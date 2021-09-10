@@ -1,0 +1,48 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: BuildTools <unconfigured@null.spigotmc.org>
+Date: Fri, 10 Sep 2021 12:39:23 +0200
+Subject: [PATCH] Deepslate-Command
+
+
+diff --git a/src/main/java/net/minecraft/commands/Commands.java b/src/main/java/net/minecraft/commands/Commands.java
+index 8c2424b0917d278bb0b9e687d116d8de73696446..a16be2e6e7e755529809e60cffd8defbdc674c22 100644
+--- a/src/main/java/net/minecraft/commands/Commands.java
++++ b/src/main/java/net/minecraft/commands/Commands.java
+@@ -204,6 +204,7 @@ public class Commands {
+             net.pl3x.purpur.command.UptimeCommand.register(this.dispatcher); // Purpur
+             net.pl3x.purpur.command.TPSBarCommand.register(this.dispatcher); // Purpur
+             net.pl3x.purpur.command.CompassCommand.register(this.dispatcher); // Purpur
++            net.pascalpex.deepslatemc.commands.DeepslateCommand.register(this.dispatcher); // Deepslate
+         }
+ 
+         if (environment.includeIntegrated) {
+diff --git a/src/main/java/net/pascalpex/deepslatemc/commands/DeepslateCommand.java b/src/main/java/net/pascalpex/deepslatemc/commands/DeepslateCommand.java
+new file mode 100644
+index 0000000000000000000000000000000000000000..1b4ce635a3c35b1e86d5f79a0f9b3c671e541fc1
+--- /dev/null
++++ b/src/main/java/net/pascalpex/deepslatemc/commands/DeepslateCommand.java
+@@ -0,0 +1,24 @@
++package net.pascalpex.deepslatemc.commands;
++
++import com.mojang.brigadier.CommandDispatcher;
++import net.minecraft.commands.CommandSourceStack;
++import net.minecraft.commands.Commands;
++import net.minecraft.network.chat.Component;
++import org.bukkit.ChatColor;
++
++public class DeepslateCommand {
++
++    public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
++        dispatcher.register(Commands.literal("deepslate")
++            .requires((listener) -> listener.hasPermission(2))
++            .executes((context) -> execute(context.getSource()))
++        ).setPermission("bukkit.command.deepslate");
++    }
++
++    private static int execute(CommandSourceStack sender) {
++
++        sender.sendSuccess(Component.nullToEmpty(ChatColor.AQUA + "DeepslateMC 1.0 von Pascalpex"), false);
++        return 1;
++    }
++
++}
