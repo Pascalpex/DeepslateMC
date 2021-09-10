@@ -1,5 +1,5 @@
-# Pascalpex - A private Sugarcane fork
-Pascalpex - A private Sugarcane fork
+# DeepslateMC - A private Sugarcane fork
+DeepslateMC - A private Sugarcane fork
 
 ## Building
 ```
