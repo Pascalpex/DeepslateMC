@@ -5,6 +5,6 @@ pluginManagement {
     }
 }
 
-rootProject.name = "Pascalpex"
+rootProject.name = "DeepslateMC"
 
-include("Pascalpex-API", "Pascalpex-Server")
+include("DeepslateMC-API", "DeepslateMC-Server")

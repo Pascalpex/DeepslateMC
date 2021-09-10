@@ -13,7 +13,7 @@ index d6fd981c535c26e606ab763ea127f9ebb986e964..63439cd405bbfbdda8c8402d3c2bd0d6
  
  dependencies {
 -    implementation(project(":Sugarcane-API")) // Airplane // Purpur // Sugarcane
-+    implementation(project(":Pascalpex-API")) // Airplane // Purpur // Sugarcane
++    implementation(project(":DeepslateMC-API")) // Airplane // Purpur // Sugarcane
      implementation("io.papermc.paper:paper-mojangapi:1.17.1-R0.1-SNAPSHOT") // Airplane
      // Paper start
      implementation("org.jline:jline-terminal-jansi:3.12.1")
@@ -22,7 +22,7 @@ index d6fd981c535c26e606ab763ea127f9ebb986e964..63439cd405bbfbdda8c8402d3c2bd0d6
              "Main-Class" to "org.bukkit.craftbukkit.Main",
              "Implementation-Title" to "CraftBukkit",
 -            "Implementation-Version" to "git-Sugarcane-$gitBranch-$implementationVersion", // Sugarcane // Purpur // Airplane
-+            "Implementation-Version" to "git-Pascalpex-$implementationVersion", // Sugarcane // Purpur // Airplane
++            "Implementation-Version" to "git-DeepslateMC-$implementationVersion", // Sugarcane // Purpur // Airplane
              "Implementation-Vendor" to date, // Paper
              "Specification-Title" to "Bukkit",
              "Specification-Version" to project.version,
@@ -48,7 +48,7 @@ index 4e48190486293a999892e9fb9ab5cf677ecc4808..7200d37e04df52f7ff48c84272753368
              // Only start Metrics, if it's enabled in the config
              if (config.getBoolean("enabled", true)) {
 -                Metrics metrics = new Metrics("Sugarcane", serverUUID, logFailedRequests, Bukkit.getLogger()); // Airplane // Purpur // Sugarcane
-+                Metrics metrics = new Metrics("Pascalpex", serverUUID, logFailedRequests, Bukkit.getLogger()); // Airplane // Purpur // Sugarcane
++                Metrics metrics = new Metrics("DeepslateMC", serverUUID, logFailedRequests, Bukkit.getLogger()); // Airplane // Purpur // Sugarcane
                  metrics.addCustomChart(new Metrics.SimplePie("minecraft_version", () -> {
                      String minecraftVersion = Bukkit.getVersion();
                      minecraftVersion = minecraftVersion.substring(minecraftVersion.indexOf("MC: ") + 4, minecraftVersion.length() - 1);
@@ -57,7 +57,7 @@ index 4e48190486293a999892e9fb9ab5cf677ecc4808..7200d37e04df52f7ff48c84272753368
                  metrics.addCustomChart(new Metrics.SingleLineChart("players", () -> Bukkit.getOnlinePlayers().size()));
                  metrics.addCustomChart(new Metrics.SimplePie("online_mode", () -> Bukkit.getOnlineMode() ? "online" : (PaperConfig.isProxyOnlineMode() ? "bungee" : "offline"))); // Purpur
 -                metrics.addCustomChart(new Metrics.SimplePie("sugarcane_version", () -> (Metrics.class.getPackage().getImplementationVersion() != null) ? Metrics.class.getPackage().getImplementationVersion() : "unknown")); // Airplane // Purpur // Sugarcane
-+                metrics.addCustomChart(new Metrics.SimplePie("pascalpex_version", () -> (Metrics.class.getPackage().getImplementationVersion() != null) ? Metrics.class.getPackage().getImplementationVersion() : "unknown")); // Airplane // Purpur // Sugarcane
++                metrics.addCustomChart(new Metrics.SimplePie("deepslatemc_version", () -> (Metrics.class.getPackage().getImplementationVersion() != null) ? Metrics.class.getPackage().getImplementationVersion() : "unknown")); // Airplane // Purpur // Sugarcane
  
                  metrics.addCustomChart(new Metrics.DrilldownPie("java_version", () -> {
                      Map<String, Map<String, Integer>> map = new HashMap<>();
@@ -70,7 +70,7 @@ index 8e1ca69049c50f242b8198d47302bf9ff0c9d1e8..c68e76b7499eff4dea1a1406a8edcb3f
      protected LineReader buildReader(LineReaderBuilder builder) {
          builder
 -                .appName("Sugarcane") // Sugarcane // Purpur
-+                .appName("Pascalpex") // Sugarcane // Purpur
++                .appName("DeepslateMC") // Sugarcane // Purpur
                  .variable(LineReader.HISTORY_FILE, java.nio.file.Paths.get(".console_history"))
                  .completer(new ConsoleCommandCompleter(this.server))
                  .option(LineReader.Option.COMPLETE_IN_WORD, true);
@@ -83,7 +83,7 @@ index efd9fe19ec293f7b2059c9304edf0b71ccace60c..c036f3c528c21abfb33f45acf7b4ce4f
      @DontObfuscate
      public String getServerModName() {
 -        return org.sugarcanemc.sugarcane.config.SugarcaneConfig.brandName; // Sugarcane - Sugarcane > // Purpur - Purpur > // Airplane - Airplane > // Paper - Paper > // Spigot - Spigot > // CraftBukkit - cb > vanilla!
-+        return "Pascalpex"; // Sugarcane - Sugarcane > // Purpur - Purpur > // Airplane - Airplane > // Paper - Paper > // Spigot - Spigot > // CraftBukkit - cb > vanilla!
++        return "DeepslateMC"; // Sugarcane - Sugarcane > // Purpur - Purpur > // Airplane - Airplane > // Paper - Paper > // Spigot - Spigot > // CraftBukkit - cb > vanilla!
      }
  
      public SystemReport fillSystemReport(SystemReport details) {
@@ -96,7 +96,7 @@ index 7b57e59a9f2765f4f152efb7d10a1c3edec0f4bf..318b83034d9e49bfe05511ca234137d6
  
  public final class CraftServer implements Server {
 -    private final String serverName = org.sugarcanemc.sugarcane.config.SugarcaneConfig.brandName; // Paper // Airplane // Purpur // Sugarcane
-+    private final String serverName = "Pascalpex"; // Paper // Airplane // Purpur // Sugarcane
++    private final String serverName = "DeepslateMC"; // Paper // Airplane // Purpur // Sugarcane
      private final String serverVersion;
      private final String bukkitVersion = Versioning.getBukkitVersion();
      private final Logger logger = Logger.getLogger("Minecraft");

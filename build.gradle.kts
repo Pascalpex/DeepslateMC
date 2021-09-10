@@ -58,7 +58,7 @@ subprojects {
 }
 
 paperweight {
-    serverProject.set(project(":Pascalpex-Server"))
+    serverProject.set(project(":DeepslateMC-Server"))
 
     remapRepo.set("https://maven.quiltmc.org/repository/release/")
     decompileRepo.set("https://files.minecraftforge.net/maven/")
@@ -70,15 +70,15 @@ paperweight {
         withStandardPatcher {
             baseName("Sugarcane")
 
-            apiOutputDir.set(layout.projectDirectory.dir("Pascalpex-API"))
-            serverOutputDir.set(layout.projectDirectory.dir("Pascalpex-Server"))
+            apiOutputDir.set(layout.projectDirectory.dir("DeepslateMC-API"))
+            serverOutputDir.set(layout.projectDirectory.dir("DeepslateMC-Server"))
 
             remapRepo.set("https://maven.quiltmc.org/repository/release/")
             decompileRepo.set("https://files.minecraftforge.net/maven/")
         }
 
         reobfPackagesToFix.addAll(
-            "net.pascalpexmc",
+            "net.pascalpex",
             "org.sugarcanemc",
             "gg.airplane",
             "net.pl3x",
