@@ -1,0 +1,33 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: BuildTools <unconfigured@null.spigotmc.org>
+Date: Fri, 10 Sep 2021 12:55:19 +0200
+Subject: [PATCH] Enable-Reload-Command
+
+
+diff --git a/src/main/java/org/bukkit/command/defaults/ReloadCommand.java b/src/main/java/org/bukkit/command/defaults/ReloadCommand.java
+index c831b5547533e78ede425f3b965205a455286eae..c7d5bc58be96bca7c5540f7700d5d47fa276b762 100644
+--- a/src/main/java/org/bukkit/command/defaults/ReloadCommand.java
++++ b/src/main/java/org/bukkit/command/defaults/ReloadCommand.java
+@@ -21,19 +21,9 @@ public class ReloadCommand extends BukkitCommand {
+     @Override
+     public boolean execute(@NotNull CommandSender sender, @NotNull String currentAlias, @NotNull String[] args) { // Paper
+         if (!testPermission(sender)) return true;
+-        // Sugarcane start - disable reload command
+-        if (Boolean.parseBoolean(System.getProperty("Sugarcane.DisableReloadCommand", "true"))) {
+-            sender.sendMessage(ChatColor.RED + "Operation denied.");
+-            sender.sendMessage(ChatColor.RED + "Reload command SHOULD NEVER EVER EVER be used in whatever circumstances.");
+-            sender.sendMessage(ChatColor.RED + "SugarcaneMC team has intentionally disabled it in order to stop you using it, instead of restarting your server.");
+-            sender.sendMessage(ChatColor.RED + "---------------------------------------------");
+-            sender.sendMessage(ChatColor.RED + "RESTART YOUR SERVER AND NEVER USE /reload");
+-            sender.sendMessage(ChatColor.YELLOW + "For plugin developers: learn what a HOTSWAP AGENT is and stop using /reload");
+-            sender.sendMessage(ChatColor.RED + "---------------------------------------------");
+-            sender.sendMessage(ChatColor.YELLOW + "For more information, join our discord server.");
+-            return true;
+-        }
+-        // Sugarcane end
++
++        sender.sendMessage(ChatColor.DARK_RED + "Achtung!" + ChatColor.RED + " Der Reload Befehl kann bei bestimmten Plugins Fehler verursachen");
++        sender.sendMessage(ChatColor.DARK_RED + "Achtung!" + ChatColor.RED + " Ein Neustart ist stattdessen empfohlen");
+ 
+         // Paper start - Reload permissions.yml & require confirm
+         boolean confirmed = System.getProperty("LetMeReload") != null;
