@@ -1,0 +1,140 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: BuildTools <unconfigured@null.spigotmc.org>
+Date: Sat, 11 Sep 2021 13:33:08 +0200
+Subject: [PATCH] Discord-Command
+
+
+diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
+index 61fce75ca67dc8480c81c70b6036ad6d72338689..b30c880ddfc277fbbcbe0ef359abde546ffcb7a1 100644
+--- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
++++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
+@@ -64,6 +64,7 @@ import net.minecraft.world.level.storage.LevelStorageSource;
+ import net.minecraft.world.level.storage.WorldData;
+ import net.pascalpex.deepslatemc.Config;
+ import net.pascalpex.deepslatemc.commands.DeepslateCommand;
++import net.pascalpex.deepslatemc.commands.DiscordCommand;
+ import org.apache.logging.log4j.LogManager;
+ import org.apache.logging.log4j.Logger;
+ import org.apache.logging.log4j.Level;
+@@ -240,6 +241,9 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+ 
+         Config.load();
+         MinecraftServer.getServer().server.getCommandMap().register("deepslate", "Deepslate", new DeepslateCommand("deepslate"));
++        MinecraftServer.getServer().server.getCommandMap().register("discord", "Deepslate", new DiscordCommand("discord"));
++        MinecraftServer.getServer().server.getCommandMap().register("dc", "Deepslate", new DiscordCommand("dc"));
++
+         // Sugarcane start - config
+         try {
+             org.sugarcanemc.sugarcane.config.SugarcaneConfig.init((java.io.File) options.valueOf("sugarcane-settings"));
+diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
+index 43e05ef11cbd95fb60a9e2fdf18c0d660810ae95..01c156b0db34e65198c2854a6d57c44c2b6c6ded 100644
+--- a/src/main/java/net/pascalpex/deepslatemc/Config.java
++++ b/src/main/java/net/pascalpex/deepslatemc/Config.java
+@@ -21,6 +21,7 @@ public class Config {
+             if (!configFile.exists()) {
+                 configFile.createNewFile();
+                 config.set("prefix", ChatColor.BLACK + "[" + ChatColor.DARK_GRAY + "DeepslateMC" + ChatColor.BLACK + "]");
++                config.set("discordLink", "https://google.de/");
+                 save();
+             }
+             config.load(configFile);
+@@ -43,4 +44,8 @@ public class Config {
+         return config.getString("prefix");
+     }
+ 
++    public static String getDiscordLink() {
++        return config.getString("discordLink");
++    }
++
+ }
+diff --git a/src/main/java/net/pascalpex/deepslatemc/commands/DeepslateCommand.java b/src/main/java/net/pascalpex/deepslatemc/commands/DeepslateCommand.java
+index e31c8371cdc32a3c0e345ef1354f37da55cf2be1..9db7691b43f177a554b5768d5f446a0bb33390fa 100644
+--- a/src/main/java/net/pascalpex/deepslatemc/commands/DeepslateCommand.java
++++ b/src/main/java/net/pascalpex/deepslatemc/commands/DeepslateCommand.java
+@@ -33,29 +33,31 @@ public class DeepslateCommand extends Command {
+ 
+     @Override
+     public boolean execute(CommandSender sender, String commandLabel, String[] args) {
+-        String prefix = Config.getPrefix() + " " + ChatColor.DARK_AQUA;
+-        Player player = (Player) sender;
+-        if(player.hasPermission("deepslate.command")) {
+-            if(args.length == 0) {
+-                player.sendMessage(prefix + "Nutze /deepslate [reload | version]");
+-            }
+-            if(args.length == 1) {
+-                if(args[0].equalsIgnoreCase("reload")) {
+-                    Config.load();
+-                    player.sendMessage(prefix + "Config wurde neugeladen");
+-                } else {
+-                    if(args[0].equalsIgnoreCase("version")) {
+-                        player.sendMessage(prefix + "Dieser Server läuft mit DeepslateMC Version 1.0");
++        if (commandLabel.equalsIgnoreCase("deepslate")) {
++            String prefix = Config.getPrefix() + " " + ChatColor.DARK_AQUA;
++            Player player = (Player) sender;
++            if(player.hasPermission("deepslate.command")) {
++                if(args.length == 0) {
++                    player.sendMessage(prefix + "Nutze /deepslate [reload | version]");
++                }
++                if(args.length == 1) {
++                    if(args[0].equalsIgnoreCase("reload")) {
++                        Config.load();
++                        player.sendMessage(prefix + "Config wurde neugeladen");
+                     } else {
+-                        player.sendMessage(prefix + "Nutze /deepslate [reload | version]");
++                        if(args[0].equalsIgnoreCase("version")) {
++                            player.sendMessage(prefix + "Dieser Server läuft mit DeepslateMC Version 1.0");
++                        } else {
++                            player.sendMessage(prefix + "Nutze /deepslate [reload | version]");
++                        }
+                     }
+                 }
++                if(args.length >= 2) {
++                    player.sendMessage(prefix + "Nutze /deepslate [reload | version]");
++                }
++            } else {
++                player.sendMessage(prefix + "Dafür hast du keine Rechte");
+             }
+-            if(args.length >= 2) {
+-                player.sendMessage(prefix + "Nutze /deepslate [reload | version]");
+-            }
+-        } else {
+-            player.sendMessage(prefix + "Dafür hast du keine Rechte");
+         }
+         return true;
+     }
+diff --git a/src/main/java/net/pascalpex/deepslatemc/commands/DiscordCommand.java b/src/main/java/net/pascalpex/deepslatemc/commands/DiscordCommand.java
+new file mode 100644
+index 0000000000000000000000000000000000000000..9d2fe8cfe962d86f1bb22c76e64d6cddb4809425
+--- /dev/null
++++ b/src/main/java/net/pascalpex/deepslatemc/commands/DiscordCommand.java
+@@ -0,0 +1,30 @@
++package net.pascalpex.deepslatemc.commands;
++
++import net.pascalpex.deepslatemc.Config;
++import org.bukkit.ChatColor;
++import org.bukkit.command.Command;
++import org.bukkit.command.CommandSender;
++import org.bukkit.entity.Player;
++import org.jetbrains.annotations.NotNull;
++
++public class DiscordCommand extends Command {
++
++
++    public DiscordCommand(String name) {
++        super(name);
++        this.description = "Discord Link Befehl";
++        this.usageMessage = "/discord";
++        this.setPermission("deepslate.discord");
++    }
++
++    @Override
++    public boolean execute(@NotNull CommandSender sender, @NotNull String commandLabel, @NotNull String[] args) {
++        if (commandLabel.equalsIgnoreCase("dc") || commandLabel.equalsIgnoreCase("discord")) {
++            Player player = (Player) sender;
++            String link = Config.getDiscordLink();
++            player.sendMessage(ChatColor.DARK_GRAY + "[" + ChatColor.GREEN + "Pascalpex" + ChatColor.DARK_GRAY + "]" + ChatColor.GOLD + " Der Link zu unserem Discord:");
++            player.sendMessage(ChatColor.GOLD + link);
++        }
++        return true;
++    }
++}
