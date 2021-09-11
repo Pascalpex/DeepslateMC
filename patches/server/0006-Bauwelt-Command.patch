@@ -1,0 +1,94 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: BuildTools <unconfigured@null.spigotmc.org>
+Date: Sat, 11 Sep 2021 14:53:50 +0200
+Subject: [PATCH] Bauwelt-Command
+
+
+diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
+index 66fd09b02721075e34d3e85486c3d42db9381d7b..154ce560b2e1c2c13d9728e0bb4b3b30ebaf04af 100644
+--- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
++++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
+@@ -63,6 +63,7 @@ import net.minecraft.world.level.block.entity.SkullBlockEntity;
+ import net.minecraft.world.level.storage.LevelStorageSource;
+ import net.minecraft.world.level.storage.WorldData;
+ import net.pascalpex.deepslatemc.Config;
++import net.pascalpex.deepslatemc.commands.BauweltCommand;
+ import net.pascalpex.deepslatemc.commands.ClearchatCommand;
+ import net.pascalpex.deepslatemc.commands.DeepslateCommand;
+ import net.pascalpex.deepslatemc.commands.DiscordCommand;
+@@ -247,6 +248,8 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+         MinecraftServer.getServer().server.getCommandMap().register("dc", "Deepslate", new DiscordCommand("dc"));
+         MinecraftServer.getServer().server.getCommandMap().register("cc", "Deepslate", new ClearchatCommand("cc"));
+         MinecraftServer.getServer().server.getCommandMap().register("clearchat", "Deepslate", new ClearchatCommand("clearchat"));
++        MinecraftServer.getServer().server.getCommandMap().register("setbauwelt", "Deepslate", new BauweltCommand("setbauwelt"));
++        MinecraftServer.getServer().server.getCommandMap().register("bauwelt", "Deepslate", new BauweltCommand("bauwelt"));
+         // Deepslate end
+ 
+         // Sugarcane start - config
+diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
+index 01c156b0db34e65198c2854a6d57c44c2b6c6ded..0dbe0e9de28208649c73e614e28e2e5bdc3418a3 100644
+--- a/src/main/java/net/pascalpex/deepslatemc/Config.java
++++ b/src/main/java/net/pascalpex/deepslatemc/Config.java
+@@ -48,4 +48,13 @@ public class Config {
+         return config.getString("discordLink");
+     }
+ 
++    public static String getBauwelt() {
++        return config.getString("bauwelt");
++    }
++
++    public static void setBauwelt(String worldName) {
++        config.set("bauwelt", worldName);
++        save();
++    }
++
+ }
+diff --git a/src/main/java/net/pascalpex/deepslatemc/commands/BauweltCommand.java b/src/main/java/net/pascalpex/deepslatemc/commands/BauweltCommand.java
+new file mode 100644
+index 0000000000000000000000000000000000000000..8e04e63ac1e3faff555e3128c114e552869b642d
+--- /dev/null
++++ b/src/main/java/net/pascalpex/deepslatemc/commands/BauweltCommand.java
+@@ -0,0 +1,43 @@
++package net.pascalpex.deepslatemc.commands;
++
++import net.pascalpex.deepslatemc.Config;
++import org.bukkit.Bukkit;
++import org.bukkit.ChatColor;
++import org.bukkit.World;
++import org.bukkit.command.Command;
++import org.bukkit.command.CommandSender;
++import org.bukkit.entity.Player;
++import org.jetbrains.annotations.NotNull;
++
++public class BauweltCommand extends Command {
++
++    public BauweltCommand(@NotNull String name) {
++        super(name);
++        this.description = "Teleportiert Builder in die Bauwelt";
++        this.usageMessage = "/bauwelt";
++        this.setPermission("deepslate.bauwelt");
++    }
++
++    @Override
++    public boolean execute(@NotNull CommandSender sender, @NotNull String label, @NotNull String[] args) {
++        Player player = (Player) sender;
++        if(label.equalsIgnoreCase("setbauwelt")) {
++            if(player.hasPermission("deepslate.setbauwelt")) {
++                World world = player.getLocation().getWorld();
++                Config.setBauwelt(world.getName());
++                player.sendMessage(ChatColor.GREEN + "Bauwelt gesetzt");
++            }
++        }
++        if(label.equalsIgnoreCase("bauwelt")) {
++            if(player.hasPermission("deepslate.bauwelt")) {
++                try {
++                    player.teleport(Bukkit.getWorld(Config.getBauwelt()).getSpawnLocation());
++                    player.sendMessage(ChatColor.GREEN + "Wilkommen in der Bauwelt");
++                } catch (Exception e) {
++                    player.sendMessage(ChatColor.RED + "Die Bauwelt wurde nicht gesetzt");
++                }
++            }
++        }
++        return true;
++    }
++}
