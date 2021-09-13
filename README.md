@@ -14,7 +14,7 @@ I know that some patches are a mess
 ./gradlew paperclip
 ```
 
-##Adding a Patch
+## Adding a Patch
 ```
 ./gradlew applyPatches
 Edit the code
