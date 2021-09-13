@@ -1,7 +1,8 @@
 # DeepslateMC - A private Sugarcane fork
 DeepslateMC - A private Sugarcane fork for my own Minecraft Server
+I will start using it once Sugarcane becomes officially stable
 
-This fork server two purposes:
+This fork serves two purposes:
 - I learn stuff about Git, Paperclip and Patches
 - Small features replace minor plugins on my server
 
