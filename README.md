@@ -1,5 +1,11 @@
 # DeepslateMC - A private Sugarcane fork
-DeepslateMC - A private Sugarcane fork
+DeepslateMC - A private Sugarcane fork for my own Minecraft Server
+
+This fork server two purposes:
+- I learn stuff about Git, Paperclip and Patches
+- Small features replace minor plugins on my server
+
+I know that some patches are a mess
 
 ## Building
 ```
@@ -8,22 +14,17 @@ DeepslateMC - A private Sugarcane fork
 ./gradlew paperclip
 ```
 
-## Tasks
-
+##Adding a Patch
 ```
-Paperweight tasks
------------------
-applyApiPatches
-applyPatches
-applyServerPatches
-cleanCache - Delete the project setup cache and task outputs.
-generateDevelopmentBundle
-paperclipJar - Build a runnable paperclip jar
-rebuildApiPatches
-rebuildPatches
-rebuildServerPatches
-reobfJar - Re-obfuscate the built jar to obf mappings
-runDev - Spin up a non-shaded non-remapped test server
-runReobf - Spin up a test server from the reobfJar output jar
-runShadow - Spin up a test server from the shadowJar archiveFile
+./gradlew applyPatches
+Edit the code
+./gradlew build
+./gradlew paperclip
+Test the code
+cd into submodule (api or server)
+git add .
+git commit -m PATCHNAME
+cd into root dir
+./gradlew rebuildPatches
+Push/PR
 ```
