@@ -1,0 +1,102 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: BuildTools <unconfigured@null.spigotmc.org>
+Date: Mon, 13 Sep 2021 15:11:40 +0200
+Subject: [PATCH] Wartung-Mode
+
+
+diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
+index 154ce560b2e1c2c13d9728e0bb4b3b30ebaf04af..651e4af507818deac7f45456856b1771c0966835 100644
+--- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
++++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
+@@ -63,10 +63,7 @@ import net.minecraft.world.level.block.entity.SkullBlockEntity;
+ import net.minecraft.world.level.storage.LevelStorageSource;
+ import net.minecraft.world.level.storage.WorldData;
+ import net.pascalpex.deepslatemc.Config;
+-import net.pascalpex.deepslatemc.commands.BauweltCommand;
+-import net.pascalpex.deepslatemc.commands.ClearchatCommand;
+-import net.pascalpex.deepslatemc.commands.DeepslateCommand;
+-import net.pascalpex.deepslatemc.commands.DiscordCommand;
++import net.pascalpex.deepslatemc.commands.*;
+ import org.apache.logging.log4j.LogManager;
+ import org.apache.logging.log4j.Logger;
+ import org.apache.logging.log4j.Level;
+@@ -250,6 +247,7 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+         MinecraftServer.getServer().server.getCommandMap().register("clearchat", "Deepslate", new ClearchatCommand("clearchat"));
+         MinecraftServer.getServer().server.getCommandMap().register("setbauwelt", "Deepslate", new BauweltCommand("setbauwelt"));
+         MinecraftServer.getServer().server.getCommandMap().register("bauwelt", "Deepslate", new BauweltCommand("bauwelt"));
++        MinecraftServer.getServer().server.getCommandMap().register("wartung", "Deepslate", new WartungCommand("wartung"));
+         // Deepslate end
+ 
+         // Sugarcane start - config
+diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
+index 161561ae4a792466daaa5e5830684090ae27d3bf..e2d9b926b0dbbfdc4a34b264cb618e6533f35782 100644
+--- a/src/main/java/net/minecraft/server/players/PlayerList.java
++++ b/src/main/java/net/minecraft/server/players/PlayerList.java
+@@ -92,6 +92,7 @@ import net.minecraft.world.scores.Objective;
+ import net.minecraft.world.scores.PlayerTeam;
+ import net.minecraft.world.scores.Scoreboard; // Paper
+ import net.minecraft.world.scores.Team;
++import net.pascalpex.deepslatemc.commands.WartungCommand;
+ import org.apache.logging.log4j.LogManager;
+ import org.apache.logging.log4j.Logger;
+ 
+@@ -357,6 +358,7 @@ public abstract class PlayerList {
+         player.containerMenu.transferTo(player.containerMenu, bukkitPlayer);
+ 
+         PlayerJoinEvent playerJoinEvent = new PlayerJoinEvent(bukkitPlayer, PaperAdventure.asAdventure(chatmessage)); // Paper - Adventure
++        WartungCommand.playerJoin(bukkitPlayer);
+         this.cserver.getPluginManager().callEvent(playerJoinEvent);
+ 
+         if (!player.connection.connection.isConnected()) {
+diff --git a/src/main/java/net/pascalpex/deepslatemc/commands/WartungCommand.java b/src/main/java/net/pascalpex/deepslatemc/commands/WartungCommand.java
+new file mode 100644
+index 0000000000000000000000000000000000000000..8ba817ad02ab3870a26f6b53a74bbfd552b7bb38
+--- /dev/null
++++ b/src/main/java/net/pascalpex/deepslatemc/commands/WartungCommand.java
+@@ -0,0 +1,46 @@
++package net.pascalpex.deepslatemc.commands;
++
++import net.pascalpex.deepslatemc.Config;
++import org.bukkit.ChatColor;
++import org.bukkit.command.Command;
++import org.bukkit.command.CommandSender;
++import org.bukkit.entity.Player;
++import org.jetbrains.annotations.NotNull;
++
++public class WartungCommand extends Command {
++
++    private static boolean wartungMode = false;
++
++    public WartungCommand(@NotNull String name) {
++        super(name);
++        this.description = "Schaltet den Wartungsmodus an/aus";
++        this.usageMessage = "/wartung";
++        this.setPermission("deepslate.wartung");
++    }
++
++    public static void playerJoin(Player player) {
++        if(!player.hasPermission("deepslate.wartungbypass")) {
++            if(wartungMode) {
++                player.kickPlayer(ChatColor.DARK_GRAY + "[" + ChatColor.GREEN + "Pascalpex" + ChatColor.DARK_GRAY + "]" + ChatColor.GOLD + " Der Server ist aktuell im Wartungsmodus");
++            }
++        }
++    }
++
++    @Override
++    public boolean execute(@NotNull CommandSender sender, @NotNull String label, @NotNull String[] args) {
++        String prefix = Config.getPrefix() + " " + ChatColor.DARK_AQUA;
++        Player player = (Player) sender;
++        if(label.equalsIgnoreCase("wartung")) {
++            if(player.hasPermission("deepslate.wartung")) {
++                if(wartungMode) {
++                    wartungMode = false;
++                    player.sendMessage(prefix + "Der Wartungsmodus ist nun deaktiviert");
++                } else {
++                    wartungMode = true;
++                    player.sendMessage(prefix + "Der Wartungsmodus ist nun aktiviert");
++                }
++            }
++        }
++        return true;
++    }
++}
