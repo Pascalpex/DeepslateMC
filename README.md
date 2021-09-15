@@ -1,10 +1,10 @@
-# DeepslateMC - A private Sugarcane fork
-DeepslateMC - A private Sugarcane fork for my own Minecraft Server
+# DeepslateMC - A private [Sugarcane](https://github.com/SugarcaneMC/Sugarcane) fork
+DeepslateMC - A private [Sugarcane](https://github.com/SugarcaneMC/Sugarcane) fork for my own Minecraft Server
 
-I will start using it once Sugarcane becomes officially stable
+I will start using it once [Sugarcane](https://github.com/SugarcaneMC/Sugarcane) becomes officially stable
 
 This fork serves two purposes:
-- I learn stuff about Git, Paperclip and Patches
+- I learn stuff about [Git](https://git-scm.com/), [Paperweight](https://github.com/PaperMC/paperweight) and Patches
 - Small features replace minor plugins on my server
 
 I know that some patches are a mess
@@ -30,3 +30,8 @@ cd into root dir
 ./gradlew rebuildPatches
 Push/PR
 ```
+
+## Download
+**Warning!**: Because the upstream is still quite experimental, this fork is as well
+
+Download at [Github Actions](https://github.com/Pascalpex/DeepslateMC/actions)
