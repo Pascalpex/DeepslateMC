@@ -1,0 +1,267 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: BuildTools <unconfigured@null.spigotmc.org>
+Date: Thu, 16 Sep 2021 14:38:09 +0200
+Subject: [PATCH] Toggleable-Op-Command
+
+
+diff --git a/src/main/java/net/minecraft/commands/Commands.java b/src/main/java/net/minecraft/commands/Commands.java
+index 542122a770c6e12b79ac420d2031c73f0a8aea98..e26959c5defd23de785699c0eb267bc87bf9ff60 100644
+--- a/src/main/java/net/minecraft/commands/Commands.java
++++ b/src/main/java/net/minecraft/commands/Commands.java
+@@ -101,6 +101,7 @@ import net.minecraft.server.commands.WhitelistCommand;
+ import net.minecraft.server.commands.WorldBorderCommand;
+ import net.minecraft.server.commands.data.DataCommands;
+ import net.minecraft.server.level.ServerPlayer;
++import net.pascalpex.deepslatemc.Config;
+ import net.pascalpex.deepslatemc.commands.DeepslateCommand;
+ import org.apache.logging.log4j.LogManager;
+ import org.apache.logging.log4j.Logger;
+@@ -185,11 +186,14 @@ public class Commands {
+         }
+ 
+         if (environment.includeDedicated) {
++            Config.load();
+             BanIpCommands.register(this.dispatcher);
+             BanListCommands.register(this.dispatcher);
+             BanPlayerCommands.register(this.dispatcher);
+             DeOpCommands.register(this.dispatcher);
+-            OpCommand.register(this.dispatcher);
++            if (Config.getOpActive()) {
++                OpCommand.register(this.dispatcher);
++            }
+             PardonCommand.register(this.dispatcher);
+             PardonIpCommand.register(this.dispatcher);
+             PerfCommand.register(this.dispatcher);
+diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
+index 651e4af507818deac7f45456856b1771c0966835..70ca6b28adb2046d395b15784f9df9019d8ff3f5 100644
+--- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
++++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
+@@ -239,7 +239,6 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+         gg.airplane.commands.AirplaneCommands.init(); // Airplane - command
+ 
+         // Deepslate start
+-        Config.load();
+         MinecraftServer.getServer().server.getCommandMap().register("deepslate", "Deepslate", new DeepslateCommand("deepslate"));
+         MinecraftServer.getServer().server.getCommandMap().register("discord", "Deepslate", new DiscordCommand("discord"));
+         MinecraftServer.getServer().server.getCommandMap().register("dc", "Deepslate", new DiscordCommand("dc"));
+diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
+index 0dbe0e9de28208649c73e614e28e2e5bdc3418a3..8bc29201c12faf433466dc9a7232921c86440bb0 100644
+--- a/src/main/java/net/pascalpex/deepslatemc/Config.java
++++ b/src/main/java/net/pascalpex/deepslatemc/Config.java
+@@ -22,6 +22,7 @@ public class Config {
+                 configFile.createNewFile();
+                 config.set("prefix", ChatColor.BLACK + "[" + ChatColor.DARK_GRAY + "DeepslateMC" + ChatColor.BLACK + "]");
+                 config.set("discordLink", "https://google.de/");
++                config.set("opCommandActive", true);
+                 save();
+             }
+             config.load(configFile);
+@@ -57,4 +58,7 @@ public class Config {
+         save();
+     }
+ 
++    public static boolean getOpActive() {
++        return config.getBoolean("opCommandActive");
++    }
+ }
+diff --git a/src/main/java/net/pascalpex/deepslatemc/commands/BauweltCommand.java b/src/main/java/net/pascalpex/deepslatemc/commands/BauweltCommand.java
+index 8e04e63ac1e3faff555e3128c114e552869b642d..58144727ad8e134ba69ef6b4624aeeb013076d61 100644
+--- a/src/main/java/net/pascalpex/deepslatemc/commands/BauweltCommand.java
++++ b/src/main/java/net/pascalpex/deepslatemc/commands/BauweltCommand.java
+@@ -20,23 +20,27 @@ public class BauweltCommand extends Command {
+ 
+     @Override
+     public boolean execute(@NotNull CommandSender sender, @NotNull String label, @NotNull String[] args) {
+-        Player player = (Player) sender;
+-        if(label.equalsIgnoreCase("setbauwelt")) {
+-            if(player.hasPermission("deepslate.setbauwelt")) {
+-                World world = player.getLocation().getWorld();
+-                Config.setBauwelt(world.getName());
+-                player.sendMessage(ChatColor.GREEN + "Bauwelt gesetzt");
++        if (sender instanceof Player) {
++            Player player = (Player) sender;
++            if(label.equalsIgnoreCase("setbauwelt")) {
++                if(player.hasPermission("deepslate.setbauwelt")) {
++                    World world = player.getLocation().getWorld();
++                    Config.setBauwelt(world.getName());
++                    player.sendMessage(ChatColor.GREEN + "Bauwelt gesetzt");
++                }
+             }
+-        }
+-        if(label.equalsIgnoreCase("bauwelt")) {
+-            if(player.hasPermission("deepslate.bauwelt")) {
+-                try {
+-                    player.teleport(Bukkit.getWorld(Config.getBauwelt()).getSpawnLocation());
+-                    player.sendMessage(ChatColor.GREEN + "Wilkommen in der Bauwelt");
+-                } catch (Exception e) {
+-                    player.sendMessage(ChatColor.RED + "Die Bauwelt wurde nicht gesetzt");
++            if(label.equalsIgnoreCase("bauwelt")) {
++                if(player.hasPermission("deepslate.bauwelt")) {
++                    try {
++                        player.teleport(Bukkit.getWorld(Config.getBauwelt()).getSpawnLocation());
++                        player.sendMessage(ChatColor.GREEN + "Wilkommen in der Bauwelt");
++                    } catch (Exception e) {
++                        player.sendMessage(ChatColor.RED + "Die Bauwelt wurde nicht gesetzt");
++                    }
+                 }
+             }
++        } else {
++            sender.sendMessage("Dieser Befehl ist nur für Spieler geeignet");
+         }
+         return true;
+     }
+diff --git a/src/main/java/net/pascalpex/deepslatemc/commands/ClearchatCommand.java b/src/main/java/net/pascalpex/deepslatemc/commands/ClearchatCommand.java
+index 5eae1e19bcdffa70da7f328140b4dca39b507992..49be5e430d713f4ec8cf1e1b25c1de5215f322b7 100644
+--- a/src/main/java/net/pascalpex/deepslatemc/commands/ClearchatCommand.java
++++ b/src/main/java/net/pascalpex/deepslatemc/commands/ClearchatCommand.java
+@@ -17,16 +17,20 @@ public class ClearchatCommand extends Command {
+ 
+     @Override
+     public boolean execute(@NotNull CommandSender sender, @NotNull String commandLabel, @NotNull String[] args) {
+-        Player player = (Player) sender;
+-        if (commandLabel.equalsIgnoreCase("cc") || commandLabel.equalsIgnoreCase("clearchat")) {
+-            if(player.hasPermission("deepslate.clearchat")) {
+-                for (int x = 0; x < 150; x++){
+-                    Bukkit.broadcastMessage("");
++        if (sender instanceof Player) {
++            Player player = (Player) sender;
++            if (commandLabel.equalsIgnoreCase("cc") || commandLabel.equalsIgnoreCase("clearchat")) {
++                if(player.hasPermission("deepslate.clearchat")) {
++                    for (int x = 0; x < 150; x++){
++                        Bukkit.broadcastMessage("");
++                    }
++                    Bukkit.broadcastMessage(ChatColor.YELLOW + "Der Chat wurde von " + ChatColor.RED + player.getName() + ChatColor.YELLOW + " geleert");
+                 }
+-                Bukkit.broadcastMessage(ChatColor.YELLOW + "Der Chat wurde von " + ChatColor.RED + player.getName() + ChatColor.YELLOW + " geleert");
++            } else {
++                player.sendMessage(ChatColor.RED + "Dafür hast du keine Rechte");
+             }
+         } else {
+-            player.sendMessage(ChatColor.RED + "Dafür hast du keine Rechte");
++            sender.sendMessage("Dieser Befehl ist nur für Spieler geeignet");
+         }
+         return true;
+     }
+diff --git a/src/main/java/net/pascalpex/deepslatemc/commands/DeepslateCommand.java b/src/main/java/net/pascalpex/deepslatemc/commands/DeepslateCommand.java
+index 65006575ec9180086266ab5eaf3d78de63e866c2..251eb020ed795e1d8c95ff1b1d94870a6040b4ba 100644
+--- a/src/main/java/net/pascalpex/deepslatemc/commands/DeepslateCommand.java
++++ b/src/main/java/net/pascalpex/deepslatemc/commands/DeepslateCommand.java
+@@ -35,28 +35,49 @@ public class DeepslateCommand extends Command {
+     public boolean execute(CommandSender sender, String commandLabel, String[] args) {
+         if (commandLabel.equalsIgnoreCase("deepslate")) {
+             String prefix = Config.getPrefix() + " " + ChatColor.DARK_AQUA;
+-            Player player = (Player) sender;
+-            if(player.hasPermission("deepslate.command")) {
++            if (sender instanceof Player) {
++                Player player = (Player) sender;
++                if(player.hasPermission("deepslate.command")) {
++                    if(args.length == 0) {
++                        player.sendMessage(prefix + "Nutze /deepslate [reload | version]");
++                    }
++                    if(args.length == 1) {
++                        if(args[0].equalsIgnoreCase("reload")) {
++                            Config.load();
++                            player.sendMessage(prefix + "Config wurde neugeladen");
++                        } else {
++                            if(args[0].equalsIgnoreCase("version")) {
++                                player.sendMessage(prefix + "Dieser Server läuft mit DeepslateMC Version 1.0");
++                            } else {
++                                player.sendMessage(prefix + "Nutze /deepslate [reload | version]");
++                            }
++                        }
++                    }
++                    if(args.length >= 2) {
++                        player.sendMessage(prefix + "Nutze /deepslate [reload | version]");
++                    }
++                } else {
++                    player.sendMessage(prefix + "Dieser Server läuft mit DeepslateMC Version 1.0");
++                }
++            } else {
+                 if(args.length == 0) {
+-                    player.sendMessage(prefix + "Nutze /deepslate [reload | version]");
++                    sender.sendMessage(prefix + "Nutze /deepslate [reload | version]");
+                 }
+                 if(args.length == 1) {
+                     if(args[0].equalsIgnoreCase("reload")) {
+                         Config.load();
+-                        player.sendMessage(prefix + "Config wurde neugeladen");
++                        sender.sendMessage(prefix + "Config wurde neugeladen");
+                     } else {
+                         if(args[0].equalsIgnoreCase("version")) {
+-                            player.sendMessage(prefix + "Dieser Server läuft mit DeepslateMC Version 1.0");
++                            sender.sendMessage(prefix + "Dieser Server läuft mit DeepslateMC Version 1.0");
+                         } else {
+-                            player.sendMessage(prefix + "Nutze /deepslate [reload | version]");
++                            sender.sendMessage(prefix + "Nutze /deepslate [reload | version]");
+                         }
+                     }
+                 }
+                 if(args.length >= 2) {
+-                    player.sendMessage(prefix + "Nutze /deepslate [reload | version]");
++                    sender.sendMessage(prefix + "Nutze /deepslate [reload | version]");
+                 }
+-            } else {
+-                player.sendMessage(prefix + "Dieser Server läuft mit DeepslateMC Version 1.0");
+             }
+         }
+         return true;
+diff --git a/src/main/java/net/pascalpex/deepslatemc/commands/DiscordCommand.java b/src/main/java/net/pascalpex/deepslatemc/commands/DiscordCommand.java
+index 9ab77020d5a8f2403713e5622cb1204cda27d8f9..8ab1afab8817a1cbe089df79586e1c278bdf9e1b 100644
+--- a/src/main/java/net/pascalpex/deepslatemc/commands/DiscordCommand.java
++++ b/src/main/java/net/pascalpex/deepslatemc/commands/DiscordCommand.java
+@@ -19,10 +19,14 @@ public class DiscordCommand extends Command {
+     @Override
+     public boolean execute(@NotNull CommandSender sender, @NotNull String commandLabel, @NotNull String[] args) {
+         if (commandLabel.equalsIgnoreCase("dc") || commandLabel.equalsIgnoreCase("discord")) {
+-            Player player = (Player) sender;
+-            String link = Config.getDiscordLink();
+-            player.sendMessage(ChatColor.DARK_GRAY + "[" + ChatColor.GREEN + "Pascalpex" + ChatColor.DARK_GRAY + "]" + ChatColor.GOLD + " Der Link zu unserem Discord:");
+-            player.sendMessage(ChatColor.GOLD + link);
++            if (sender instanceof Player) {
++                Player player = (Player) sender;
++                String link = Config.getDiscordLink();
++                player.sendMessage(ChatColor.DARK_GRAY + "[" + ChatColor.GREEN + "Pascalpex" + ChatColor.DARK_GRAY + "]" + ChatColor.GOLD + " Der Link zu unserem Discord:");
++                player.sendMessage(ChatColor.GOLD + link);
++            } else {
++                sender.sendMessage("Dieser Befehl ist nur für Spieler geeignet");
++            }
+         }
+         return true;
+     }
+diff --git a/src/main/java/net/pascalpex/deepslatemc/commands/WartungCommand.java b/src/main/java/net/pascalpex/deepslatemc/commands/WartungCommand.java
+index 8ba817ad02ab3870a26f6b53a74bbfd552b7bb38..2580dc98414b6b6113d00f44dadcaf7ef87e50f5 100644
+--- a/src/main/java/net/pascalpex/deepslatemc/commands/WartungCommand.java
++++ b/src/main/java/net/pascalpex/deepslatemc/commands/WartungCommand.java
+@@ -29,15 +29,27 @@ public class WartungCommand extends Command {
+     @Override
+     public boolean execute(@NotNull CommandSender sender, @NotNull String label, @NotNull String[] args) {
+         String prefix = Config.getPrefix() + " " + ChatColor.DARK_AQUA;
+-        Player player = (Player) sender;
+-        if(label.equalsIgnoreCase("wartung")) {
+-            if(player.hasPermission("deepslate.wartung")) {
++        if (sender instanceof Player) {
++            Player player = (Player) sender;
++            if(label.equalsIgnoreCase("wartung")) {
++                if(player.hasPermission("deepslate.wartung")) {
++                    if(wartungMode) {
++                        wartungMode = false;
++                        player.sendMessage(prefix + "Der Wartungsmodus ist nun deaktiviert");
++                    } else {
++                        wartungMode = true;
++                        player.sendMessage(prefix + "Der Wartungsmodus ist nun aktiviert");
++                    }
++                }
++            }
++        } else {
++            if(label.equalsIgnoreCase("wartung")) {
+                 if(wartungMode) {
+                     wartungMode = false;
+-                    player.sendMessage(prefix + "Der Wartungsmodus ist nun deaktiviert");
++                    sender.sendMessage(prefix + "Der Wartungsmodus ist nun deaktiviert");
+                 } else {
+                     wartungMode = true;
+-                    player.sendMessage(prefix + "Der Wartungsmodus ist nun aktiviert");
++                    sender.sendMessage(prefix + "Der Wartungsmodus ist nun aktiviert");
+                 }
+             }
+         }
