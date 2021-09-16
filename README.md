@@ -1,5 +1,10 @@
-# DeepslateMC - A private [Sugarcane](https://github.com/SugarcaneMC/Sugarcane) fork
-DeepslateMC - A private [Sugarcane](https://github.com/SugarcaneMC/Sugarcane) fork for my own Minecraft Server
+<img src=".github/assets/logo.png" width="200px" align="right">
+<div align="center">
+
+# DeepslateMC
+### A private [Sugarcane](https://github.com/SugarcaneMC/Sugarcane) fork for my own Minecraft Server
+<br/>
+</div>
 
 I will start using it once [Sugarcane](https://github.com/SugarcaneMC/Sugarcane) becomes officially stable
 
