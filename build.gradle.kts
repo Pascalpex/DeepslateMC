@@ -3,8 +3,8 @@ import io.papermc.paperweight.util.constants.*
 plugins {
     java
     `maven-publish`
-    id("com.github.johnrengelman.shadow") version "7.0.0" apply false
-    id("io.papermc.paperweight.patcher") version "1.1.11"
+    id("com.github.johnrengelman.shadow") version "7.1.0" apply false
+    id("io.papermc.paperweight.patcher") version "1.1.12"
 }
 
 repositories {
@@ -15,7 +15,7 @@ repositories {
 }
 
 dependencies {
-    remapper("org.quiltmc:tiny-remapper:0.4.3")
+    remapper("net.fabricmc:tiny-remapper:0.6.0:fat")
     decompiler("net.minecraftforge:forgeflower:1.5.498.12")
     paperclip("io.papermc:paperclip:2.0.1")
 }
@@ -60,7 +60,7 @@ subprojects {
 paperweight {
     serverProject.set(project(":DeepslateMC-Server"))
 
-    remapRepo.set("https://maven.quiltmc.org/repository/release/")
+    remapRepo.set("https://maven.fabricmc.net/")
     decompileRepo.set("https://files.minecraftforge.net/maven/")
 
     useStandardUpstream("Sugarcane") {
@@ -102,9 +102,9 @@ tasks.generateDevelopmentBundle {
             "https://maven.quiltmc.org/repository/release/",
             "https://repo.aikar.co/content/groups/aikar",
             "https://ci.emc.gs/nexus/content/groups/aikar/",
-            "https://papermc.io/repo/repository/maven-public/", // for paper-mojangapi
-
-            // "https://my.repo/" // This should be a repo hosting your API (in this example, 'com.example.paperfork:forktest-api')
+            "https://papermc.io/repo/repository/maven-public/",
+            "https://repo.velocitypowered.com/snapshots/",
+            // "https://my.repo/", // This should be a repo hosting your API (in this example, 'com.example.paperfork:forktest-api')
         )
     )
 }
