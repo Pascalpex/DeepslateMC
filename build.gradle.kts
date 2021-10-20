@@ -9,9 +9,7 @@ plugins {
 
 repositories {
     mavenCentral()
-    maven("https://papermc.io/repo/repository/maven-public/") {
-        content { onlyForConfigurations(PAPERCLIP_CONFIG) }
-    }
+    maven("https://papermc.io/repo/repository/maven-public/")
 }
 
 dependencies {
