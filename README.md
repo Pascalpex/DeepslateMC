@@ -39,4 +39,4 @@ Push/PR
 ## Download
 **Warning!**: Because the upstream is still quite experimental, this fork is as well
 
-Download at [Github Actions](https://github.com/Pascalpex/DeepslateMC/actions)
+Download [here](https://pascalpex.ddns.net/files/deepslate/DeepslateMC.jar)
