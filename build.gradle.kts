@@ -71,7 +71,7 @@ paperweight {
             apiOutputDir.set(layout.projectDirectory.dir("DeepslateMC-API"))
             serverOutputDir.set(layout.projectDirectory.dir("DeepslateMC-Server"))
 
-            remapRepo.set("https://maven.quiltmc.org/repository/release/")
+            remapRepo.set("https://maven.fabricmc.net/")
             decompileRepo.set("https://files.minecraftforge.net/maven/")
         }
 
