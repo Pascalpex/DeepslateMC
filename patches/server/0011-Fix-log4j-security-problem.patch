@@ -1,0 +1,27 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Pascalpex <pascalpex@gmail.com>
+Date: Fri, 10 Dec 2021 20:58:23 +0100
+Subject: [PATCH] Fix log4j security problem
+
+
+diff --git a/build.gradle.kts b/build.gradle.kts
+index 2ceaeeee91ec2ce126f2d96d9f2404cde1f4d41b..4122d6b0153fc8aad5122c599661520c2abe8814 100644
+--- a/build.gradle.kts
++++ b/build.gradle.kts
+@@ -43,11 +43,12 @@ dependencies {
+           all its classes to check if they are plugins.
+           Scanning takes about 1-2 seconds so adding this speeds up the server start.
+      */
+-    implementation("org.apache.logging.log4j:log4j-core:2.14.1") // Paper - implementation
+-    annotationProcessor("org.apache.logging.log4j:log4j-core:2.14.1") // Paper - Needed to generate meta for out hex color converter plugin
++    implementation("org.apache.logging.log4j:log4j-core:2.15.0") // Paper - implementation
++    annotationProcessor("org.apache.logging.log4j:log4j-core:2.15.0") // Paper - Needed to generate meta for out hex color converter plugin
+     // Paper end
+-    implementation("org.apache.logging.log4j:log4j-iostreams:2.14.1") // Paper
+-    implementation("org.apache.logging.log4j:log4j-api:2.14.1") // Paper
++    implementation("org.apache.logging.log4j:log4j-iostreams:2.15.0") // Paper
++    implementation("org.apache.logging.log4j:log4j-slf4j18-impl:2.15.0") // Paper
++    implementation("org.apache.logging.log4j:log4j-api:2.15.0") // Paper
+     implementation("org.ow2.asm:asm:9.2")
+     implementation("org.ow2.asm:asm-commons:9.2") // Paper - ASM event executor generation
+     implementation("org.apache.commons:commons-rng-core:1.3") // Sugarcane - Utilities
