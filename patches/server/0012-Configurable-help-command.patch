@@ -1,0 +1,105 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Pascalpex <pascalpex@gmail.com>
+Date: Sun, 19 Dec 2021 19:03:10 +0100
+Subject: [PATCH] Configurable-help-command
+
+
+diff --git a/src/main/java/net/minecraft/commands/Commands.java b/src/main/java/net/minecraft/commands/Commands.java
+index e26959c5defd23de785699c0eb267bc87bf9ff60..dfce9b90ba650c3d33f90f91381de31fe7479343 100644
+--- a/src/main/java/net/minecraft/commands/Commands.java
++++ b/src/main/java/net/minecraft/commands/Commands.java
+@@ -147,7 +147,7 @@ public class Commands {
+         GameModeCommand.register(this.dispatcher);
+         GameRuleCommand.register(this.dispatcher);
+         GiveCommand.register(this.dispatcher);
+-        HelpCommand.register(this.dispatcher);
++        //HelpCommand.register(this.dispatcher); //DeepslateMC
+         ItemCommands.register(this.dispatcher);
+         KickCommand.register(this.dispatcher);
+         KillCommand.register(this.dispatcher);
+diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
+index 1296fd4a6acf55a24c4ad661eb0137c04e4c3d0d..ae6ef7c4c335bdf2bc7bb767296415661e5f460d 100644
+--- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
++++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
+@@ -248,6 +248,8 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+         MinecraftServer.getServer().server.getCommandMap().register("setbauwelt", "Deepslate", new BauweltCommand("setbauwelt"));
+         MinecraftServer.getServer().server.getCommandMap().register("bauwelt", "Deepslate", new BauweltCommand("bauwelt"));
+         MinecraftServer.getServer().server.getCommandMap().register("wartung", "Deepslate", new WartungCommand("wartung"));
++        MinecraftServer.getServer().server.getCommandMap().register("help", "Deepslate", new HelpCommand("help"));
++        MinecraftServer.getServer().server.getCommandMap().register("hilfe", "Deepslate", new HelpCommand("hilfe"));
+         // Deepslate end
+ 
+         // Sugarcane start - config
+diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
+index 7bccfc3f1147d657a8a8fd44db9ca340d97d4434..16041a7c8bf3fbd039e6756c4258ee98c1f6d65d 100644
+--- a/src/main/java/net/pascalpex/deepslatemc/Config.java
++++ b/src/main/java/net/pascalpex/deepslatemc/Config.java
+@@ -9,6 +9,7 @@ import org.bukkit.inventory.ItemStack;
+ import java.io.File;
+ import java.io.IOException;
+ import java.util.ArrayList;
++import java.util.List;
+ 
+ public class Config {
+ 
+@@ -23,6 +24,12 @@ public class Config {
+                 config.set("prefix", "&0[&8DeepslateMC&0]");
+                 config.set("discordLink", "https://google.de/");
+                 config.set("opCommandActive", true);
++                List<String> message = new ArrayList<String>();
++                message.add("&2&l--Hilfeseite--");
++                message.add("&6Die wichtigsten Befehle kannst du bei");
++                message.add("&9&l/warp &9&lInfos &r&6nachlesen. Wende dich bei");
++                message.add("&6weiteren Fragen an ein &9Teammitglied.");
++                config.set("helpMessage", message);
+                 save();
+             }
+             config.load(configFile);
+@@ -62,4 +69,17 @@ public class Config {
+     public static boolean getOpActive() {
+         return config.getBoolean("opCommandActive");
+     }
++
++    public static String getHelpMessage() {
++        List<String> messages = (List<String>) config.getList("helpMessage");
++        String message = "";
++        for(int i = 0; i < messages.size(); i++) {
++            message = message + messages.get(i).replace("&", "§");
++            if(i < messages.size() - 1) {
++                message = message + "\n§r";
++            }
++        }
++
++        return message;
++    }
+ }
+diff --git a/src/main/java/net/pascalpex/deepslatemc/commands/HelpCommand.java b/src/main/java/net/pascalpex/deepslatemc/commands/HelpCommand.java
+new file mode 100644
+index 0000000000000000000000000000000000000000..3bc737c576508623dab3c24c955b131f25f7bd89
+--- /dev/null
++++ b/src/main/java/net/pascalpex/deepslatemc/commands/HelpCommand.java
+@@ -0,0 +1,24 @@
++package net.pascalpex.deepslatemc.commands;
++
++import net.pascalpex.deepslatemc.Config;
++import org.bukkit.command.Command;
++import org.bukkit.command.CommandSender;
++import org.jetbrains.annotations.NotNull;
++
++public class HelpCommand extends Command {
++
++    public HelpCommand(@NotNull String name) {
++        super(name);
++        this.description = "Zeigt die konfigurierte Hilfe an";
++        this.usageMessage = "/help";
++    }
++
++    @Override
++    public boolean execute(@NotNull CommandSender sender, @NotNull String label, @NotNull String[] args) {
++        if (label.equalsIgnoreCase("help") || label.equalsIgnoreCase("hilfe")) {
++            sender.sendMessage(Config.getHelpMessage());
++        }
++        return true;
++    }
++
++}
