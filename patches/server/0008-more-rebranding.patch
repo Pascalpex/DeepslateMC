@@ -656,14 +656,3 @@ zrb|?tAOeX>Hpp11%eJr%^=i7T62)a!_X_DIZGzyAz0y>`3`Kxr4(0f0=`@hvI4znx
 zmM6-R!zoAg1{%8Zaw+0!-~V&ev)8*Z1#FtQ?o*1n`RqSh5$K2{Ce&EMGG_>nj06%<
 zLh<SZgy*Im9rB;loT6SbLqN-+whiC*AzQ==sGA0VKoR<o!VEF<^lxZn!ey5ML+UdH
 u3M5zm>%!gL-i-r&$^YZ%bZO}LojHCojKc^cetE_V(0HPwQmORfum1wIEC#Ir
-
-diff --git a/src/main/resources/logo.png:Zone.Identifier b/src/main/resources/logo.png:Zone.Identifier
-new file mode 100644
-index 0000000000000000000000000000000000000000..d3ae04c7d4a051ce7271b4914e12608361094105
---- /dev/null
-+++ b/src/main/resources/logo.png:Zone.Identifier
-@@ -0,0 +1,4 @@
-+[ZoneTransfer]
-+ZoneId=3
-+ReferrerUrl=https://raw.githubusercontent.com/Pascalpex/DeepslateMC/ver/1.17.1/.github/assets/logo.png
-+HostUrl=https://raw.githubusercontent.com/Pascalpex/DeepslateMC/ver/1.17.1/.github/assets/logo.png
