@@ -5,7 +5,7 @@ Subject: [PATCH] Deepslate-Config
 
 
 diff --git a/src/main/java/net/minecraft/commands/Commands.java b/src/main/java/net/minecraft/commands/Commands.java
-index b57df113bb8294d825a5bc619ebf4b2afa38728e..0ce345138f8b56fd103183068380aa388c7354d1 100644
+index 3eeba06b6b9847e276a64f1c791bd8c6e203059b..6ffc4b37dcba18f13829ad04fe2a3274b776c71f 100644
 --- a/src/main/java/net/minecraft/commands/Commands.java
 +++ b/src/main/java/net/minecraft/commands/Commands.java
 @@ -101,6 +101,7 @@ import net.minecraft.server.commands.WhitelistCommand;
@@ -25,7 +25,7 @@ index b57df113bb8294d825a5bc619ebf4b2afa38728e..0ce345138f8b56fd103183068380aa38
  
          if (environment.includeIntegrated) {
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index bcdc23604a122fadc736f8089aa2a7aedafe4564..c935b44b9f7f870dcd39f0024368b92a6bb699c0 100644
+index b39b82a297e05efc374190eacbc64b2f6b24f08b..55076770719c672c6feae066fcf7cbc64cdb7925 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
 @@ -165,6 +165,8 @@ import net.minecraft.world.level.storage.loot.PredicateManager;
@@ -37,7 +37,7 @@ index bcdc23604a122fadc736f8089aa2a7aedafe4564..c935b44b9f7f870dcd39f0024368b92a
  import org.apache.commons.lang3.Validate;
  import org.apache.logging.log4j.LogManager;
  import org.apache.logging.log4j.Logger;
-@@ -1236,7 +1238,6 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -1239,7 +1241,6 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
                  this.status.setDescription(new TextComponent(this.motd));
                  this.status.setVersion(new ServerStatus.Version(SharedConstants.getCurrentVersion().getName(), SharedConstants.getCurrentVersion().getProtocolVersion()));
                  this.updateStatusIcon(this.status);
