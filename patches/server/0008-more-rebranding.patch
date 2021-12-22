@@ -1,22 +1,23 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
-From: BuildTools <unconfigured@null.spigotmc.org>
-Date: Wed, 15 Sep 2021 13:54:42 +0200
-Subject: [PATCH] more-rebranding
+From: Pascalpex <pascalpex@gmail.com>
+Date: Wed, 22 Dec 2021 09:57:58 +0100
+Subject: [PATCH] more rebranding
 
 
 diff --git a/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java b/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java
-index 27a60864f94ed0e171fc37060d8770afaa90afce..d466e4aadc3a72921cfa653db751d401b240bf28 100644
+index 5c4a1afb10d869c4719640119a35152e3cb872b9..a0121496060a5fd9aaef4c848e6e9e53314e2d66 100644
 --- a/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java
 +++ b/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java
-@@ -20,6 +20,7 @@ import org.sugarcanemc.sugarcane.util.versioning.BranchReader;
+@@ -21,7 +21,7 @@ import org.sugarcanemc.sugarcane.util.versioning.BranchReader;
  
  public class PaperVersionFetcher implements VersionFetcher {
      private static final java.util.regex.Pattern VER_PATTERN = java.util.regex.Pattern.compile("^([0-9\\.]*)\\-.*R"); // R is an anchor, will always give '-R' at end
+-
 +    private static final String GITHUB_BRANCH_NAME = "ver/1.17.1";
-     private static @Nullable String mcVer;
+     private static final String DOWNLOAD_PAGE = "https://ci.sugarcanemc.org/job/Sugarcane/";
  
-     @Override
-@@ -30,9 +31,8 @@ public class PaperVersionFetcher implements VersionFetcher {
+     private static @Nullable String mcVer;
+@@ -34,9 +34,8 @@ public class PaperVersionFetcher implements VersionFetcher {
      @Nonnull
      @Override
      public Component getVersionMessage(@Nonnull String serverVersion) {
@@ -28,9 +29,9 @@ index 27a60864f94ed0e171fc37060d8770afaa90afce..d466e4aadc3a72921cfa653db751d401
          final Component history = getHistory();
  
          return history != null ? TextComponent.ofChildren(updateMessage, Component.newline(), history) : updateMessage;
-@@ -58,13 +58,13 @@ public class PaperVersionFetcher implements VersionFetcher {
+@@ -61,13 +60,13 @@ public class PaperVersionFetcher implements VersionFetcher {
+     private static Component getUpdateStatusMessage(@Nonnull String repo, @Nonnull String branch, @Nonnull String versionInfo) {
          int distance;
-         // Purpur start - put all this back, yet again
          // Sugarcane start
 -        try {
 -            int jenkinsBuild = Integer.parseInt(versionInfo);
@@ -44,11 +45,11 @@ index 27a60864f94ed0e171fc37060d8770afaa90afce..d466e4aadc3a72921cfa653db751d401
              distance = fetchDistanceFromGitHub(repo, branch, versionInfo);
 -        }
 +        //}
-         // Purpur end
          // Sugarcane end
  
-@@ -83,7 +83,7 @@ public class PaperVersionFetcher implements VersionFetcher {
-     // Purpur start
+         switch (distance) {
+@@ -90,7 +89,7 @@ public class PaperVersionFetcher implements VersionFetcher {
+     // Sugarcane start
      private static int fetchDistanceFromJenkins(int jenkinsBuild, @Nonnull String branch) { // Sugarcane
          try {
 -            try (BufferedReader reader = Resources.asCharSource(new URL("https://ci.sugarcanemc.org/job/Sugarcane/job/" + URLEncoder.encode(branch, Charsets.UTF_8.name()) + "/lastStableBuild/buildNumber"), Charsets.UTF_8).openBufferedStream()) { // Sugarcane
@@ -656,3 +657,13 @@ zmM6-R!zoAg1{%8Zaw+0!-~V&ev)8*Z1#FtQ?o*1n`RqSh5$K2{Ce&EMGG_>nj06%<
 zLh<SZgy*Im9rB;loT6SbLqN-+whiC*AzQ==sGA0VKoR<o!VEF<^lxZn!ey5ML+UdH
 u3M5zm>%!gL-i-r&$^YZ%bZO}LojHCojKc^cetE_V(0HPwQmORfum1wIEC#Ir
 
+diff --git a/src/main/resources/logo.png:Zone.Identifier b/src/main/resources/logo.png:Zone.Identifier
+new file mode 100644
+index 0000000000000000000000000000000000000000..d3ae04c7d4a051ce7271b4914e12608361094105
+--- /dev/null
++++ b/src/main/resources/logo.png:Zone.Identifier
+@@ -0,0 +1,4 @@
++[ZoneTransfer]
++ZoneId=3
++ReferrerUrl=https://raw.githubusercontent.com/Pascalpex/DeepslateMC/ver/1.17.1/.github/assets/logo.png
++HostUrl=https://raw.githubusercontent.com/Pascalpex/DeepslateMC/ver/1.17.1/.github/assets/logo.png

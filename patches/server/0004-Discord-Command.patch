@@ -5,7 +5,7 @@ Subject: [PATCH] Discord-Command
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 61fce75ca67dc8480c81c70b6036ad6d72338689..b30c880ddfc277fbbcbe0ef359abde546ffcb7a1 100644
+index 0a94788cdc4a7a6cd9e736c7454fbd8921bad20b..93aeab967d7742a8746bffbcc53c377bbeea6d94 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 @@ -64,6 +64,7 @@ import net.minecraft.world.level.storage.LevelStorageSource;
@@ -16,7 +16,7 @@ index 61fce75ca67dc8480c81c70b6036ad6d72338689..b30c880ddfc277fbbcbe0ef359abde54
  import org.apache.logging.log4j.LogManager;
  import org.apache.logging.log4j.Logger;
  import org.apache.logging.log4j.Level;
-@@ -240,6 +241,9 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+@@ -251,6 +252,9 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
  
          Config.load();
          MinecraftServer.getServer().server.getCommandMap().register("deepslate", "Deepslate", new DeepslateCommand("deepslate"));

@@ -1,11 +1,11 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Pascalpex <pascalpex@gmail.com>
-Date: Fri, 10 Dec 2021 14:21:07 +0100
+Date: Wed, 22 Dec 2021 10:17:14 +0100
 Subject: [PATCH] Better configurable prefix
 
 
 diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
-index 8bc29201c12faf433466dc9a7232921c86440bb0..7bccfc3f1147d657a8a8fd44db9ca340d97d4434 100644
+index b6be04bf7a594652da371d24eb6a5f762b59b5f6..532a0f027e6e56a3805f9987e20c88c665ab81f3 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/Config.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/Config.java
 @@ -20,7 +20,7 @@ public class Config {
@@ -17,7 +17,7 @@ index 8bc29201c12faf433466dc9a7232921c86440bb0..7bccfc3f1147d657a8a8fd44db9ca340
                  config.set("discordLink", "https://google.de/");
                  config.set("opCommandActive", true);
                  save();
-@@ -42,7 +42,8 @@ public class Config {
+@@ -46,7 +46,8 @@ public class Config {
      }
  
      public static String getPrefix() {

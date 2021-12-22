@@ -1,11 +1,11 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
-From: BuildTools <unconfigured@null.spigotmc.org>
-Date: Thu, 16 Sep 2021 14:38:09 +0200
-Subject: [PATCH] Toggleable-Op-Command
+From: Pascalpex <pascalpex@gmail.com>
+Date: Wed, 22 Dec 2021 10:11:09 +0100
+Subject: [PATCH] Toggleable Op Command
 
 
 diff --git a/src/main/java/net/minecraft/commands/Commands.java b/src/main/java/net/minecraft/commands/Commands.java
-index 542122a770c6e12b79ac420d2031c73f0a8aea98..e26959c5defd23de785699c0eb267bc87bf9ff60 100644
+index 0ce345138f8b56fd103183068380aa388c7354d1..cbba8d3080117c795db5a718b7ea49d708a00d9c 100644
 --- a/src/main/java/net/minecraft/commands/Commands.java
 +++ b/src/main/java/net/minecraft/commands/Commands.java
 @@ -101,6 +101,7 @@ import net.minecraft.server.commands.WhitelistCommand;
@@ -18,7 +18,7 @@ index 542122a770c6e12b79ac420d2031c73f0a8aea98..e26959c5defd23de785699c0eb267bc8
  import org.apache.logging.log4j.Logger;
 @@ -185,11 +186,14 @@ public class Commands {
          }
-
+ 
          if (environment.includeDedicated) {
 +            Config.load();
              BanIpCommands.register(this.dispatcher);
@@ -33,19 +33,19 @@ index 542122a770c6e12b79ac420d2031c73f0a8aea98..e26959c5defd23de785699c0eb267bc8
              PardonIpCommand.register(this.dispatcher);
              PerfCommand.register(this.dispatcher);
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 651e4af507818deac7f45456856b1771c0966835..70ca6b28adb2046d395b15784f9df9019d8ff3f5 100644
+index d6e9b78ad4e6d017cfcadcdc2cbab9e0aac5c78f..ca9e4a35d48f736a2381a023fcaf9ef4b102249e 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-@@ -239,7 +239,6 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+@@ -250,7 +250,6 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
          gg.airplane.commands.AirplaneCommands.init(); // Airplane - command
-
+ 
          // Deepslate start
 -        Config.load();
          MinecraftServer.getServer().server.getCommandMap().register("deepslate", "Deepslate", new DeepslateCommand("deepslate"));
          MinecraftServer.getServer().server.getCommandMap().register("discord", "Deepslate", new DiscordCommand("discord"));
          MinecraftServer.getServer().server.getCommandMap().register("dc", "Deepslate", new DiscordCommand("dc"));
 diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
-index 0dbe0e9de28208649c73e614e28e2e5bdc3418a3..8bc29201c12faf433466dc9a7232921c86440bb0 100644
+index 0dbe0e9de28208649c73e614e28e2e5bdc3418a3..b6be04bf7a594652da371d24eb6a5f762b59b5f6 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/Config.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/Config.java
 @@ -22,6 +22,7 @@ public class Config {
@@ -56,20 +56,23 @@ index 0dbe0e9de28208649c73e614e28e2e5bdc3418a3..8bc29201c12faf433466dc9a7232921c
                  save();
              }
              config.load(configFile);
-@@ -57,4 +58,7 @@ public class Config {
-         save();
+@@ -40,6 +41,10 @@ public class Config {
+         }
      }
-
+ 
 +    public static boolean getOpActive() {
 +        return config.getBoolean("opCommandActive");
 +    }
- }
++
+     public static String getPrefix() {
+         return config.getString("prefix");
+     }
 diff --git a/src/main/java/net/pascalpex/deepslatemc/commands/BauweltCommand.java b/src/main/java/net/pascalpex/deepslatemc/commands/BauweltCommand.java
 index 8e04e63ac1e3faff555e3128c114e552869b642d..58144727ad8e134ba69ef6b4624aeeb013076d61 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/commands/BauweltCommand.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/commands/BauweltCommand.java
 @@ -20,23 +20,27 @@ public class BauweltCommand extends Command {
-
+ 
      @Override
      public boolean execute(@NotNull CommandSender sender, @NotNull String label, @NotNull String[] args) {
 -        Player player = (Player) sender;
@@ -115,7 +118,7 @@ index 5eae1e19bcdffa70da7f328140b4dca39b507992..49be5e430d713f4ec8cf1e1b25c1de52
 --- a/src/main/java/net/pascalpex/deepslatemc/commands/ClearchatCommand.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/commands/ClearchatCommand.java
 @@ -17,16 +17,20 @@ public class ClearchatCommand extends Command {
-
+ 
      @Override
      public boolean execute(@NotNull CommandSender sender, @NotNull String commandLabel, @NotNull String[] args) {
 -        Player player = (Player) sender;

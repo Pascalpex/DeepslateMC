@@ -5,7 +5,7 @@ Subject: [PATCH] Bauwelt-Command
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 66fd09b02721075e34d3e85486c3d42db9381d7b..154ce560b2e1c2c13d9728e0bb4b3b30ebaf04af 100644
+index 0737ee49b58f3450212185ec6c1366edd13e58e1..93e6d89ecd50563e89fe66cfe249d4d07c600dad 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 @@ -63,6 +63,7 @@ import net.minecraft.world.level.block.entity.SkullBlockEntity;
@@ -16,7 +16,7 @@ index 66fd09b02721075e34d3e85486c3d42db9381d7b..154ce560b2e1c2c13d9728e0bb4b3b30
  import net.pascalpex.deepslatemc.commands.ClearchatCommand;
  import net.pascalpex.deepslatemc.commands.DeepslateCommand;
  import net.pascalpex.deepslatemc.commands.DiscordCommand;
-@@ -247,6 +248,8 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+@@ -258,6 +259,8 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
          MinecraftServer.getServer().server.getCommandMap().register("dc", "Deepslate", new DiscordCommand("dc"));
          MinecraftServer.getServer().server.getCommandMap().register("cc", "Deepslate", new ClearchatCommand("cc"));
          MinecraftServer.getServer().server.getCommandMap().register("clearchat", "Deepslate", new ClearchatCommand("clearchat"));

@@ -5,7 +5,7 @@ Subject: [PATCH] Deepslate-Config
 
 
 diff --git a/src/main/java/net/minecraft/commands/Commands.java b/src/main/java/net/minecraft/commands/Commands.java
-index a16be2e6e7e755529809e60cffd8defbdc674c22..542122a770c6e12b79ac420d2031c73f0a8aea98 100644
+index b57df113bb8294d825a5bc619ebf4b2afa38728e..0ce345138f8b56fd103183068380aa388c7354d1 100644
 --- a/src/main/java/net/minecraft/commands/Commands.java
 +++ b/src/main/java/net/minecraft/commands/Commands.java
 @@ -101,6 +101,7 @@ import net.minecraft.server.commands.WhitelistCommand;
@@ -25,7 +25,7 @@ index a16be2e6e7e755529809e60cffd8defbdc674c22..542122a770c6e12b79ac420d2031c73f
  
          if (environment.includeIntegrated) {
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index f06c5cd6b77dc3bf5de79961aa7bf408c26b950e..33ebbc899789d1ee29dc5b25d2f520a5934305ac 100644
+index bcdc23604a122fadc736f8089aa2a7aedafe4564..c935b44b9f7f870dcd39f0024368b92a6bb699c0 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
 @@ -165,6 +165,8 @@ import net.minecraft.world.level.storage.loot.PredicateManager;
@@ -37,7 +37,7 @@ index f06c5cd6b77dc3bf5de79961aa7bf408c26b950e..33ebbc899789d1ee29dc5b25d2f520a5
  import org.apache.commons.lang3.Validate;
  import org.apache.logging.log4j.LogManager;
  import org.apache.logging.log4j.Logger;
-@@ -1222,7 +1224,6 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -1236,7 +1238,6 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
                  this.status.setDescription(new TextComponent(this.motd));
                  this.status.setVersion(new ServerStatus.Version(SharedConstants.getCurrentVersion().getName(), SharedConstants.getCurrentVersion().getProtocolVersion()));
                  this.updateStatusIcon(this.status);
@@ -46,7 +46,7 @@ index f06c5cd6b77dc3bf5de79961aa7bf408c26b950e..33ebbc899789d1ee29dc5b25d2f520a5
                  // Paper start - move done tracking
                  LOGGER.info("Running delayed init tasks");
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 7aef7f81f440838228839fbc2a27a602e30abcea..61fce75ca67dc8480c81c70b6036ad6d72338689 100644
+index 1ff2c567c40a43dbb694913b1f09a70fdd4b19ed..0a94788cdc4a7a6cd9e736c7454fbd8921bad20b 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 @@ -62,6 +62,8 @@ import net.minecraft.world.level.GameType;
@@ -58,7 +58,7 @@ index 7aef7f81f440838228839fbc2a27a602e30abcea..61fce75ca67dc8480c81c70b6036ad6d
  import org.apache.logging.log4j.LogManager;
  import org.apache.logging.log4j.Logger;
  import org.apache.logging.log4j.Level;
-@@ -235,6 +237,9 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+@@ -246,6 +248,9 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
          // Paper end
          gg.airplane.AirplaneConfig.load(); // Airplane - config
          gg.airplane.commands.AirplaneCommands.init(); // Airplane - command

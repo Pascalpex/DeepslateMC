@@ -5,7 +5,7 @@ Subject: [PATCH] Clearchat-Command
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index b30c880ddfc277fbbcbe0ef359abde546ffcb7a1..66fd09b02721075e34d3e85486c3d42db9381d7b 100644
+index 93aeab967d7742a8746bffbcc53c377bbeea6d94..0737ee49b58f3450212185ec6c1366edd13e58e1 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 @@ -63,6 +63,7 @@ import net.minecraft.world.level.block.entity.SkullBlockEntity;
@@ -16,7 +16,7 @@ index b30c880ddfc277fbbcbe0ef359abde546ffcb7a1..66fd09b02721075e34d3e85486c3d42d
  import net.pascalpex.deepslatemc.commands.DeepslateCommand;
  import net.pascalpex.deepslatemc.commands.DiscordCommand;
  import org.apache.logging.log4j.LogManager;
-@@ -239,10 +240,14 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+@@ -250,10 +251,14 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
          gg.airplane.AirplaneConfig.load(); // Airplane - config
          gg.airplane.commands.AirplaneCommands.init(); // Airplane - command
  

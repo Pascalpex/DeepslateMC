@@ -5,7 +5,7 @@ Subject: [PATCH] Wartung-Mode
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 154ce560b2e1c2c13d9728e0bb4b3b30ebaf04af..651e4af507818deac7f45456856b1771c0966835 100644
+index 93e6d89ecd50563e89fe66cfe249d4d07c600dad..d6e9b78ad4e6d017cfcadcdc2cbab9e0aac5c78f 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 @@ -63,10 +63,7 @@ import net.minecraft.world.level.block.entity.SkullBlockEntity;
@@ -20,7 +20,7 @@ index 154ce560b2e1c2c13d9728e0bb4b3b30ebaf04af..651e4af507818deac7f45456856b1771
  import org.apache.logging.log4j.LogManager;
  import org.apache.logging.log4j.Logger;
  import org.apache.logging.log4j.Level;
-@@ -250,6 +247,7 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+@@ -261,6 +258,7 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
          MinecraftServer.getServer().server.getCommandMap().register("clearchat", "Deepslate", new ClearchatCommand("clearchat"));
          MinecraftServer.getServer().server.getCommandMap().register("setbauwelt", "Deepslate", new BauweltCommand("setbauwelt"));
          MinecraftServer.getServer().server.getCommandMap().register("bauwelt", "Deepslate", new BauweltCommand("bauwelt"));
@@ -29,7 +29,7 @@ index 154ce560b2e1c2c13d9728e0bb4b3b30ebaf04af..651e4af507818deac7f45456856b1771
  
          // Sugarcane start - config
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index 161561ae4a792466daaa5e5830684090ae27d3bf..e2d9b926b0dbbfdc4a34b264cb618e6533f35782 100644
+index 3a128beeee65a0f178ce129981368534ec0aed02..1f9ef5dd365424da43a0e1b8b676949885438968 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
 @@ -92,6 +92,7 @@ import net.minecraft.world.scores.Objective;

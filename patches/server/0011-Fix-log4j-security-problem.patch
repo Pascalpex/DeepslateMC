@@ -5,10 +5,10 @@ Subject: [PATCH] Fix log4j security problem
 
 
 diff --git a/build.gradle.kts b/build.gradle.kts
-index 2ceaeeee91ec2ce126f2d96d9f2404cde1f4d41b..a79a2388a0dfdd44bbb83e2f0f1c4544620e128f 100644
+index 7a66c769557f30e9ca8a94b3b15e8e9d93f4aceb..4fbd4726a972717227b8436feca22d1d69575839 100644
 --- a/build.gradle.kts
 +++ b/build.gradle.kts
-@@ -43,11 +43,12 @@ dependencies {
+@@ -36,11 +36,12 @@ dependencies {
            all its classes to check if they are plugins.
            Scanning takes about 1-2 seconds so adding this speeds up the server start.
       */
