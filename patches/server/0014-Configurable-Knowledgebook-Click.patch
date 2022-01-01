@@ -1,0 +1,57 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Pascalpex <pascalpex@gmail.com>
+Date: Sat, 1 Jan 2022 17:05:56 +0100
+Subject: [PATCH] Configurable Knowledgebook Click
+
+
+diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
+index c885e60fdae9c5713e82ac933772c8d4d45fd28e..daa5f02fd88e5c0dd3be98c752c3787f061ef090 100644
+--- a/src/main/java/net/pascalpex/deepslatemc/Config.java
++++ b/src/main/java/net/pascalpex/deepslatemc/Config.java
+@@ -34,6 +34,7 @@ public class Config {
+                 message.add("&6weiteren Fragen an ein &9Teammitglied.");
+                 config.set("helpMessage", message);
+                 config.set("spawnOnJoin", false);
++                config.set("preventKnowledgebookClick", false);
+                 save();
+             }
+             config.load(configFile);
+@@ -56,6 +57,10 @@ public class Config {
+         return config.getBoolean("spawnOnJoin");
+     }
+ 
++    public static boolean getPreventKnowledgebookClick() {
++        return config.getBoolean("preventKnowledgebookClick");
++    }
++
+     public static boolean getOpActive() {
+         return config.getBoolean("opCommandActive");
+     }
+diff --git a/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java b/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
+index 6d38c0478210bf264afd48be3e7ba7fee296ebc1..07cbc38f1e9dd3cc42ff8e96737fd2c852476e76 100644
+--- a/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
++++ b/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
+@@ -57,6 +57,7 @@ import net.minecraft.world.phys.BlockHitResult;
+ import net.minecraft.world.phys.EntityHitResult;
+ import net.minecraft.world.phys.HitResult;
+ import net.minecraft.world.phys.Vec3;
++import net.pascalpex.deepslatemc.Config;
+ import org.bukkit.Bukkit;
+ import org.bukkit.Location; // Paper
+ import org.bukkit.Material;
+@@ -536,6 +537,15 @@ public class CraftEventFactory {
+         // Paper start
+         Location interactionPoint =  hitVec == null ? null : new Location(craftWorld, hitVec.x, hitVec.y, hitVec.z);
+         PlayerInteractEvent event = new PlayerInteractEvent(player, action, itemInHand, blockClicked, blockFace, (hand == null) ? null : ((hand == InteractionHand.OFF_HAND) ? EquipmentSlot.OFF_HAND : EquipmentSlot.HAND), interactionPoint);
++        if (Config.getPreventKnowledgebookClick()) {
++            if (event.hasItem()) {
++                if (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) {
++                    if (event.getItem().getType() == Material.KNOWLEDGE_BOOK) {
++                        event.setCancelled(true);
++                    }
++                }
++            }
++        }
+         // Paper end
+         if (cancelledBlock) {
+             event.setUseInteractedBlock(Event.Result.DENY);
