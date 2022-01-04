@@ -1,0 +1,98 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Pascalpex <pascalpex@gmail.com>
+Date: Tue, 4 Jan 2022 14:04:47 +0100
+Subject: [PATCH] Colored Signs
+
+
+diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
+index 9bf0449597e60fd2f38045ff10d6876126ae3dc6..8ca4ada8df9da47d6bf147080b8ca79b43cfa082 100644
+--- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
++++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
+@@ -158,6 +158,7 @@ import net.minecraft.world.phys.Vec3;
+ import net.minecraft.world.phys.shapes.BooleanOp;
+ import net.minecraft.world.phys.shapes.Shapes;
+ import net.minecraft.world.phys.shapes.VoxelShape;
++import net.pascalpex.deepslatemc.Config;
+ import org.apache.commons.lang3.StringUtils;
+ import org.apache.logging.log4j.LogManager;
+ import org.apache.logging.log4j.Logger;
+@@ -3148,6 +3149,15 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Ser
+                 // Purpur end
+             }
+             SignChangeEvent event = new SignChangeEvent((org.bukkit.craftbukkit.block.CraftBlock) player.getWorld().getBlockAt(x, y, z), this.player.getBukkitEntity(), lines);
++            if(Config.getColoredSignsEnabled()) {
++                if(Config.getColoredSignsPermissionUse()) {
++                    if(player.hasPermission("deepslate.colorsigns")) {
++                        colorSign(event);
++                    }
++                } else {
++                    colorSign(event);
++                }
++            }
+             this.cserver.getPluginManager().callEvent(event);
+ 
+             if (!event.isCancelled()) {
+@@ -3165,6 +3175,35 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Ser
+ 
+     }
+ 
++    public void colorSign(SignChangeEvent event) {
++        for(int i = 0; i < 4; i++) {
++            String line = event.getLines()[i];
++            line = line.replace("&0", "§0");
++            line = line.replace("&1", "§1");
++            line = line.replace("&2", "§2");
++            line = line.replace("&3", "§3");
++            line = line.replace("&4", "§4");
++            line = line.replace("&5", "§5");
++            line = line.replace("&6", "§6");
++            line = line.replace("&7", "§7");
++            line = line.replace("&8", "§8");
++            line = line.replace("&9", "§9");
++            line = line.replace("&a", "§a");
++            line = line.replace("&b", "§b");
++            line = line.replace("&c", "§c");
++            line = line.replace("&d", "§d");
++            line = line.replace("&e", "§e");
++            line = line.replace("&f", "§f");
++            line = line.replace("&k", "§k");
++            line = line.replace("&l", "§l");
++            line = line.replace("&m", "§m");
++            line = line.replace("&n", "§n");
++            line = line.replace("&o", "§o");
++            line = line.replace("&r", "§r");
++            event.setLine(i, line);
++        }
++    }
++
+     @Override
+     public void handleKeepAlive(ServerboundKeepAlivePacket packet) {
+         // Purpur start
+diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
+index daa5f02fd88e5c0dd3be98c752c3787f061ef090..d477bc22713fa77996902e86b670f6d0553e974b 100644
+--- a/src/main/java/net/pascalpex/deepslatemc/Config.java
++++ b/src/main/java/net/pascalpex/deepslatemc/Config.java
+@@ -35,6 +35,8 @@ public class Config {
+                 config.set("helpMessage", message);
+                 config.set("spawnOnJoin", false);
+                 config.set("preventKnowledgebookClick", false);
++                config.set("coloredSigns" + ".enabled", false);
++                config.set("coloredSigns" + ".usePermission", true);
+                 save();
+             }
+             config.load(configFile);
+@@ -53,6 +55,14 @@ public class Config {
+         }
+     }
+ 
++    public static boolean getColoredSignsEnabled() {
++        return config.getBoolean("coloredSigns" + ".enabled");
++    }
++
++    public static boolean getColoredSignsPermissionUse() {
++        return config.getBoolean("coloredSigns" + ".usePermission");
++    }
++
+     public static boolean getSpawnOnJoin() {
+         return config.getBoolean("spawnOnJoin");
+     }
