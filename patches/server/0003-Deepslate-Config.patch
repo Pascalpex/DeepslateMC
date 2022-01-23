@@ -1,81 +1,37 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
-From: BuildTools <unconfigured@null.spigotmc.org>
-Date: Fri, 10 Sep 2021 22:22:14 +0200
-Subject: [PATCH] Deepslate-Config
+From: Pascalpex <pascalpex@gmail.com>
+Date: Sun, 23 Jan 2022 18:46:32 +0100
+Subject: [PATCH] Deepslate Config
 
 
-diff --git a/src/main/java/net/minecraft/commands/Commands.java b/src/main/java/net/minecraft/commands/Commands.java
-index 3eeba06b6b9847e276a64f1c791bd8c6e203059b..6ffc4b37dcba18f13829ad04fe2a3274b776c71f 100644
---- a/src/main/java/net/minecraft/commands/Commands.java
-+++ b/src/main/java/net/minecraft/commands/Commands.java
-@@ -101,6 +101,7 @@ import net.minecraft.server.commands.WhitelistCommand;
- import net.minecraft.server.commands.WorldBorderCommand;
- import net.minecraft.server.commands.data.DataCommands;
- import net.minecraft.server.level.ServerPlayer;
-+import net.pascalpex.deepslatemc.commands.DeepslateCommand;
- import org.apache.logging.log4j.LogManager;
- import org.apache.logging.log4j.Logger;
- 
-@@ -204,7 +205,6 @@ public class Commands {
-             net.pl3x.purpur.command.UptimeCommand.register(this.dispatcher); // Purpur
-             net.pl3x.purpur.command.TPSBarCommand.register(this.dispatcher); // Purpur
-             net.pl3x.purpur.command.CompassCommand.register(this.dispatcher); // Purpur
--            net.pascalpex.deepslatemc.commands.DeepslateCommand.register(this.dispatcher); // Deepslate
-         }
- 
-         if (environment.includeIntegrated) {
-diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index b39b82a297e05efc374190eacbc64b2f6b24f08b..55076770719c672c6feae066fcf7cbc64cdb7925 100644
---- a/src/main/java/net/minecraft/server/MinecraftServer.java
-+++ b/src/main/java/net/minecraft/server/MinecraftServer.java
-@@ -165,6 +165,8 @@ import net.minecraft.world.level.storage.loot.PredicateManager;
- import net.minecraft.world.phys.Vec2;
- import net.minecraft.world.phys.Vec3;
- import net.minecraft.world.scores.PlayerTeam; // Paper
-+import net.pascalpex.deepslatemc.Config;
-+import net.pascalpex.deepslatemc.commands.DeepslateCommand;
- import org.apache.commons.lang3.Validate;
- import org.apache.logging.log4j.LogManager;
- import org.apache.logging.log4j.Logger;
-@@ -1239,7 +1241,6 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
-                 this.status.setDescription(new TextComponent(this.motd));
-                 this.status.setVersion(new ServerStatus.Version(SharedConstants.getCurrentVersion().getName(), SharedConstants.getCurrentVersion().getProtocolVersion()));
-                 this.updateStatusIcon(this.status);
--
-                 // Spigot start
-                 // Paper start - move done tracking
-                 LOGGER.info("Running delayed init tasks");
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 1ff2c567c40a43dbb694913b1f09a70fdd4b19ed..0a94788cdc4a7a6cd9e736c7454fbd8921bad20b 100644
+index a8d32dbcfab10622c77a7030feae96fdb985e679..c8aa8d8b16c8571baa82303a68041d7b9d1e2083 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-@@ -62,6 +62,8 @@ import net.minecraft.world.level.GameType;
+@@ -58,6 +58,7 @@ import net.minecraft.world.level.GameType;
  import net.minecraft.world.level.block.entity.SkullBlockEntity;
  import net.minecraft.world.level.storage.LevelStorageSource;
  import net.minecraft.world.level.storage.WorldData;
 +import net.pascalpex.deepslatemc.Config;
-+import net.pascalpex.deepslatemc.commands.DeepslateCommand;
+ import net.pascalpex.deepslatemc.commands.DeepslateCommand;
  import org.apache.logging.log4j.LogManager;
  import org.apache.logging.log4j.Logger;
- import org.apache.logging.log4j.Level;
-@@ -246,6 +248,9 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
-         // Paper end
-         gg.airplane.AirplaneConfig.load(); // Airplane - config
-         gg.airplane.commands.AirplaneCommands.init(); // Airplane - command
-+
+@@ -245,6 +246,7 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+         gg.pufferfish.pufferfish.PufferfishConfig.load(); // Pufferfish
+         gg.pufferfish.pufferfish.PufferfishCommand.init(); // Pufferfish
+ 
 +        Config.load();
-+        MinecraftServer.getServer().server.getCommandMap().register("deepslate", "Deepslate", new DeepslateCommand("deepslate"));
-         // Sugarcane start - config
-         try {
-             org.sugarcanemc.sugarcane.config.SugarcaneConfig.init((java.io.File) options.valueOf("sugarcane-settings"));
+         MinecraftServer.getServer().server.getCommandMap().register("deepslate", "Deepslate", new DeepslateCommand("deepslate"));
+ 
+         // Yatopia start
 diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
 new file mode 100644
-index 0000000000000000000000000000000000000000..43e05ef11cbd95fb60a9e2fdf18c0d660810ae95
+index 0000000000000000000000000000000000000000..99122d5f56c40ee12d3d01b90d052de98eff2668
 --- /dev/null
 +++ b/src/main/java/net/pascalpex/deepslatemc/Config.java
-@@ -0,0 +1,46 @@
+@@ -0,0 +1,44 @@
 +package net.pascalpex.deepslatemc;
-+
++    
 +import org.bukkit.ChatColor;
 +import org.bukkit.configuration.InvalidConfigurationException;
 +import org.bukkit.configuration.file.FileConfiguration;
@@ -103,14 +59,12 @@ index 0000000000000000000000000000000000000000..43e05ef11cbd95fb60a9e2fdf18c0d66
 +        } catch (IOException | InvalidConfigurationException e) {
 +            e.printStackTrace();
 +        }
-+
 +    }
 +
 +    public static void save() {
 +        try {
 +            config.save(configFile);
 +        } catch (IOException e) {
-+
 +            e.printStackTrace();
 +        }
 +    }
@@ -120,84 +74,3 @@ index 0000000000000000000000000000000000000000..43e05ef11cbd95fb60a9e2fdf18c0d66
 +    }
 +
 +}
-diff --git a/src/main/java/net/pascalpex/deepslatemc/commands/DeepslateCommand.java b/src/main/java/net/pascalpex/deepslatemc/commands/DeepslateCommand.java
-index 1b4ce635a3c35b1e86d5f79a0f9b3c671e541fc1..e31c8371cdc32a3c0e345ef1354f37da55cf2be1 100644
---- a/src/main/java/net/pascalpex/deepslatemc/commands/DeepslateCommand.java
-+++ b/src/main/java/net/pascalpex/deepslatemc/commands/DeepslateCommand.java
-@@ -1,24 +1,62 @@
- package net.pascalpex.deepslatemc.commands;
- 
--import com.mojang.brigadier.CommandDispatcher;
--import net.minecraft.commands.CommandSourceStack;
--import net.minecraft.commands.Commands;
--import net.minecraft.network.chat.Component;
-+import net.pascalpex.deepslatemc.Config;
- import org.bukkit.ChatColor;
-+import org.bukkit.Location;
-+import org.bukkit.command.Command;
-+import org.bukkit.command.CommandSender;
-+import org.bukkit.entity.Player;
- 
--public class DeepslateCommand {
-+import java.util.Collections;
-+import java.util.List;
-+import java.util.stream.Collectors;
-+import java.util.stream.Stream;
- 
--    public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
--        dispatcher.register(Commands.literal("deepslate")
--            .requires((listener) -> listener.hasPermission(2))
--            .executes((context) -> execute(context.getSource()))
--        ).setPermission("bukkit.command.deepslate");
--    }
-+public class DeepslateCommand extends Command {
- 
--    private static int execute(CommandSourceStack sender) {
-+    public DeepslateCommand(String name) {
-+        super(name);
-+        this.description = "Deepslate Befehl";
-+        this.usageMessage = "/deepslate [reload | version]";
-+        this.setPermission("deepslate.command");
-+    }
- 
--        sender.sendSuccess(Component.nullToEmpty(ChatColor.AQUA + "DeepslateMC 1.0 von Pascalpex"), false);
--        return 1;
-+    @Override
-+    public List<String> tabComplete(CommandSender sender, String alias, String[] args, Location location) throws IllegalArgumentException {
-+        if (args.length == 1) {
-+            return Stream.of("reload", "version")
-+                .filter(arg -> arg.startsWith(args[0].toLowerCase()))
-+                .collect(Collectors.toList());
-+        }
-+        return Collections.emptyList();
-     }
- 
-+    @Override
-+    public boolean execute(CommandSender sender, String commandLabel, String[] args) {
-+        String prefix = Config.getPrefix() + " " + ChatColor.DARK_AQUA;
-+        Player player = (Player) sender;
-+        if(player.hasPermission("deepslate.command")) {
-+            if(args.length == 0) {
-+                player.sendMessage(prefix + "Nutze /deepslate [reload | version]");
-+            }
-+            if(args.length == 1) {
-+                if(args[0].equalsIgnoreCase("reload")) {
-+                    Config.load();
-+                    player.sendMessage(prefix + "Config wurde neugeladen");
-+                } else {
-+                    if(args[0].equalsIgnoreCase("version")) {
-+                        player.sendMessage(prefix + "Dieser Server läuft mit DeepslateMC Version 1.0");
-+                    } else {
-+                        player.sendMessage(prefix + "Nutze /deepslate [reload | version]");
-+                    }
-+                }
-+            }
-+            if(args.length >= 2) {
-+                player.sendMessage(prefix + "Nutze /deepslate [reload | version]");
-+            }
-+        } else {
-+            player.sendMessage(prefix + "Dafür hast du keine Rechte");
-+        }
-+        return true;
-+    }
- }

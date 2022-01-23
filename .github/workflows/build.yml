@@ -18,12 +18,10 @@ jobs:
       run: chmod +x gradlew
     - name: Apply patches
       run: ./gradlew applyPatches
-    - name: Build DeepslateMC
-      run: ./gradlew createReobfBundleJar
     - name: Generate Paperclip Jar
-      run: ./gradlew paperclip
+      run: ./gradlew createReobfPaperclipJar
     - name: Upload Paperclip
       uses: actions/upload-artifact@v2.3.1
       with:
         name: DeepslateMC
-        path: build/libs/deepslateMC-bundler-1.18.1-R0.1-SNAPSHOT-reobf.jar
+        path: build/libs/deepslateMC-paperclip-1.18.1-R0.1-SNAPSHOT-reobf.jar

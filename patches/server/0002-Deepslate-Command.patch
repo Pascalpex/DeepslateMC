@@ -1,48 +1,97 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
-From: BuildTools <unconfigured@null.spigotmc.org>
-Date: Fri, 10 Sep 2021 12:39:23 +0200
-Subject: [PATCH] Deepslate-Command
+From: Pascalpex <pascalpex@gmail.com>
+Date: Sun, 23 Jan 2022 18:42:48 +0100
+Subject: [PATCH] Deepslate Command
 
 
-diff --git a/src/main/java/net/minecraft/commands/Commands.java b/src/main/java/net/minecraft/commands/Commands.java
-index 8c2424b0917d278bb0b9e687d116d8de73696446..a16be2e6e7e755529809e60cffd8defbdc674c22 100644
---- a/src/main/java/net/minecraft/commands/Commands.java
-+++ b/src/main/java/net/minecraft/commands/Commands.java
-@@ -204,6 +204,7 @@ public class Commands {
-             net.pl3x.purpur.command.UptimeCommand.register(this.dispatcher); // Purpur
-             net.pl3x.purpur.command.TPSBarCommand.register(this.dispatcher); // Purpur
-             net.pl3x.purpur.command.CompassCommand.register(this.dispatcher); // Purpur
-+            net.pascalpex.deepslatemc.commands.DeepslateCommand.register(this.dispatcher); // Deepslate
-         }
+diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
+index ec7382b85e7ca9fead5f398a3e61989a012e06eb..a8d32dbcfab10622c77a7030feae96fdb985e679 100644
+--- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
++++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
+@@ -58,6 +58,7 @@ import net.minecraft.world.level.GameType;
+ import net.minecraft.world.level.block.entity.SkullBlockEntity;
+ import net.minecraft.world.level.storage.LevelStorageSource;
+ import net.minecraft.world.level.storage.WorldData;
++import net.pascalpex.deepslatemc.commands.DeepslateCommand;
+ import org.apache.logging.log4j.LogManager;
+ import org.apache.logging.log4j.Logger;
+ import org.apache.logging.log4j.Level;
+@@ -244,6 +245,8 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+         gg.pufferfish.pufferfish.PufferfishConfig.load(); // Pufferfish
+         gg.pufferfish.pufferfish.PufferfishCommand.init(); // Pufferfish
  
-         if (environment.includeIntegrated) {
++        MinecraftServer.getServer().server.getCommandMap().register("deepslate", "Deepslate", new DeepslateCommand("deepslate"));
++
+         // Yatopia start
+         try {
+             me.titaniumtown.JettPackConfig.init((java.io.File) options.valueOf("jettpack-settings"));
 diff --git a/src/main/java/net/pascalpex/deepslatemc/commands/DeepslateCommand.java b/src/main/java/net/pascalpex/deepslatemc/commands/DeepslateCommand.java
 new file mode 100644
-index 0000000000000000000000000000000000000000..1b4ce635a3c35b1e86d5f79a0f9b3c671e541fc1
+index 0000000000000000000000000000000000000000..d881c5cfd8383fba16f4ebfc9ddd98d33450972c
 --- /dev/null
 +++ b/src/main/java/net/pascalpex/deepslatemc/commands/DeepslateCommand.java
-@@ -0,0 +1,24 @@
+@@ -0,0 +1,64 @@
 +package net.pascalpex.deepslatemc.commands;
-+
-+import com.mojang.brigadier.CommandDispatcher;
-+import net.minecraft.commands.CommandSourceStack;
-+import net.minecraft.commands.Commands;
-+import net.minecraft.network.chat.Component;
++    
++import net.pascalpex.deepslatemc.Config;
 +import org.bukkit.ChatColor;
++import org.bukkit.Location;
++import org.bukkit.command.Command;
++import org.bukkit.command.CommandSender;
++import org.bukkit.entity.Player;
 +
-+public class DeepslateCommand {
++import java.util.Collections;
++import java.util.List;
++import java.util.stream.Collectors;
++import java.util.stream.Stream;
 +
-+    public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
-+        dispatcher.register(Commands.literal("deepslate")
-+            .requires((listener) -> listener.hasPermission(2))
-+            .executes((context) -> execute(context.getSource()))
-+        ).setPermission("bukkit.command.deepslate");
++
++public class DeepslateCommand extends Command {
++
++    public DeepslateCommand(String name) {
++        super(name);
++        this.description = "Deepslate Befehl";
++        this.usageMessage = "/deepslate [reload | version]";
++        this.setPermission("deepslate.command");
++    }
++        
++    @Override
++    public List<String> tabComplete(CommandSender sender, String alias, String[] args, Location location) throws IllegalArgumentException {
++        if (args.length == 1) {
++            return Stream.of("reload", "version")
++                .filter(arg -> arg.startsWith(args[0].toLowerCase()))
++                .collect(Collectors.toList());
++        }
++        return Collections.emptyList();
 +    }
 +
-+    private static int execute(CommandSourceStack sender) {
-+
-+        sender.sendSuccess(Component.nullToEmpty(ChatColor.AQUA + "DeepslateMC 1.0 von Pascalpex"), false);
-+        return 1;
++    @Override
++    public boolean execute(CommandSender sender, String commandLabel, String[] args) {
++        String prefix = Config.getPrefix() + " " + ChatColor.DARK_AQUA;
++        Player player = (Player) sender;
++        if(player.hasPermission("deepslate.command")) {
++            if(args.length == 0) {
++                player.sendMessage(prefix + "Nutze /deepslate [reload | version]");
++            }
++            if(args.length == 1) {
++                if(args[0].equalsIgnoreCase("reload")) {
++                    Config.load();
++                    player.sendMessage(prefix + "Config wurde neugeladen");
++                } else {
++                    if(args[0].equalsIgnoreCase("version")) {
++                        player.sendMessage(prefix + "Dieser Server läuft mit DeepslateMC Version 1.0");
++                    } else {
++                        player.sendMessage(prefix + "Nutze /deepslate [reload | version]");
++                    }
++                }
++            }
++            if(args.length >= 2) {
++                player.sendMessage(prefix + "Nutze /deepslate [reload | version]");
++            }
++        } else {
++            player.sendMessage(prefix + "Dafür hast du keine Rechte");
++        }
++        return true;
 +    }
 +
 +}
