@@ -15,8 +15,7 @@ I know that some patches are a mess
 ## Building
 ```
 ./gradlew applyPatches
-./gradlew build
-./gradlew paperclip
+./gradlew createReobfPaperclipJar
 ```
 
 ## Adding a Patch
