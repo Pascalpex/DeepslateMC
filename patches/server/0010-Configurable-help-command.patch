@@ -1,14 +1,14 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Pascalpex <pascalpex@gmail.com>
-Date: Wed, 22 Dec 2021 10:23:04 +0100
+Date: Sun, 23 Jan 2022 20:22:43 +0100
 Subject: [PATCH] Configurable help command
 
 
 diff --git a/src/main/java/net/minecraft/commands/Commands.java b/src/main/java/net/minecraft/commands/Commands.java
-index cbba8d3080117c795db5a718b7ea49d708a00d9c..09c82fb94b89633a58aac8bd8755493245141d2f 100644
+index 47e8733266d5359898d31818ddaaf1ab3f326838..3f54629ae1a4b2e8d5018d6706731c45c383113f 100644
 --- a/src/main/java/net/minecraft/commands/Commands.java
 +++ b/src/main/java/net/minecraft/commands/Commands.java
-@@ -147,7 +147,7 @@ public class Commands {
+@@ -149,7 +149,7 @@ public class Commands {
          GameModeCommand.register(this.dispatcher);
          GameRuleCommand.register(this.dispatcher);
          GiveCommand.register(this.dispatcher);
@@ -18,20 +18,20 @@ index cbba8d3080117c795db5a718b7ea49d708a00d9c..09c82fb94b89633a58aac8bd87554932
          KickCommand.register(this.dispatcher);
          KillCommand.register(this.dispatcher);
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index ca9e4a35d48f736a2381a023fcaf9ef4b102249e..b3f3dd8a93c69a0103a012766ac5fe15d8493496 100644
+index bdc0ee503c614590b2fdeb7b3c4742952245bf0f..7e2f07dfd928ce22b6f32985b689ed01536dca2d 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-@@ -258,6 +258,8 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+@@ -255,6 +255,8 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
          MinecraftServer.getServer().server.getCommandMap().register("setbauwelt", "Deepslate", new BauweltCommand("setbauwelt"));
          MinecraftServer.getServer().server.getCommandMap().register("bauwelt", "Deepslate", new BauweltCommand("bauwelt"));
          MinecraftServer.getServer().server.getCommandMap().register("wartung", "Deepslate", new WartungCommand("wartung"));
 +        MinecraftServer.getServer().server.getCommandMap().register("help", "Deepslate", new HelpCommand("help"));
 +        MinecraftServer.getServer().server.getCommandMap().register("hilfe", "Deepslate", new HelpCommand("hilfe"));
-         // Deepslate end
+         //Deepslate end
  
-         // Sugarcane start - config
+         // Yatopia start
 diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
-index 532a0f027e6e56a3805f9987e20c88c665ab81f3..7df4ad75f865d8c61526a21366841f1cc55b89b5 100644
+index e2a657722ce38e83ae4dc5eeafe27457307f1e55..e26831d8d26081c95e9b5452057b35bfc186f13b 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/Config.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/Config.java
 @@ -9,6 +9,7 @@ import org.bukkit.inventory.ItemStack;
@@ -55,7 +55,7 @@ index 532a0f027e6e56a3805f9987e20c88c665ab81f3..7df4ad75f865d8c61526a21366841f1c
                  save();
              }
              config.load(configFile);
-@@ -45,6 +52,19 @@ public class Config {
+@@ -43,6 +50,19 @@ public class Config {
          return config.getBoolean("opCommandActive");
      }
  
@@ -66,23 +66,23 @@ index 532a0f027e6e56a3805f9987e20c88c665ab81f3..7df4ad75f865d8c61526a21366841f1c
 +            message = message + messages.get(i).replace("&", "§");
 +            if(i < messages.size() - 1) {
 +                message = message + "\n§r";
-+                }
 +            }
-+
-+            return message;
 +        }
++
++        return message;
++    }
 +
      public static String getPrefix() {
          String prefix = config.getString("prefix");
          return prefix.replace("&", "§");
 diff --git a/src/main/java/net/pascalpex/deepslatemc/commands/HelpCommand.java b/src/main/java/net/pascalpex/deepslatemc/commands/HelpCommand.java
 new file mode 100644
-index 0000000000000000000000000000000000000000..3bc737c576508623dab3c24c955b131f25f7bd89
+index 0000000000000000000000000000000000000000..e5e8edc0f6e506d151c622b966533712f34edba6
 --- /dev/null
 +++ b/src/main/java/net/pascalpex/deepslatemc/commands/HelpCommand.java
 @@ -0,0 +1,24 @@
 +package net.pascalpex.deepslatemc.commands;
-+
++    
 +import net.pascalpex.deepslatemc.Config;
 +import org.bukkit.command.Command;
 +import org.bukkit.command.CommandSender;

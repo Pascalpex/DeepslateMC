@@ -1,14 +1,14 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Pascalpex <pascalpex@gmail.com>
-Date: Wed, 22 Dec 2021 15:17:50 +0100
+Date: Sun, 23 Jan 2022 20:29:03 +0100
 Subject: [PATCH] Spawn functions
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index b3f3dd8a93c69a0103a012766ac5fe15d8493496..ca7646a6ba46c69904272ba701240a866b15c3af 100644
+index 7e2f07dfd928ce22b6f32985b689ed01536dca2d..29f7d11eb90bb4dd640673ca63e3e220d0c54a1f 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-@@ -260,6 +260,13 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+@@ -257,6 +257,13 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
          MinecraftServer.getServer().server.getCommandMap().register("wartung", "Deepslate", new WartungCommand("wartung"));
          MinecraftServer.getServer().server.getCommandMap().register("help", "Deepslate", new HelpCommand("help"));
          MinecraftServer.getServer().server.getCommandMap().register("hilfe", "Deepslate", new HelpCommand("hilfe"));
@@ -19,22 +19,22 @@ index b3f3dd8a93c69a0103a012766ac5fe15d8493496..ca7646a6ba46c69904272ba701240a86
 +        MinecraftServer.getServer().server.getCommandMap().register("l", "Deepslate", new SpawnCommand("l"));
 +        MinecraftServer.getServer().server.getCommandMap().register("hub", "Deepslate", new SpawnCommand("hub"));
 +        MinecraftServer.getServer().server.getCommandMap().register("hubschrauber", "Deepslate", new SpawnCommand("hubschrauber"));
-         // Deepslate end
+         //Deepslate end
  
-         // Sugarcane start - config
+         // Yatopia start
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index 1f9ef5dd365424da43a0e1b8b676949885438968..2fbc6186fbbcbe65859ac99a2d22d3f51f3b1c2c 100644
+index 571fd37ed09a2bc8b5838b7a3d159fa0d99753c8..9f4e743da2d589ba55b93c169430b7ac7a81697f 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
-@@ -92,6 +92,7 @@ import net.minecraft.world.scores.Objective;
- import net.minecraft.world.scores.PlayerTeam;
+@@ -92,6 +92,7 @@ import net.minecraft.world.scores.PlayerTeam;
  import net.minecraft.world.scores.Scoreboard; // Paper
  import net.minecraft.world.scores.Team;
-+import net.pascalpex.deepslatemc.commands.SpawnCommand;
  import net.pascalpex.deepslatemc.commands.WartungCommand;
++import net.pascalpex.deepslatemc.commands.SpawnCommand;
  import org.apache.logging.log4j.LogManager;
  import org.apache.logging.log4j.Logger;
-@@ -359,6 +360,7 @@ public abstract class PlayerList {
+ 
+@@ -358,6 +359,7 @@ public abstract class PlayerList {
  
          PlayerJoinEvent playerJoinEvent = new PlayerJoinEvent(bukkitPlayer, PaperAdventure.asAdventure(chatmessage)); // Paper - Adventure
          WartungCommand.playerJoin(bukkitPlayer);
@@ -43,12 +43,13 @@ index 1f9ef5dd365424da43a0e1b8b676949885438968..2fbc6186fbbcbe65859ac99a2d22d3f5
  
          if (!player.connection.connection.isConnected()) {
 diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
-index 7df4ad75f865d8c61526a21366841f1cc55b89b5..c885e60fdae9c5713e82ac933772c8d4d45fd28e 100644
+index e26831d8d26081c95e9b5452057b35bfc186f13b..db6e3068d4395bc0e70aba38e5ee19c4a5574301 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/Config.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/Config.java
 @@ -1,6 +1,9 @@
  package net.pascalpex.deepslatemc;
- 
+-    
++
 +import org.bukkit.Bukkit;
  import org.bukkit.ChatColor;
 +import org.bukkit.Location;
@@ -64,7 +65,7 @@ index 7df4ad75f865d8c61526a21366841f1cc55b89b5..c885e60fdae9c5713e82ac933772c8d4
                  save();
              }
              config.load(configFile);
-@@ -48,10 +52,34 @@ public class Config {
+@@ -46,10 +50,34 @@ public class Config {
          }
      }
  
@@ -101,12 +102,12 @@ index 7df4ad75f865d8c61526a21366841f1cc55b89b5..c885e60fdae9c5713e82ac933772c8d4
          String message = "";
 diff --git a/src/main/java/net/pascalpex/deepslatemc/commands/SpawnCommand.java b/src/main/java/net/pascalpex/deepslatemc/commands/SpawnCommand.java
 new file mode 100644
-index 0000000000000000000000000000000000000000..2097e6b0d6b4915cad3ec49b3b8c9d38e2b7050f
+index 0000000000000000000000000000000000000000..2add389551771752f482f25c11fa115a43deea51
 --- /dev/null
 +++ b/src/main/java/net/pascalpex/deepslatemc/commands/SpawnCommand.java
 @@ -0,0 +1,54 @@
 +package net.pascalpex.deepslatemc.commands;
-+
++    
 +import net.pascalpex.deepslatemc.Config;
 +import org.bukkit.ChatColor;
 +import org.bukkit.command.Command;
@@ -133,7 +134,7 @@ index 0000000000000000000000000000000000000000..2097e6b0d6b4915cad3ec49b3b8c9d38
 +    public boolean execute(@NotNull CommandSender sender, @NotNull String label, @NotNull String[] args) {
 +        String prefix = Config.getPrefix() + " " + ChatColor.DARK_AQUA;
 +        if(sender instanceof Player) {
-+
++            
 +            Player player = (Player) sender;
 +            if(label.equalsIgnoreCase("setspawn")) {
 +                if(player.hasPermission("deepslate.setspawn")) {
@@ -151,7 +152,7 @@ index 0000000000000000000000000000000000000000..2097e6b0d6b4915cad3ec49b3b8c9d38
 +                    player.sendMessage(prefix + ChatColor.RED + "Dafür hast du keine Rechte");
 +                }
 +            }
-+
++            
 +        } else {
 +            sender.sendMessage(prefix + "Dieser Befehl ist nur für Spieler geeignet");
 +        }
