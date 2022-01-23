@@ -47,10 +47,10 @@ index f557502a700159620fd8ba53d0498f2d9cfce948..e0136508752affde08f1c785192a3cb3
 +
  }
 diff --git a/src/main/java/net/pascalpex/deepslatemc/commands/DeepslateCommand.java b/src/main/java/net/pascalpex/deepslatemc/commands/DeepslateCommand.java
-index 7985449b11ae5c246c56a8795480568496b93024..73394cba474533d1600b6a7d620e950438d98bcc 100644
+index 7985449b11ae5c246c56a8795480568496b93024..5d383176cc333c3715d9b925384deece3a9c0758 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/commands/DeepslateCommand.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/commands/DeepslateCommand.java
-@@ -34,31 +34,55 @@ public class DeepslateCommand extends Command {
+@@ -34,29 +34,53 @@ public class DeepslateCommand extends Command {
  
      @Override
      public boolean execute(CommandSender sender, String commandLabel, String[] args) {
@@ -122,8 +122,6 @@ index 7985449b11ae5c246c56a8795480568496b93024..73394cba474533d1600b6a7d620e9504
          }
          return true;
      }
- 
- }
 diff --git a/src/main/java/net/pascalpex/deepslatemc/commands/DiscordCommand.java b/src/main/java/net/pascalpex/deepslatemc/commands/DiscordCommand.java
 new file mode 100644
 index 0000000000000000000000000000000000000000..e8b90d4b5e05ddb467189839899fe36b407433bc

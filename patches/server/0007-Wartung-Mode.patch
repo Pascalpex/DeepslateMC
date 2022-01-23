@@ -1,38 +1,38 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
-From: BuildTools <unconfigured@null.spigotmc.org>
-Date: Mon, 13 Sep 2021 15:11:40 +0200
-Subject: [PATCH] Wartung-Mode
+From: Pascalpex <pascalpex@gmail.com>
+Date: Sun, 23 Jan 2022 20:01:50 +0100
+Subject: [PATCH] Wartung Mode
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 93e6d89ecd50563e89fe66cfe249d4d07c600dad..d6e9b78ad4e6d017cfcadcdc2cbab9e0aac5c78f 100644
+index c118f596fd51cd09589f70100f9a77c726dce8d6..22fbad3f47d500937da383f49b4d4b1ad0755e37 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-@@ -63,10 +63,7 @@ import net.minecraft.world.level.block.entity.SkullBlockEntity;
+@@ -59,10 +59,7 @@ import net.minecraft.world.level.block.entity.SkullBlockEntity;
  import net.minecraft.world.level.storage.LevelStorageSource;
  import net.minecraft.world.level.storage.WorldData;
  import net.pascalpex.deepslatemc.Config;
--import net.pascalpex.deepslatemc.commands.BauweltCommand;
--import net.pascalpex.deepslatemc.commands.ClearchatCommand;
 -import net.pascalpex.deepslatemc.commands.DeepslateCommand;
 -import net.pascalpex.deepslatemc.commands.DiscordCommand;
+-import net.pascalpex.deepslatemc.commands.ClearchatCommand;
+-import net.pascalpex.deepslatemc.commands.BauweltCommand;
 +import net.pascalpex.deepslatemc.commands.*;
  import org.apache.logging.log4j.LogManager;
  import org.apache.logging.log4j.Logger;
  import org.apache.logging.log4j.Level;
-@@ -261,6 +258,7 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+@@ -258,6 +255,7 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
          MinecraftServer.getServer().server.getCommandMap().register("clearchat", "Deepslate", new ClearchatCommand("clearchat"));
          MinecraftServer.getServer().server.getCommandMap().register("setbauwelt", "Deepslate", new BauweltCommand("setbauwelt"));
          MinecraftServer.getServer().server.getCommandMap().register("bauwelt", "Deepslate", new BauweltCommand("bauwelt"));
 +        MinecraftServer.getServer().server.getCommandMap().register("wartung", "Deepslate", new WartungCommand("wartung"));
-         // Deepslate end
+         //Deepslate end
  
-         // Sugarcane start - config
+         // Yatopia start
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index 3a128beeee65a0f178ce129981368534ec0aed02..1f9ef5dd365424da43a0e1b8b676949885438968 100644
+index 15afcf4e8048fc15f1a2d407972cca90df8f66c0..571fd37ed09a2bc8b5838b7a3d159fa0d99753c8 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
-@@ -92,6 +92,7 @@ import net.minecraft.world.scores.Objective;
+@@ -91,6 +91,7 @@ import net.minecraft.world.scores.Objective;
  import net.minecraft.world.scores.PlayerTeam;
  import net.minecraft.world.scores.Scoreboard; // Paper
  import net.minecraft.world.scores.Team;
@@ -40,7 +40,7 @@ index 3a128beeee65a0f178ce129981368534ec0aed02..1f9ef5dd365424da43a0e1b8b6769498
  import org.apache.logging.log4j.LogManager;
  import org.apache.logging.log4j.Logger;
  
-@@ -357,6 +358,7 @@ public abstract class PlayerList {
+@@ -356,6 +357,7 @@ public abstract class PlayerList {
          player.containerMenu.transferTo(player.containerMenu, bukkitPlayer);
  
          PlayerJoinEvent playerJoinEvent = new PlayerJoinEvent(bukkitPlayer, PaperAdventure.asAdventure(chatmessage)); // Paper - Adventure
@@ -50,12 +50,12 @@ index 3a128beeee65a0f178ce129981368534ec0aed02..1f9ef5dd365424da43a0e1b8b6769498
          if (!player.connection.connection.isConnected()) {
 diff --git a/src/main/java/net/pascalpex/deepslatemc/commands/WartungCommand.java b/src/main/java/net/pascalpex/deepslatemc/commands/WartungCommand.java
 new file mode 100644
-index 0000000000000000000000000000000000000000..8ba817ad02ab3870a26f6b53a74bbfd552b7bb38
+index 0000000000000000000000000000000000000000..8edd4e20d05acac568a364509604716989aa0941
 --- /dev/null
 +++ b/src/main/java/net/pascalpex/deepslatemc/commands/WartungCommand.java
-@@ -0,0 +1,46 @@
+@@ -0,0 +1,58 @@
 +package net.pascalpex.deepslatemc.commands;
-+
++    
 +import net.pascalpex.deepslatemc.Config;
 +import org.bukkit.ChatColor;
 +import org.bukkit.command.Command;
@@ -85,15 +85,27 @@ index 0000000000000000000000000000000000000000..8ba817ad02ab3870a26f6b53a74bbfd5
 +    @Override
 +    public boolean execute(@NotNull CommandSender sender, @NotNull String label, @NotNull String[] args) {
 +        String prefix = Config.getPrefix() + " " + ChatColor.DARK_AQUA;
-+        Player player = (Player) sender;
-+        if(label.equalsIgnoreCase("wartung")) {
-+            if(player.hasPermission("deepslate.wartung")) {
++        if (sender instanceof Player) {
++            Player player = (Player) sender;
++            if(label.equalsIgnoreCase("wartung")) {
++                if(player.hasPermission("deepslate.wartung")) {
++                    if(wartungMode) {
++                        wartungMode = false;
++                        player.sendMessage(prefix + "Der Wartungsmodus ist nun deaktiviert");
++                    } else {
++                        wartungMode = true;
++                        player.sendMessage(prefix + "Der Wartungsmodus ist nun aktiviert");
++                    }
++                }
++            }
++        } else {
++            if(label.equalsIgnoreCase("wartung")) {
 +                if(wartungMode) {
 +                    wartungMode = false;
-+                    player.sendMessage(prefix + "Der Wartungsmodus ist nun deaktiviert");
++                    sender.sendMessage(prefix + "Der Wartungsmodus ist nun deaktiviert");
 +                } else {
 +                    wartungMode = true;
-+                    player.sendMessage(prefix + "Der Wartungsmodus ist nun aktiviert");
++                    sender.sendMessage(prefix + "Der Wartungsmodus ist nun aktiviert");
 +                }
 +            }
 +        }

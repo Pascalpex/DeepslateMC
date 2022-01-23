@@ -1,0 +1,115 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Pascalpex <pascalpex@gmail.com>
+Date: Sun, 23 Jan 2022 20:09:17 +0100
+Subject: [PATCH] Toggleable Op Command
+
+
+diff --git a/src/main/java/net/minecraft/commands/Commands.java b/src/main/java/net/minecraft/commands/Commands.java
+index beac966ddf6348ac956920a803dd509a80dd1132..47e8733266d5359898d31818ddaaf1ab3f326838 100644
+--- a/src/main/java/net/minecraft/commands/Commands.java
++++ b/src/main/java/net/minecraft/commands/Commands.java
+@@ -104,6 +104,7 @@ import net.minecraft.server.commands.WorldBorderCommand;
+ import net.minecraft.server.commands.data.DataCommands;
+ import net.minecraft.server.level.ServerPlayer;
+ import net.minecraft.util.profiling.jfr.JvmProfiler;
++import net.pascalpex.deepslatemc.Config;
+ import org.apache.logging.log4j.LogManager;
+ import org.apache.logging.log4j.Logger;
+ 
+@@ -191,11 +192,14 @@ public class Commands {
+         }
+ 
+         if (environment.includeDedicated) {
++            Config.load();
+             BanIpCommands.register(this.dispatcher);
+             BanListCommands.register(this.dispatcher);
+             BanPlayerCommands.register(this.dispatcher);
+             DeOpCommands.register(this.dispatcher);
+-            OpCommand.register(this.dispatcher);
++            if (Config.getOpActive()) {
++                OpCommand.register(this.dispatcher);
++            }
+             PardonCommand.register(this.dispatcher);
+             PardonIpCommand.register(this.dispatcher);
+             PerfCommand.register(this.dispatcher);
+diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
+index 22fbad3f47d500937da383f49b4d4b1ad0755e37..bdc0ee503c614590b2fdeb7b3c4742952245bf0f 100644
+--- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
++++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
+@@ -247,7 +247,6 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+         gg.pufferfish.pufferfish.PufferfishCommand.init(); // Pufferfish
+ 
+         //Deepslate start
+-        Config.load();
+         MinecraftServer.getServer().server.getCommandMap().register("deepslate", "Deepslate", new DeepslateCommand("deepslate"));
+         MinecraftServer.getServer().server.getCommandMap().register("discord", "Deepslate", new DiscordCommand("discord"));
+         MinecraftServer.getServer().server.getCommandMap().register("dc", "Deepslate", new DiscordCommand("dc"));
+diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
+index 4cfc701c47db9a2a513b4e4af9a9230459f887bc..f5c4fba19da3fbd3d0ee621d336cd93f93b83224 100644
+--- a/src/main/java/net/pascalpex/deepslatemc/Config.java
++++ b/src/main/java/net/pascalpex/deepslatemc/Config.java
+@@ -22,6 +22,7 @@ public class Config {
+                 configFile.createNewFile();
+                 config.set("prefix", ChatColor.BLACK + "[" + ChatColor.DARK_GRAY + "DeepslateMC" + ChatColor.BLACK + "]");
+                 config.set("discordLink", "https://google.de/");
++                config.set("opCommandActive", true);
+                 save();
+             }
+             config.load(configFile);
+@@ -38,6 +39,10 @@ public class Config {
+         }
+     }
+ 
++    public static boolean getOpActive() {
++        return config.getBoolean("opCommandActive");
++    }
++
+     public static String getPrefix() {
+         return config.getString("prefix");
+     }
+diff --git a/src/main/java/net/pascalpex/deepslatemc/commands/BauweltCommand.java b/src/main/java/net/pascalpex/deepslatemc/commands/BauweltCommand.java
+index 5ceab092ef009ecbf65d035a57ac4933385e8526..0bb98551ead1129a00ba727533c4fc17f25e3896 100644
+--- a/src/main/java/net/pascalpex/deepslatemc/commands/BauweltCommand.java
++++ b/src/main/java/net/pascalpex/deepslatemc/commands/BauweltCommand.java
+@@ -20,23 +20,27 @@ public class BauweltCommand extends Command {
+ 
+     @Override
+     public boolean execute(@NotNull CommandSender sender, @NotNull String label, @NotNull String[] args) {
+-        Player player = (Player) sender;
+-        if(label.equalsIgnoreCase("setbauwelt")) {
+-            if(player.hasPermission("deepslate.setbauwelt")) {
+-                World world = player.getLocation().getWorld();
+-                Config.setBauwelt(world.getName());
+-                player.sendMessage(ChatColor.GREEN + "Bauwelt gesetzt");
++        if (sender instanceof Player) {
++            Player player = (Player) sender;
++            if(label.equalsIgnoreCase("setbauwelt")) {
++                if(player.hasPermission("deepslate.setbauwelt")) {
++                    World world = player.getLocation().getWorld();
++                    Config.setBauwelt(world.getName());
++                    player.sendMessage(ChatColor.GREEN + "Bauwelt gesetzt");
++                }
+             }
+-        }
+-        if(label.equalsIgnoreCase("bauwelt")) {
+-            if(player.hasPermission("deepslate.bauwelt")) {
+-                try {
+-                    player.teleport(Bukkit.getWorld(Config.getBauwelt()).getSpawnLocation());
+-                    player.sendMessage(ChatColor.GREEN + "Wilkommen in der Bauwelt");
+-                } catch (Exception e) {
+-                    player.sendMessage(ChatColor.RED + "Die Bauwelt wurde nicht gesetzt");
++            if(label.equalsIgnoreCase("bauwelt")) {
++                if(player.hasPermission("deepslate.bauwelt")) {
++                    try {
++                        player.teleport(Bukkit.getWorld(Config.getBauwelt()).getSpawnLocation());
++                        player.sendMessage(ChatColor.GREEN + "Wilkommen in der Bauwelt");
++                    } catch (Exception e) {
++                        player.sendMessage(ChatColor.RED + "Die Bauwelt wurde nicht gesetzt");
++                    }
+                 }
+             }
++        } else {
++            sender.sendMessage("Dieser Befehl ist nur für Spieler geeignet");
+         }
+         return true;
+     }
