@@ -6,8 +6,6 @@
 <br/>
 </div>
 
-I will start using it once [Patina](https://github.com/PatinaMC/Patina) becomes officially stable
-
 This fork serves two purposes:
 - I learn stuff about [Git](https://git-scm.com/), [Paperweight](https://github.com/PaperMC/paperweight) and Patches
 - Small features replace minor plugins on my server
@@ -39,4 +37,4 @@ Push/PR
 ## Download
 **Warning!**: Because the upstream is still quite experimental, this fork is as well
 
-Download [here](https://pascalpex.ddns.net/files/deepslate/DeepslateMC.jar)
+Download: [1.17.1](https://pascalpex.ddns.net/files/deepslate/1.17.1/DeepslateMC.jar) - [1.18.1](https://pascalpex.ddns.net/files/deepslate/1.18.1/DeepslateMC.jar)
