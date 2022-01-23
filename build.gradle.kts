@@ -71,6 +71,9 @@ paperweight {
             apiOutputDir.set(layout.projectDirectory.dir("deepslateMC-api"))
             serverOutputDir.set(layout.projectDirectory.dir("deepslateMC-server"))
 
+            apiSourceDirPath.set("patina-api")
+            serverSourceDirPath.set("patina-server")
+
             remapRepo.set("https://maven.fabricmc.net/")
             decompileRepo.set("https://files.minecraftforge.net/maven/")
         }
