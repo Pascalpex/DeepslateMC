@@ -1,0 +1,19 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Pascalpex <pascalpex@gmail.com>
+Date: Sun, 23 Jan 2022 16:40:12 +0100
+Subject: [PATCH] Reload warning
+
+
+diff --git a/src/main/java/org/bukkit/command/defaults/ReloadCommand.java b/src/main/java/org/bukkit/command/defaults/ReloadCommand.java
+index 0c7ba0718de2b93d013968ca0fec34ffd423990f..f5efc92c15bebf65e8046c4b9a12f7b6bac532c6 100644
+--- a/src/main/java/org/bukkit/command/defaults/ReloadCommand.java
++++ b/src/main/java/org/bukkit/command/defaults/ReloadCommand.java
+@@ -43,6 +43,8 @@ public class ReloadCommand extends BukkitCommand {
+                 return true;
+             }
+         }
++        sender.sendMessage(ChatColor.DARK_RED + "Achtung!" + ChatColor.RED + " Der Reload Befehl kann bei bestimmten Plugins Fehler verursachen");
++        sender.sendMessage(ChatColor.DARK_RED + "Achtung!" + ChatColor.RED + " Ein Neustart ist stattdessen empfohlen");
+         if (!confirmed) {
+             Command.broadcastCommandMessage(sender, ChatColor.RED + "Are you sure you wish to reload your server? Doing so may cause bugs and memory leaks. It is recommended to restart instead of using /reload. To confirm, please type " + ChatColor.YELLOW + "/reload confirm");
+             return true;

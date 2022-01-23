@@ -5,6 +5,6 @@ pluginManagement {
     }
 }
 
-rootProject.name = "DeepslateMC"
+rootProject.name = "deepslateMC"
 
-include("DeepslateMC-API", "DeepslateMC-Server")
+include("deepslateMC-api", "deepslateMC-server")

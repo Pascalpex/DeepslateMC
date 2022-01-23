@@ -1,14 +1,16 @@
+import io.papermc.paperweight.util.constants.*
+
 plugins {
     java
     `maven-publish`
-    id("com.github.johnrengelman.shadow") version "7.1.2" apply false
+    id("com.github.johnrengelman.shadow") version "7.1.1" apply false
     id("io.papermc.paperweight.patcher") version "1.3.3"
 }
 
 repositories {
     mavenCentral()
     maven("https://papermc.io/repo/repository/maven-public/") {
-        content { onlyForConfigurations("paperclip") }
+        content { onlyForConfigurations(PAPERCLIP_CONFIG) }
     }
 }
 
@@ -43,8 +45,6 @@ subprojects {
 
     repositories {
         mavenCentral()
-        maven("https://libraries.minecraft.net/")
-        maven("https://repo.codemc.io/repository/maven-public/")
         maven("https://oss.sonatype.org/content/groups/public/")
         maven("https://papermc.io/repo/repository/maven-public/")
         maven("https://ci.emc.gs/nexus/content/groups/aikar/")
@@ -56,20 +56,20 @@ subprojects {
 }
 
 paperweight {
-    serverProject.set(project(":DeepslateMC-Server"))
+    serverProject.set(project(":deepslateMC-server"))
 
     remapRepo.set("https://maven.fabricmc.net/")
     decompileRepo.set("https://files.minecraftforge.net/maven/")
 
-    useStandardUpstream("Sugarcane") {
-        url.set(github("SugarcaneMC", "Sugarcane"))
-        ref.set(providers.gradleProperty("sugarcaneRef"))
+    useStandardUpstream("patina") {
+        url.set(github("PatinaMC", "Patina"))
+        ref.set(providers.gradleProperty("patinaRef"))
 
         withStandardPatcher {
-            baseName("Sugarcane")
+            baseName("patina")
 
-            apiOutputDir.set(layout.projectDirectory.dir("DeepslateMC-API"))
-            serverOutputDir.set(layout.projectDirectory.dir("DeepslateMC-Server"))
+            apiOutputDir.set(layout.projectDirectory.dir("deepslateMC-api"))
+            serverOutputDir.set(layout.projectDirectory.dir("deepslateMC-server"))
 
             remapRepo.set("https://maven.fabricmc.net/")
             decompileRepo.set("https://files.minecraftforge.net/maven/")

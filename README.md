@@ -2,11 +2,11 @@
 <div align="center">
 
 # DeepslateMC
-### A private [Sugarcane](https://github.com/SugarcaneMC/Sugarcane) fork for my own Minecraft Server
+### A private [Patina](https://github.com/PatinaMC/Patina) fork for my own Minecraft Server
 <br/>
 </div>
 
-I will start using it once [Sugarcane](https://github.com/SugarcaneMC/Sugarcane) becomes officially stable
+I will start using it once [Patina](https://github.com/PatinaMC/Patina) becomes officially stable
 
 This fork serves two purposes:
 - I learn stuff about [Git](https://git-scm.com/), [Paperweight](https://github.com/PaperMC/paperweight) and Patches
