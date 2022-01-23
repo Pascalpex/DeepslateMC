@@ -1,44 +1,44 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
-From: BuildTools <unconfigured@null.spigotmc.org>
-Date: Sat, 11 Sep 2021 14:15:41 +0200
-Subject: [PATCH] Clearchat-Command
+From: Pascalpex <pascalpex@gmail.com>
+Date: Sun, 23 Jan 2022 19:45:39 +0100
+Subject: [PATCH] Clearchat Command
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 93aeab967d7742a8746bffbcc53c377bbeea6d94..0737ee49b58f3450212185ec6c1366edd13e58e1 100644
+index 8ec849fe9b4736ead7ca925c868eaa3d9bf15c4b..2b762a99c51b6eb6c68e4dbbc7194a3a300bdbf7 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-@@ -63,6 +63,7 @@ import net.minecraft.world.level.block.entity.SkullBlockEntity;
- import net.minecraft.world.level.storage.LevelStorageSource;
- import net.minecraft.world.level.storage.WorldData;
+@@ -61,6 +61,7 @@ import net.minecraft.world.level.storage.WorldData;
  import net.pascalpex.deepslatemc.Config;
-+import net.pascalpex.deepslatemc.commands.ClearchatCommand;
  import net.pascalpex.deepslatemc.commands.DeepslateCommand;
  import net.pascalpex.deepslatemc.commands.DiscordCommand;
++import net.pascalpex.deepslatemc.commands.ClearchatCommand;
  import org.apache.logging.log4j.LogManager;
-@@ -250,10 +251,14 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
-         gg.airplane.AirplaneConfig.load(); // Airplane - config
-         gg.airplane.commands.AirplaneCommands.init(); // Airplane - command
+ import org.apache.logging.log4j.Logger;
+ import org.apache.logging.log4j.Level;
+@@ -247,10 +248,14 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+         gg.pufferfish.pufferfish.PufferfishConfig.load(); // Pufferfish
+         gg.pufferfish.pufferfish.PufferfishCommand.init(); // Pufferfish
  
-+        // Deepslate start
++        //Deepslate start
          Config.load();
          MinecraftServer.getServer().server.getCommandMap().register("deepslate", "Deepslate", new DeepslateCommand("deepslate"));
          MinecraftServer.getServer().server.getCommandMap().register("discord", "Deepslate", new DiscordCommand("discord"));
          MinecraftServer.getServer().server.getCommandMap().register("dc", "Deepslate", new DiscordCommand("dc"));
 +        MinecraftServer.getServer().server.getCommandMap().register("cc", "Deepslate", new ClearchatCommand("cc"));
 +        MinecraftServer.getServer().server.getCommandMap().register("clearchat", "Deepslate", new ClearchatCommand("clearchat"));
-+        // Deepslate end
++        //Deepslate end
  
-         // Sugarcane start - config
+         // Yatopia start
          try {
 diff --git a/src/main/java/net/pascalpex/deepslatemc/commands/ClearchatCommand.java b/src/main/java/net/pascalpex/deepslatemc/commands/ClearchatCommand.java
 new file mode 100644
-index 0000000000000000000000000000000000000000..5eae1e19bcdffa70da7f328140b4dca39b507992
+index 0000000000000000000000000000000000000000..c3bd198b4f653599289261f2ab1535b0e8e9b611
 --- /dev/null
 +++ b/src/main/java/net/pascalpex/deepslatemc/commands/ClearchatCommand.java
-@@ -0,0 +1,33 @@
+@@ -0,0 +1,37 @@
 +package net.pascalpex.deepslatemc.commands;
-+
++    
 +import org.bukkit.Bukkit;
 +import org.bukkit.ChatColor;
 +import org.bukkit.command.Command;
@@ -56,38 +56,29 @@ index 0000000000000000000000000000000000000000..5eae1e19bcdffa70da7f328140b4dca3
 +
 +    @Override
 +    public boolean execute(@NotNull CommandSender sender, @NotNull String commandLabel, @NotNull String[] args) {
-+        Player player = (Player) sender;
-+        if (commandLabel.equalsIgnoreCase("cc") || commandLabel.equalsIgnoreCase("clearchat")) {
-+            if(player.hasPermission("deepslate.clearchat")) {
-+                for (int x = 0; x < 150; x++){
-+                    Bukkit.broadcastMessage("");
++        if (sender instanceof Player) {
++            Player player = (Player) sender;
++            if (commandLabel.equalsIgnoreCase("cc") || commandLabel.equalsIgnoreCase("clearchat")) {
++                if(player.hasPermission("deepslate.clearchat")) {
++                    for (int x = 0; x < 150; x++){
++                        Bukkit.broadcastMessage("");
++                    }
++                    Bukkit.broadcastMessage(ChatColor.YELLOW + "Der Chat wurde von " + ChatColor.RED + player.getName() + ChatColor.YELLOW + " geleert");
 +                }
-+                Bukkit.broadcastMessage(ChatColor.YELLOW + "Der Chat wurde von " + ChatColor.RED + player.getName() + ChatColor.YELLOW + " geleert");
++            } else {
++                player.sendMessage(ChatColor.RED + "Dafür hast du keine Rechte");
 +            }
 +        } else {
-+            player.sendMessage(ChatColor.RED + "Dafür hast du keine Rechte");
++            sender.sendMessage("Dieser Befehl ist nur für Spieler geeignet");
 +        }
 +        return true;
 +    }
 +}
-diff --git a/src/main/java/net/pascalpex/deepslatemc/commands/DeepslateCommand.java b/src/main/java/net/pascalpex/deepslatemc/commands/DeepslateCommand.java
-index 9db7691b43f177a554b5768d5f446a0bb33390fa..65006575ec9180086266ab5eaf3d78de63e866c2 100644
---- a/src/main/java/net/pascalpex/deepslatemc/commands/DeepslateCommand.java
-+++ b/src/main/java/net/pascalpex/deepslatemc/commands/DeepslateCommand.java
-@@ -56,7 +56,7 @@ public class DeepslateCommand extends Command {
-                     player.sendMessage(prefix + "Nutze /deepslate [reload | version]");
-                 }
-             } else {
--                player.sendMessage(prefix + "Dafür hast du keine Rechte");
-+                player.sendMessage(prefix + "Dieser Server läuft mit DeepslateMC Version 1.0");
-             }
-         }
-         return true;
 diff --git a/src/main/java/net/pascalpex/deepslatemc/commands/DiscordCommand.java b/src/main/java/net/pascalpex/deepslatemc/commands/DiscordCommand.java
-index 9d2fe8cfe962d86f1bb22c76e64d6cddb4809425..9ab77020d5a8f2403713e5622cb1204cda27d8f9 100644
+index e8b90d4b5e05ddb467189839899fe36b407433bc..9276201f7ed8757c534f47aa5f703c7f9ac6dd75 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/commands/DiscordCommand.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/commands/DiscordCommand.java
-@@ -14,7 +14,6 @@ public class DiscordCommand extends Command {
+@@ -13,7 +13,6 @@ public class DiscordCommand extends Command {
          super(name);
          this.description = "Discord Link Befehl";
          this.usageMessage = "/discord";
