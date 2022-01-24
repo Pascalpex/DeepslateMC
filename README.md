@@ -34,6 +34,6 @@ Push/PR
 ```
 
 ## Download
-**Warning!**: Because the upstream is still quite experimental, this fork is as well
+**Warning!**: The 1.18.1 Version is still quite experimental
 
 Download: [1.17.1](https://pascalpex.ddns.net/files/deepslate/1.17.1/DeepslateMC.jar) - [1.18.1](https://pascalpex.ddns.net/files/deepslate/1.18.1/DeepslateMC.jar)
