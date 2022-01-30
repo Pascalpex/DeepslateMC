@@ -1,14 +1,14 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Pascalpex <pascalpex@gmail.com>
-Date: Tue, 4 Jan 2022 14:04:47 +0100
+Date: Sun, 30 Jan 2022 14:44:31 +0100
 Subject: [PATCH] Colored Signs
 
 
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index 9bf0449597e60fd2f38045ff10d6876126ae3dc6..8ca4ada8df9da47d6bf147080b8ca79b43cfa082 100644
+index 852f9ed67af5698e29e0e68d33dd5755e1f15f8d..0c7f6422ecedcc35faf9a0a5d2bbd45ec19cb3ff 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-@@ -158,6 +158,7 @@ import net.minecraft.world.phys.Vec3;
+@@ -151,6 +151,7 @@ import net.minecraft.world.phys.Vec3;
  import net.minecraft.world.phys.shapes.BooleanOp;
  import net.minecraft.world.phys.shapes.Shapes;
  import net.minecraft.world.phys.shapes.VoxelShape;
@@ -16,7 +16,7 @@ index 9bf0449597e60fd2f38045ff10d6876126ae3dc6..8ca4ada8df9da47d6bf147080b8ca79b
  import org.apache.commons.lang3.StringUtils;
  import org.apache.logging.log4j.LogManager;
  import org.apache.logging.log4j.Logger;
-@@ -3148,6 +3149,15 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Ser
+@@ -3172,6 +3173,15 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Ser
                  // Purpur end
              }
              SignChangeEvent event = new SignChangeEvent((org.bukkit.craftbukkit.block.CraftBlock) player.getWorld().getBlockAt(x, y, z), this.player.getBukkitEntity(), lines);
@@ -32,7 +32,7 @@ index 9bf0449597e60fd2f38045ff10d6876126ae3dc6..8ca4ada8df9da47d6bf147080b8ca79b
              this.cserver.getPluginManager().callEvent(event);
  
              if (!event.isCancelled()) {
-@@ -3165,6 +3175,35 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Ser
+@@ -3189,6 +3199,35 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Ser
  
      }
  
@@ -69,10 +69,10 @@ index 9bf0449597e60fd2f38045ff10d6876126ae3dc6..8ca4ada8df9da47d6bf147080b8ca79b
      public void handleKeepAlive(ServerboundKeepAlivePacket packet) {
          // Purpur start
 diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
-index daa5f02fd88e5c0dd3be98c752c3787f061ef090..d477bc22713fa77996902e86b670f6d0553e974b 100644
+index 191e8bedf91bc6d38951c0731b156cf0ed1e1755..e6dcc90c84ad72dd9efacd0d24ee98549bc700cb 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/Config.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/Config.java
-@@ -35,6 +35,8 @@ public class Config {
+@@ -33,6 +33,8 @@ public class Config {
                  config.set("helpMessage", message);
                  config.set("spawnOnJoin", false);
                  config.set("preventKnowledgebookClick", false);
@@ -81,7 +81,7 @@ index daa5f02fd88e5c0dd3be98c752c3787f061ef090..d477bc22713fa77996902e86b670f6d0
                  save();
              }
              config.load(configFile);
-@@ -53,6 +55,14 @@ public class Config {
+@@ -49,6 +51,13 @@ public class Config {
          }
      }
  
@@ -92,7 +92,6 @@ index daa5f02fd88e5c0dd3be98c752c3787f061ef090..d477bc22713fa77996902e86b670f6d0
 +    public static boolean getColoredSignsPermissionUse() {
 +        return config.getBoolean("coloredSigns" + ".usePermission");
 +    }
-+
+ 
      public static boolean getSpawnOnJoin() {
          return config.getBoolean("spawnOnJoin");
-     }

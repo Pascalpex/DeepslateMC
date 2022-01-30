@@ -5,10 +5,10 @@ Subject: [PATCH] Reload warning
 
 
 diff --git a/src/main/java/org/bukkit/command/defaults/ReloadCommand.java b/src/main/java/org/bukkit/command/defaults/ReloadCommand.java
-index 0c7ba0718de2b93d013968ca0fec34ffd423990f..f5efc92c15bebf65e8046c4b9a12f7b6bac532c6 100644
+index 535800197c43f43c30854d2b193107808dc3b6c7..6a41c5c040bdbf08966594642ca682d5ada16d07 100644
 --- a/src/main/java/org/bukkit/command/defaults/ReloadCommand.java
 +++ b/src/main/java/org/bukkit/command/defaults/ReloadCommand.java
-@@ -43,6 +43,8 @@ public class ReloadCommand extends BukkitCommand {
+@@ -54,6 +54,8 @@ public class ReloadCommand extends BukkitCommand {
                  return true;
              }
          }

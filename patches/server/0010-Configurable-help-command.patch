@@ -1,11 +1,11 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Pascalpex <pascalpex@gmail.com>
-Date: Sun, 23 Jan 2022 20:22:43 +0100
+Date: Sun, 30 Jan 2022 14:35:50 +0100
 Subject: [PATCH] Configurable help command
 
 
 diff --git a/src/main/java/net/minecraft/commands/Commands.java b/src/main/java/net/minecraft/commands/Commands.java
-index 47e8733266d5359898d31818ddaaf1ab3f326838..3f54629ae1a4b2e8d5018d6706731c45c383113f 100644
+index a888ea8a4dea848c439959a640afec8bb2ba45ea..d2e745061369f09b0518cbc2a603d6d3c693c51c 100644
 --- a/src/main/java/net/minecraft/commands/Commands.java
 +++ b/src/main/java/net/minecraft/commands/Commands.java
 @@ -149,7 +149,7 @@ public class Commands {
@@ -18,10 +18,10 @@ index 47e8733266d5359898d31818ddaaf1ab3f326838..3f54629ae1a4b2e8d5018d6706731c45
          KickCommand.register(this.dispatcher);
          KillCommand.register(this.dispatcher);
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index bdc0ee503c614590b2fdeb7b3c4742952245bf0f..7e2f07dfd928ce22b6f32985b689ed01536dca2d 100644
+index 8ec1aca8180221a8b16ecffdfe241a7e3b8fa62e..aa27acb098b85bb0c7a1341277e536f7e2621183 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-@@ -255,6 +255,8 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+@@ -265,6 +265,8 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
          MinecraftServer.getServer().server.getCommandMap().register("setbauwelt", "Deepslate", new BauweltCommand("setbauwelt"));
          MinecraftServer.getServer().server.getCommandMap().register("bauwelt", "Deepslate", new BauweltCommand("bauwelt"));
          MinecraftServer.getServer().server.getCommandMap().register("wartung", "Deepslate", new WartungCommand("wartung"));
@@ -29,7 +29,7 @@ index bdc0ee503c614590b2fdeb7b3c4742952245bf0f..7e2f07dfd928ce22b6f32985b689ed01
 +        MinecraftServer.getServer().server.getCommandMap().register("hilfe", "Deepslate", new HelpCommand("hilfe"));
          //Deepslate end
  
-         // Yatopia start
+         this.setPvpAllowed(dedicatedserverproperties.pvp);
 diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
 index e2a657722ce38e83ae4dc5eeafe27457307f1e55..e26831d8d26081c95e9b5452057b35bfc186f13b 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/Config.java

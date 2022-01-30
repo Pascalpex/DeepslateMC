@@ -1,22 +1,22 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Pascalpex <pascalpex@gmail.com>
-Date: Sun, 23 Jan 2022 19:49:26 +0100
+Date: Sun, 30 Jan 2022 14:21:19 +0100
 Subject: [PATCH] Bauwelt Command
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 2b762a99c51b6eb6c68e4dbbc7194a3a300bdbf7..c118f596fd51cd09589f70100f9a77c726dce8d6 100644
+index 2d5e864b23660d12b2592094fb63c6ea17e8ae55..12c8970943008d35a17b661f55e72ca71c47d401 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-@@ -62,6 +62,7 @@ import net.pascalpex.deepslatemc.Config;
+@@ -59,6 +59,7 @@ import net.minecraft.world.level.block.entity.SkullBlockEntity;
+ import net.minecraft.world.level.storage.LevelStorageSource;
+ import net.minecraft.world.level.storage.WorldData;
+ import net.pascalpex.deepslatemc.Config;
++import net.pascalpex.deepslatemc.commands.BauweltCommand;
+ import net.pascalpex.deepslatemc.commands.ClearchatCommand;
  import net.pascalpex.deepslatemc.commands.DeepslateCommand;
  import net.pascalpex.deepslatemc.commands.DiscordCommand;
- import net.pascalpex.deepslatemc.commands.ClearchatCommand;
-+import net.pascalpex.deepslatemc.commands.BauweltCommand;
- import org.apache.logging.log4j.LogManager;
- import org.apache.logging.log4j.Logger;
- import org.apache.logging.log4j.Level;
-@@ -255,6 +256,8 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+@@ -265,6 +266,8 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
          MinecraftServer.getServer().server.getCommandMap().register("dc", "Deepslate", new DiscordCommand("dc"));
          MinecraftServer.getServer().server.getCommandMap().register("cc", "Deepslate", new ClearchatCommand("cc"));
          MinecraftServer.getServer().server.getCommandMap().register("clearchat", "Deepslate", new ClearchatCommand("clearchat"));
@@ -24,7 +24,7 @@ index 2b762a99c51b6eb6c68e4dbbc7194a3a300bdbf7..c118f596fd51cd09589f70100f9a77c7
 +        MinecraftServer.getServer().server.getCommandMap().register("bauwelt", "Deepslate", new BauweltCommand("bauwelt"));
          //Deepslate end
  
-         // Yatopia start
+         this.setPvpAllowed(dedicatedserverproperties.pvp);
 diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
 index e0136508752affde08f1c785192a3cb3e45ebe9d..4cfc701c47db9a2a513b4e4af9a9230459f887bc 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/Config.java

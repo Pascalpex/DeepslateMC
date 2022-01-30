@@ -24,7 +24,6 @@ dependency-reduced-pom.xml
 .*.sw[a-p]
 
 # various other potential build files
-build/
 bin/
 dist/
 manifest.mf
@@ -46,7 +45,7 @@ out/
 # other stuff
 run/
 
-ForkTest-Server
-ForkTest-API
+deepslateMC-server
+deepslateMC-api
 
 !gradle/wrapper/gradle-wrapper.jar

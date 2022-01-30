@@ -5,10 +5,10 @@ Subject: [PATCH] Configurable Knowledgebook Click
 
 
 diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
-index c885e60fdae9c5713e82ac933772c8d4d45fd28e..daa5f02fd88e5c0dd3be98c752c3787f061ef090 100644
+index 70a82964ac31cab89a0d27e1944f4b5aba6b98c8..191e8bedf91bc6d38951c0731b156cf0ed1e1755 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/Config.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/Config.java
-@@ -34,6 +34,7 @@ public class Config {
+@@ -32,6 +32,7 @@ public class Config {
                  message.add("&6weiteren Fragen an ein &9Teammitglied.");
                  config.set("helpMessage", message);
                  config.set("spawnOnJoin", false);
@@ -16,7 +16,7 @@ index c885e60fdae9c5713e82ac933772c8d4d45fd28e..daa5f02fd88e5c0dd3be98c752c3787f
                  save();
              }
              config.load(configFile);
-@@ -56,6 +57,10 @@ public class Config {
+@@ -53,6 +54,10 @@ public class Config {
          return config.getBoolean("spawnOnJoin");
      }
  
@@ -28,7 +28,7 @@ index c885e60fdae9c5713e82ac933772c8d4d45fd28e..daa5f02fd88e5c0dd3be98c752c3787f
          return config.getBoolean("opCommandActive");
      }
 diff --git a/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java b/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
-index 6d38c0478210bf264afd48be3e7ba7fee296ebc1..07cbc38f1e9dd3cc42ff8e96737fd2c852476e76 100644
+index 4bf67cdbe9516e4d167ddcfca3d0c033a7ca5172..ee7c0009cb490141a7fb061d730e8a4a83cdf8fc 100644
 --- a/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
 +++ b/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
 @@ -57,6 +57,7 @@ import net.minecraft.world.phys.BlockHitResult;

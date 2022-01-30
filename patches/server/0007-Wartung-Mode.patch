@@ -1,35 +1,35 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Pascalpex <pascalpex@gmail.com>
-Date: Sun, 23 Jan 2022 20:01:50 +0100
+Date: Sun, 30 Jan 2022 14:24:52 +0100
 Subject: [PATCH] Wartung Mode
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index c118f596fd51cd09589f70100f9a77c726dce8d6..22fbad3f47d500937da383f49b4d4b1ad0755e37 100644
+index 12c8970943008d35a17b661f55e72ca71c47d401..3aba32673a5499a9e0eb391f9da342ea4fcde08b 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 @@ -59,10 +59,7 @@ import net.minecraft.world.level.block.entity.SkullBlockEntity;
  import net.minecraft.world.level.storage.LevelStorageSource;
  import net.minecraft.world.level.storage.WorldData;
  import net.pascalpex.deepslatemc.Config;
+-import net.pascalpex.deepslatemc.commands.BauweltCommand;
+-import net.pascalpex.deepslatemc.commands.ClearchatCommand;
 -import net.pascalpex.deepslatemc.commands.DeepslateCommand;
 -import net.pascalpex.deepslatemc.commands.DiscordCommand;
--import net.pascalpex.deepslatemc.commands.ClearchatCommand;
--import net.pascalpex.deepslatemc.commands.BauweltCommand;
 +import net.pascalpex.deepslatemc.commands.*;
  import org.apache.logging.log4j.LogManager;
  import org.apache.logging.log4j.Logger;
  import org.apache.logging.log4j.Level;
-@@ -258,6 +255,7 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+@@ -268,6 +265,7 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
          MinecraftServer.getServer().server.getCommandMap().register("clearchat", "Deepslate", new ClearchatCommand("clearchat"));
          MinecraftServer.getServer().server.getCommandMap().register("setbauwelt", "Deepslate", new BauweltCommand("setbauwelt"));
          MinecraftServer.getServer().server.getCommandMap().register("bauwelt", "Deepslate", new BauweltCommand("bauwelt"));
 +        MinecraftServer.getServer().server.getCommandMap().register("wartung", "Deepslate", new WartungCommand("wartung"));
          //Deepslate end
  
-         // Yatopia start
+         this.setPvpAllowed(dedicatedserverproperties.pvp);
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index 15afcf4e8048fc15f1a2d407972cca90df8f66c0..571fd37ed09a2bc8b5838b7a3d159fa0d99753c8 100644
+index 5b993156daa75ecdd0cdcd014dadcb3b6b01df1b..78c60d2e0b852db70aac84315d7d6610a5c1293a 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
 @@ -91,6 +91,7 @@ import net.minecraft.world.scores.Objective;
@@ -40,7 +40,7 @@ index 15afcf4e8048fc15f1a2d407972cca90df8f66c0..571fd37ed09a2bc8b5838b7a3d159fa0
  import org.apache.logging.log4j.LogManager;
  import org.apache.logging.log4j.Logger;
  
-@@ -356,6 +357,7 @@ public abstract class PlayerList {
+@@ -360,6 +361,7 @@ public abstract class PlayerList {
          player.containerMenu.transferTo(player.containerMenu, bukkitPlayer);
  
          PlayerJoinEvent playerJoinEvent = new PlayerJoinEvent(bukkitPlayer, PaperAdventure.asAdventure(chatmessage)); // Paper - Adventure
@@ -50,12 +50,12 @@ index 15afcf4e8048fc15f1a2d407972cca90df8f66c0..571fd37ed09a2bc8b5838b7a3d159fa0
          if (!player.connection.connection.isConnected()) {
 diff --git a/src/main/java/net/pascalpex/deepslatemc/commands/WartungCommand.java b/src/main/java/net/pascalpex/deepslatemc/commands/WartungCommand.java
 new file mode 100644
-index 0000000000000000000000000000000000000000..8edd4e20d05acac568a364509604716989aa0941
+index 0000000000000000000000000000000000000000..2580dc98414b6b6113d00f44dadcaf7ef87e50f5
 --- /dev/null
 +++ b/src/main/java/net/pascalpex/deepslatemc/commands/WartungCommand.java
 @@ -0,0 +1,58 @@
 +package net.pascalpex.deepslatemc.commands;
-+    
++
 +import net.pascalpex.deepslatemc.Config;
 +import org.bukkit.ChatColor;
 +import org.bukkit.command.Command;

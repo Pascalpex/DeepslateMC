@@ -35,6 +35,9 @@ subprojects {
     tasks.withType<JavaCompile> {
         options.encoding = Charsets.UTF_8.name()
         options.release.set(17)
+        options.compilerArgs = listOf(
+            "--add-modules", "jdk.incubator.vector"
+        )
     }
     tasks.withType<Javadoc> {
         options.encoding = Charsets.UTF_8.name()
@@ -52,6 +55,7 @@ subprojects {
         maven("https://repo.md-5.net/content/repositories/releases/")
         maven("https://hub.spigotmc.org/nexus/content/groups/public/")
         maven("https://jitpack.io")
+        maven("https://repo.codemc.org/repository/maven-public/")
     }
 }
 
@@ -61,18 +65,18 @@ paperweight {
     remapRepo.set("https://maven.fabricmc.net/")
     decompileRepo.set("https://files.minecraftforge.net/maven/")
 
-    useStandardUpstream("patina") {
-        url.set(github("PatinaMC", "Patina"))
-        ref.set(providers.gradleProperty("patinaRef"))
+    useStandardUpstream("mirai") {
+        url.set(github("etil2jz", "Mirai"))
+        ref.set(providers.gradleProperty("miraiRef"))
 
         withStandardPatcher {
-            baseName("patina")
+            baseName("mirai")
 
             apiOutputDir.set(layout.projectDirectory.dir("deepslateMC-api"))
             serverOutputDir.set(layout.projectDirectory.dir("deepslateMC-server"))
 
-            apiSourceDirPath.set("patina-api")
-            serverSourceDirPath.set("patina-server")
+            apiSourceDirPath.set("mirai-api")
+            serverSourceDirPath.set("mirai-server")
 
             remapRepo.set("https://maven.fabricmc.net/")
             decompileRepo.set("https://files.minecraftforge.net/maven/")

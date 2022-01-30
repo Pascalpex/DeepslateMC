@@ -1,14 +1,14 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Pascalpex <pascalpex@gmail.com>
-Date: Sun, 23 Jan 2022 20:29:03 +0100
+Date: Sun, 30 Jan 2022 14:40:49 +0100
 Subject: [PATCH] Spawn functions
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 7e2f07dfd928ce22b6f32985b689ed01536dca2d..29f7d11eb90bb4dd640673ca63e3e220d0c54a1f 100644
+index aa27acb098b85bb0c7a1341277e536f7e2621183..9dc401fdb1c8a11f4fe968a8adaf2ec4a27c01bd 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-@@ -257,6 +257,13 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+@@ -267,6 +267,13 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
          MinecraftServer.getServer().server.getCommandMap().register("wartung", "Deepslate", new WartungCommand("wartung"));
          MinecraftServer.getServer().server.getCommandMap().register("help", "Deepslate", new HelpCommand("help"));
          MinecraftServer.getServer().server.getCommandMap().register("hilfe", "Deepslate", new HelpCommand("hilfe"));
@@ -21,20 +21,20 @@ index 7e2f07dfd928ce22b6f32985b689ed01536dca2d..29f7d11eb90bb4dd640673ca63e3e220
 +        MinecraftServer.getServer().server.getCommandMap().register("hubschrauber", "Deepslate", new SpawnCommand("hubschrauber"));
          //Deepslate end
  
-         // Yatopia start
+         this.setPvpAllowed(dedicatedserverproperties.pvp);
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index 571fd37ed09a2bc8b5838b7a3d159fa0d99753c8..9f4e743da2d589ba55b93c169430b7ac7a81697f 100644
+index 78c60d2e0b852db70aac84315d7d6610a5c1293a..ca0a2d17ad76fef045ea4bd193c81c84dba88f5c 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
-@@ -92,6 +92,7 @@ import net.minecraft.world.scores.PlayerTeam;
+@@ -91,6 +91,7 @@ import net.minecraft.world.scores.Objective;
+ import net.minecraft.world.scores.PlayerTeam;
  import net.minecraft.world.scores.Scoreboard; // Paper
  import net.minecraft.world.scores.Team;
- import net.pascalpex.deepslatemc.commands.WartungCommand;
 +import net.pascalpex.deepslatemc.commands.SpawnCommand;
+ import net.pascalpex.deepslatemc.commands.WartungCommand;
  import org.apache.logging.log4j.LogManager;
  import org.apache.logging.log4j.Logger;
- 
-@@ -358,6 +359,7 @@ public abstract class PlayerList {
+@@ -362,6 +363,7 @@ public abstract class PlayerList {
  
          PlayerJoinEvent playerJoinEvent = new PlayerJoinEvent(bukkitPlayer, PaperAdventure.asAdventure(chatmessage)); // Paper - Adventure
          WartungCommand.playerJoin(bukkitPlayer);
@@ -43,21 +43,25 @@ index 571fd37ed09a2bc8b5838b7a3d159fa0d99753c8..9f4e743da2d589ba55b93c169430b7ac
  
          if (!player.connection.connection.isConnected()) {
 diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
-index e26831d8d26081c95e9b5452057b35bfc186f13b..db6e3068d4395bc0e70aba38e5ee19c4a5574301 100644
+index e26831d8d26081c95e9b5452057b35bfc186f13b..70a82964ac31cab89a0d27e1944f4b5aba6b98c8 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/Config.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/Config.java
-@@ -1,6 +1,9 @@
+@@ -1,10 +1,11 @@
  package net.pascalpex.deepslatemc;
 -    
+-import org.bukkit.ChatColor;
 +
 +import org.bukkit.Bukkit;
- import org.bukkit.ChatColor;
 +import org.bukkit.Location;
 +import org.bukkit.World;
  import org.bukkit.configuration.InvalidConfigurationException;
  import org.bukkit.configuration.file.FileConfiguration;
  import org.bukkit.configuration.file.YamlConfiguration;
-@@ -30,6 +33,7 @@ public class Config {
+-import org.bukkit.inventory.ItemStack;
+ 
+ import java.io.File;
+ import java.io.IOException;
+@@ -30,6 +31,7 @@ public class Config {
                  message.add("&9&l/warp &9&lInfos &r&6nachlesen. Wende dich bei");
                  message.add("&6weiteren Fragen an ein &9Teammitglied.");
                  config.set("helpMessage", message);
@@ -65,10 +69,11 @@ index e26831d8d26081c95e9b5452057b35bfc186f13b..db6e3068d4395bc0e70aba38e5ee19c4
                  save();
              }
              config.load(configFile);
-@@ -46,10 +50,34 @@ public class Config {
+@@ -46,10 +48,35 @@ public class Config {
          }
      }
  
++
 +    public static boolean getSpawnOnJoin() {
 +        return config.getBoolean("spawnOnJoin");
 +    }
@@ -102,12 +107,12 @@ index e26831d8d26081c95e9b5452057b35bfc186f13b..db6e3068d4395bc0e70aba38e5ee19c4
          String message = "";
 diff --git a/src/main/java/net/pascalpex/deepslatemc/commands/SpawnCommand.java b/src/main/java/net/pascalpex/deepslatemc/commands/SpawnCommand.java
 new file mode 100644
-index 0000000000000000000000000000000000000000..2add389551771752f482f25c11fa115a43deea51
+index 0000000000000000000000000000000000000000..b808c70ce97bb59aba2182fc3f3117f77f76792e
 --- /dev/null
 +++ b/src/main/java/net/pascalpex/deepslatemc/commands/SpawnCommand.java
 @@ -0,0 +1,54 @@
 +package net.pascalpex.deepslatemc.commands;
-+    
++
 +import net.pascalpex.deepslatemc.Config;
 +import org.bukkit.ChatColor;
 +import org.bukkit.command.Command;

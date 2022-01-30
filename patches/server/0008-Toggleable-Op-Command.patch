@@ -1,11 +1,11 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Pascalpex <pascalpex@gmail.com>
-Date: Sun, 23 Jan 2022 20:09:17 +0100
+Date: Sun, 30 Jan 2022 14:29:18 +0100
 Subject: [PATCH] Toggleable Op Command
 
 
 diff --git a/src/main/java/net/minecraft/commands/Commands.java b/src/main/java/net/minecraft/commands/Commands.java
-index beac966ddf6348ac956920a803dd509a80dd1132..47e8733266d5359898d31818ddaaf1ab3f326838 100644
+index a4ec8c35c1870810c11e81e79c3b191c4f440f35..a888ea8a4dea848c439959a640afec8bb2ba45ea 100644
 --- a/src/main/java/net/minecraft/commands/Commands.java
 +++ b/src/main/java/net/minecraft/commands/Commands.java
 @@ -104,6 +104,7 @@ import net.minecraft.server.commands.WorldBorderCommand;
@@ -33,11 +33,11 @@ index beac966ddf6348ac956920a803dd509a80dd1132..47e8733266d5359898d31818ddaaf1ab
              PardonIpCommand.register(this.dispatcher);
              PerfCommand.register(this.dispatcher);
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 22fbad3f47d500937da383f49b4d4b1ad0755e37..bdc0ee503c614590b2fdeb7b3c4742952245bf0f 100644
+index 3aba32673a5499a9e0eb391f9da342ea4fcde08b..8ec1aca8180221a8b16ecffdfe241a7e3b8fa62e 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-@@ -247,7 +247,6 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
-         gg.pufferfish.pufferfish.PufferfishCommand.init(); // Pufferfish
+@@ -257,7 +257,6 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+         // Mirai end
  
          //Deepslate start
 -        Config.load();

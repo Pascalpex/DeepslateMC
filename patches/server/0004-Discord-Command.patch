@@ -1,11 +1,11 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Pascalpex <pascalpex@gmail.com>
-Date: Sun, 23 Jan 2022 19:35:46 +0100
+Date: Sun, 30 Jan 2022 14:15:33 +0100
 Subject: [PATCH] Discord Command
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index c8aa8d8b16c8571baa82303a68041d7b9d1e2083..8ec849fe9b4736ead7ca925c868eaa3d9bf15c4b 100644
+index f322c6bbd791d926789e225ad3ea0aaf30bef8ce..93a109b8bc0ee464356bfb35f5d6287681fe6c8a 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 @@ -60,6 +60,7 @@ import net.minecraft.world.level.storage.LevelStorageSource;
@@ -16,15 +16,15 @@ index c8aa8d8b16c8571baa82303a68041d7b9d1e2083..8ec849fe9b4736ead7ca925c868eaa3d
  import org.apache.logging.log4j.LogManager;
  import org.apache.logging.log4j.Logger;
  import org.apache.logging.log4j.Level;
-@@ -248,6 +249,8 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+@@ -258,6 +259,8 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
  
          Config.load();
          MinecraftServer.getServer().server.getCommandMap().register("deepslate", "Deepslate", new DeepslateCommand("deepslate"));
 +        MinecraftServer.getServer().server.getCommandMap().register("discord", "Deepslate", new DiscordCommand("discord"));
 +        MinecraftServer.getServer().server.getCommandMap().register("dc", "Deepslate", new DiscordCommand("dc"));
  
-         // Yatopia start
-         try {
+         this.setPvpAllowed(dedicatedserverproperties.pvp);
+         this.setFlightAllowed(dedicatedserverproperties.allowFlight);
 diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
 index f557502a700159620fd8ba53d0498f2d9cfce948..e0136508752affde08f1c785192a3cb3e45ebe9d 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/Config.java
@@ -47,7 +47,7 @@ index f557502a700159620fd8ba53d0498f2d9cfce948..e0136508752affde08f1c785192a3cb3
 +
  }
 diff --git a/src/main/java/net/pascalpex/deepslatemc/commands/DeepslateCommand.java b/src/main/java/net/pascalpex/deepslatemc/commands/DeepslateCommand.java
-index 7985449b11ae5c246c56a8795480568496b93024..5d383176cc333c3715d9b925384deece3a9c0758 100644
+index 9d6a418ef1a3c467150f13636c69c585b994c852..0e87b138838382269cc6b265c91e5101983e61ea 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/commands/DeepslateCommand.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/commands/DeepslateCommand.java
 @@ -34,29 +34,53 @@ public class DeepslateCommand extends Command {
@@ -65,7 +65,7 @@ index 7985449b11ae5c246c56a8795480568496b93024..5d383176cc333c3715d9b925384deece
 -                    Config.load();
 -                    player.sendMessage(prefix + "Config wurde neugeladen");
 +        if (commandLabel.equalsIgnoreCase("deepslate")) {
-+            String prefix = Config.getPrefix() + " " + ChatColor.DARK_AQUA;
++            String prefix = Config.getPrefix() + " "  +ChatColor.DARK_AQUA;
 +            if (sender instanceof Player) {
 +                Player player = (Player) sender;
 +                if(player.hasPermission("deepslate.command")) {
@@ -90,7 +90,7 @@ index 7985449b11ae5c246c56a8795480568496b93024..5d383176cc333c3715d9b925384deece
                  } else {
 -                    if(args[0].equalsIgnoreCase("version")) {
 -                        player.sendMessage(prefix + "Dieser Server läuft mit DeepslateMC Version 1.0");
-+                    player.sendMessage(prefix + "Dieser Server läuft mit DeepslateMC Version 1.0");
++                    player.sendMessage(prefix + "Dieser Server läuft mit DeepslateMC von Pascalpex");
 +                }
 +            } else {
 +                if(args.length == 0) {
@@ -112,24 +112,24 @@ index 7985449b11ae5c246c56a8795480568496b93024..5d383176cc333c3715d9b925384deece
 +                if(args.length >= 2) {
 +                    sender.sendMessage(prefix + "Nutze /deepslate [reload | version]");
 +                }
-+
              }
 -            if(args.length >= 2) {
 -                player.sendMessage(prefix + "Nutze /deepslate [reload | version]");
 -            }
 -        } else {
 -            player.sendMessage(prefix + "Dafür hast du keine Rechte");
++            
          }
          return true;
      }
 diff --git a/src/main/java/net/pascalpex/deepslatemc/commands/DiscordCommand.java b/src/main/java/net/pascalpex/deepslatemc/commands/DiscordCommand.java
 new file mode 100644
-index 0000000000000000000000000000000000000000..e8b90d4b5e05ddb467189839899fe36b407433bc
+index 0000000000000000000000000000000000000000..dedcebcb180edb9b35a559161cd55239c3098bdd
 --- /dev/null
 +++ b/src/main/java/net/pascalpex/deepslatemc/commands/DiscordCommand.java
 @@ -0,0 +1,33 @@
 +package net.pascalpex.deepslatemc.commands;
-+    
++
 +import net.pascalpex.deepslatemc.Config;
 +import org.bukkit.ChatColor;
 +import org.bukkit.command.Command;

@@ -1,11 +1,11 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Pascalpex <pascalpex@gmail.com>
-Date: Sun, 23 Jan 2022 18:46:32 +0100
+Date: Sun, 30 Jan 2022 14:06:29 +0100
 Subject: [PATCH] Deepslate Config
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index a8d32dbcfab10622c77a7030feae96fdb985e679..c8aa8d8b16c8571baa82303a68041d7b9d1e2083 100644
+index b70c9a2446489d5217c93c977da5dfb7ed49520b..f322c6bbd791d926789e225ad3ea0aaf30bef8ce 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 @@ -58,6 +58,7 @@ import net.minecraft.world.level.GameType;
@@ -16,17 +16,17 @@ index a8d32dbcfab10622c77a7030feae96fdb985e679..c8aa8d8b16c8571baa82303a68041d7b
  import net.pascalpex.deepslatemc.commands.DeepslateCommand;
  import org.apache.logging.log4j.LogManager;
  import org.apache.logging.log4j.Logger;
-@@ -245,6 +246,7 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
-         gg.pufferfish.pufferfish.PufferfishConfig.load(); // Pufferfish
-         gg.pufferfish.pufferfish.PufferfishCommand.init(); // Pufferfish
+@@ -255,6 +256,7 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+         wtf.etil.mirai.MiraiConfig.registerCommands();
+         // Mirai end
  
 +        Config.load();
          MinecraftServer.getServer().server.getCommandMap().register("deepslate", "Deepslate", new DeepslateCommand("deepslate"));
  
-         // Yatopia start
+         this.setPvpAllowed(dedicatedserverproperties.pvp);
 diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
 new file mode 100644
-index 0000000000000000000000000000000000000000..99122d5f56c40ee12d3d01b90d052de98eff2668
+index 0000000000000000000000000000000000000000..f557502a700159620fd8ba53d0498f2d9cfce948
 --- /dev/null
 +++ b/src/main/java/net/pascalpex/deepslatemc/Config.java
 @@ -0,0 +1,44 @@

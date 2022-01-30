@@ -1,24 +1,24 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Pascalpex <pascalpex@gmail.com>
-Date: Sun, 23 Jan 2022 19:45:39 +0100
+Date: Sun, 30 Jan 2022 14:18:34 +0100
 Subject: [PATCH] Clearchat Command
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 8ec849fe9b4736ead7ca925c868eaa3d9bf15c4b..2b762a99c51b6eb6c68e4dbbc7194a3a300bdbf7 100644
+index 93a109b8bc0ee464356bfb35f5d6287681fe6c8a..2d5e864b23660d12b2592094fb63c6ea17e8ae55 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-@@ -61,6 +61,7 @@ import net.minecraft.world.level.storage.WorldData;
+@@ -59,6 +59,7 @@ import net.minecraft.world.level.block.entity.SkullBlockEntity;
+ import net.minecraft.world.level.storage.LevelStorageSource;
+ import net.minecraft.world.level.storage.WorldData;
  import net.pascalpex.deepslatemc.Config;
++import net.pascalpex.deepslatemc.commands.ClearchatCommand;
  import net.pascalpex.deepslatemc.commands.DeepslateCommand;
  import net.pascalpex.deepslatemc.commands.DiscordCommand;
-+import net.pascalpex.deepslatemc.commands.ClearchatCommand;
  import org.apache.logging.log4j.LogManager;
- import org.apache.logging.log4j.Logger;
- import org.apache.logging.log4j.Level;
-@@ -247,10 +248,14 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
-         gg.pufferfish.pufferfish.PufferfishConfig.load(); // Pufferfish
-         gg.pufferfish.pufferfish.PufferfishCommand.init(); // Pufferfish
+@@ -257,10 +258,14 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+         wtf.etil.mirai.MiraiConfig.registerCommands();
+         // Mirai end
  
 +        //Deepslate start
          Config.load();
@@ -29,11 +29,11 @@ index 8ec849fe9b4736ead7ca925c868eaa3d9bf15c4b..2b762a99c51b6eb6c68e4dbbc7194a3a
 +        MinecraftServer.getServer().server.getCommandMap().register("clearchat", "Deepslate", new ClearchatCommand("clearchat"));
 +        //Deepslate end
  
-         // Yatopia start
-         try {
+         this.setPvpAllowed(dedicatedserverproperties.pvp);
+         this.setFlightAllowed(dedicatedserverproperties.allowFlight);
 diff --git a/src/main/java/net/pascalpex/deepslatemc/commands/ClearchatCommand.java b/src/main/java/net/pascalpex/deepslatemc/commands/ClearchatCommand.java
 new file mode 100644
-index 0000000000000000000000000000000000000000..c3bd198b4f653599289261f2ab1535b0e8e9b611
+index 0000000000000000000000000000000000000000..4163c875eb1a188ef661b4eb73e678ebcca098ba
 --- /dev/null
 +++ b/src/main/java/net/pascalpex/deepslatemc/commands/ClearchatCommand.java
 @@ -0,0 +1,37 @@
@@ -63,7 +63,7 @@ index 0000000000000000000000000000000000000000..c3bd198b4f653599289261f2ab1535b0
 +                    for (int x = 0; x < 150; x++){
 +                        Bukkit.broadcastMessage("");
 +                    }
-+                    Bukkit.broadcastMessage(ChatColor.YELLOW + "Der Chat wurde von " + ChatColor.RED + player.getName() + ChatColor.YELLOW + " geleert");
++                    Bukkit.broadcastMessage(ChatColor.YELLOW  +"Der Chat wurde von " + ChatColor.RED + player.getName() + ChatColor.YELLOW + " geleert");
 +                }
 +            } else {
 +                player.sendMessage(ChatColor.RED + "Dafür hast du keine Rechte");
@@ -75,7 +75,7 @@ index 0000000000000000000000000000000000000000..c3bd198b4f653599289261f2ab1535b0
 +    }
 +}
 diff --git a/src/main/java/net/pascalpex/deepslatemc/commands/DiscordCommand.java b/src/main/java/net/pascalpex/deepslatemc/commands/DiscordCommand.java
-index e8b90d4b5e05ddb467189839899fe36b407433bc..9276201f7ed8757c534f47aa5f703c7f9ac6dd75 100644
+index dedcebcb180edb9b35a559161cd55239c3098bdd..edff000773574859cb4df5afe9dbb54b31598e1c 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/commands/DiscordCommand.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/commands/DiscordCommand.java
 @@ -13,7 +13,6 @@ public class DiscordCommand extends Command {

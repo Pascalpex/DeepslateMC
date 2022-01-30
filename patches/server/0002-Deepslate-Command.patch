@@ -1,11 +1,11 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Pascalpex <pascalpex@gmail.com>
-Date: Sun, 23 Jan 2022 18:42:48 +0100
-Subject: [PATCH] Deepslate Command
+Date: Sun, 30 Jan 2022 14:03:03 +0100
+Subject: [PATCH] Deepslate-Command
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index ec7382b85e7ca9fead5f398a3e61989a012e06eb..a8d32dbcfab10622c77a7030feae96fdb985e679 100644
+index c434373557639463b862615552183a61665f01d0..b70c9a2446489d5217c93c977da5dfb7ed49520b 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 @@ -58,6 +58,7 @@ import net.minecraft.world.level.GameType;
@@ -16,18 +16,18 @@ index ec7382b85e7ca9fead5f398a3e61989a012e06eb..a8d32dbcfab10622c77a7030feae96fd
  import org.apache.logging.log4j.LogManager;
  import org.apache.logging.log4j.Logger;
  import org.apache.logging.log4j.Level;
-@@ -244,6 +245,8 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
-         gg.pufferfish.pufferfish.PufferfishConfig.load(); // Pufferfish
-         gg.pufferfish.pufferfish.PufferfishCommand.init(); // Pufferfish
+@@ -254,6 +255,8 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+         wtf.etil.mirai.MiraiConfig.registerCommands();
+         // Mirai end
  
 +        MinecraftServer.getServer().server.getCommandMap().register("deepslate", "Deepslate", new DeepslateCommand("deepslate"));
 +
-         // Yatopia start
-         try {
-             me.titaniumtown.JettPackConfig.init((java.io.File) options.valueOf("jettpack-settings"));
+         this.setPvpAllowed(dedicatedserverproperties.pvp);
+         this.setFlightAllowed(dedicatedserverproperties.allowFlight);
+         this.setResourcePack(dedicatedserverproperties.resourcePack, this.getPackHash());
 diff --git a/src/main/java/net/pascalpex/deepslatemc/commands/DeepslateCommand.java b/src/main/java/net/pascalpex/deepslatemc/commands/DeepslateCommand.java
 new file mode 100644
-index 0000000000000000000000000000000000000000..d881c5cfd8383fba16f4ebfc9ddd98d33450972c
+index 0000000000000000000000000000000000000000..9d6a418ef1a3c467150f13636c69c585b994c852
 --- /dev/null
 +++ b/src/main/java/net/pascalpex/deepslatemc/commands/DeepslateCommand.java
 @@ -0,0 +1,64 @@
@@ -45,7 +45,7 @@ index 0000000000000000000000000000000000000000..d881c5cfd8383fba16f4ebfc9ddd98d3
 +import java.util.stream.Collectors;
 +import java.util.stream.Stream;
 +
-+
++    
 +public class DeepslateCommand extends Command {
 +
 +    public DeepslateCommand(String name) {
@@ -54,7 +54,7 @@ index 0000000000000000000000000000000000000000..d881c5cfd8383fba16f4ebfc9ddd98d3
 +        this.usageMessage = "/deepslate [reload | version]";
 +        this.setPermission("deepslate.command");
 +    }
-+        
++
 +    @Override
 +    public List<String> tabComplete(CommandSender sender, String alias, String[] args, Location location) throws IllegalArgumentException {
 +        if (args.length == 1) {

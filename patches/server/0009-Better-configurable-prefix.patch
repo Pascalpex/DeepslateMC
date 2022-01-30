@@ -1,6 +1,6 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Pascalpex <pascalpex@gmail.com>
-Date: Sun, 23 Jan 2022 20:15:13 +0100
+Date: Sun, 30 Jan 2022 14:32:40 +0100
 Subject: [PATCH] Better configurable prefix
 
 
@@ -65,13 +65,12 @@ index 0bb98551ead1129a00ba727533c4fc17f25e3896..cd748aef81b1897684a9f994d382b1e3
          return true;
      }
 diff --git a/src/main/java/net/pascalpex/deepslatemc/commands/ClearchatCommand.java b/src/main/java/net/pascalpex/deepslatemc/commands/ClearchatCommand.java
-index c3bd198b4f653599289261f2ab1535b0e8e9b611..d6408e6e2ca3b1c7aaca21159f30b218f754637f 100644
+index 4163c875eb1a188ef661b4eb73e678ebcca098ba..79fdd22f3999846ffd65c0b69be0fb9b43538bfa 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/commands/ClearchatCommand.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/commands/ClearchatCommand.java
 @@ -1,5 +1,6 @@
  package net.pascalpex.deepslatemc.commands;
--    
-+
+     
 +import net.pascalpex.deepslatemc.Config;
  import org.bukkit.Bukkit;
  import org.bukkit.ChatColor;
@@ -85,7 +84,7 @@ index c3bd198b4f653599289261f2ab1535b0e8e9b611..d6408e6e2ca3b1c7aaca21159f30b218
              Player player = (Player) sender;
              if (commandLabel.equalsIgnoreCase("cc") || commandLabel.equalsIgnoreCase("clearchat")) {
 @@ -27,10 +29,10 @@ public class ClearchatCommand extends Command {
-                     Bukkit.broadcastMessage(ChatColor.YELLOW + "Der Chat wurde von " + ChatColor.RED + player.getName() + ChatColor.YELLOW + " geleert");
+                     Bukkit.broadcastMessage(ChatColor.YELLOW  +"Der Chat wurde von " + ChatColor.RED + player.getName() + ChatColor.YELLOW + " geleert");
                  }
              } else {
 -                player.sendMessage(ChatColor.RED + "Dafür hast du keine Rechte");
@@ -98,7 +97,7 @@ index c3bd198b4f653599289261f2ab1535b0e8e9b611..d6408e6e2ca3b1c7aaca21159f30b218
          return true;
      }
 diff --git a/src/main/java/net/pascalpex/deepslatemc/commands/DiscordCommand.java b/src/main/java/net/pascalpex/deepslatemc/commands/DiscordCommand.java
-index 9276201f7ed8757c534f47aa5f703c7f9ac6dd75..b183e6f80d2f1e959eb69c793626fc3739f379fd 100644
+index edff000773574859cb4df5afe9dbb54b31598e1c..588d834a085b1ed058699eb65f418f234839cef8 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/commands/DiscordCommand.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/commands/DiscordCommand.java
 @@ -17,11 +17,12 @@ public class DiscordCommand extends Command {
@@ -116,7 +115,7 @@ index 9276201f7ed8757c534f47aa5f703c7f9ac6dd75..b183e6f80d2f1e959eb69c793626fc37
              } else {
                  sender.sendMessage("Dieser Befehl ist nur für Spieler geeignet");
 diff --git a/src/main/java/net/pascalpex/deepslatemc/commands/WartungCommand.java b/src/main/java/net/pascalpex/deepslatemc/commands/WartungCommand.java
-index 8edd4e20d05acac568a364509604716989aa0941..4e9bdde2e3fe95efdb291644e0da361527dbed2d 100644
+index 2580dc98414b6b6113d00f44dadcaf7ef87e50f5..8111e877e7e224a76753d2659eda710a9379959d 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/commands/WartungCommand.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/commands/WartungCommand.java
 @@ -20,8 +20,9 @@ public class WartungCommand extends Command {
