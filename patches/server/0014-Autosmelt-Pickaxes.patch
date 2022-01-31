@@ -1,0 +1,199 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Pascalpex <pascalpex@gmail.com>
+Date: Mon, 31 Jan 2022 20:13:52 +0100
+Subject: [PATCH] Autosmelt Pickaxes
+
+
+diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
+index 9dc401fdb1c8a11f4fe968a8adaf2ec4a27c01bd..3c4395e90a7187ca068aa15871c6415f50fe8361 100644
+--- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
++++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
+@@ -267,6 +267,7 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+         MinecraftServer.getServer().server.getCommandMap().register("wartung", "Deepslate", new WartungCommand("wartung"));
+         MinecraftServer.getServer().server.getCommandMap().register("help", "Deepslate", new HelpCommand("help"));
+         MinecraftServer.getServer().server.getCommandMap().register("hilfe", "Deepslate", new HelpCommand("hilfe"));
++        MinecraftServer.getServer().server.getCommandMap().register("autosmelt", "Deepslate", new AutosmeltCommand("autosmelt"));
+ 
+         MinecraftServer.getServer().server.getCommandMap().register("setspawn", "Deepslate", new SpawnCommand("setspawn"));
+         MinecraftServer.getServer().server.getCommandMap().register("spawn", "Deepslate", new SpawnCommand("spawn"));
+diff --git a/src/main/java/net/minecraft/server/level/ServerPlayerGameMode.java b/src/main/java/net/minecraft/server/level/ServerPlayerGameMode.java
+index 5c301ece8de3c4b2988767c2428353ab3b525930..da863ac1ea612ae4f30e2c7df8b7c2641637ce98 100644
+--- a/src/main/java/net/minecraft/server/level/ServerPlayerGameMode.java
++++ b/src/main/java/net/minecraft/server/level/ServerPlayerGameMode.java
+@@ -19,6 +19,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
+ import net.minecraft.world.level.block.state.BlockState;
+ import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
+ import net.minecraft.world.phys.BlockHitResult;
++import net.pascalpex.deepslatemc.Config;
+ import org.apache.logging.log4j.LogManager;
+ import org.apache.logging.log4j.Logger;
+ 
+@@ -36,7 +37,9 @@ import net.minecraft.world.level.block.Blocks;
+ import net.minecraft.world.level.block.CakeBlock;
+ import net.minecraft.world.level.block.DoorBlock;
+ import org.bukkit.GameMode;
++import org.bukkit.Material;
+ import org.bukkit.craftbukkit.block.CraftBlock;
++import org.bukkit.entity.Player;
+ import org.bukkit.event.block.BlockBreakEvent;
+ import org.bukkit.craftbukkit.event.CraftEventFactory;
+ import org.bukkit.event.Event;
+@@ -383,6 +386,57 @@ public class ServerPlayerGameMode {
+             }
+ 
+             event = new BlockBreakEvent(bblock, this.player.getBukkitEntity());
++            
++            Player Bplayer = this.player.getBukkitEntity();
++            if (Bplayer.getItemInHand() != null && Bplayer.getItemInHand().getType() != Material.AIR) {
++                if (Bplayer.getItemInHand().getItemMeta().hasLore()) {
++                    if (Bplayer.getItemInHand().getItemMeta().getLore().contains("Auto Smelt")) {
++                        if (Config.getAutoSmeltWorlds().contains(Bplayer.getWorld().getName())) {
++                            if (Bplayer.getGameMode() != GameMode.CREATIVE) {
++                                switch (event.getBlock().getType()) {
++                                    case IRON_ORE:
++                                    case DEEPSLATE_IRON_ORE:
++                                        event.setDropItems(false);
++                                        Bplayer.getInventory().addItem(new org.bukkit.inventory.ItemStack(Material.IRON_INGOT, 1));
++                                        break;
++                                    case GOLD_ORE:
++                                    case DEEPSLATE_GOLD_ORE:
++                                        event.setDropItems(false);
++                                        Bplayer.getInventory().addItem(new org.bukkit.inventory.ItemStack(Material.GOLD_INGOT, 1));
++                                        break;
++                                    case COBBLESTONE:
++                                        event.setDropItems(false);
++                                        Bplayer.getInventory().addItem(new org.bukkit.inventory.ItemStack(Material.STONE, 1));
++                                        break;
++                                    case COBBLED_DEEPSLATE:
++                                        event.setDropItems(false);
++                                        Bplayer.getInventory().addItem(new org.bukkit.inventory.ItemStack(Material.DEEPSLATE, 1));
++                                        break;
++                                    case STONE:
++                                        event.setDropItems(false);
++                                        Bplayer.getInventory().addItem(new org.bukkit.inventory.ItemStack(Material.SMOOTH_STONE, 1));
++                                        break;
++                                    case SAND:
++                                        event.setDropItems(false);
++                                        Bplayer.getInventory().addItem(new org.bukkit.inventory.ItemStack(Material.GLASS, 1));
++                                        break;
++                                    case ANCIENT_DEBRIS:
++                                        event.setDropItems(false);
++                                        Bplayer.getInventory().addItem(new org.bukkit.inventory.ItemStack(Material.NETHERITE_SCRAP, 1));
++                                        break;
++                                    case COPPER_ORE:
++                                    case DEEPSLATE_COPPER_ORE:
++                                        event.setDropItems(false);
++                                        Bplayer.getInventory().addItem(new org.bukkit.inventory.ItemStack(Material.COPPER_INGOT, 1));
++                                        break;
++                                    default:
++                                        break;
++                                }
++                            }
++                        }
++                    }
++                }
++            }
+ 
+             // Sword + Creative mode pre-cancel
+             event.setCancelled(isSwordNoBreak);
+diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
+index e6dcc90c84ad72dd9efacd0d24ee98549bc700cb..b2d86a2ab7f123f21c7fa9301ea2dbe902c01837 100644
+--- a/src/main/java/net/pascalpex/deepslatemc/Config.java
++++ b/src/main/java/net/pascalpex/deepslatemc/Config.java
+@@ -35,6 +35,10 @@ public class Config {
+                 config.set("preventKnowledgebookClick", false);
+                 config.set("coloredSigns" + ".enabled", false);
+                 config.set("coloredSigns" + ".usePermission", true);
++                config.set("autoSmelt" + ".price", 30);
++                List<String> worldsList = new ArrayList<>();
++                worldsList.add("FantasyWorld");
++                config.set("autoSmelt" + ".enabledWorlds", worldsList);
+                 save();
+             }
+             config.load(configFile);
+@@ -51,6 +55,14 @@ public class Config {
+         }
+     }
+ 
++    public static int getAutoSmeltPrice() {
++        return config.getInt("autoSmelt" + ".price");
++    }
++
++    public static List<String> getAutoSmeltWorlds() {
++        return (List<String>) config.getList("autoSmelt" + ".enabledWorlds");
++    }
++
+     public static boolean getColoredSignsEnabled() {
+         return config.getBoolean("coloredSigns" + ".enabled");
+     }
+diff --git a/src/main/java/net/pascalpex/deepslatemc/commands/AutosmeltCommand.java b/src/main/java/net/pascalpex/deepslatemc/commands/AutosmeltCommand.java
+new file mode 100644
+index 0000000000000000000000000000000000000000..82dfbd28f63e7edefe0b51b19c969408f22bb5f7
+--- /dev/null
++++ b/src/main/java/net/pascalpex/deepslatemc/commands/AutosmeltCommand.java
+@@ -0,0 +1,65 @@
++package net.pascalpex.deepslatemc.commands;
++
++import net.pascalpex.deepslatemc.Config;
++import org.bukkit.ChatColor;
++import org.bukkit.command.Command;
++import org.bukkit.command.CommandSender;
++import org.bukkit.entity.Player;
++import org.bukkit.inventory.ItemStack;
++import org.bukkit.inventory.meta.ItemMeta;
++import org.jetbrains.annotations.NotNull;
++
++import java.util.ArrayList;
++
++public class AutosmeltCommand extends Command {
++
++    public AutosmeltCommand(@NotNull String name) {
++        super(name);
++        this.description = "Verzaubert eine Spitzhacke mit Autosmelt";
++        this.usageMessage = "/autosmelt";
++    }
++
++    @Override
++    public boolean execute(@NotNull CommandSender sender, @NotNull String label, @NotNull String[] args) {
++        String prefix = Config.getPrefix() + " " + ChatColor.DARK_AQUA;
++        if (sender instanceof Player) {
++            Player player = (Player) sender;
++            if(label.equalsIgnoreCase("autosmelt")) {
++                if(player.hasPermission("deepslate.autosmelt")) {
++                    if (Config.getAutoSmeltWorlds().contains(player.getWorld().getName())) {
++                        if (player.getLevel() >= Config.getAutoSmeltPrice()) {
++                            if (player.getItemInHand().getType().toString().contains("PICKAXE")) {
++                                if (!player.getItemInHand().getItemMeta().hasLore()) {
++                                    ItemStack item = player.getItemInHand();
++                                    ItemMeta meta = item.getItemMeta();
++                                    ArrayList<String> lore = new ArrayList<>();
++                                    lore.add("Auto Smelt");
++                                    meta.setLore(lore);
++                                    item.setItemMeta(meta);
++                                    player.getInventory().setItemInHand(item);
++                                    player.sendMessage(prefix + "Deine Spitzhacke hat nun AutoSmelt");
++                                    player.giveExpLevels(-Config.getAutoSmeltPrice());
++                                } else {
++                                    player.sendMessage(prefix + "Diese Spitzhacke kann nicht mit Autosmelt verzaubert werden");
++                                }
++
++                            } else {
++                                player.sendMessage(prefix + "Du musst eine Spitzhacke in der Hand halten.");
++                            }
++                        } else {
++                            player.sendMessage(prefix + "Du benötigst " + Config.getAutoSmeltPrice() + " Erfahrungsevel.");
++                        }
++                    } else {
++                        player.sendMessage(prefix + "AutoSmelt funktioniert hier nicht.");
++                    }
++                } else {
++                    player.sendMessage(prefix + ChatColor.RED + "Dafür hast du keine Rechte");
++                }
++            }
++        } else {
++            sender.sendMessage(prefix + "Dieser Befehl ist nur für Spieler geeignet");
++        }
++        return true;
++    }
++
++}
