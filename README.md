@@ -2,13 +2,13 @@
 <div align="center">
 
 # DeepslateMC
-### A private [Patina](https://github.com/PatinaMC/Patina) fork for my own Minecraft Server
+### A private [Mirai](https://github.com/etil2jz/Mirai) fork for my own Minecraft Server
 <br/>
 </div>
 
 This fork serves two purposes:
 - I learn stuff about [Git](https://git-scm.com/), [Paperweight](https://github.com/PaperMC/paperweight) and Patches
-- Small features replace minor plugins on my server
+- Small features replace minor plugins
 
 I know that some patches are a mess
 
