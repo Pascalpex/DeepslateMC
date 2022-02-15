@@ -5,7 +5,7 @@ Subject: [PATCH] Enable reload command
 
 
 diff --git a/src/main/java/org/bukkit/command/defaults/ReloadCommand.java b/src/main/java/org/bukkit/command/defaults/ReloadCommand.java
-index 535800197c43f43c30854d2b193107808dc3b6c7..304f5b4d65d74aee84fbd84f90998ab8a2c79570 100644
+index 535800197c43f43c30854d2b193107808dc3b6c7..2bff0ecafb4c8a33c8da91535a9f5a43548f0352 100644
 --- a/src/main/java/org/bukkit/command/defaults/ReloadCommand.java
 +++ b/src/main/java/org/bukkit/command/defaults/ReloadCommand.java
 @@ -21,17 +21,8 @@ public class ReloadCommand extends BukkitCommand {
@@ -23,8 +23,8 @@ index 535800197c43f43c30854d2b193107808dc3b6c7..304f5b4d65d74aee84fbd84f90998ab8
 -            return true;
 -        }
 -        // Yatopia end
-+        sender.sendMessage(ChatColor.DARK_RED + "Achtung!" + ChatColor.RED + " Der Reload Befehl kann bei bestimmten Plugins Fehler verursachen");
-+        sender.sendMessage(ChatColor.DARK_RED + "Achtung!" + ChatColor.RED + " Ein Neustart ist stattdessen empfohlen");
++        sender.sendMessage(ChatColor.DARK_RED + "Warning!" + ChatColor.RED + " The reload command can cause issues with certain plugins");
++        sender.sendMessage(ChatColor.DARK_RED + "Warning!" + ChatColor.RED + " A restart is recommended instead");
  
          // Paper start - Reload permissions.yml & require confirm
          boolean confirmed = System.getProperty("LetMeReload") != null;
