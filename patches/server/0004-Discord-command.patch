@@ -1,0 +1,121 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Pascalpex <pascalpex@gmail.com>
+Date: Tue, 15 Feb 2022 13:35:14 +0100
+Subject: [PATCH] Discord command
+
+
+diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
+index b51aaef4c7d4639ba3d5d9ed9d8957f5349e4113..079e90a80fd592dd2d05b49501de8d867a1dc9a8 100644
+--- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
++++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
+@@ -61,6 +61,7 @@ import net.minecraft.world.level.storage.WorldData;
+ import net.pascalpex.deepslatemc.Config;
+ import net.pascalpex.deepslatemc.MessagesFile;
+ import net.pascalpex.deepslatemc.commands.DeepslateCommand;
++import net.pascalpex.deepslatemc.commands.DiscordCommand;
+ import org.apache.logging.log4j.LogManager;
+ import org.apache.logging.log4j.Logger;
+ import org.apache.logging.log4j.Level;
+@@ -262,6 +263,8 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+         Config.load();
+ 
+         MinecraftServer.getServer().server.getCommandMap().register("deepslate", "Deepslate", new DeepslateCommand("deepslate"));
++        MinecraftServer.getServer().server.getCommandMap().register("discord", "Deepslate", new DiscordCommand("discord"));
++        MinecraftServer.getServer().server.getCommandMap().register("dc", "Deepslate", new DiscordCommand("dc"));
+         // Deepslate end
+ 
+         this.setPvpAllowed(dedicatedserverproperties.pvp);
+diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
+index 8e3a1629a0fd78dd95db003a1e127d23b247df90..6c5993ce5b95601f45d4bc97cab8adfdbb4cb747 100644
+--- a/src/main/java/net/pascalpex/deepslatemc/Config.java
++++ b/src/main/java/net/pascalpex/deepslatemc/Config.java
+@@ -20,6 +20,10 @@ public class Config {
+                 save();
+             }
+             config.load(configFile);
++            if(!config.contains("discordLink")) {
++                config.set("discordLink", "https://google.de/");
++            }
++            save();
+         } catch (IOException | InvalidConfigurationException e) {
+             e.printStackTrace();
+         }
+@@ -33,4 +37,8 @@ public class Config {
+         }
+     }
+ 
++    public static String getDiscordLink() {
++        return config.getString("discordLink");
++    }
++
+ }
+diff --git a/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java b/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java
+index f59866b9e16774cb5efd995ddb4276c66a940542..1bd3b0aff4fba64a2ea075c6508a0bba86bbeea1 100644
+--- a/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java
++++ b/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java
+@@ -29,6 +29,12 @@ public class MessagesFile {
+             if(!config.contains("configReloaded")) {
+                 config.set("configReloaded", "&aConfig got reloaded successfully");
+             }
++            if(!config.contains("onlyForPlayers")) {
++                config.set("onlyForPlayers", "&cThis command can only be used by players");
++            }
++            if(!config.contains("discordMessage")) {
++                config.set("discordMessage", "&6The link to our Discord server: &b%link%");
++            }
+             save();
+         } catch (IOException | InvalidConfigurationException e) {
+             e.printStackTrace();
+@@ -58,4 +64,14 @@ public class MessagesFile {
+         return prefix.replace("&", "§");
+     }
+ 
++    public static String getOnlyForPlayers() {
++        String prefix = config.getString("onlyForPlayers");
++        return prefix.replace("&", "§");
++    }
++
++    public static String getDiscordMessage() {
++        String prefix = config.getString("discordMessage");
++        return prefix.replace("&", "§");
++    }
++
+ }
+diff --git a/src/main/java/net/pascalpex/deepslatemc/commands/DiscordCommand.java b/src/main/java/net/pascalpex/deepslatemc/commands/DiscordCommand.java
+new file mode 100644
+index 0000000000000000000000000000000000000000..9559a10ca96bd432f0ef1df87d681ce40ccae58b
+--- /dev/null
++++ b/src/main/java/net/pascalpex/deepslatemc/commands/DiscordCommand.java
+@@ -0,0 +1,32 @@
++package net.pascalpex.deepslatemc.commands;
++
++import net.pascalpex.deepslatemc.Config;
++import net.pascalpex.deepslatemc.MessagesFile;
++import org.bukkit.command.Command;
++import org.bukkit.command.CommandSender;
++import org.bukkit.entity.Player;
++import org.jetbrains.annotations.NotNull;
++
++public class DiscordCommand extends Command {
++
++    public DiscordCommand(String name) {
++        super(name);
++        this.description = "Discord Link Befehl";
++        this.usageMessage = "/discord";
++    }
++
++    @Override
++    public boolean execute(@NotNull CommandSender sender, @NotNull String commandLabel, @NotNull String[] args) {
++        String prefix = MessagesFile.getPrefix() + " ";
++        if (commandLabel.equalsIgnoreCase("dc") || commandLabel.equalsIgnoreCase("discord")) {
++            if (sender instanceof Player) {
++                Player player = (Player) sender;
++                String link = Config.getDiscordLink();
++                player.sendMessage(prefix + MessagesFile.getDiscordMessage().replace("%link%", link));
++            } else {
++                sender.sendMessage(prefix + MessagesFile.getOnlyForPlayers());
++            }
++        }
++        return true;
++    }
++}

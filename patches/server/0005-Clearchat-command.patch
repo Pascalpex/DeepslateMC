@@ -1,46 +1,72 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Pascalpex <pascalpex@gmail.com>
-Date: Sun, 30 Jan 2022 14:18:34 +0100
-Subject: [PATCH] Clearchat Command
+Date: Tue, 15 Feb 2022 13:55:12 +0100
+Subject: [PATCH] Clearchat command
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 93a109b8bc0ee464356bfb35f5d6287681fe6c8a..2d5e864b23660d12b2592094fb63c6ea17e8ae55 100644
+index 079e90a80fd592dd2d05b49501de8d867a1dc9a8..bf37edd331ebd7e52ffcb5bfa20b788c69cde148 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-@@ -59,6 +59,7 @@ import net.minecraft.world.level.block.entity.SkullBlockEntity;
- import net.minecraft.world.level.storage.LevelStorageSource;
+@@ -60,6 +60,7 @@ import net.minecraft.world.level.storage.LevelStorageSource;
  import net.minecraft.world.level.storage.WorldData;
  import net.pascalpex.deepslatemc.Config;
+ import net.pascalpex.deepslatemc.MessagesFile;
 +import net.pascalpex.deepslatemc.commands.ClearchatCommand;
  import net.pascalpex.deepslatemc.commands.DeepslateCommand;
  import net.pascalpex.deepslatemc.commands.DiscordCommand;
  import org.apache.logging.log4j.LogManager;
-@@ -257,10 +258,14 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
-         wtf.etil.mirai.MiraiConfig.registerCommands();
-         // Mirai end
- 
-+        //Deepslate start
-         Config.load();
+@@ -265,6 +266,8 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
          MinecraftServer.getServer().server.getCommandMap().register("deepslate", "Deepslate", new DeepslateCommand("deepslate"));
          MinecraftServer.getServer().server.getCommandMap().register("discord", "Deepslate", new DiscordCommand("discord"));
          MinecraftServer.getServer().server.getCommandMap().register("dc", "Deepslate", new DiscordCommand("dc"));
 +        MinecraftServer.getServer().server.getCommandMap().register("cc", "Deepslate", new ClearchatCommand("cc"));
 +        MinecraftServer.getServer().server.getCommandMap().register("clearchat", "Deepslate", new ClearchatCommand("clearchat"));
-+        //Deepslate end
+         // Deepslate end
  
          this.setPvpAllowed(dedicatedserverproperties.pvp);
-         this.setFlightAllowed(dedicatedserverproperties.allowFlight);
+diff --git a/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java b/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java
+index 1bd3b0aff4fba64a2ea075c6508a0bba86bbeea1..37f901e9da4952e27515324ca20b8437fba6ca93 100644
+--- a/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java
++++ b/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java
+@@ -35,6 +35,12 @@ public class MessagesFile {
+             if(!config.contains("discordMessage")) {
+                 config.set("discordMessage", "&6The link to our Discord server: &b%link%");
+             }
++            if(!config.contains("noPermissions")) {
++                config.set("noPermissions", "&cYou have no permission to do this");
++            }
++            if(!config.contains("clearedChat")) {
++                config.set("clearedChat", "&6The chat got cleared by &b%clearer%");
++            }
+             save();
+         } catch (IOException | InvalidConfigurationException e) {
+             e.printStackTrace();
+@@ -74,4 +80,14 @@ public class MessagesFile {
+         return prefix.replace("&", "§");
+     }
+ 
++    public static String getNoPermissions() {
++        String prefix = config.getString("noPermissions");
++        return prefix.replace("&", "§");
++    }
++
++    public static String getClearedChat() {
++        String prefix = config.getString("clearedChat");
++        return prefix.replace("&", "§");
++    }
++
+ }
 diff --git a/src/main/java/net/pascalpex/deepslatemc/commands/ClearchatCommand.java b/src/main/java/net/pascalpex/deepslatemc/commands/ClearchatCommand.java
 new file mode 100644
-index 0000000000000000000000000000000000000000..4163c875eb1a188ef661b4eb73e678ebcca098ba
+index 0000000000000000000000000000000000000000..87ad06081da07a9a46f332ad157f358ab4f8adb3
 --- /dev/null
 +++ b/src/main/java/net/pascalpex/deepslatemc/commands/ClearchatCommand.java
-@@ -0,0 +1,37 @@
+@@ -0,0 +1,38 @@
 +package net.pascalpex.deepslatemc.commands;
-+    
++
++import net.pascalpex.deepslatemc.MessagesFile;
 +import org.bukkit.Bukkit;
-+import org.bukkit.ChatColor;
 +import org.bukkit.command.Command;
 +import org.bukkit.command.CommandSender;
 +import org.bukkit.entity.Player;
@@ -56,33 +82,22 @@ index 0000000000000000000000000000000000000000..4163c875eb1a188ef661b4eb73e678eb
 +
 +    @Override
 +    public boolean execute(@NotNull CommandSender sender, @NotNull String commandLabel, @NotNull String[] args) {
-+        if (sender instanceof Player) {
-+            Player player = (Player) sender;
-+            if (commandLabel.equalsIgnoreCase("cc") || commandLabel.equalsIgnoreCase("clearchat")) {
++        String prefix = MessagesFile.getPrefix() + " ";
++        if (commandLabel.equalsIgnoreCase("cc") || commandLabel.equalsIgnoreCase("clearchat")) {
++            if (sender instanceof Player) {
++                Player player = (Player) sender;
 +                if(player.hasPermission("deepslate.clearchat")) {
 +                    for (int x = 0; x < 150; x++){
 +                        Bukkit.broadcastMessage("");
 +                    }
-+                    Bukkit.broadcastMessage(ChatColor.YELLOW  +"Der Chat wurde von " + ChatColor.RED + player.getName() + ChatColor.YELLOW + " geleert");
++                    Bukkit.broadcastMessage(prefix + MessagesFile.getClearedChat().replace("%clearer%", player.getName()));
++                } else {
++                    player.sendMessage(prefix + MessagesFile.getNoPermissions());
 +                }
 +            } else {
-+                player.sendMessage(ChatColor.RED + "Dafür hast du keine Rechte");
++                sender.sendMessage(prefix + MessagesFile.getOnlyForPlayers());
 +            }
-+        } else {
-+            sender.sendMessage("Dieser Befehl ist nur für Spieler geeignet");
 +        }
 +        return true;
 +    }
 +}
-diff --git a/src/main/java/net/pascalpex/deepslatemc/commands/DiscordCommand.java b/src/main/java/net/pascalpex/deepslatemc/commands/DiscordCommand.java
-index dedcebcb180edb9b35a559161cd55239c3098bdd..edff000773574859cb4df5afe9dbb54b31598e1c 100644
---- a/src/main/java/net/pascalpex/deepslatemc/commands/DiscordCommand.java
-+++ b/src/main/java/net/pascalpex/deepslatemc/commands/DiscordCommand.java
-@@ -13,7 +13,6 @@ public class DiscordCommand extends Command {
-         super(name);
-         this.description = "Discord Link Befehl";
-         this.usageMessage = "/discord";
--        this.setPermission("deepslate.discord");
-     }
- 
-     @Override

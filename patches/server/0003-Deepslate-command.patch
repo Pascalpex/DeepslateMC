@@ -1,7 +1,7 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Pascalpex <pascalpex@gmail.com>
 Date: Tue, 15 Feb 2022 13:20:52 +0100
-Subject: [PATCH] Deepslate Command
+Subject: [PATCH] Deepslate command
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
