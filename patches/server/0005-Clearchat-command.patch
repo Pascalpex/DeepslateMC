@@ -101,3 +101,24 @@ index 0000000000000000000000000000000000000000..87ad06081da07a9a46f332ad157f358a
 +        return true;
 +    }
 +}
+diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
+index 4377bf52ec5ea3308525d4613e14a55450f974d1..d0cbc175ff39266410380f45ad222577a833731a 100644
+--- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
++++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
+@@ -116,6 +116,7 @@ import net.minecraft.world.level.storage.loot.LootTables;
+ import net.minecraft.world.phys.Vec3;
+ import net.pascalpex.deepslatemc.Config;
+ import net.pascalpex.deepslatemc.MessagesFile;
++import net.pascalpex.deepslatemc.commands.ClearchatCommand;
+ import net.pascalpex.deepslatemc.commands.DeepslateCommand;
+ import net.pascalpex.deepslatemc.commands.DiscordCommand;
+ import org.apache.commons.lang.Validate;
+@@ -1005,6 +1006,8 @@ public final class CraftServer implements Server {
+         MinecraftServer.getServer().server.getCommandMap().register("deepslate", "Deepslate", new DeepslateCommand("deepslate"));
+         MinecraftServer.getServer().server.getCommandMap().register("discord", "Deepslate", new DiscordCommand("discord"));
+         MinecraftServer.getServer().server.getCommandMap().register("dc", "Deepslate", new DiscordCommand("dc"));
++        MinecraftServer.getServer().server.getCommandMap().register("cc", "Deepslate", new ClearchatCommand("cc"));
++        MinecraftServer.getServer().server.getCommandMap().register("clearchat", "Deepslate", new ClearchatCommand("clearchat"));
+         // Deepslate end
+ 
+         this.overrideAllCommandBlockCommands = this.commandsConfiguration.getStringList("command-block-overrides").contains("*");

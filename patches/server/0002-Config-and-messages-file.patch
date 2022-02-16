@@ -122,3 +122,29 @@ index 0000000000000000000000000000000000000000..b6f529b7e5adf0b497d5c8d783e70fec
 +    }
 +
 +}
+diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
+index af3092860fea2d33dbf7443a314ba6cae75c5933..21581f427b384bac50537f3b67322f4ff788a035 100644
+--- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
++++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
+@@ -113,6 +113,8 @@ import net.minecraft.world.level.storage.PlayerDataStorage;
+ import net.minecraft.world.level.storage.PrimaryLevelData;
+ import net.minecraft.world.level.storage.loot.LootTables;
+ import net.minecraft.world.phys.Vec3;
++import net.pascalpex.deepslatemc.Config;
++import net.pascalpex.deepslatemc.MessagesFile;
+ import org.apache.commons.lang.Validate;
+ import org.bukkit.BanList;
+ import org.bukkit.Bukkit;
+@@ -992,6 +994,12 @@ public final class CraftServer implements Server {
+         org.spigotmc.SpigotConfig.registerCommands(); // Spigot
+         com.destroystokyo.paper.PaperConfig.registerCommands(); // Paper
+         org.purpurmc.purpur.PurpurConfig.registerCommands(); // Purpur
++
++        // Deepslate start
++        MessagesFile.load();
++        Config.load();
++        // Deepslate end
++
+         this.overrideAllCommandBlockCommands = this.commandsConfiguration.getStringList("command-block-overrides").contains("*");
+         this.ignoreVanillaPermissions = this.commandsConfiguration.getBoolean("ignore-vanilla-permissions");
+ 
