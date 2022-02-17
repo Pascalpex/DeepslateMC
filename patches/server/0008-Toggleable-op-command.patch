@@ -1,0 +1,94 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Pascalpex <pascalpex@gmail.com>
+Date: Thu, 17 Feb 2022 18:58:42 +0100
+Subject: [PATCH] Toggleable op command
+
+
+diff --git a/src/main/java/net/minecraft/commands/Commands.java b/src/main/java/net/minecraft/commands/Commands.java
+index a4ec8c35c1870810c11e81e79c3b191c4f440f35..8d94128353c55148b4e840701fc7d881e3d92551 100644
+--- a/src/main/java/net/minecraft/commands/Commands.java
++++ b/src/main/java/net/minecraft/commands/Commands.java
+@@ -104,6 +104,8 @@ import net.minecraft.server.commands.WorldBorderCommand;
+ import net.minecraft.server.commands.data.DataCommands;
+ import net.minecraft.server.level.ServerPlayer;
+ import net.minecraft.util.profiling.jfr.JvmProfiler;
++import net.pascalpex.deepslatemc.Config;
++import net.pascalpex.deepslatemc.MessagesFile;
+ import org.apache.logging.log4j.LogManager;
+ import org.apache.logging.log4j.Logger;
+ 
+@@ -127,6 +129,10 @@ public class Commands {
+ 
+     public Commands(Commands.CommandSelection environment) {
+         this(); // CraftBukkit
++        // Deepslate start
++        Config.load();
++        MessagesFile.load();
++        // Deepslate end
+         AdvancementCommands.register(this.dispatcher);
+         AttributeCommand.register(this.dispatcher);
+         ExecuteCommand.register(this.dispatcher);
+@@ -195,7 +201,9 @@ public class Commands {
+             BanListCommands.register(this.dispatcher);
+             BanPlayerCommands.register(this.dispatcher);
+             DeOpCommands.register(this.dispatcher);
+-            OpCommand.register(this.dispatcher);
++            if (Config.getOpActive()) {
++                OpCommand.register(this.dispatcher);
++            }
+             PardonCommand.register(this.dispatcher);
+             PardonIpCommand.register(this.dispatcher);
+             PerfCommand.register(this.dispatcher);
+diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
+index 42d58caa1d6d8b26cd6e707c723b9054fcbae9c6..2d01d6c49d313ec19eced87961877da3f9bc5ac6 100644
+--- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
++++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
+@@ -258,9 +258,6 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+         // Mirai end
+ 
+         // Deepslate start
+-        MessagesFile.load();
+-        Config.load();
+-
+         MinecraftServer.getServer().server.getCommandMap().register("deepslate", "Deepslate", new DeepslateCommand("deepslate"));
+         MinecraftServer.getServer().server.getCommandMap().register("discord", "Deepslate", new DiscordCommand("discord"));
+         MinecraftServer.getServer().server.getCommandMap().register("dc", "Deepslate", new DiscordCommand("dc"));
+diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
+index 33a817915e46f09ed69a7f0e2419ee69d82bc920..c95e643c90428454268143582e4d50b6eb8affde 100644
+--- a/src/main/java/net/pascalpex/deepslatemc/Config.java
++++ b/src/main/java/net/pascalpex/deepslatemc/Config.java
+@@ -23,6 +23,9 @@ public class Config {
+             if(!config.contains("discordLink")) {
+                 config.set("discordLink", "https://google.de/");
+             }
++            if(!config.contains("opCommandActive")) {
++                config.set("opCommandActive", true);
++            }
+             save();
+         } catch (IOException | InvalidConfigurationException e) {
+             e.printStackTrace();
+@@ -37,6 +40,10 @@ public class Config {
+         }
+     }
+ 
++    public static boolean getOpActive() {
++        return config.getBoolean("opCommandActive");
++    }
++
+     public static String getDiscordLink() {
+         return config.getString("discordLink");
+     }
+diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
+index e1f963fd38a15bd65d170d29d86a0a34f96353f9..402f73907a7415dd9c28d658acb1d1bd1cf6b6de 100644
+--- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
++++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
+@@ -998,9 +998,6 @@ public final class CraftServer implements Server {
+         org.purpurmc.purpur.PurpurConfig.registerCommands(); // Purpur
+ 
+         // Deepslate start
+-        MessagesFile.load();
+-        Config.load();
+-
+         MinecraftServer.getServer().server.getCommandMap().register("deepslate", "Deepslate", new DeepslateCommand("deepslate"));
+         MinecraftServer.getServer().server.getCommandMap().register("discord", "Deepslate", new DiscordCommand("discord"));
+         MinecraftServer.getServer().server.getCommandMap().register("dc", "Deepslate", new DiscordCommand("dc"));
