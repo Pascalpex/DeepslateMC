@@ -59,7 +59,7 @@ index b6f529b7e5adf0b497d5c8d783e70fec072e456c..f59866b9e16774cb5efd995ddb4276c6
  }
 diff --git a/src/main/java/net/pascalpex/deepslatemc/commands/DeepslateCommand.java b/src/main/java/net/pascalpex/deepslatemc/commands/DeepslateCommand.java
 new file mode 100644
-index 0000000000000000000000000000000000000000..3a25ba35539baeac4b96c2fad6319e524055bd8d
+index 0000000000000000000000000000000000000000..1614abbfb5e5ad8bb4e5b3f7670aad5daef4048b
 --- /dev/null
 +++ b/src/main/java/net/pascalpex/deepslatemc/commands/DeepslateCommand.java
 @@ -0,0 +1,93 @@
@@ -83,7 +83,7 @@ index 0000000000000000000000000000000000000000..3a25ba35539baeac4b96c2fad6319e52
 +
 +    public DeepslateCommand(String name) {
 +        super(name);
-+        this.description = "Deepslate Command";
++        this.description = "Deepslate command";
 +        this.usageMessage = "/deepslate [reload | version]";
 +        this.setPermission("deepslate.command");
 +    }

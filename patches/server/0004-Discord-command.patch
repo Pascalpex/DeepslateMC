@@ -83,7 +83,7 @@ index f59866b9e16774cb5efd995ddb4276c66a940542..1bd3b0aff4fba64a2ea075c6508a0bba
  }
 diff --git a/src/main/java/net/pascalpex/deepslatemc/commands/DiscordCommand.java b/src/main/java/net/pascalpex/deepslatemc/commands/DiscordCommand.java
 new file mode 100644
-index 0000000000000000000000000000000000000000..9559a10ca96bd432f0ef1df87d681ce40ccae58b
+index 0000000000000000000000000000000000000000..a8541a29be22cf3e604ae7e74155e78f25edf83b
 --- /dev/null
 +++ b/src/main/java/net/pascalpex/deepslatemc/commands/DiscordCommand.java
 @@ -0,0 +1,32 @@
@@ -100,7 +100,7 @@ index 0000000000000000000000000000000000000000..9559a10ca96bd432f0ef1df87d681ce4
 +
 +    public DiscordCommand(String name) {
 +        super(name);
-+        this.description = "Discord Link Befehl";
++        this.description = "Discord link command";
 +        this.usageMessage = "/discord";
 +    }
 +

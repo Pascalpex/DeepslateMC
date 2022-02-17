@@ -59,7 +59,7 @@ index 1bd3b0aff4fba64a2ea075c6508a0bba86bbeea1..37f901e9da4952e27515324ca20b8437
  }
 diff --git a/src/main/java/net/pascalpex/deepslatemc/commands/ClearchatCommand.java b/src/main/java/net/pascalpex/deepslatemc/commands/ClearchatCommand.java
 new file mode 100644
-index 0000000000000000000000000000000000000000..87ad06081da07a9a46f332ad157f358ab4f8adb3
+index 0000000000000000000000000000000000000000..8bcc729631a5283148bc58985201a39a16e4e1c7
 --- /dev/null
 +++ b/src/main/java/net/pascalpex/deepslatemc/commands/ClearchatCommand.java
 @@ -0,0 +1,38 @@
@@ -75,7 +75,7 @@ index 0000000000000000000000000000000000000000..87ad06081da07a9a46f332ad157f358a
 +public class ClearchatCommand extends Command {
 +    public ClearchatCommand(@NotNull String name) {
 +        super(name);
-+        this.description = "Leert den Chat";
++        this.description = "Clears the chat";
 +        this.usageMessage = "/clearchat";
 +        this.setPermission("deepslate.clearchat");
 +    }
