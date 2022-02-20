@@ -5,7 +5,7 @@ Subject: [PATCH] Metrics stats
 
 
 diff --git a/src/main/java/com/destroystokyo/paper/PaperConfig.java b/src/main/java/com/destroystokyo/paper/PaperConfig.java
-index 79ff17de22314c9bde44f0b9d1373974f4a7abed..50240ea7edd8ae59fb1da387810007165ae98ad3 100644
+index 79ff17de22314c9bde44f0b9d1373974f4a7abed..b48531c857af007a8b36cffa7249f22f874bb0c3 100644
 --- a/src/main/java/com/destroystokyo/paper/PaperConfig.java
 +++ b/src/main/java/com/destroystokyo/paper/PaperConfig.java
 @@ -13,12 +13,14 @@ import java.nio.charset.StandardCharsets;
@@ -23,14 +23,16 @@ index 79ff17de22314c9bde44f0b9d1373974f4a7abed..50240ea7edd8ae59fb1da38781000716
  import org.bukkit.Bukkit;
  import org.bukkit.ChatColor;
  import org.bukkit.command.Command;
-@@ -127,6 +129,10 @@ public class PaperConfig {
+@@ -127,6 +129,12 @@ public class PaperConfig {
              Metrics.PaperMetrics.startMetrics();
              metricsStarted = true;
          }
++        // Deepslate start - Metrics stats
 +        if(Config.getMetricsEnabled()) {
 +            net.pascalpex.deepslatemc.util.Metrics metrics = new net.pascalpex.deepslatemc.util.Metrics(UUID.randomUUID());
 +            metrics.startSending();
 +        }
++        // Deepslate end
      }
  
      static void readConfig(Class<?> clazz, Object instance) {

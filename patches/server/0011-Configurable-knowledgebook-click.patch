@@ -30,7 +30,7 @@ index 0c373fc76600e9889ace4666efba5560a32eba45..6008a38b1f0b51a9b85911d605d1bd45
          return config.getBoolean("opCommandActive");
      }
 diff --git a/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java b/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
-index 361bd8edcc6e6d0fbac958e3ec91d74a622d630a..7503f4b2a32c70c9e81be75eaa6acc546e158016 100644
+index 361bd8edcc6e6d0fbac958e3ec91d74a622d630a..1822fdd31152d160dd237c405e1afc07b50bfa0c 100644
 --- a/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
 +++ b/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
 @@ -57,6 +57,7 @@ import net.minecraft.world.phys.BlockHitResult;
@@ -45,7 +45,7 @@ index 361bd8edcc6e6d0fbac958e3ec91d74a622d630a..7503f4b2a32c70c9e81be75eaa6acc54
          // Paper start
          Location interactionPoint =  hitVec == null ? null : new Location(craftWorld, hitVec.x, hitVec.y, hitVec.z);
          PlayerInteractEvent event = new PlayerInteractEvent(player, action, itemInHand, blockClicked, blockFace, (hand == null) ? null : ((hand == InteractionHand.OFF_HAND) ? EquipmentSlot.OFF_HAND : EquipmentSlot.HAND), interactionPoint);
-+        // Deepslate start
++        // Deepslate start - Configurable knowledgebook click
 +        if (Config.getPreventKnowledgebookClick()) {
 +            if (event.hasItem()) {
 +                if (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) {

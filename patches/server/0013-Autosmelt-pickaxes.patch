@@ -17,7 +17,7 @@ index fa09df0f45972ed5ecc5242ea56b1fea8e216c84..728a2c9dc98121dc60c95d5d76320f14
          MinecraftServer.getServer().server.getCommandMap().register("setspawn", "Deepslate", new SpawnCommand("setspawn"));
          MinecraftServer.getServer().server.getCommandMap().register("spawn", "Deepslate", new SpawnCommand("spawn"));
 diff --git a/src/main/java/net/minecraft/server/level/ServerPlayerGameMode.java b/src/main/java/net/minecraft/server/level/ServerPlayerGameMode.java
-index 29329381ee67a409ed6b324c8c1f0d7ae05970da..b4a1df84265f3600de2e2925d9352a1829c57578 100644
+index 29329381ee67a409ed6b324c8c1f0d7ae05970da..f76ce49537cf9f0c9ca6598669125a7b8039fb06 100644
 --- a/src/main/java/net/minecraft/server/level/ServerPlayerGameMode.java
 +++ b/src/main/java/net/minecraft/server/level/ServerPlayerGameMode.java
 @@ -19,6 +19,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
@@ -38,10 +38,11 @@ index 29329381ee67a409ed6b324c8c1f0d7ae05970da..b4a1df84265f3600de2e2925d9352a18
  import org.bukkit.event.block.BlockBreakEvent;
  import org.bukkit.craftbukkit.event.CraftEventFactory;
  import org.bukkit.event.Event;
-@@ -385,6 +388,56 @@ public class ServerPlayerGameMode {
+@@ -385,6 +388,58 @@ public class ServerPlayerGameMode {
              }
  
              event = new BlockBreakEvent(bblock, this.player.getBukkitEntity());
++            // Deepslate start - Autosmelt pickaxes
 +            Player Bplayer = this.player.getBukkitEntity();
 +            if (Bplayer.getItemInHand() != null && Bplayer.getItemInHand().getType() != Material.AIR) {
 +                if (Bplayer.getItemInHand().getItemMeta().hasLore()) {
@@ -92,6 +93,7 @@ index 29329381ee67a409ed6b324c8c1f0d7ae05970da..b4a1df84265f3600de2e2925d9352a18
 +                    }
 +                }
 +            }
++            // Deepslate end
  
              // Sword + Creative mode pre-cancel
              event.setCancelled(isSwordNoBreak);
@@ -261,7 +263,7 @@ index 0000000000000000000000000000000000000000..2e7c7466fafd7c7ffb24e3568fb220a5
 +
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index a5838b3fb69ddf7b24f20ff31ce487990d7ee178..7cc9f76ba97ca6b1d1a84ad31f30a3c906dcaf49 100644
+index d1ccde1e52700247f0ca0c3961388e1064d6aa82..90454f9bcb60bba8fcd11f6fce92c8726cfbaec3 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -1011,6 +1011,7 @@ public final class CraftServer implements Server {

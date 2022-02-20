@@ -5,7 +5,7 @@ Subject: [PATCH] Colored signs
 
 
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index 00779ca84c604885a6ea3741ca46db55a67d8510..7540394be6971b597cacc14fd539b79483452d2e 100644
+index 00779ca84c604885a6ea3741ca46db55a67d8510..34787745614afa5ec519326ce585dc9d6b3a1e89 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 @@ -151,6 +151,7 @@ import net.minecraft.world.phys.Vec3;
@@ -16,10 +16,11 @@ index 00779ca84c604885a6ea3741ca46db55a67d8510..7540394be6971b597cacc14fd539b794
  import org.apache.commons.lang3.StringUtils;
  import org.apache.logging.log4j.LogManager;
  import org.apache.logging.log4j.Logger;
-@@ -3175,6 +3176,15 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Ser
+@@ -3175,6 +3176,17 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Ser
                  // Purpur end
              }
              SignChangeEvent event = new SignChangeEvent((org.bukkit.craftbukkit.block.CraftBlock) player.getWorld().getBlockAt(x, y, z), this.player.getBukkitEntity(), lines);
++            // Deepslate start - Colored signs
 +            if(Config.getColoredSignsEnabled()) {
 +                if(Config.getColoredSignsPermissionUse()) {
 +                    if(player.hasPermission("deepslate.colorsigns")) {
@@ -29,13 +30,15 @@ index 00779ca84c604885a6ea3741ca46db55a67d8510..7540394be6971b597cacc14fd539b794
 +                    colorSign(event);
 +                }
 +            }
++            // Deepslate end
              this.cserver.getPluginManager().callEvent(event);
  
              if (!event.isCancelled()) {
-@@ -3192,6 +3202,35 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Ser
+@@ -3192,6 +3204,37 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Ser
  
      }
  
++    // Deepslate start
 +    private void colorSign(SignChangeEvent event) {
 +        for(int i = 0; i < 4; i++) {
 +            String line = event.getLines()[i];
@@ -64,6 +67,7 @@ index 00779ca84c604885a6ea3741ca46db55a67d8510..7540394be6971b597cacc14fd539b794
 +            event.setLine(i, line);
 +        }
 +    }
++    // Deeplate end
 +
      @Override
      public void handleKeepAlive(ServerboundKeepAlivePacket packet) {

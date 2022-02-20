@@ -5,7 +5,7 @@ Subject: [PATCH] Toggleable op command
 
 
 diff --git a/src/main/java/net/minecraft/commands/Commands.java b/src/main/java/net/minecraft/commands/Commands.java
-index a4ec8c35c1870810c11e81e79c3b191c4f440f35..8d94128353c55148b4e840701fc7d881e3d92551 100644
+index a4ec8c35c1870810c11e81e79c3b191c4f440f35..572124245f45b614c0c7bf7c3ddf09128696d7c2 100644
 --- a/src/main/java/net/minecraft/commands/Commands.java
 +++ b/src/main/java/net/minecraft/commands/Commands.java
 @@ -104,6 +104,8 @@ import net.minecraft.server.commands.WorldBorderCommand;
@@ -33,7 +33,7 @@ index a4ec8c35c1870810c11e81e79c3b191c4f440f35..8d94128353c55148b4e840701fc7d881
              BanPlayerCommands.register(this.dispatcher);
              DeOpCommands.register(this.dispatcher);
 -            OpCommand.register(this.dispatcher);
-+            if (Config.getOpActive()) {
++            if (Config.getOpActive()) { // Deepslate - Toggleable op command
 +                OpCommand.register(this.dispatcher);
 +            }
              PardonCommand.register(this.dispatcher);
@@ -79,7 +79,7 @@ index 33a817915e46f09ed69a7f0e2419ee69d82bc920..c95e643c90428454268143582e4d50b6
          return config.getString("discordLink");
      }
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index e1f963fd38a15bd65d170d29d86a0a34f96353f9..402f73907a7415dd9c28d658acb1d1bd1cf6b6de 100644
+index fba82a5dbed06ea9c40a6a869c64b30898b7a265..ce55b9263ad2239c441575b3293bbc6897b7a6e0 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -998,9 +998,6 @@ public final class CraftServer implements Server {
