@@ -1,0 +1,178 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Pascalpex <pascalpex@gmail.com>
+Date: Thu, 17 Feb 2022 17:07:52 +0100
+Subject: [PATCH] Maintenance mode
+
+
+diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
+index 707185b87b8cce476e1b931d9f56b8cd9f5ec457..42d58caa1d6d8b26cd6e707c723b9054fcbae9c6 100644
+--- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
++++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
+@@ -60,10 +60,7 @@ import net.minecraft.world.level.storage.LevelStorageSource;
+ import net.minecraft.world.level.storage.WorldData;
+ import net.pascalpex.deepslatemc.Config;
+ import net.pascalpex.deepslatemc.MessagesFile;
+-import net.pascalpex.deepslatemc.commands.BuildworldCommand;
+-import net.pascalpex.deepslatemc.commands.ClearchatCommand;
+-import net.pascalpex.deepslatemc.commands.DeepslateCommand;
+-import net.pascalpex.deepslatemc.commands.DiscordCommand;
++import net.pascalpex.deepslatemc.commands.*;
+ import org.apache.logging.log4j.LogManager;
+ import org.apache.logging.log4j.Logger;
+ import org.apache.logging.log4j.Level;
+@@ -273,6 +270,8 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+         MinecraftServer.getServer().server.getCommandMap().register("bauwelt", "Deepslate", new BuildworldCommand("bauwelt"));
+         MinecraftServer.getServer().server.getCommandMap().register("setbuildworld", "Deepslate", new BuildworldCommand("setbuildworld"));
+         MinecraftServer.getServer().server.getCommandMap().register("buildworld", "Deepslate", new BuildworldCommand("buildworld"));
++        MinecraftServer.getServer().server.getCommandMap().register("maintenance", "Deepslate", new MaintenanceMode("maintenance"));
++        MinecraftServer.getServer().server.getCommandMap().register("wartung", "Deepslate", new MaintenanceMode("wartung"));
+         // Deepslate end
+ 
+         this.setPvpAllowed(dedicatedserverproperties.pvp);
+diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
+index 5b96f6a15e22b7cb9037abb0d38a33da2a2a8278..0fff15ed4a9d79ffa2d32009f843644079f60d8d 100644
+--- a/src/main/java/net/minecraft/server/players/PlayerList.java
++++ b/src/main/java/net/minecraft/server/players/PlayerList.java
+@@ -91,6 +91,8 @@ import net.minecraft.world.scores.Objective;
+ import net.minecraft.world.scores.PlayerTeam;
+ import net.minecraft.world.scores.Scoreboard; // Paper
+ import net.minecraft.world.scores.Team;
++import net.pascalpex.deepslatemc.MessagesFile;
++import net.pascalpex.deepslatemc.commands.MaintenanceMode;
+ import org.apache.logging.log4j.LogManager;
+ import org.apache.logging.log4j.Logger;
+ 
+@@ -744,6 +746,14 @@ public abstract class PlayerList {
+         ServerPlayer entity = new ServerPlayer(this.server, this.server.getLevel(Level.OVERWORLD), gameprofile);
+         Player player = entity.getBukkitEntity();
+         PlayerLoginEvent event = new PlayerLoginEvent(player, hostname, ((java.net.InetSocketAddress) socketaddress).getAddress(), ((java.net.InetSocketAddress) loginlistener.connection.getRawAddress()).getAddress());
++        // Deepslate start - Maintenance mode
++        if(MaintenanceMode.maintenanceMode) {
++            if(!player.hasPermission("deepslate.maintenancebypass")) {
++                String prefix = MessagesFile.getPrefix();
++                event.disallow(PlayerLoginEvent.Result.KICK_OTHER, prefix + MessagesFile.getMaintenanceKick());
++            }
++        }
++        // Deepslate end
+ 
+         // Paper start - Fix MC-158900
+         UserBanListEntry gameprofilebanentry;
+diff --git a/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java b/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java
+index 1e0c5aecdd5fe5695ff5d2ef6739e73b5ca014f6..2da21be0aa6defda86430a40b4049427d3951f4e 100644
+--- a/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java
++++ b/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java
+@@ -50,6 +50,15 @@ public class MessagesFile {
+             if(!config.contains("buildworldNotSet")) {
+                 config.set("buildworldNotSet", "&cThe buildworld is not set");
+             }
++            if (!config.contains("maintenanceKick")) {
++                config.set("maintenanceKick", "&cThe server is currently in maintenance mode");
++            }
++            if (!config.contains("maintenanceOn")) {
++                config.set("maintenanceOn", "&aYou turned on the maintenance mode");
++            }
++            if (!config.contains("maintenanceOff")) {
++                config.set("maintenanceOff", "&aYou turned off the maintenance mode");
++            }
+             save();
+         } catch (IOException | InvalidConfigurationException e) {
+             e.printStackTrace();
+@@ -110,5 +119,17 @@ public class MessagesFile {
+         String prefix = config.getString("buildworldNotSet");
+         return prefix.replace("&", "§");
+     }
++    public static String getMaintenanceKick() {
++        String prefix = config.getString("maintenanceKick");
++        return prefix.replace("&", "§");
++    }
++    public static String getMaintenanceOn() {
++        String prefix = config.getString("maintenanceOn");
++        return prefix.replace("&", "§");
++    }
++    public static String getMaintenanceOff() {
++        String prefix = config.getString("maintenanceOff");
++        return prefix.replace("&", "§");
++    }
+ 
+ }
+diff --git a/src/main/java/net/pascalpex/deepslatemc/commands/MaintenanceMode.java b/src/main/java/net/pascalpex/deepslatemc/commands/MaintenanceMode.java
+new file mode 100644
+index 0000000000000000000000000000000000000000..5dc8222d9e5eaf3a5bb9b70ff82435866aac619d
+--- /dev/null
++++ b/src/main/java/net/pascalpex/deepslatemc/commands/MaintenanceMode.java
+@@ -0,0 +1,50 @@
++package net.pascalpex.deepslatemc.commands;
++
++import net.pascalpex.deepslatemc.MessagesFile;
++import org.bukkit.command.Command;
++import org.bukkit.command.CommandSender;
++import org.bukkit.entity.Player;
++import org.jetbrains.annotations.NotNull;
++
++public class MaintenanceMode
++    extends Command {
++    public static boolean maintenanceMode = false;
++
++    public MaintenanceMode(@NotNull String name) {
++        super(name);
++        this.description = "Toggles the maintenance mode";
++        this.usageMessage = "/maintenance";
++        setPermission("deepslate.maintenance");
++    }
++
++
++    public boolean execute(@NotNull CommandSender sender, @NotNull String label, @NotNull String[] args) {
++        String prefix = MessagesFile.getPrefix() + " ";
++        if (sender instanceof Player) {
++            Player player = (Player)sender;
++            if ((label.equalsIgnoreCase("wartung") || label.equalsIgnoreCase("maintenance")) &&
++                player.hasPermission("deepslate.maintenance")) {
++                if (maintenanceMode) {
++                    maintenanceMode = false;
++                    player.sendMessage(prefix + MessagesFile.getMaintenanceOff());
++                } else {
++                    maintenanceMode = true;
++                    player.sendMessage(prefix + MessagesFile.getMaintenanceOn());
++                }
++            } else {
++                player.sendMessage(prefix + MessagesFile.getNoPermissions());
++            }
++        }
++        else if (label.equalsIgnoreCase("wartung") || label.equalsIgnoreCase("maintenance")) {
++            if (maintenanceMode) {
++                maintenanceMode = false;
++                sender.sendMessage(prefix + MessagesFile.getMaintenanceOff());
++            } else {
++                maintenanceMode = true;
++                sender.sendMessage(prefix + MessagesFile.getMaintenanceOn());
++            }
++        }
++
++        return true;
++    }
++}
+diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
+index 76e521a368ea3543152baaf24be01781a513bfa2..fba82a5dbed06ea9c40a6a869c64b30898b7a265 100644
+--- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
++++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
+@@ -116,10 +116,7 @@ import net.minecraft.world.level.storage.loot.LootTables;
+ import net.minecraft.world.phys.Vec3;
+ import net.pascalpex.deepslatemc.Config;
+ import net.pascalpex.deepslatemc.MessagesFile;
+-import net.pascalpex.deepslatemc.commands.BuildworldCommand;
+-import net.pascalpex.deepslatemc.commands.ClearchatCommand;
+-import net.pascalpex.deepslatemc.commands.DeepslateCommand;
+-import net.pascalpex.deepslatemc.commands.DiscordCommand;
++import net.pascalpex.deepslatemc.commands.*;
+ import org.apache.commons.lang.Validate;
+ import org.bukkit.BanList;
+ import org.bukkit.Bukkit;
+@@ -1013,6 +1010,8 @@ public final class CraftServer implements Server {
+         MinecraftServer.getServer().server.getCommandMap().register("bauwelt", "Deepslate", new BuildworldCommand("bauwelt"));
+         MinecraftServer.getServer().server.getCommandMap().register("setbuildworld", "Deepslate", new BuildworldCommand("setbuildworld"));
+         MinecraftServer.getServer().server.getCommandMap().register("buildworld", "Deepslate", new BuildworldCommand("buildworld"));
++        MinecraftServer.getServer().server.getCommandMap().register("maintenance", "Deepslate", new MaintenanceMode("maintenance"));
++        MinecraftServer.getServer().server.getCommandMap().register("wartung", "Deepslate", new MaintenanceMode("wartung"));
+         // Deepslate end
+ 
+         this.overrideAllCommandBlockCommands = this.commandsConfiguration.getStringList("command-block-overrides").contains("*");

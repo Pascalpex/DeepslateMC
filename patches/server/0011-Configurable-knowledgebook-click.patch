@@ -1,23 +1,25 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Pascalpex <pascalpex@gmail.com>
-Date: Sat, 1 Jan 2022 17:05:56 +0100
-Subject: [PATCH] Configurable Knowledgebook Click
+Date: Fri, 18 Feb 2022 16:45:10 +0100
+Subject: [PATCH] Configurable knowledgebook click
 
 
 diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
-index 70a82964ac31cab89a0d27e1944f4b5aba6b98c8..191e8bedf91bc6d38951c0731b156cf0ed1e1755 100644
+index 0c373fc76600e9889ace4666efba5560a32eba45..6008a38b1f0b51a9b85911d605d1bd455367de77 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/Config.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/Config.java
-@@ -32,6 +32,7 @@ public class Config {
-                 message.add("&6weiteren Fragen an ein &9Teammitglied.");
-                 config.set("helpMessage", message);
+@@ -32,6 +32,9 @@ public class Config {
+             if(!config.contains("spawnOnJoin")) {
                  config.set("spawnOnJoin", false);
-+                config.set("preventKnowledgebookClick", false);
-                 save();
              }
-             config.load(configFile);
-@@ -53,6 +54,10 @@ public class Config {
-         return config.getBoolean("spawnOnJoin");
++            if(!config.contains("preventKnowledgebookClick")) {
++                config.set("preventKnowledgebookClick", false);
++            }
+             save();
+         } catch (IOException | InvalidConfigurationException e) {
+             e.printStackTrace();
+@@ -46,6 +49,10 @@ public class Config {
+         }
      }
  
 +    public static boolean getPreventKnowledgebookClick() {
@@ -28,7 +30,7 @@ index 70a82964ac31cab89a0d27e1944f4b5aba6b98c8..191e8bedf91bc6d38951c0731b156cf0
          return config.getBoolean("opCommandActive");
      }
 diff --git a/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java b/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
-index 4bf67cdbe9516e4d167ddcfca3d0c033a7ca5172..ee7c0009cb490141a7fb061d730e8a4a83cdf8fc 100644
+index 361bd8edcc6e6d0fbac958e3ec91d74a622d630a..1822fdd31152d160dd237c405e1afc07b50bfa0c 100644
 --- a/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
 +++ b/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
 @@ -57,6 +57,7 @@ import net.minecraft.world.phys.BlockHitResult;
@@ -39,10 +41,11 @@ index 4bf67cdbe9516e4d167ddcfca3d0c033a7ca5172..ee7c0009cb490141a7fb061d730e8a4a
  import org.bukkit.Bukkit;
  import org.bukkit.Location; // Paper
  import org.bukkit.Material;
-@@ -536,6 +537,15 @@ public class CraftEventFactory {
+@@ -537,6 +538,17 @@ public class CraftEventFactory {
          // Paper start
          Location interactionPoint =  hitVec == null ? null : new Location(craftWorld, hitVec.x, hitVec.y, hitVec.z);
          PlayerInteractEvent event = new PlayerInteractEvent(player, action, itemInHand, blockClicked, blockFace, (hand == null) ? null : ((hand == InteractionHand.OFF_HAND) ? EquipmentSlot.OFF_HAND : EquipmentSlot.HAND), interactionPoint);
++        // Deepslate start - Configurable knowledgebook click
 +        if (Config.getPreventKnowledgebookClick()) {
 +            if (event.hasItem()) {
 +                if (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) {
@@ -52,6 +55,7 @@ index 4bf67cdbe9516e4d167ddcfca3d0c033a7ca5172..ee7c0009cb490141a7fb061d730e8a4a
 +                }
 +            }
 +        }
++        // Deepslate end
          // Paper end
          if (cancelledBlock) {
              event.setUseInteractedBlock(Event.Result.DENY);

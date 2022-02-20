@@ -2,38 +2,22 @@
 <div align="center">
 
 # DeepslateMC
-### A private [Mirai](https://github.com/etil2jz/Mirai) fork for my own Minecraft Server
+### A fork of [Mirai](https://github.com/etil2jz/Mirai) that adds neat functionalities
 <br/>
 </div>
 
-This fork serves two purposes:
-- I learn stuff about [Git](https://git-scm.com/), [Paperweight](https://github.com/PaperMC/paperweight) and Patches
-- Small features replace minor plugins
-
-I know that some patches are a mess
-
+## Information
+This fork aims to add useful little functionalities to replace plugins that many servers use, like spawn commands, colored signs or the ability to clear the chat.
+<br>
+All messages are customizable in a separate file. The default ones are in English and you can find translated ones [here](https://pascalpex.ddns.net/files/deepslate/translations/).
+<br>
+You can find a full list of features, commands, permissions, config options and other information in the [wiki](https://github.com/Pascalpex/DeepslateMC/wiki).
 ## Building
 ```
 ./gradlew applyPatches
 ./gradlew createReobfPaperclipJar
 ```
-
-## Adding a Patch
-```
-./gradlew applyPatches
-Edit the code
-./gradlew build
-./gradlew paperclip
-Test the code
-cd into submodule (api or server)
-git add .
-git commit -m PATCHNAME
-cd into root dir
-./gradlew rebuildPatches
-Push/PR
-```
-
 ## Download
-**Warning!**: The 1.18.1 Version is still quite experimental
+**Warning!**: Because the upstream is still quite experimental, this fork is as well
 
 Download: [1.17.1](https://pascalpex.ddns.net/files/deepslate/1.17.1/DeepslateMC.jar) - [1.18.1](https://pascalpex.ddns.net/files/deepslate/1.18.1/DeepslateMC.jar)
