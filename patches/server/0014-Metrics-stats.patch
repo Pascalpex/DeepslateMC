@@ -63,10 +63,10 @@ index a67218c323556d5bb85f47b4dff729f4c1d7b34d..541408b791e715c7c3362f6264647106
      }
 diff --git a/src/main/java/net/pascalpex/deepslatemc/util/Metrics.java b/src/main/java/net/pascalpex/deepslatemc/util/Metrics.java
 new file mode 100644
-index 0000000000000000000000000000000000000000..2ceac702f4e8b5eea97673f337495ad3f1f99258
+index 0000000000000000000000000000000000000000..0e7df0548440bca927c52035321bc295bd9d5cbf
 --- /dev/null
 +++ b/src/main/java/net/pascalpex/deepslatemc/util/Metrics.java
-@@ -0,0 +1,45 @@
+@@ -0,0 +1,43 @@
 +package net.pascalpex.deepslatemc.util;
 +
 +import org.bukkit.Bukkit;
@@ -105,9 +105,7 @@ index 0000000000000000000000000000000000000000..2ceac702f4e8b5eea97673f337495ad3
 +            try {
 +                URL url = new URL(urlString);
 +                url.openConnection().getInputStream();
-+            } catch (IOException e) {
-+                e.printStackTrace();
-+            }
++            } catch (IOException ignored) {}
 +        }
 +    };
 +
