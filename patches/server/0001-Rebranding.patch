@@ -49,7 +49,7 @@ index 83a322bb56ad6fe41047e18df22f3246c8db83fe..69bc98d3bf599b3519503f79f3027318
                  metrics.addCustomChart(new Metrics.DrilldownPie("java_version", () -> {
                      Map<String, Map<String, Integer>> map = new HashMap<>();
 diff --git a/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java b/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java
-index fba5dbdb7bcbb55400ef18342c9b54612972a718..f6bf7e27cfc28fd56a1d55cc84ee0d9c01199846 100644
+index fba5dbdb7bcbb55400ef18342c9b54612972a718..52dbeabc66d004a1db3bbb0f52b5425e6822f0de 100644
 --- a/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java
 +++ b/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java
 @@ -20,7 +20,10 @@ import java.util.stream.StreamSupport;
@@ -58,7 +58,7 @@ index fba5dbdb7bcbb55400ef18342c9b54612972a718..f6bf7e27cfc28fd56a1d55cc84ee0d9c
      // Purpur start
 -    private static final String DOWNLOAD_PAGE = "https://purpurmc.org/downloads";
 +    // Deepslate start
-+    private static final String GITHUB_BRANCH_NAME = "ver/1.18.1";
++    private static final String GITHUB_BRANCH_NAME = "ver/1.18.2";
 +    private static final String DOWNLOAD_PAGE = "https://pascalpex.ddns.net/files/deepslate/";
 +    // Deepslate end
      private static int distance = -2; public int distance() { return distance; }
