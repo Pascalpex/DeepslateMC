@@ -24,4 +24,4 @@ jobs:
       uses: actions/upload-artifact@v2.3.1
       with:
         name: DeepslateMC
-        path: build/libs/deepslateMC-paperclip-1.18.1-R0.1-SNAPSHOT-reobf.jar
+        path: build/libs/deepslateMC-paperclip-1.18.2-R0.1-SNAPSHOT-reobf.jar
