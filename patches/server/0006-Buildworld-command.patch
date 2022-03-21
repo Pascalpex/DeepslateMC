@@ -1,22 +1,22 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Pascalpex <pascalpex@gmail.com>
-Date: Wed, 16 Feb 2022 13:34:52 +0100
+Date: Mon, 21 Mar 2022 15:16:16 +0100
 Subject: [PATCH] Buildworld command
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index bf37edd331ebd7e52ffcb5bfa20b788c69cde148..707185b87b8cce476e1b931d9f56b8cd9f5ec457 100644
+index 549f32a403c6f983ff1aa60c92db58c994ed5f52..aa8470ce91d3435df605d038db2521389655107b 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-@@ -60,6 +60,7 @@ import net.minecraft.world.level.storage.LevelStorageSource;
- import net.minecraft.world.level.storage.WorldData;
- import net.pascalpex.deepslatemc.Config;
- import net.pascalpex.deepslatemc.MessagesFile;
+@@ -58,6 +58,7 @@ import net.minecraft.world.level.GameRules;
+ import net.minecraft.world.level.GameType;
+ import net.minecraft.world.level.block.entity.SkullBlockEntity;
+ import net.minecraft.world.level.storage.LevelStorageSource;
 +import net.pascalpex.deepslatemc.commands.BuildworldCommand;
  import net.pascalpex.deepslatemc.commands.ClearchatCommand;
  import net.pascalpex.deepslatemc.commands.DeepslateCommand;
  import net.pascalpex.deepslatemc.commands.DiscordCommand;
-@@ -268,6 +269,10 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+@@ -266,6 +267,10 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
          MinecraftServer.getServer().server.getCommandMap().register("dc", "Deepslate", new DiscordCommand("dc"));
          MinecraftServer.getServer().server.getCommandMap().register("cc", "Deepslate", new ClearchatCommand("cc"));
          MinecraftServer.getServer().server.getCommandMap().register("clearchat", "Deepslate", new ClearchatCommand("clearchat"));
@@ -28,69 +28,69 @@ index bf37edd331ebd7e52ffcb5bfa20b788c69cde148..707185b87b8cce476e1b931d9f56b8cd
  
          this.setPvpAllowed(dedicatedserverproperties.pvp);
 diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
-index 6c5993ce5b95601f45d4bc97cab8adfdbb4cb747..33a817915e46f09ed69a7f0e2419ee69d82bc920 100644
+index 6240a269ab54ebbb9729d737e7f0cedfe2e2139a..5d65ca0019450b16102acb94756d14df523620e0 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/Config.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/Config.java
-@@ -41,4 +41,13 @@ public class Config {
-         return config.getString("discordLink");
-     }
+@@ -47,4 +47,13 @@ public class Config {
+             return config.getString("discordLink");
+         }
  
-+    public static String getBuildworld() {
-+        return config.getString("buildworld");
-+    }
++        public static String getBuildworld() {
++            return config.getString("buildworld");
++        }
 +
-+    public static void setBuildworld(String worldName) {
-+        config.set("buildworld", worldName);
-+        save();
-+    }
++        public static void setBuildworld(String worldName) {
++            config.set("buildworld", worldName);
++            save();
++        }
 +
  }
 diff --git a/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java b/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java
-index 37f901e9da4952e27515324ca20b8437fba6ca93..1e0c5aecdd5fe5695ff5d2ef6739e73b5ca014f6 100644
+index e2ba05e75440f78c60089b81a156f7c03c2bb0a5..036689bc447a1a143f0b336feab659b5ca03eea7 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java
-@@ -41,6 +41,15 @@ public class MessagesFile {
-             if(!config.contains("clearedChat")) {
-                 config.set("clearedChat", "&6The chat got cleared by &b%clearer%");
-             }
-+            if(!config.contains("buildworldSet")) {
-+                config.set("buildworldSet", "&aThe buildworld got set successfully");
-+            }
-+            if(!config.contains("buildworldWelcome")) {
-+                config.set("buildworldWelcome", "&aWelcome to the buildworld");
-+            }
-+            if(!config.contains("buildworldNotSet")) {
-+                config.set("buildworldNotSet", "&cThe buildworld is not set");
-+            }
-             save();
-         } catch (IOException | InvalidConfigurationException e) {
-             e.printStackTrace();
-@@ -89,5 +98,17 @@ public class MessagesFile {
-         String prefix = config.getString("clearedChat");
-         return prefix.replace("&", "§");
-     }
-+    public static String getBuildworldSet() {
-+        String prefix = config.getString("buildworldSet");
-+        return prefix.replace("&", "§");
-+    }
-+    public static String getBuildworldWelcome() {
-+        String prefix = config.getString("buildworldWelcome");
-+        return prefix.replace("&", "§");
-+    }
-+    public static String getBuildworldNotSet() {
-+        String prefix = config.getString("buildworldNotSet");
-+        return prefix.replace("&", "§");
-+    }
+@@ -47,6 +47,15 @@ public class MessagesFile {
+                 if(!config.contains("clearedChat")) {
+                     config.set("clearedChat", "&6The chat got cleared by &b%clearer%");
+                 }
++                if(!config.contains("buildworldSet")) {
++                    config.set("buildworldSet", "&aThe buildworld got set successfully");
++                }
++                if(!config.contains("buildworldWelcome")) {
++                    config.set("buildworldWelcome", "&aWelcome to the buildworld");
++                }
++                if(!config.contains("buildworldNotSet")) {
++                    config.set("buildworldNotSet", "&cThe buildworld is not set");
++                }
+                 save();
+             } catch (IOException | InvalidConfigurationException e) {
+                 e.printStackTrace();
+@@ -96,4 +105,17 @@ public class MessagesFile {
+             return prefix.replace("&", "§");
+         }
  
++        public static String getBuildworldSet() {
++            String prefix = config.getString("buildworldSet");
++            return prefix.replace("&", "§");
++        }
++        public static String getBuildworldWelcome() {
++            String prefix = config.getString("buildworldWelcome");
++            return prefix.replace("&", "§");
++        }
++        public static String getBuildworldNotSet() {
++            String prefix = config.getString("buildworldNotSet");
++            return prefix.replace("&", "§");
++        }
++
  }
 diff --git a/src/main/java/net/pascalpex/deepslatemc/commands/BuildworldCommand.java b/src/main/java/net/pascalpex/deepslatemc/commands/BuildworldCommand.java
 new file mode 100644
-index 0000000000000000000000000000000000000000..70e7412f1a50668dab07bb9d4f56bee0bf7cfa04
+index 0000000000000000000000000000000000000000..f406beb184e03b67658eb2fe4ab3a3e4f1f29ffd
 --- /dev/null
 +++ b/src/main/java/net/pascalpex/deepslatemc/commands/BuildworldCommand.java
 @@ -0,0 +1,52 @@
 +package net.pascalpex.deepslatemc.commands;
-+
++    
 +import net.pascalpex.deepslatemc.Config;
 +import net.pascalpex.deepslatemc.MessagesFile;
 +import org.bukkit.Bukkit;
@@ -142,18 +142,18 @@ index 0000000000000000000000000000000000000000..70e7412f1a50668dab07bb9d4f56bee0
 +    }
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index d0cbc175ff39266410380f45ad222577a833731a..d7a8a10dbece2410655e3b0e6bae8fdcadec2cc4 100644
+index 3711bbd1739fc2dfc39da512221db0258284e88c..2d99b4ab03143ac19552446bfcf6eadd39045cfd 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -116,6 +116,7 @@ import net.minecraft.world.level.storage.loot.LootTables;
+@@ -111,6 +111,7 @@ import net.minecraft.world.level.storage.PlayerDataStorage;
+ import net.minecraft.world.level.storage.PrimaryLevelData;
+ import net.minecraft.world.level.storage.loot.LootTables;
  import net.minecraft.world.phys.Vec3;
- import net.pascalpex.deepslatemc.Config;
- import net.pascalpex.deepslatemc.MessagesFile;
 +import net.pascalpex.deepslatemc.commands.BuildworldCommand;
  import net.pascalpex.deepslatemc.commands.ClearchatCommand;
  import net.pascalpex.deepslatemc.commands.DeepslateCommand;
  import net.pascalpex.deepslatemc.commands.DiscordCommand;
-@@ -1008,6 +1009,10 @@ public final class CraftServer implements Server {
+@@ -1001,6 +1002,10 @@ public final class CraftServer implements Server {
          MinecraftServer.getServer().server.getCommandMap().register("dc", "Deepslate", new DiscordCommand("dc"));
          MinecraftServer.getServer().server.getCommandMap().register("cc", "Deepslate", new ClearchatCommand("cc"));
          MinecraftServer.getServer().server.getCommandMap().register("clearchat", "Deepslate", new ClearchatCommand("clearchat"));

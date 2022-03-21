@@ -1,22 +1,22 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Pascalpex <pascalpex@gmail.com>
-Date: Tue, 15 Feb 2022 13:55:12 +0100
+Date: Mon, 21 Mar 2022 15:10:57 +0100
 Subject: [PATCH] Clearchat command
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 079e90a80fd592dd2d05b49501de8d867a1dc9a8..bf37edd331ebd7e52ffcb5bfa20b788c69cde148 100644
+index 9606f09c82fcc40a287289ca3d592812f6196209..549f32a403c6f983ff1aa60c92db58c994ed5f52 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-@@ -60,6 +60,7 @@ import net.minecraft.world.level.storage.LevelStorageSource;
- import net.minecraft.world.level.storage.WorldData;
- import net.pascalpex.deepslatemc.Config;
- import net.pascalpex.deepslatemc.MessagesFile;
+@@ -58,6 +58,7 @@ import net.minecraft.world.level.GameRules;
+ import net.minecraft.world.level.GameType;
+ import net.minecraft.world.level.block.entity.SkullBlockEntity;
+ import net.minecraft.world.level.storage.LevelStorageSource;
 +import net.pascalpex.deepslatemc.commands.ClearchatCommand;
  import net.pascalpex.deepslatemc.commands.DeepslateCommand;
  import net.pascalpex.deepslatemc.commands.DiscordCommand;
- import org.apache.logging.log4j.LogManager;
-@@ -265,6 +266,8 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+ import org.slf4j.Logger;
+@@ -263,6 +264,8 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
          MinecraftServer.getServer().server.getCommandMap().register("deepslate", "Deepslate", new DeepslateCommand("deepslate"));
          MinecraftServer.getServer().server.getCommandMap().register("discord", "Deepslate", new DiscordCommand("discord"));
          MinecraftServer.getServer().server.getCommandMap().register("dc", "Deepslate", new DiscordCommand("dc"));
@@ -26,45 +26,45 @@ index 079e90a80fd592dd2d05b49501de8d867a1dc9a8..bf37edd331ebd7e52ffcb5bfa20b788c
  
          this.setPvpAllowed(dedicatedserverproperties.pvp);
 diff --git a/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java b/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java
-index 1bd3b0aff4fba64a2ea075c6508a0bba86bbeea1..37f901e9da4952e27515324ca20b8437fba6ca93 100644
+index 1090737d07457f9884162ce15c324d4816441111..e2ba05e75440f78c60089b81a156f7c03c2bb0a5 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java
-@@ -35,6 +35,12 @@ public class MessagesFile {
-             if(!config.contains("discordMessage")) {
-                 config.set("discordMessage", "&6The link to our Discord server: &b%link%");
-             }
-+            if(!config.contains("noPermissions")) {
-+                config.set("noPermissions", "&cYou have no permission to do this");
-+            }
-+            if(!config.contains("clearedChat")) {
-+                config.set("clearedChat", "&6The chat got cleared by &b%clearer%");
-+            }
-             save();
-         } catch (IOException | InvalidConfigurationException e) {
-             e.printStackTrace();
-@@ -74,4 +80,14 @@ public class MessagesFile {
-         return prefix.replace("&", "§");
-     }
+@@ -41,6 +41,12 @@ public class MessagesFile {
+                 if(!config.contains("discordMessage")) {
+                     config.set("discordMessage", "&6The link to our Discord server: &b%link%");
+                 }
++                if(!config.contains("noPermissions")) {
++                    config.set("noPermissions", "&cYou have no permission to do this");
++                }
++                if(!config.contains("clearedChat")) {
++                    config.set("clearedChat", "&6The chat got cleared by &b%clearer%");
++                }
+                 save();
+             } catch (IOException | InvalidConfigurationException e) {
+                 e.printStackTrace();
+@@ -80,4 +86,14 @@ public class MessagesFile {
+             return prefix.replace("&", "§");
+         }
  
-+    public static String getNoPermissions() {
-+        String prefix = config.getString("noPermissions");
-+        return prefix.replace("&", "§");
-+    }
++        public static String getNoPermissions() {
++            String prefix = config.getString("noPermissions");
++            return prefix.replace("&", "§");
++        }
 +
-+    public static String getClearedChat() {
-+        String prefix = config.getString("clearedChat");
-+        return prefix.replace("&", "§");
-+    }
++        public static String getClearedChat() {
++            String prefix = config.getString("clearedChat");
++            return prefix.replace("&", "§");
++        }
 +
  }
 diff --git a/src/main/java/net/pascalpex/deepslatemc/commands/ClearchatCommand.java b/src/main/java/net/pascalpex/deepslatemc/commands/ClearchatCommand.java
 new file mode 100644
-index 0000000000000000000000000000000000000000..8bcc729631a5283148bc58985201a39a16e4e1c7
+index 0000000000000000000000000000000000000000..6343e7803f9d3c90e08523a757fb83eec4ddadcd
 --- /dev/null
 +++ b/src/main/java/net/pascalpex/deepslatemc/commands/ClearchatCommand.java
 @@ -0,0 +1,38 @@
 +package net.pascalpex.deepslatemc.commands;
-+
++    
 +import net.pascalpex.deepslatemc.MessagesFile;
 +import org.bukkit.Bukkit;
 +import org.bukkit.command.Command;
@@ -102,18 +102,18 @@ index 0000000000000000000000000000000000000000..8bcc729631a5283148bc58985201a39a
 +    }
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 4377bf52ec5ea3308525d4613e14a55450f974d1..d0cbc175ff39266410380f45ad222577a833731a 100644
+index a84e2e77fe52e7c843e3b53d5b09df6184688635..3711bbd1739fc2dfc39da512221db0258284e88c 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -116,6 +116,7 @@ import net.minecraft.world.level.storage.loot.LootTables;
+@@ -111,6 +111,7 @@ import net.minecraft.world.level.storage.PlayerDataStorage;
+ import net.minecraft.world.level.storage.PrimaryLevelData;
+ import net.minecraft.world.level.storage.loot.LootTables;
  import net.minecraft.world.phys.Vec3;
- import net.pascalpex.deepslatemc.Config;
- import net.pascalpex.deepslatemc.MessagesFile;
 +import net.pascalpex.deepslatemc.commands.ClearchatCommand;
  import net.pascalpex.deepslatemc.commands.DeepslateCommand;
  import net.pascalpex.deepslatemc.commands.DiscordCommand;
  import org.apache.commons.lang.Validate;
-@@ -1005,6 +1006,8 @@ public final class CraftServer implements Server {
+@@ -998,6 +999,8 @@ public final class CraftServer implements Server {
          MinecraftServer.getServer().server.getCommandMap().register("deepslate", "Deepslate", new DeepslateCommand("deepslate"));
          MinecraftServer.getServer().server.getCommandMap().register("discord", "Deepslate", new DiscordCommand("discord"));
          MinecraftServer.getServer().server.getCommandMap().register("dc", "Deepslate", new DiscordCommand("dc"));
