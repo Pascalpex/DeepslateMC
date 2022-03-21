@@ -1,11 +1,11 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Pascalpex <pascalpex@gmail.com>
-Date: Sat, 19 Feb 2022 14:31:31 +0100
+Date: Mon, 21 Mar 2022 15:55:41 +0100
 Subject: [PATCH] Metrics stats
 
 
 diff --git a/src/main/java/com/destroystokyo/paper/PaperConfig.java b/src/main/java/com/destroystokyo/paper/PaperConfig.java
-index 79ff17de22314c9bde44f0b9d1373974f4a7abed..b48531c857af007a8b36cffa7249f22f874bb0c3 100644
+index 19d7ea19f91bb2ef94187d6db91f26a93a6d0be2..a64019984928df84aaf5d1d897ceb9c5796dc1dc 100644
 --- a/src/main/java/com/destroystokyo/paper/PaperConfig.java
 +++ b/src/main/java/com/destroystokyo/paper/PaperConfig.java
 @@ -13,12 +13,14 @@ import java.nio.charset.StandardCharsets;
@@ -23,52 +23,54 @@ index 79ff17de22314c9bde44f0b9d1373974f4a7abed..b48531c857af007a8b36cffa7249f22f
  import org.bukkit.Bukkit;
  import org.bukkit.ChatColor;
  import org.bukkit.command.Command;
-@@ -127,6 +129,12 @@ public class PaperConfig {
+@@ -127,6 +129,14 @@ public class PaperConfig {
              Metrics.PaperMetrics.startMetrics();
              metricsStarted = true;
          }
++
 +        // Deepslate start - Metrics stats
 +        if(Config.getMetricsEnabled()) {
 +            net.pascalpex.deepslatemc.util.Metrics metrics = new net.pascalpex.deepslatemc.util.Metrics(UUID.randomUUID());
 +            metrics.startSending();
 +        }
 +        // Deepslate end
++
      }
  
      static void readConfig(Class<?> clazz, Object instance) {
 diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
-index a67218c323556d5bb85f47b4dff729f4c1d7b34d..541408b791e715c7c3362f62646471060b56c308 100644
+index 462ac1f4b48ac54d58c92f79a3c15b50e915071a..ba80d45928ff1c25f213b4ebf1fd72c527c7d70e 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/Config.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/Config.java
-@@ -47,6 +47,9 @@ public class Config {
-                 worldsList.add("FantasyWorld");
-                 config.set("autoSmelt" + ".enabledWorlds", worldsList);
+@@ -51,6 +51,9 @@ public class Config {
+                     worldsList.add("FantasyWorld");
+                     config.set("autoSmelt" + ".enabledWorlds", worldsList);
+                 }
++                if (!config.contains("metrics")) {
++                    config.set("metrics", true);
++                }
+                 save();
+             } catch (IOException | InvalidConfigurationException e) {
+                 e.printStackTrace();
+@@ -65,6 +68,10 @@ public class Config {
              }
-+            if (!config.contains("metrics")) {
-+                config.set("metrics", true);
-+            }
-             save();
-         } catch (IOException | InvalidConfigurationException e) {
-             e.printStackTrace();
-@@ -61,6 +64,10 @@ public class Config {
          }
-     }
  
-+    public static boolean getMetricsEnabled() {
-+        return config.getBoolean("metrics");
-+    }
++        public static boolean getMetricsEnabled() {
++            return config.getBoolean("metrics");
++        }
 +
-     public static int getAutoSmeltPrice() {
-         return config.getInt("autoSmelt" + ".price");
-     }
+         public static int getAutoSmeltPrice() {
+             return config.getInt("autoSmelt" + ".price");
+         }
 diff --git a/src/main/java/net/pascalpex/deepslatemc/util/Metrics.java b/src/main/java/net/pascalpex/deepslatemc/util/Metrics.java
 new file mode 100644
-index 0000000000000000000000000000000000000000..0e7df0548440bca927c52035321bc295bd9d5cbf
+index 0000000000000000000000000000000000000000..136d30d7e25895adf5be857aeac94c46cb330ec0
 --- /dev/null
 +++ b/src/main/java/net/pascalpex/deepslatemc/util/Metrics.java
 @@ -0,0 +1,43 @@
 +package net.pascalpex.deepslatemc.util;
-+
++    
 +import org.bukkit.Bukkit;
 +
 +import java.io.IOException;
