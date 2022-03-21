@@ -1,14 +1,14 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Pascalpex <pascalpex@gmail.com>
-Date: Thu, 17 Feb 2022 19:10:53 +0100
+Date: Mon, 21 Mar 2022 15:29:49 +0100
 Subject: [PATCH] Configurable help command
 
 
 diff --git a/src/main/java/net/minecraft/commands/Commands.java b/src/main/java/net/minecraft/commands/Commands.java
-index 572124245f45b614c0c7bf7c3ddf09128696d7c2..505f61ab6944f887882244dec1ddaf26d954e50e 100644
+index 56693b7b02b80371f57ed04beb8caaab3d87b00f..e5c91d5f0da24f83e7eca4a166aa16f94b4aa807 100644
 --- a/src/main/java/net/minecraft/commands/Commands.java
 +++ b/src/main/java/net/minecraft/commands/Commands.java
-@@ -154,7 +154,7 @@ public class Commands {
+@@ -155,7 +155,7 @@ public class Commands {
          GameModeCommand.register(this.dispatcher);
          GameRuleCommand.register(this.dispatcher);
          GiveCommand.register(this.dispatcher);
@@ -18,10 +18,10 @@ index 572124245f45b614c0c7bf7c3ddf09128696d7c2..505f61ab6944f887882244dec1ddaf26
          KickCommand.register(this.dispatcher);
          KillCommand.register(this.dispatcher);
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 2d01d6c49d313ec19eced87961877da3f9bc5ac6..c155d30c6c2d74bf3912bc58abe2aaa08eab3f12 100644
+index 31b9bd9eacd6121eae4262bcee30440563cf406d..5c34f8ab69e213ed72114086b29a1c64c847e7a8 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-@@ -269,6 +269,8 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+@@ -270,6 +270,8 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
          MinecraftServer.getServer().server.getCommandMap().register("buildworld", "Deepslate", new BuildworldCommand("buildworld"));
          MinecraftServer.getServer().server.getCommandMap().register("maintenance", "Deepslate", new MaintenanceMode("maintenance"));
          MinecraftServer.getServer().server.getCommandMap().register("wartung", "Deepslate", new MaintenanceMode("wartung"));
@@ -31,61 +31,52 @@ index 2d01d6c49d313ec19eced87961877da3f9bc5ac6..c155d30c6c2d74bf3912bc58abe2aaa0
  
          this.setPvpAllowed(dedicatedserverproperties.pvp);
 diff --git a/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java b/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java
-index 2da21be0aa6defda86430a40b4049427d3951f4e..cda520e47a4cb4f5fc0dddde1da1dd16d8de6de4 100644
+index 4dc6db121908300d3712075f79009a306e62f24d..60c6d01d6845f183a6e9899f04b3b8974b0ae42f 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java
-@@ -6,6 +6,8 @@ import org.bukkit.configuration.file.YamlConfiguration;
- 
- import java.io.File;
- import java.io.IOException;
-+import java.util.ArrayList;
-+import java.util.List;
- 
- public class MessagesFile {
- 
-@@ -59,6 +61,14 @@ public class MessagesFile {
-             if (!config.contains("maintenanceOff")) {
-                 config.set("maintenanceOff", "&aYou turned off the maintenance mode");
+@@ -65,6 +65,14 @@ public class MessagesFile {
+                 if (!config.contains("maintenanceOff")) {
+                     config.set("maintenanceOff", "&aYou turned off the maintenance mode");
+                 }
++                if (!config.contains("helpMessage")) {
++                    List<String> message = new ArrayList<String>();
++                    message.add("&2&l--Help page--");
++                    message.add("&6You can find the most important commands at");
++                    message.add("&9&l/warp &9&lInfo&r&6. If you have more");
++                    message.add("&6questions, please ask a &9team member.");
++                    config.set("helpMessage", message);
++                }
+                 save();
+             } catch (IOException | InvalidConfigurationException e) {
+                 e.printStackTrace();
+@@ -79,6 +87,19 @@ public class MessagesFile {
              }
-+            if (!config.contains("helpMessage")) {
-+                List<String> message = new ArrayList<String>();
-+                message.add("&2&l--Help page--");
-+                message.add("&6You can find the most important commands at");
-+                message.add("&9&l/warp &9&lInfo&r&6. If you have more");
-+                message.add("&6questions, please ask a &9team member.");
-+                config.set("helpMessage", message);
-+            }
-             save();
-         } catch (IOException | InvalidConfigurationException e) {
-             e.printStackTrace();
-@@ -73,6 +83,19 @@ public class MessagesFile {
          }
-     }
  
-+    public static String getHelpMessage() {
-+        List<String> messages = (List<String>) config.getList("helpMessage");
-+        String message = "";
-+        for(int i = 0; i < messages.size(); i++) {
-+            message = message + messages.get(i).replace("&", "§");
-+            if(i < messages.size() - 1) {
-+                message = message + "\n§r";
++        public static String getHelpMessage() {
++            List<String> messages = (List<String>) config.getList("helpMessage");
++            String message = "";
++            for(int i = 0; i < messages.size(); i++) {
++                message = message + messages.get(i).replace("&", "§");
++                if(i < messages.size() - 1) {
++                    message = message + "\n§r";
++                }
 +            }
-+        }
-+        
-+        return message;
-+    }
 +
-     public static String getPrefix() {
-         String prefix = config.getString("prefix");
-         return prefix.replace("&", "§");
++            return message;
++        }
++
+         public static String getPrefix() {
+             String prefix = config.getString("prefix");
+             return prefix.replace("&", "§");
 diff --git a/src/main/java/net/pascalpex/deepslatemc/commands/HelpCommand.java b/src/main/java/net/pascalpex/deepslatemc/commands/HelpCommand.java
 new file mode 100644
-index 0000000000000000000000000000000000000000..18c716d6d2da7e4ce25d7ba5be5fe0a29e192e44
+index 0000000000000000000000000000000000000000..911e23651037de54edaf4084686e6097da528dcf
 --- /dev/null
 +++ b/src/main/java/net/pascalpex/deepslatemc/commands/HelpCommand.java
 @@ -0,0 +1,24 @@
 +package net.pascalpex.deepslatemc.commands;
-+
++    
 +import net.pascalpex.deepslatemc.MessagesFile;
 +import org.bukkit.command.Command;
 +import org.bukkit.command.CommandSender;
@@ -109,10 +100,10 @@ index 0000000000000000000000000000000000000000..18c716d6d2da7e4ce25d7ba5be5fe0a2
 +
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index ce55b9263ad2239c441575b3293bbc6897b7a6e0..ccd2a7bbee31d077a4fd92bf5561f277538afb73 100644
+index 4f12f1118b3d01004c467c1ec5afe84c5c661e17..6b12edd303aa3091e75a427667a1f3e2d2f9919b 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -1009,6 +1009,8 @@ public final class CraftServer implements Server {
+@@ -1005,6 +1005,8 @@ public final class CraftServer implements Server {
          MinecraftServer.getServer().server.getCommandMap().register("buildworld", "Deepslate", new BuildworldCommand("buildworld"));
          MinecraftServer.getServer().server.getCommandMap().register("maintenance", "Deepslate", new MaintenanceMode("maintenance"));
          MinecraftServer.getServer().server.getCommandMap().register("wartung", "Deepslate", new MaintenanceMode("wartung"));
