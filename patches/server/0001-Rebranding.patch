@@ -87,18 +87,6 @@ index 859f1980507f6abfac7e5d86943b0b761be3be37..b410ed8b493b27c5e58bf16b24e1a322
      private final String serverVersion;
      private final String bukkitVersion = Versioning.getBukkitVersion();
      private final Logger logger = Logger.getLogger("Minecraft");
-diff --git a/src/main/java/org/bukkit/craftbukkit/util/Versioning.java b/src/main/java/org/bukkit/craftbukkit/util/Versioning.java
-index dde8458ce2d8cc9aceaa4c62acdaf2ff0c0d610a..00359c60d56a2435aa1abc4f35e674158bdd34a7 100644
---- a/src/main/java/org/bukkit/craftbukkit/util/Versioning.java
-+++ b/src/main/java/org/bukkit/craftbukkit/util/Versioning.java
-@@ -4,6 +4,6 @@ import org.bukkit.Bukkit;
- 
- public final class Versioning {
-     public static String getBukkitVersion() {
--        return "1.18.2-R0.1-SNAPSHOT (Purpur build)"; // Mirai - hardcode version, it's obviously 1.18.2
-+        return "1.18.2-R0.1-SNAPSHOT"; // Mirai - hardcode version, it's obviously 1.18.2 // Deepslate
-     }
- }
 diff --git a/src/main/resources/logo.png b/src/main/resources/logo.png
 index 2047f9fe870f0e6dcd97dde15672b9b6e7ef60f1..3d7fb771e0031a778ba1c09603c50e45155d0d3e 100644
 GIT binary patch
