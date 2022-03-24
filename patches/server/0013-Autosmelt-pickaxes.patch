@@ -123,10 +123,10 @@ index e1858918fc0940270369fc517d3477a73497be1e..462ac1f4b48ac54d58c92f79a3c15b50
          return config.getBoolean("coloredSigns" + ".enabled");
      }
 diff --git a/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java b/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java
-index 7a32dbdc7ba9da6f66f9357f10adabed0436b94e..edf6211afc335103cf1c8839f2dbe0ae083451a0 100644
+index 3470d789fd267a0b41a8590dd553c29f8345ce2f..31daafb3b1e802a0418082e567d213291b72e882 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java
-@@ -79,6 +79,21 @@ public class MessagesFile {
+@@ -82,6 +82,21 @@ public class MessagesFile {
                  if(!config.contains("spawnTeleport")) {
                      config.set("spawnTeleport", "&aYou got teleported to the spawn");
                  }
@@ -148,7 +148,7 @@ index 7a32dbdc7ba9da6f66f9357f10adabed0436b94e..edf6211afc335103cf1c8839f2dbe0ae
                  save();
              } catch (IOException | InvalidConfigurationException e) {
                  e.printStackTrace();
-@@ -174,5 +189,25 @@ public class MessagesFile {
+@@ -181,5 +196,25 @@ public class MessagesFile {
              String prefix = config.getString("spawnTeleport");
              return prefix.replace("&", "§");
          }

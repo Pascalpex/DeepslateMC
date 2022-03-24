@@ -97,15 +97,18 @@ index 44200c0056fca59b312e5e9115b17e0bb69437bd..c591634e173da39764b4064963e4d500
              return config.getString("discordLink");
          }
 diff --git a/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java b/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java
-index 60c6d01d6845f183a6e9899f04b3b8974b0ae42f..7a32dbdc7ba9da6f66f9357f10adabed0436b94e 100644
+index 60c6d01d6845f183a6e9899f04b3b8974b0ae42f..3470d789fd267a0b41a8590dd553c29f8345ce2f 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java
-@@ -73,6 +73,12 @@ public class MessagesFile {
+@@ -73,6 +73,15 @@ public class MessagesFile {
                      message.add("&6questions, please ask a &9team member.");
                      config.set("helpMessage", message);
                  }
 +                if(!config.contains("spawnSet")) {
 +                    config.set("spawnSet", "&aThe spawn got set successfully");
++                }
++                if(!config.contains("spawnNotSet")) {
++                    config.set("spawnNotSet", "&cThe spawn is not set");
 +                }
 +                if(!config.contains("spawnTeleport")) {
 +                    config.set("spawnTeleport", "&aYou got teleported to the spawn");
@@ -113,12 +116,16 @@ index 60c6d01d6845f183a6e9899f04b3b8974b0ae42f..7a32dbdc7ba9da6f66f9357f10adabed
                  save();
              } catch (IOException | InvalidConfigurationException e) {
                  e.printStackTrace();
-@@ -160,5 +166,13 @@ public class MessagesFile {
+@@ -160,5 +169,17 @@ public class MessagesFile {
              String prefix = config.getString("maintenanceOff");
              return prefix.replace("&", "§");
          }
 +        public static String getSpawnSet() {
 +            String prefix = config.getString("spawnSet");
++            return prefix.replace("&", "§");
++        }
++        public static String getSpawnNotSet() {
++            String prefix = config.getString("spawnNotSet");
 +            return prefix.replace("&", "§");
 +        }
 +        public static String getSpawnTeleport() {
@@ -129,14 +136,15 @@ index 60c6d01d6845f183a6e9899f04b3b8974b0ae42f..7a32dbdc7ba9da6f66f9357f10adabed
  }
 diff --git a/src/main/java/net/pascalpex/deepslatemc/commands/SpawnCommand.java b/src/main/java/net/pascalpex/deepslatemc/commands/SpawnCommand.java
 new file mode 100644
-index 0000000000000000000000000000000000000000..1c7bef4b1807ed6e7acaeaa32d282bcbe355a30e
+index 0000000000000000000000000000000000000000..8b79c6b4202f724e8dbe111f9bb8fd744f3184ff
 --- /dev/null
 +++ b/src/main/java/net/pascalpex/deepslatemc/commands/SpawnCommand.java
-@@ -0,0 +1,53 @@
+@@ -0,0 +1,62 @@
 +package net.pascalpex.deepslatemc.commands;
-+    
++
 +import net.pascalpex.deepslatemc.Config;
 +import net.pascalpex.deepslatemc.MessagesFile;
++import org.bukkit.Bukkit;
 +import org.bukkit.command.Command;
 +import org.bukkit.command.CommandSender;
 +import org.bukkit.entity.Player;
@@ -153,7 +161,11 @@ index 0000000000000000000000000000000000000000..1c7bef4b1807ed6e7acaeaa32d282bcb
 +
 +    public static void playerJoin(Player player) {
 +        if(Config.getSpawnOnJoin()) {
-+            player.teleport(Config.getSpawn());
++            try {
++                player.teleport(Config.getSpawn());
++            } catch (Exception e) {
++                Bukkit.getLogger().warning("The option spawnOnJoin in the deepslate.yml file is turned on but there is no spawn set!");
++            }
 +        }
 +    }
 +
@@ -172,8 +184,12 @@ index 0000000000000000000000000000000000000000..1c7bef4b1807ed6e7acaeaa32d282bcb
 +            }
 +            if(label.equalsIgnoreCase("l") || label.equalsIgnoreCase("hub") || label.equalsIgnoreCase("lobby") || label.equalsIgnoreCase("spawn") || label.equalsIgnoreCase("hubschrauber")) {
 +                if(player.hasPermission("deepslate.spawn")) {
-+                    player.teleport(Config.getSpawn());
-+                    sender.sendMessage(prefix + MessagesFile.getSpawnTeleport());
++                    try {
++                        player.teleport(Config.getSpawn());
++                        player.sendMessage(prefix + MessagesFile.getSpawnTeleport());
++                    } catch (Exception e) {
++                        player.sendMessage(prefix + MessagesFile.getSpawnNotSet());
++                    }
 +                } else {
 +                    player.sendMessage(prefix + MessagesFile.getNoPermissions());
 +                }
