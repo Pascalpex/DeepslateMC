@@ -130,6 +130,41 @@ index 35d89f50212503781f329920a1aa59b011cc9718..673647e8128efeb2494a1a2f9e0c206b
      }
  
      @Override
+diff --git a/src/main/java/org/bukkit/craftbukkit/util/Versioning.java b/src/main/java/org/bukkit/craftbukkit/util/Versioning.java
+index 3e9a46500401da7634766b720677e11f3db28e76..ed420f654a85208328bf9c7f14e9353822068d2a 100644
+--- a/src/main/java/org/bukkit/craftbukkit/util/Versioning.java
++++ b/src/main/java/org/bukkit/craftbukkit/util/Versioning.java
+@@ -1,29 +1,7 @@
+ package org.bukkit.craftbukkit.util;
+ 
+-import java.io.IOException;
+-import java.io.InputStream;
+-import java.util.Properties;
+-import java.util.logging.Level;
+-import java.util.logging.Logger;
+-import org.bukkit.Bukkit;
+-
+ public final class Versioning {
+     public static String getBukkitVersion() {
+-        String result = "Unknown-Version";
+-
+-        InputStream stream = Bukkit.class.getClassLoader().getResourceAsStream("META-INF/maven/wtf.etil.mirai/mirai-api/pom.properties"); // Pufferfish // Purpur // Mirai
+-        Properties properties = new Properties();
+-
+-        if (stream != null) {
+-            try {
+-                properties.load(stream);
+-
+-                result = properties.getProperty("version");
+-            } catch (IOException ex) {
+-                Logger.getLogger(Versioning.class.getName()).log(Level.SEVERE, "Could not get Bukkit version!", ex);
+-            }
+-        }
+-
+-        return result;
++        return "1.18.2-R0.1-SNAPSHOT"; // Deepslate - Hardcode version
+     }
+ }
 diff --git a/src/main/resources/logo.png b/src/main/resources/logo.png
 index 2047f9fe870f0e6dcd97dde15672b9b6e7ef60f1..3d7fb771e0031a778ba1c09603c50e45155d0d3e 100644
 GIT binary patch
