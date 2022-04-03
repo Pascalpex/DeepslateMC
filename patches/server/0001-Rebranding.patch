@@ -5,7 +5,7 @@ Subject: [PATCH] Rebranding
 
 
 diff --git a/build.gradle.kts b/build.gradle.kts
-index 5e75485694263c16dc09411ebf067479aa94d49d..45a669ac05d970ec499970204fa64b43d775909c 100644
+index faf6ccd44ed215979d12b809cdd4b3cbcd579453..31c30adc017081dae1ba67690cae38e7af25b58a 100644
 --- a/build.gradle.kts
 +++ b/build.gradle.kts
 @@ -18,7 +18,7 @@ repositories {
@@ -17,7 +17,7 @@ index 5e75485694263c16dc09411ebf067479aa94d49d..45a669ac05d970ec499970204fa64b43
      // Pufferfish start
      implementation("io.papermc.paper:paper-mojangapi:1.18.2-R0.1-SNAPSHOT") {
          exclude("io.papermc.paper", "paper-api")
-@@ -89,7 +89,7 @@ tasks.jar {
+@@ -90,7 +90,7 @@ tasks.jar {
          attributes(
              "Main-Class" to "org.bukkit.craftbukkit.Main",
              "Implementation-Title" to "CraftBukkit",
@@ -48,6 +48,36 @@ index 83a322bb56ad6fe41047e18df22f3246c8db83fe..69bc98d3bf599b3519503f79f3027318
  
                  metrics.addCustomChart(new Metrics.DrilldownPie("java_version", () -> {
                      Map<String, Map<String, Integer>> map = new HashMap<>();
+diff --git a/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java b/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java
+index fba5dbdb7bcbb55400ef18342c9b54612972a718..4b98cdcea19214ee322cddf361d0adfd340d1b85 100644
+--- a/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java
++++ b/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java
+@@ -19,10 +19,11 @@ import java.util.stream.StreamSupport;
+ 
+ public class PaperVersionFetcher implements VersionFetcher {
+     private static final java.util.regex.Pattern VER_PATTERN = java.util.regex.Pattern.compile("^([0-9\\.]*)\\-.*R"); // R is an anchor, will always give '-R' at end
+-    // Purpur start
+-    private static final String DOWNLOAD_PAGE = "https://purpurmc.org/downloads";
++    // Purpur // Deepslate start
++    private static final String GITHUB_BRANCH_NAME = "ver/1.18.2";
++    private static final String DOWNLOAD_PAGE = "https://pascalpex.ddns.net/files/deepslate/";
+     private static int distance = -2; public int distance() { return distance; }
+-    // Purpur end
++    // Purpur // Deepslate end
+     private static @Nullable String mcVer;
+ 
+     @Override
+@@ -33,8 +34,8 @@ public class PaperVersionFetcher implements VersionFetcher {
+     @Nonnull
+     @Override
+     public Component getVersionMessage(@Nonnull String serverVersion) {
+-        String[] parts = serverVersion.substring("git-Purpur-".length()).split("[-\\s]"); // Purpur
+-        final Component updateMessage = getUpdateStatusMessage("PurpurMC/Purpur", "ver/" + getMinecraftVersion(), parts[0]); // Purpur
++        String[] parts = serverVersion.substring("git-DeepslateMC-".length()).split("[-\\s]"); // Purpur // Deepslate
++        final Component updateMessage = getUpdateStatusMessage("Pascalpex/DeepslateMC", GITHUB_BRANCH_NAME, parts[0]); // Purpur // Deepslate
+         final Component history = getHistory();
+ 
+         return history != null ? Component.join(net.kyori.adventure.text.JoinConfiguration.separator(Component.newline()), history, updateMessage) : updateMessage; // Purpur
 diff --git a/src/main/java/com/destroystokyo/paper/console/PaperConsole.java b/src/main/java/com/destroystokyo/paper/console/PaperConsole.java
 index 83942f84525462a7a9c1d0c2895176ec9d0a6529..4f42debd7e5f032f7ea82a1c74909c73049ef1ee 100644
 --- a/src/main/java/com/destroystokyo/paper/console/PaperConsole.java
@@ -62,7 +92,7 @@ index 83942f84525462a7a9c1d0c2895176ec9d0a6529..4f42debd7e5f032f7ea82a1c74909c73
                  .completer(new ConsoleCommandCompleter(this.server))
                  .option(LineReader.Option.COMPLETE_IN_WORD, true);
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 6d30a2196ba04d5d20fe3d3379b4702d13ce29ba..02a9129549bc21bb05bb8059ea2aa071f2047128 100644
+index c109f7449bb5230c012f859757c1e5066b294b7c..aa149485de528f6ed074539e3b26c2330a38f37d 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
 @@ -1731,7 +1731,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<Runnab
@@ -87,6 +117,19 @@ index 5ec8c37b96af64d4aab9f94d8fa5e10a3255edfc..c70432ada7f5f2dbee1acbe1b2b206b9
      private final String serverVersion;
      private final String bukkitVersion = Versioning.getBukkitVersion();
      private final Logger logger = Logger.getLogger("Minecraft");
+diff --git a/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java b/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
+index 35d89f50212503781f329920a1aa59b011cc9718..673647e8128efeb2494a1a2f9e0c206b72e3eb93 100644
+--- a/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
++++ b/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
+@@ -430,7 +430,7 @@ public final class CraftMagicNumbers implements UnsafeValues {
+ 
+     @Override
+     public com.destroystokyo.paper.util.VersionFetcher getVersionFetcher() {
+-        return new wtf.etil.mirai.MiraiVersionFetcher(); // Mirai
++        return new com.destroystokyo.paper.PaperVersionFetcher(); // Pufferfish // Purpur // Deepslate
+     }
+ 
+     @Override
 diff --git a/src/main/resources/logo.png b/src/main/resources/logo.png
 index 2047f9fe870f0e6dcd97dde15672b9b6e7ef60f1..3d7fb771e0031a778ba1c09603c50e45155d0d3e 100644
 GIT binary patch
