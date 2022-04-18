@@ -23,7 +23,7 @@ index 5c34f8ab69e213ed72114086b29a1c64c847e7a8..76ed2954211655697b557093ab4a0361
  
          this.setPvpAllowed(dedicatedserverproperties.pvp);
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index dcdd689bf8cb9f812152a7eb3db96b952fdaa6fb..d9d6b79bc5782777e787ee5e997e5290df7c297b 100644
+index 377720a203760d525f8fa90dd564b8230dcb40e4..53e2cc8ef88121f7baccf7dcab396232e07d0531 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
 @@ -94,6 +94,7 @@ import net.minecraft.world.scores.Scoreboard; // Paper
@@ -203,10 +203,10 @@ index 0000000000000000000000000000000000000000..8b79c6b4202f724e8dbe111f9bb8fd74
 +
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 6b12edd303aa3091e75a427667a1f3e2d2f9919b..ef91d78f3b74ec6f1c7442577990270df6226312 100644
+index 460d951d385fed544f88484b2c68cec6c4e044d3..dedabbb5e24996e166f6d127f9f1c0aa061af3aa 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -1007,6 +1007,13 @@ public final class CraftServer implements Server {
+@@ -1008,6 +1008,13 @@ public final class CraftServer implements Server {
          MinecraftServer.getServer().server.getCommandMap().register("wartung", "Deepslate", new MaintenanceMode("wartung"));
          MinecraftServer.getServer().server.getCommandMap().register("help", "Deepslate", new HelpCommand("help"));
          MinecraftServer.getServer().server.getCommandMap().register("hilfe", "Deepslate", new HelpCommand("hilfe"));

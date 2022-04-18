@@ -102,7 +102,7 @@ index 0000000000000000000000000000000000000000..6343e7803f9d3c90e08523a757fb83ee
 +    }
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index a84e2e77fe52e7c843e3b53d5b09df6184688635..3711bbd1739fc2dfc39da512221db0258284e88c 100644
+index 6ebda0fede3bf5e8a7686d5d06e34a051ea1c5ec..248d0b92e2dffb12f3563305e2ec2fd2f6014690 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -111,6 +111,7 @@ import net.minecraft.world.level.storage.PlayerDataStorage;
@@ -113,7 +113,7 @@ index a84e2e77fe52e7c843e3b53d5b09df6184688635..3711bbd1739fc2dfc39da512221db025
  import net.pascalpex.deepslatemc.commands.DeepslateCommand;
  import net.pascalpex.deepslatemc.commands.DiscordCommand;
  import org.apache.commons.lang.Validate;
-@@ -998,6 +999,8 @@ public final class CraftServer implements Server {
+@@ -999,6 +1000,8 @@ public final class CraftServer implements Server {
          MinecraftServer.getServer().server.getCommandMap().register("deepslate", "Deepslate", new DeepslateCommand("deepslate"));
          MinecraftServer.getServer().server.getCommandMap().register("discord", "Deepslate", new DiscordCommand("discord"));
          MinecraftServer.getServer().server.getCommandMap().register("dc", "Deepslate", new DiscordCommand("dc"));

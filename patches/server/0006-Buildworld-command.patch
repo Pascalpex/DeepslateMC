@@ -142,7 +142,7 @@ index 0000000000000000000000000000000000000000..f406beb184e03b67658eb2fe4ab3a3e4
 +    }
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 3711bbd1739fc2dfc39da512221db0258284e88c..2d99b4ab03143ac19552446bfcf6eadd39045cfd 100644
+index 248d0b92e2dffb12f3563305e2ec2fd2f6014690..57cbe970773a7e78526b429ae58f9c84af3ac7e0 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -111,6 +111,7 @@ import net.minecraft.world.level.storage.PlayerDataStorage;
@@ -153,7 +153,7 @@ index 3711bbd1739fc2dfc39da512221db0258284e88c..2d99b4ab03143ac19552446bfcf6eadd
  import net.pascalpex.deepslatemc.commands.ClearchatCommand;
  import net.pascalpex.deepslatemc.commands.DeepslateCommand;
  import net.pascalpex.deepslatemc.commands.DiscordCommand;
-@@ -1001,6 +1002,10 @@ public final class CraftServer implements Server {
+@@ -1002,6 +1003,10 @@ public final class CraftServer implements Server {
          MinecraftServer.getServer().server.getCommandMap().register("dc", "Deepslate", new DiscordCommand("dc"));
          MinecraftServer.getServer().server.getCommandMap().register("cc", "Deepslate", new ClearchatCommand("cc"));
          MinecraftServer.getServer().server.getCommandMap().register("clearchat", "Deepslate", new ClearchatCommand("clearchat"));
