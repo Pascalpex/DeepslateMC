@@ -21,7 +21,7 @@ jobs:
     - name: Generate Paperclip Jar
       run: ./gradlew createReobfPaperclipJar
     - name: Upload Paperclip
-      uses: actions/upload-artifact@v3.0.0
+      uses: actions/upload-artifact@v3.1.0
       with:
         name: DeepslateMC
         path: build/libs/deepslateMC-paperclip-1.18.2-R0.1-SNAPSHOT-reobf.jar

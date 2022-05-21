@@ -9,13 +9,13 @@ plugins {
 
 repositories {
     mavenCentral()
-    maven("https://papermc.io/repo/repository/maven-public/") {
+    maven("https://repo.papermc.io/repository/maven-public/") {
         content { onlyForConfigurations(PAPERCLIP_CONFIG) }
     }
 }
 
 dependencies {
-    remapper("net.fabricmc:tiny-remapper:0.8.2:fat")
+    remapper("net.fabricmc:tiny-remapper:0.8.4:fat")
     decompiler("net.minecraftforge:forgeflower:1.5.498.29")
     paperclip("io.papermc:paperclip:3.0.2")
 }
@@ -46,7 +46,7 @@ subprojects {
     repositories {
         mavenCentral()
         maven("https://oss.sonatype.org/content/groups/public/")
-        maven("https://papermc.io/repo/repository/maven-public/")
+        maven("https://repo.papermc.io/repository/maven-public/")
         maven("https://ci.emc.gs/nexus/content/groups/aikar/")
         maven("https://repo.aikar.co/content/groups/aikar")
         maven("https://repo.md-5.net/content/repositories/releases/")
