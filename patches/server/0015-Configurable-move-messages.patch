@@ -1,0 +1,60 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Pascalpex <pascalpex@gmail.com>
+Date: Sun, 22 May 2022 13:50:56 +0200
+Subject: [PATCH] Configurable move messages
+
+
+diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
+index 4bbe90b9695b60276e7e6d01260719cb30565e03..1f3f280aaee0822318ff8c272c12feda69624a96 100644
+--- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
++++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
+@@ -1438,7 +1438,9 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Ser
+ 
+                                 if (d11 - d10 > Math.max(f2, Math.pow((double) (org.spigotmc.SpigotConfig.movedTooQuicklyMultiplier * (float) i * speed), 2)) && !this.isSingleplayerOwner()) {
+                                 // CraftBukkit end
+-                                    ServerGamePacketListenerImpl.LOGGER.warn("{} moved too quickly! {},{},{}", new Object[]{this.player.getName().getString(), d7, d8, d9});
++                                    if (Config.getMovedQuickly()) { // Deepslate
++                                        ServerGamePacketListenerImpl.LOGGER.warn("{} moved too quickly! {},{},{}", new Object[]{this.player.getName().getString(), d7, d8, d9});
++                                    }
+                                     this.teleport(this.player.getX(), this.player.getY(), this.player.getZ(), this.player.getYRot(), this.player.getXRot());
+                                     return;
+                                 }
+@@ -1506,7 +1508,9 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Ser
+ 
+                             if (!this.player.isChangingDimension() && d11 > org.spigotmc.SpigotConfig.movedWronglyThreshold && !this.player.isSleeping() && !this.player.gameMode.isCreative() && this.player.gameMode.getGameModeForPlayer() != GameType.SPECTATOR) { // Spigot
+                                 flag2 = true; // Paper - diff on change, this should be moved wrongly
+-                                ServerGamePacketListenerImpl.LOGGER.warn("{} moved wrongly!, ({})", this.player.getName().getString(), d11); // Purpur
++                                if (Config.getMovedWrongly()) { // Deepslate
++                                    ServerGamePacketListenerImpl.LOGGER.warn("{} moved wrongly!, ({})", this.player.getName().getString(), d11); // Purpur
++                                }
+                             }
+ 
+                             this.player.absMoveTo(d0, d1, d2, f, f1);
+diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
+index ba80d45928ff1c25f213b4ebf1fd72c527c7d70e..35c475542482fc3f5faa70c52bfba65acde96f90 100644
+--- a/src/main/java/net/pascalpex/deepslatemc/Config.java
++++ b/src/main/java/net/pascalpex/deepslatemc/Config.java
+@@ -54,6 +54,10 @@ public class Config {
+                 if (!config.contains("metrics")) {
+                     config.set("metrics", true);
+                 }
++                if (!config.contains("messages")) {
++                    config.set("messages" + ".movedWrongly", true);
++                    config.set("messages" + ".movedQuickly", true);
++                }
+                 save();
+             } catch (IOException | InvalidConfigurationException e) {
+                 e.printStackTrace();
+@@ -133,4 +137,12 @@ public class Config {
+             save();
+         }
+ 
++    public static boolean getMovedQuickly() {
++        return config.getBoolean("messages" + ".movedQuickly");
++    }
++
++    public static boolean getMovedWrongly() {
++        return config.getBoolean("messages" + ".movedWrongly");
++    }
++
+ }
