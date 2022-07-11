@@ -1,4 +1,4 @@
-<img src=".github/assets/logo.png" width="200px" align="right">
+<img src=".github/assets/reinforcedLogo.png" width="200px" align="right">
 <div align="center">
 
 # DeepslateMC
