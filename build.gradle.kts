@@ -63,7 +63,7 @@ paperweight {
     decompileRepo.set("https://files.minecraftforge.net/maven/")
 
     useStandardUpstream("mirai") {
-        url.set(github("etil2jz", "Mirai"))
+        url.set(github("Pascalpex", "MiraiPurpur"))
         ref.set(providers.gradleProperty("miraiRef"))
 
         withStandardPatcher {
