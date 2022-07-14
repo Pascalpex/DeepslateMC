@@ -5,10 +5,10 @@ Subject: [PATCH] Discord command
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index b7dcc8d838eaf5dcbeae2e53868e6113913ab93e..9606f09c82fcc40a287289ca3d592812f6196209 100644
+index c49375943bf53db3cd5cb9151531206eede2f6ef..eebfa066ef56e8c8770b79974bf8b5c98515a2f8 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-@@ -59,6 +59,7 @@ import net.minecraft.world.level.GameType;
+@@ -56,6 +56,7 @@ import net.minecraft.world.level.GameType;
  import net.minecraft.world.level.block.entity.SkullBlockEntity;
  import net.minecraft.world.level.storage.LevelStorageSource;
  import net.pascalpex.deepslatemc.commands.DeepslateCommand;
@@ -16,7 +16,7 @@ index b7dcc8d838eaf5dcbeae2e53868e6113913ab93e..9606f09c82fcc40a287289ca3d592812
  import org.slf4j.Logger;
  
  // CraftBukkit start
-@@ -260,6 +261,8 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+@@ -241,6 +242,8 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
  
          // Deepslate start
          MinecraftServer.getServer().server.getCommandMap().register("deepslate", "Deepslate", new DeepslateCommand("deepslate"));
@@ -26,23 +26,23 @@ index b7dcc8d838eaf5dcbeae2e53868e6113913ab93e..9606f09c82fcc40a287289ca3d592812
  
          this.setPvpAllowed(dedicatedserverproperties.pvp);
 diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
-index 994b992d2acb48576af874137df074bb7c659c88..6240a269ab54ebbb9729d737e7f0cedfe2e2139a 100644
+index 66389dedb5b0ad82839f5c324d6676591c108096..0050bc0886dedcbfe0740ec1f295b4e0d303fb87 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/Config.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/Config.java
 @@ -26,6 +26,10 @@ public class Config {
-                     save();
-                 }
-                 config.load(configFile);
+                 save();
+             }
+             config.load(configFile);
 +                if(!config.contains("discordLink")) {
 +                    config.set("discordLink", "https://google.de/");
 +                }
 +                save();
-             } catch (IOException | InvalidConfigurationException e) {
-                 e.printStackTrace();
-             }
-@@ -39,4 +43,8 @@ public class Config {
-             }
+         } catch (IOException | InvalidConfigurationException e) {
+             e.printStackTrace();
          }
+@@ -39,4 +43,8 @@ public class Config {
+         }
+     }
  
 +        public static String getDiscordLink() {
 +            return config.getString("discordLink");
@@ -50,25 +50,25 @@ index 994b992d2acb48576af874137df074bb7c659c88..6240a269ab54ebbb9729d737e7f0cedf
 +
  }
 diff --git a/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java b/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java
-index 0016a0e047060c670dc2d1efe20afc8f5ea4288e..1090737d07457f9884162ce15c324d4816441111 100644
+index cf13be02d96049534d46ab981c1dd78f8eccd0da..bb13ce36183389dab6ba595a63891bfab99d9401 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java
 @@ -35,6 +35,12 @@ public class MessagesFile {
-                 if(!config.contains("configReloaded")) {
-                     config.set("configReloaded", "&aConfig got reloaded successfully");
-                 }
+             if(!config.contains("configReloaded")) {
+                 config.set("configReloaded", "&aConfig got reloaded successfully");
+             }
 +                if(!config.contains("onlyForPlayers")) {
 +                    config.set("onlyForPlayers", "&cThis command can only be used by players");
 +                }
 +                if(!config.contains("discordMessage")) {
 +                    config.set("discordMessage", "&6The link to our Discord server: &b%link%");
 +                }
-                 save();
-             } catch (IOException | InvalidConfigurationException e) {
-                 e.printStackTrace();
-@@ -64,4 +70,14 @@ public class MessagesFile {
-             return prefix.replace("&", "§");
-         }
+             save();
+         } catch (IOException | InvalidConfigurationException e) {
+             e.printStackTrace();
+@@ -63,4 +69,14 @@ public class MessagesFile {
+         return prefix.replace("&", "§");
+     }
  
 +        public static String getOnlyForPlayers() {
 +            String prefix = config.getString("onlyForPlayers");
@@ -120,10 +120,10 @@ index 0000000000000000000000000000000000000000..24717b7f0ead489c38635c7db36e22b8
 +    }
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 6516f6da5857a3903db2dc4d6c701c94827c3f78..6ebda0fede3bf5e8a7686d5d06e34a051ea1c5ec 100644
+index 9be0714d2064e210ffcd8fb0d77c6904a3159d44..bc280f50078789e228ea39f5fec83e92fd9e404d 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -112,6 +112,7 @@ import net.minecraft.world.level.storage.PrimaryLevelData;
+@@ -106,6 +106,7 @@ import net.minecraft.world.level.storage.PrimaryLevelData;
  import net.minecraft.world.level.storage.loot.LootTables;
  import net.minecraft.world.phys.Vec3;
  import net.pascalpex.deepslatemc.commands.DeepslateCommand;
@@ -131,7 +131,7 @@ index 6516f6da5857a3903db2dc4d6c701c94827c3f78..6ebda0fede3bf5e8a7686d5d06e34a05
  import org.apache.commons.lang.Validate;
  import org.bukkit.BanList;
  import org.bukkit.Bukkit;
-@@ -996,6 +997,8 @@ public final class CraftServer implements Server {
+@@ -1027,6 +1028,8 @@ public final class CraftServer implements Server {
  
          // Deepslate start
          MinecraftServer.getServer().server.getCommandMap().register("deepslate", "Deepslate", new DeepslateCommand("deepslate"));

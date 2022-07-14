@@ -5,10 +5,10 @@ Subject: [PATCH] Toggleable op command
 
 
 diff --git a/src/main/java/net/minecraft/commands/Commands.java b/src/main/java/net/minecraft/commands/Commands.java
-index e254b9a190056b3fb81ff3679cdf733b37a52f85..56693b7b02b80371f57ed04beb8caaab3d87b00f 100644
+index 25eb0137ef2037cec648b157a095ffa920a820c4..839a7e4a94178512109e4f5cd21cdbc3c0072d66 100644
 --- a/src/main/java/net/minecraft/commands/Commands.java
 +++ b/src/main/java/net/minecraft/commands/Commands.java
-@@ -203,7 +203,9 @@ public class Commands {
+@@ -201,7 +201,9 @@ public class Commands {
              BanListCommands.register(this.dispatcher);
              BanPlayerCommands.register(this.dispatcher);
              DeOpCommands.register(this.dispatcher);
@@ -20,7 +20,7 @@ index e254b9a190056b3fb81ff3679cdf733b37a52f85..56693b7b02b80371f57ed04beb8caaab
              PardonIpCommand.register(this.dispatcher);
              PerfCommand.register(this.dispatcher);
 diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
-index 5d65ca0019450b16102acb94756d14df523620e0..44200c0056fca59b312e5e9115b17e0bb69437bd 100644
+index 32c369a09346b40d0a683291badfe0addcde9897..cf33202b996839c11bb52e5550b3e588e5b2dc2e 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/Config.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/Config.java
 @@ -29,6 +29,9 @@ public class Config {
@@ -31,11 +31,11 @@ index 5d65ca0019450b16102acb94756d14df523620e0..44200c0056fca59b312e5e9115b17e0b
 +                    config.set("opCommandActive", true);
 +                }
                  save();
-             } catch (IOException | InvalidConfigurationException e) {
-                 e.printStackTrace();
+         } catch (IOException | InvalidConfigurationException e) {
+             e.printStackTrace();
 @@ -43,6 +46,10 @@ public class Config {
-             }
          }
+     }
  
 +        public static boolean getOpActive() {
 +            return config.getBoolean("opCommandActive");

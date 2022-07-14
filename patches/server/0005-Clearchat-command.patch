@@ -5,10 +5,10 @@ Subject: [PATCH] Clearchat command
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 9606f09c82fcc40a287289ca3d592812f6196209..549f32a403c6f983ff1aa60c92db58c994ed5f52 100644
+index eebfa066ef56e8c8770b79974bf8b5c98515a2f8..6609a2e6f930862f2672e5aeac0212e12533d533 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-@@ -58,6 +58,7 @@ import net.minecraft.world.level.GameRules;
+@@ -55,6 +55,7 @@ import net.minecraft.world.level.GameRules;
  import net.minecraft.world.level.GameType;
  import net.minecraft.world.level.block.entity.SkullBlockEntity;
  import net.minecraft.world.level.storage.LevelStorageSource;
@@ -16,7 +16,7 @@ index 9606f09c82fcc40a287289ca3d592812f6196209..549f32a403c6f983ff1aa60c92db58c9
  import net.pascalpex.deepslatemc.commands.DeepslateCommand;
  import net.pascalpex.deepslatemc.commands.DiscordCommand;
  import org.slf4j.Logger;
-@@ -263,6 +264,8 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+@@ -244,6 +245,8 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
          MinecraftServer.getServer().server.getCommandMap().register("deepslate", "Deepslate", new DeepslateCommand("deepslate"));
          MinecraftServer.getServer().server.getCommandMap().register("discord", "Deepslate", new DiscordCommand("discord"));
          MinecraftServer.getServer().server.getCommandMap().register("dc", "Deepslate", new DiscordCommand("dc"));
@@ -26,7 +26,7 @@ index 9606f09c82fcc40a287289ca3d592812f6196209..549f32a403c6f983ff1aa60c92db58c9
  
          this.setPvpAllowed(dedicatedserverproperties.pvp);
 diff --git a/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java b/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java
-index 1090737d07457f9884162ce15c324d4816441111..e2ba05e75440f78c60089b81a156f7c03c2bb0a5 100644
+index bb13ce36183389dab6ba595a63891bfab99d9401..bb941ebeb75f66ea0c4b970bc914bd18c619d2b5 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java
 @@ -41,6 +41,12 @@ public class MessagesFile {
@@ -39,10 +39,10 @@ index 1090737d07457f9884162ce15c324d4816441111..e2ba05e75440f78c60089b81a156f7c0
 +                if(!config.contains("clearedChat")) {
 +                    config.set("clearedChat", "&6The chat got cleared by &b%clearer%");
 +                }
-                 save();
-             } catch (IOException | InvalidConfigurationException e) {
-                 e.printStackTrace();
-@@ -80,4 +86,14 @@ public class MessagesFile {
+             save();
+         } catch (IOException | InvalidConfigurationException e) {
+             e.printStackTrace();
+@@ -79,4 +85,14 @@ public class MessagesFile {
              return prefix.replace("&", "§");
          }
  
@@ -102,10 +102,10 @@ index 0000000000000000000000000000000000000000..6343e7803f9d3c90e08523a757fb83ee
 +    }
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 6ebda0fede3bf5e8a7686d5d06e34a051ea1c5ec..248d0b92e2dffb12f3563305e2ec2fd2f6014690 100644
+index bc280f50078789e228ea39f5fec83e92fd9e404d..9e3e4cdb2290472eaf0f5238ac396d5007fc1ca9 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -111,6 +111,7 @@ import net.minecraft.world.level.storage.PlayerDataStorage;
+@@ -105,6 +105,7 @@ import net.minecraft.world.level.storage.PlayerDataStorage;
  import net.minecraft.world.level.storage.PrimaryLevelData;
  import net.minecraft.world.level.storage.loot.LootTables;
  import net.minecraft.world.phys.Vec3;
@@ -113,7 +113,7 @@ index 6ebda0fede3bf5e8a7686d5d06e34a051ea1c5ec..248d0b92e2dffb12f3563305e2ec2fd2
  import net.pascalpex.deepslatemc.commands.DeepslateCommand;
  import net.pascalpex.deepslatemc.commands.DiscordCommand;
  import org.apache.commons.lang.Validate;
-@@ -999,6 +1000,8 @@ public final class CraftServer implements Server {
+@@ -1030,6 +1031,8 @@ public final class CraftServer implements Server {
          MinecraftServer.getServer().server.getCommandMap().register("deepslate", "Deepslate", new DeepslateCommand("deepslate"));
          MinecraftServer.getServer().server.getCommandMap().register("discord", "Deepslate", new DiscordCommand("discord"));
          MinecraftServer.getServer().server.getCommandMap().register("dc", "Deepslate", new DiscordCommand("dc"));

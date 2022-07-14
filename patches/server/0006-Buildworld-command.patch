@@ -5,10 +5,10 @@ Subject: [PATCH] Buildworld command
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 549f32a403c6f983ff1aa60c92db58c994ed5f52..aa8470ce91d3435df605d038db2521389655107b 100644
+index 6609a2e6f930862f2672e5aeac0212e12533d533..4c838c4c931c2f54b598f630ec7c43a28d0858ff 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-@@ -58,6 +58,7 @@ import net.minecraft.world.level.GameRules;
+@@ -55,6 +55,7 @@ import net.minecraft.world.level.GameRules;
  import net.minecraft.world.level.GameType;
  import net.minecraft.world.level.block.entity.SkullBlockEntity;
  import net.minecraft.world.level.storage.LevelStorageSource;
@@ -16,7 +16,7 @@ index 549f32a403c6f983ff1aa60c92db58c994ed5f52..aa8470ce91d3435df605d038db252138
  import net.pascalpex.deepslatemc.commands.ClearchatCommand;
  import net.pascalpex.deepslatemc.commands.DeepslateCommand;
  import net.pascalpex.deepslatemc.commands.DiscordCommand;
-@@ -266,6 +267,10 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+@@ -247,6 +248,10 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
          MinecraftServer.getServer().server.getCommandMap().register("dc", "Deepslate", new DiscordCommand("dc"));
          MinecraftServer.getServer().server.getCommandMap().register("cc", "Deepslate", new ClearchatCommand("cc"));
          MinecraftServer.getServer().server.getCommandMap().register("clearchat", "Deepslate", new ClearchatCommand("clearchat"));
@@ -28,7 +28,7 @@ index 549f32a403c6f983ff1aa60c92db58c994ed5f52..aa8470ce91d3435df605d038db252138
  
          this.setPvpAllowed(dedicatedserverproperties.pvp);
 diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
-index 6240a269ab54ebbb9729d737e7f0cedfe2e2139a..5d65ca0019450b16102acb94756d14df523620e0 100644
+index 0050bc0886dedcbfe0740ec1f295b4e0d303fb87..32c369a09346b40d0a683291badfe0addcde9897 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/Config.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/Config.java
 @@ -47,4 +47,13 @@ public class Config {
@@ -46,7 +46,7 @@ index 6240a269ab54ebbb9729d737e7f0cedfe2e2139a..5d65ca0019450b16102acb94756d14df
 +
  }
 diff --git a/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java b/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java
-index e2ba05e75440f78c60089b81a156f7c03c2bb0a5..036689bc447a1a143f0b336feab659b5ca03eea7 100644
+index bb941ebeb75f66ea0c4b970bc914bd18c619d2b5..1bbf5356897b3d89fd9815a47c2de8562f97cd4f 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java
 @@ -47,6 +47,15 @@ public class MessagesFile {
@@ -62,10 +62,10 @@ index e2ba05e75440f78c60089b81a156f7c03c2bb0a5..036689bc447a1a143f0b336feab659b5
 +                if(!config.contains("buildworldNotSet")) {
 +                    config.set("buildworldNotSet", "&cThe buildworld is not set");
 +                }
-                 save();
-             } catch (IOException | InvalidConfigurationException e) {
-                 e.printStackTrace();
-@@ -96,4 +105,17 @@ public class MessagesFile {
+             save();
+         } catch (IOException | InvalidConfigurationException e) {
+             e.printStackTrace();
+@@ -95,4 +104,17 @@ public class MessagesFile {
              return prefix.replace("&", "§");
          }
  
@@ -142,10 +142,10 @@ index 0000000000000000000000000000000000000000..f406beb184e03b67658eb2fe4ab3a3e4
 +    }
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 248d0b92e2dffb12f3563305e2ec2fd2f6014690..57cbe970773a7e78526b429ae58f9c84af3ac7e0 100644
+index 9e3e4cdb2290472eaf0f5238ac396d5007fc1ca9..1305effc83030b69474ef5e4081c86a0e82ac8a5 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -111,6 +111,7 @@ import net.minecraft.world.level.storage.PlayerDataStorage;
+@@ -105,6 +105,7 @@ import net.minecraft.world.level.storage.PlayerDataStorage;
  import net.minecraft.world.level.storage.PrimaryLevelData;
  import net.minecraft.world.level.storage.loot.LootTables;
  import net.minecraft.world.phys.Vec3;
@@ -153,7 +153,7 @@ index 248d0b92e2dffb12f3563305e2ec2fd2f6014690..57cbe970773a7e78526b429ae58f9c84
  import net.pascalpex.deepslatemc.commands.ClearchatCommand;
  import net.pascalpex.deepslatemc.commands.DeepslateCommand;
  import net.pascalpex.deepslatemc.commands.DiscordCommand;
-@@ -1002,6 +1003,10 @@ public final class CraftServer implements Server {
+@@ -1033,6 +1034,10 @@ public final class CraftServer implements Server {
          MinecraftServer.getServer().server.getCommandMap().register("dc", "Deepslate", new DiscordCommand("dc"));
          MinecraftServer.getServer().server.getCommandMap().register("cc", "Deepslate", new ClearchatCommand("cc"));
          MinecraftServer.getServer().server.getCommandMap().register("clearchat", "Deepslate", new ClearchatCommand("clearchat"));

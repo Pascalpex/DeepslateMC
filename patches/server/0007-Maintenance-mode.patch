@@ -5,10 +5,10 @@ Subject: [PATCH] Maintenance mode
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index aa8470ce91d3435df605d038db2521389655107b..31b9bd9eacd6121eae4262bcee30440563cf406d 100644
+index 4c838c4c931c2f54b598f630ec7c43a28d0858ff..330658972ea47f5bc268d7bed9db803cd26e7fd8 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-@@ -58,10 +58,7 @@ import net.minecraft.world.level.GameRules;
+@@ -55,10 +55,7 @@ import net.minecraft.world.level.GameRules;
  import net.minecraft.world.level.GameType;
  import net.minecraft.world.level.block.entity.SkullBlockEntity;
  import net.minecraft.world.level.storage.LevelStorageSource;
@@ -20,7 +20,7 @@ index aa8470ce91d3435df605d038db2521389655107b..31b9bd9eacd6121eae4262bcee304405
  import org.slf4j.Logger;
  
  // CraftBukkit start
-@@ -271,6 +268,8 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+@@ -252,6 +249,8 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
          MinecraftServer.getServer().server.getCommandMap().register("bauwelt", "Deepslate", new BuildworldCommand("bauwelt"));
          MinecraftServer.getServer().server.getCommandMap().register("setbuildworld", "Deepslate", new BuildworldCommand("setbuildworld"));
          MinecraftServer.getServer().server.getCommandMap().register("buildworld", "Deepslate", new BuildworldCommand("buildworld"));
@@ -30,10 +30,10 @@ index aa8470ce91d3435df605d038db2521389655107b..31b9bd9eacd6121eae4262bcee304405
  
          this.setPvpAllowed(dedicatedserverproperties.pvp);
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index 14f19f4d8b36a1d7f9d2e1ca0e54bd1b387042b6..377720a203760d525f8fa90dd564b8230dcb40e4 100644
+index fecd65dc87a99a5692c59dd590b20327b1eb31c2..0a08ca4d89c9de14b3e967231f6d97a88cd1379f 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
-@@ -92,6 +92,8 @@ import net.minecraft.world.scores.Objective;
+@@ -100,6 +100,8 @@ import net.minecraft.world.scores.Objective;
  import net.minecraft.world.scores.PlayerTeam;
  import net.minecraft.world.scores.Scoreboard; // Paper
  import net.minecraft.world.scores.Team;
@@ -42,7 +42,7 @@ index 14f19f4d8b36a1d7f9d2e1ca0e54bd1b387042b6..377720a203760d525f8fa90dd564b823
  import org.slf4j.Logger;
  
  // CraftBukkit start
-@@ -752,6 +754,15 @@ public abstract class PlayerList {
+@@ -749,6 +751,15 @@ public abstract class PlayerList {
          Player player = entity.getBukkitEntity();
          PlayerLoginEvent event = new PlayerLoginEvent(player, hostname, ((java.net.InetSocketAddress) socketaddress).getAddress(), ((java.net.InetSocketAddress) loginlistener.connection.getRawAddress()).getAddress());
  
@@ -59,7 +59,7 @@ index 14f19f4d8b36a1d7f9d2e1ca0e54bd1b387042b6..377720a203760d525f8fa90dd564b823
          UserBanListEntry gameprofilebanentry;
          if (getBans().isBanned(gameprofile) && (gameprofilebanentry = getBans().get(gameprofile)) != null) {
 diff --git a/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java b/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java
-index 036689bc447a1a143f0b336feab659b5ca03eea7..4dc6db121908300d3712075f79009a306e62f24d 100644
+index 1bbf5356897b3d89fd9815a47c2de8562f97cd4f..63c3a4dc8ee2e9418fa6bbc85c65ab2477445735 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java
 @@ -56,6 +56,15 @@ public class MessagesFile {
@@ -75,10 +75,10 @@ index 036689bc447a1a143f0b336feab659b5ca03eea7..4dc6db121908300d3712075f79009a30
 +                if (!config.contains("maintenanceOff")) {
 +                    config.set("maintenanceOff", "&aYou turned off the maintenance mode");
 +                }
-                 save();
-             } catch (IOException | InvalidConfigurationException e) {
-                 e.printStackTrace();
-@@ -117,5 +126,18 @@ public class MessagesFile {
+             save();
+         } catch (IOException | InvalidConfigurationException e) {
+             e.printStackTrace();
+@@ -116,5 +125,18 @@ public class MessagesFile {
              String prefix = config.getString("buildworldNotSet");
              return prefix.replace("&", "§");
          }
@@ -153,10 +153,10 @@ index 0000000000000000000000000000000000000000..5655e29747196c4882f900a569239bb1
 +    }
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 57cbe970773a7e78526b429ae58f9c84af3ac7e0..431c032faa209abff77188b4bc10a18e2dfbb0c1 100644
+index 1305effc83030b69474ef5e4081c86a0e82ac8a5..1f92277a37b4ba433368e0edf24ab2008032b1f0 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -111,10 +111,7 @@ import net.minecraft.world.level.storage.PlayerDataStorage;
+@@ -105,10 +105,7 @@ import net.minecraft.world.level.storage.PlayerDataStorage;
  import net.minecraft.world.level.storage.PrimaryLevelData;
  import net.minecraft.world.level.storage.loot.LootTables;
  import net.minecraft.world.phys.Vec3;
@@ -168,7 +168,7 @@ index 57cbe970773a7e78526b429ae58f9c84af3ac7e0..431c032faa209abff77188b4bc10a18e
  import org.apache.commons.lang.Validate;
  import org.bukkit.BanList;
  import org.bukkit.Bukkit;
-@@ -1007,6 +1004,8 @@ public final class CraftServer implements Server {
+@@ -1038,6 +1035,8 @@ public final class CraftServer implements Server {
          MinecraftServer.getServer().server.getCommandMap().register("bauwelt", "Deepslate", new BuildworldCommand("bauwelt"));
          MinecraftServer.getServer().server.getCommandMap().register("setbuildworld", "Deepslate", new BuildworldCommand("setbuildworld"));
          MinecraftServer.getServer().server.getCommandMap().register("buildworld", "Deepslate", new BuildworldCommand("buildworld"));
