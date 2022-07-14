@@ -5,22 +5,22 @@ Subject: [PATCH] Configurable knowledgebook click
 
 
 diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
-index c591634e173da39764b4064963e4d500aaf07eee..145f6d6739f997a334cd30e7ce093947cba46ab8 100644
+index 7645e1e393108c7dd27f7b9a03deeba151ae93cc..63c113db25cb1629393ce440a57f039d821210d2 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/Config.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/Config.java
 @@ -38,6 +38,9 @@ public class Config {
-                 if(!config.contains("spawnOnJoin")) {
-                     config.set("spawnOnJoin", false);
-                 }
+             if(!config.contains("spawnOnJoin")) {
+                 config.set("spawnOnJoin", false);
+             }
 +                if(!config.contains("preventKnowledgebookClick")) {
 +                    config.set("preventKnowledgebookClick", false);
 +                }
                  save();
-             } catch (IOException | InvalidConfigurationException e) {
-                 e.printStackTrace();
+         } catch (IOException | InvalidConfigurationException e) {
+             e.printStackTrace();
 @@ -52,6 +55,10 @@ public class Config {
-             }
          }
+     }
  
 +    public static boolean getPreventKnowledgebookClick() {
 +            return config.getBoolean("preventKnowledgebookClick");
@@ -30,7 +30,7 @@ index c591634e173da39764b4064963e4d500aaf07eee..145f6d6739f997a334cd30e7ce093947
              return config.getBoolean("opCommandActive");
          }
 diff --git a/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java b/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
-index 361bd8edcc6e6d0fbac958e3ec91d74a622d630a..6b08fbf36ae6088bf6e5f7e690d630d00ef07306 100644
+index 902e420d19288df124da2292a60f95e97afb9fee..40949bf24c57b6bef37994b94b64b70faa9c2278 100644
 --- a/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
 +++ b/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
 @@ -57,6 +57,7 @@ import net.minecraft.world.phys.BlockHitResult;

@@ -5,10 +5,10 @@ Subject: [PATCH] Colored signs
 
 
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index dfcb5bc8afc7b41b1bee5e44d21bdb2e8cb67bd7..20bf25ef4535e564bcf3c3a0ea37223931e64ef0 100644
+index 3bb51f34be4341c991487a78d8793f074ffdcba4..258dae4ae2bb2270f63c8ffc6695d0a30b4f47f5 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-@@ -152,6 +152,7 @@ import net.minecraft.world.phys.Vec3;
+@@ -168,6 +168,7 @@ import net.minecraft.world.phys.Vec3;
  import net.minecraft.world.phys.shapes.BooleanOp;
  import net.minecraft.world.phys.shapes.Shapes;
  import net.minecraft.world.phys.shapes.VoxelShape;
@@ -16,7 +16,7 @@ index dfcb5bc8afc7b41b1bee5e44d21bdb2e8cb67bd7..20bf25ef4535e564bcf3c3a0ea372239
  import org.apache.commons.lang3.StringUtils;
  import org.slf4j.Logger;
  
-@@ -3207,6 +3208,17 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Ser
+@@ -3397,6 +3398,17 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Ser
                  // Purpur end
              }
              SignChangeEvent event = new SignChangeEvent((org.bukkit.craftbukkit.block.CraftBlock) player.getWorld().getBlockAt(x, y, z), this.player.getBukkitEntity(), lines);
@@ -34,7 +34,7 @@ index dfcb5bc8afc7b41b1bee5e44d21bdb2e8cb67bd7..20bf25ef4535e564bcf3c3a0ea372239
              this.cserver.getPluginManager().callEvent(event);
  
              if (!event.isCancelled()) {
-@@ -3224,6 +3236,37 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Ser
+@@ -3414,6 +3426,37 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Ser
  
      }
  
@@ -73,7 +73,7 @@ index dfcb5bc8afc7b41b1bee5e44d21bdb2e8cb67bd7..20bf25ef4535e564bcf3c3a0ea372239
      public void handleKeepAlive(ServerboundKeepAlivePacket packet) {
          // Purpur start
 diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
-index 145f6d6739f997a334cd30e7ce093947cba46ab8..e1858918fc0940270369fc517d3477a73497be1e 100644
+index 63c113db25cb1629393ce440a57f039d821210d2..203e2b74ea7cf1a6bbf02e10a9d50d2dead78343 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/Config.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/Config.java
 @@ -41,6 +41,10 @@ public class Config {
@@ -85,11 +85,11 @@ index 145f6d6739f997a334cd30e7ce093947cba46ab8..e1858918fc0940270369fc517d3477a7
 +                    config.set("coloredSigns" + ".usePermission", true);
 +                }
                  save();
-             } catch (IOException | InvalidConfigurationException e) {
-                 e.printStackTrace();
+         } catch (IOException | InvalidConfigurationException e) {
+             e.printStackTrace();
 @@ -55,6 +59,14 @@ public class Config {
-             }
          }
+     }
  
 +    public static boolean getColoredSignsEnabled() {
 +        return config.getBoolean("coloredSigns" + ".enabled");

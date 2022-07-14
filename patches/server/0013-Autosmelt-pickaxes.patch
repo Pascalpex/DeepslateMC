@@ -1,14 +1,14 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Pascalpex <pascalpex@gmail.com>
-Date: Mon, 21 Mar 2022 15:51:43 +0100
+Date: Thu, 14 Jul 2022 14:59:53 +0200
 Subject: [PATCH] Autosmelt pickaxes
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 76ed2954211655697b557093ab4a03616829c147..a026cb2202f621345138bf8ca5779a2325293ccf 100644
+index e56899e369f082241d5f42a4e15b1e6714e26da1..e7d5ff0e49b3aa241ed25b2be49f4254ed6649d3 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-@@ -272,6 +272,7 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+@@ -253,6 +253,7 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
          MinecraftServer.getServer().server.getCommandMap().register("wartung", "Deepslate", new MaintenanceMode("wartung"));
          MinecraftServer.getServer().server.getCommandMap().register("help", "Deepslate", new HelpCommand("help"));
          MinecraftServer.getServer().server.getCommandMap().register("hilfe", "Deepslate", new HelpCommand("hilfe"));
@@ -17,20 +17,20 @@ index 76ed2954211655697b557093ab4a03616829c147..a026cb2202f621345138bf8ca5779a23
          MinecraftServer.getServer().server.getCommandMap().register("setspawn", "Deepslate", new SpawnCommand("setspawn"));
          MinecraftServer.getServer().server.getCommandMap().register("spawn", "Deepslate", new SpawnCommand("spawn"));
 diff --git a/src/main/java/net/minecraft/server/level/ServerPlayerGameMode.java b/src/main/java/net/minecraft/server/level/ServerPlayerGameMode.java
-index 1c4fe18c814a48997f5fd4cf07b796cde9838188..17c6fd02ec88fd65f868b21455eb973375debee5 100644
+index 4fb8ced22cb9f106fbe39ca233a844a7effb824a..912308dd17e89286b5a165d72b50293ed00478e7 100644
 --- a/src/main/java/net/minecraft/server/level/ServerPlayerGameMode.java
 +++ b/src/main/java/net/minecraft/server/level/ServerPlayerGameMode.java
-@@ -24,6 +24,9 @@ import net.minecraft.world.level.block.entity.BlockEntity;
- import net.minecraft.world.level.block.state.BlockState;
+@@ -21,6 +21,9 @@ import net.minecraft.world.level.block.state.BlockState;
  import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
  import net.minecraft.world.phys.BlockHitResult;
+ import net.minecraft.world.phys.Vec3;
 +import net.pascalpex.deepslatemc.Config;
 +import org.bukkit.Material;
 +import org.bukkit.entity.Player;
  import org.slf4j.Logger;
  
  // CraftBukkit start
-@@ -396,6 +399,59 @@ public class ServerPlayerGameMode {
+@@ -357,6 +360,59 @@ public class ServerPlayerGameMode {
  
              event = new BlockBreakEvent(bblock, this.player.getBukkitEntity());
  
@@ -47,38 +47,38 @@ index 1c4fe18c814a48997f5fd4cf07b796cde9838188..17c6fd02ec88fd65f868b21455eb9733
 +                                        event.setDropItems(false);
 +                                        Bplayer.getInventory().addItem(new org.bukkit.inventory.ItemStack(Material.IRON_INGOT, 1));
 +                                        break;
-+                                        case GOLD_ORE:
-+                                        case DEEPSLATE_GOLD_ORE:
-+                                            event.setDropItems(false);
-+                                            Bplayer.getInventory().addItem(new org.bukkit.inventory.ItemStack(Material.GOLD_INGOT, 1));
-+                                            break;
-+                                        case COBBLESTONE:
-+                                            event.setDropItems(false);
-+                                            Bplayer.getInventory().addItem(new org.bukkit.inventory.ItemStack(Material.STONE, 1));
-+                                            break;
-+                                        case COBBLED_DEEPSLATE:
-+                                            event.setDropItems(false);
-+                                            Bplayer.getInventory().addItem(new org.bukkit.inventory.ItemStack(Material.DEEPSLATE, 1));
-+                                            break;
-+                                        case STONE:
-+                                            event.setDropItems(false);
-+                                            Bplayer.getInventory().addItem(new org.bukkit.inventory.ItemStack(Material.SMOOTH_STONE, 1));
-+                                            break;
-+                                        case SAND:
-+                                            event.setDropItems(false);
-+                                            Bplayer.getInventory().addItem(new org.bukkit.inventory.ItemStack(Material.GLASS, 1));
-+                                            break;
-+                                        case ANCIENT_DEBRIS:
-+                                            event.setDropItems(false);
-+                                            Bplayer.getInventory().addItem(new org.bukkit.inventory.ItemStack(Material.NETHERITE_SCRAP, 1));
-+                                            break;
-+                                        case COPPER_ORE:
-+                                        case DEEPSLATE_COPPER_ORE:
-+                                            event.setDropItems(false);
-+                                            Bplayer.getInventory().addItem(new org.bukkit.inventory.ItemStack(Material.COPPER_INGOT, 1));
-+                                            break;
-+                                        default:
-+                                            break;
++                                    case GOLD_ORE:
++                                    case DEEPSLATE_GOLD_ORE:
++                                        event.setDropItems(false);
++                                        Bplayer.getInventory().addItem(new org.bukkit.inventory.ItemStack(Material.GOLD_INGOT, 1));
++                                        break;
++                                    case COBBLESTONE:
++                                        event.setDropItems(false);
++                                        Bplayer.getInventory().addItem(new org.bukkit.inventory.ItemStack(Material.STONE, 1));
++                                        break;
++                                    case COBBLED_DEEPSLATE:
++                                        event.setDropItems(false);
++                                        Bplayer.getInventory().addItem(new org.bukkit.inventory.ItemStack(Material.DEEPSLATE, 1));
++                                        break;
++                                    case STONE:
++                                        event.setDropItems(false);
++                                        Bplayer.getInventory().addItem(new org.bukkit.inventory.ItemStack(Material.SMOOTH_STONE, 1));
++                                        break;
++                                    case SAND:
++                                        event.setDropItems(false);
++                                        Bplayer.getInventory().addItem(new org.bukkit.inventory.ItemStack(Material.GLASS, 1));
++                                        break;
++                                    case ANCIENT_DEBRIS:
++                                        event.setDropItems(false);
++                                        Bplayer.getInventory().addItem(new org.bukkit.inventory.ItemStack(Material.NETHERITE_SCRAP, 1));
++                                        break;
++                                    case COPPER_ORE:
++                                    case DEEPSLATE_COPPER_ORE:
++                                        event.setDropItems(false);
++                                        Bplayer.getInventory().addItem(new org.bukkit.inventory.ItemStack(Material.COPPER_INGOT, 1));
++                                        break;
++                                    default:
++                                        break;
 +                                }
 +                            }
 +                        }
@@ -91,87 +91,88 @@ index 1c4fe18c814a48997f5fd4cf07b796cde9838188..17c6fd02ec88fd65f868b21455eb9733
              event.setCancelled(isSwordNoBreak);
  
 diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
-index e1858918fc0940270369fc517d3477a73497be1e..462ac1f4b48ac54d58c92f79a3c15b50e915071a 100644
+index 203e2b74ea7cf1a6bbf02e10a9d50d2dead78343..6dc972159ef97544491b693b248195b405b1b129 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/Config.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/Config.java
 @@ -45,6 +45,12 @@ public class Config {
                      config.set("coloredSigns" + ".enabled", false);
                      config.set("coloredSigns" + ".usePermission", true);
                  }
-+                if(!config.contains("autoSmelt")) {
-+                    config.set("autoSmelt" + ".price", 30);
-+                    List<String> worldsList = new ArrayList<>();
-+                    worldsList.add("FantasyWorld");
-+                    config.set("autoSmelt" + ".enabledWorlds", worldsList);
-+                }
++            if(!config.contains("autoSmelt")) {
++                config.set("autoSmelt" + ".price", 30);
++                List<String> worldsList = new ArrayList<>();
++                worldsList.add("FantasyWorld");
++                config.set("autoSmelt" + ".enabledWorlds", worldsList);
++            }
                  save();
-             } catch (IOException | InvalidConfigurationException e) {
-                 e.printStackTrace();
+         } catch (IOException | InvalidConfigurationException e) {
+             e.printStackTrace();
 @@ -59,6 +65,14 @@ public class Config {
-             }
          }
+     }
  
-+        public static int getAutoSmeltPrice() {
-+            return config.getInt("autoSmelt" + ".price");
-+        }
++    public static int getAutoSmeltPrice() {
++        return config.getInt("autoSmelt" + ".price");
++    }
 +
-+        public static List<String> getAutoSmeltWorlds() {
-+            return (List<String>) config.getList("autoSmelt" + ".enabledWorlds");
-+        }
++    public static List<String> getAutoSmeltWorlds() {
++        return (List<String>) config.getList("autoSmelt" + ".enabledWorlds");
++    }
 +
      public static boolean getColoredSignsEnabled() {
          return config.getBoolean("coloredSigns" + ".enabled");
      }
 diff --git a/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java b/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java
-index 3470d789fd267a0b41a8590dd553c29f8345ce2f..31daafb3b1e802a0418082e567d213291b72e882 100644
+index f28b4e1f3f228210aca64e66c0a2e2e933377dae..b82dc26e4dda493b53d55fd4ebc987b7d7d07591 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java
-@@ -82,6 +82,21 @@ public class MessagesFile {
-                 if(!config.contains("spawnTeleport")) {
-                     config.set("spawnTeleport", "&aYou got teleported to the spawn");
-                 }
-+                if(!config.contains("autoSmeltEnchanted")) {
-+                    config.set("autoSmeltEnchanted", "&aYour pickaxe now has autosmelt");
-+                }
-+                if(!config.contains("autoSmeltUnable")) {
-+                    config.set("autoSmeltUnable", "&cThis pickaxe cannot be enchanted");
-+                }
-+                if(!config.contains("autoSmeltNoPickaxe")) {
-+                    config.set("autoSmeltNoPickaxe", "&cYou have to hold a pickaxe in your hand");
-+                }
-+                if(!config.contains("autoSmeltLevels")) {
-+                    config.set("autoSmeltLevels", "&cYou need %price% experience levels");
-+                }
-+                if(!config.contains("autoSmeltNotHere")) {
-+                    config.set("autoSmeltNotHere", "&cAutosmelt does not work here");
-+                }
-                 save();
-             } catch (IOException | InvalidConfigurationException e) {
-                 e.printStackTrace();
-@@ -181,5 +196,25 @@ public class MessagesFile {
-             String prefix = config.getString("spawnTeleport");
-             return prefix.replace("&", "§");
-         }
-+        public static String getAutoSmeltEnchanted() {
-+            String prefix = config.getString("autoSmeltEnchanted");
-+            return prefix.replace("&", "§");
-+        }
-+        public static String getAutoSmeltUnable() {
-+            String prefix = config.getString("autoSmeltUnable");
-+            return prefix.replace("&", "§");
-+        }
-+        public static String getAutoSmeltNoPickaxe() {
-+            String prefix = config.getString("autoSmeltNoPickaxe");
-+            return prefix.replace("&", "§");
-+        }
-+        public static String getAutoSmeltLevels() {
-+            String prefix = config.getString("autoSmeltLevels");
-+            return prefix.replace("&", "§");
-+        }
-+        public static String getAutoSmeltNotHere() {
-+            String prefix = config.getString("autoSmeltNotHere");
-+            return prefix.replace("&", "§");
-+        }
+@@ -82,6 +82,22 @@ public class MessagesFile {
+             if(!config.contains("spawnTeleport")) {
+                 config.set("spawnTeleport", "&aYou got teleported to the spawn");
+             }
++
++            if(!config.contains("autoSmeltEnchanted")) {
++                config.set("autoSmeltEnchanted", "&aYour pickaxe now has autosmelt");
++            }
++            if(!config.contains("autoSmeltUnable")) {
++                config.set("autoSmeltUnable", "&cThis pickaxe cannot be enchanted");
++            }
++            if(!config.contains("autoSmeltNoPickaxe")) {
++                config.set("autoSmeltNoPickaxe", "&cYou have to hold a pickaxe in your hand");
++            }
++            if(!config.contains("autoSmeltLevels")) {
++                config.set("autoSmeltLevels", "&cYou need %price% experience levels");
++            }
++            if(!config.contains("autoSmeltNotHere")) {
++                config.set("autoSmeltNotHere", "&cAutosmelt does not work here");
++            }
+             save();
+         } catch (IOException | InvalidConfigurationException e) {
+             e.printStackTrace();
+@@ -180,5 +196,25 @@ public class MessagesFile {
+         String prefix = config.getString("spawnTeleport");
+         return prefix.replace("&", "§");
+     }
++    public static String getAutoSmeltEnchanted() {
++        String prefix = config.getString("autoSmeltEnchanted");
++        return prefix.replace("&", "§");
++    }
++    public static String getAutoSmeltUnable() {
++        String prefix = config.getString("autoSmeltUnable");
++        return prefix.replace("&", "§");
++    }
++    public static String getAutoSmeltNoPickaxe() {
++        String prefix = config.getString("autoSmeltNoPickaxe");
++        return prefix.replace("&", "§");
++    }
++    public static String getAutoSmeltLevels() {
++        String prefix = config.getString("autoSmeltLevels");
++        return prefix.replace("&", "§");
++    }
++    public static String getAutoSmeltNotHere() {
++        String prefix = config.getString("autoSmeltNotHere");
++        return prefix.replace("&", "§");
++    }
  
  }
 diff --git a/src/main/java/net/pascalpex/deepslatemc/commands/AutosmeltCommand.java b/src/main/java/net/pascalpex/deepslatemc/commands/AutosmeltCommand.java
@@ -247,10 +248,10 @@ index 0000000000000000000000000000000000000000..0aa6ca538a87a370943d9dc117a4b33c
 +
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index dedabbb5e24996e166f6d127f9f1c0aa061af3aa..fce71ae4bce8e975ca305660b9ebe1ddadc09686 100644
+index 4cb7c0a0e1c25d483a7ec8f21da1934fb0dd045d..e5a5fdade9e27598f539fada711e0a3fdcc803a6 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -1008,6 +1008,7 @@ public final class CraftServer implements Server {
+@@ -1039,6 +1039,7 @@ public final class CraftServer implements Server {
          MinecraftServer.getServer().server.getCommandMap().register("wartung", "Deepslate", new MaintenanceMode("wartung"));
          MinecraftServer.getServer().server.getCommandMap().register("help", "Deepslate", new HelpCommand("help"));
          MinecraftServer.getServer().server.getCommandMap().register("hilfe", "Deepslate", new HelpCommand("hilfe"));
