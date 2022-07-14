@@ -1,14 +1,14 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Pascalpex <pascalpex@gmail.com>
-Date: Mon, 21 Mar 2022 15:35:15 +0100
+Date: Thu, 14 Jul 2022 14:51:50 +0200
 Subject: [PATCH] Spawn functions
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 5c34f8ab69e213ed72114086b29a1c64c847e7a8..76ed2954211655697b557093ab4a03616829c147 100644
+index 7f1bf370f7b377f704368462baf2be83e29c942d..e56899e369f082241d5f42a4e15b1e6714e26da1 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-@@ -272,6 +272,13 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+@@ -253,6 +253,13 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
          MinecraftServer.getServer().server.getCommandMap().register("wartung", "Deepslate", new MaintenanceMode("wartung"));
          MinecraftServer.getServer().server.getCommandMap().register("help", "Deepslate", new HelpCommand("help"));
          MinecraftServer.getServer().server.getCommandMap().register("hilfe", "Deepslate", new HelpCommand("hilfe"));
@@ -23,10 +23,10 @@ index 5c34f8ab69e213ed72114086b29a1c64c847e7a8..76ed2954211655697b557093ab4a0361
  
          this.setPvpAllowed(dedicatedserverproperties.pvp);
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index 377720a203760d525f8fa90dd564b8230dcb40e4..53e2cc8ef88121f7baccf7dcab396232e07d0531 100644
+index 0a08ca4d89c9de14b3e967231f6d97a88cd1379f..df84ea01364288dbdc46fd5af7acc77f514747f3 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
-@@ -94,6 +94,7 @@ import net.minecraft.world.scores.Scoreboard; // Paper
+@@ -102,6 +102,7 @@ import net.minecraft.world.scores.Scoreboard; // Paper
  import net.minecraft.world.scores.Team;
  import net.pascalpex.deepslatemc.MessagesFile;
  import net.pascalpex.deepslatemc.commands.MaintenanceMode;
@@ -34,16 +34,16 @@ index 377720a203760d525f8fa90dd564b8230dcb40e4..53e2cc8ef88121f7baccf7dcab396232
  import org.slf4j.Logger;
  
  // CraftBukkit start
-@@ -362,6 +363,7 @@ public abstract class PlayerList {
+@@ -364,6 +365,7 @@ public abstract class PlayerList {
          player.containerMenu.transferTo(player.containerMenu, bukkitPlayer);
  
-         PlayerJoinEvent playerJoinEvent = new PlayerJoinEvent(bukkitPlayer, PaperAdventure.asAdventure(chatmessage)); // Paper - Adventure
+         PlayerJoinEvent playerJoinEvent = new PlayerJoinEvent(bukkitPlayer, PaperAdventure.asAdventure(ichatmutablecomponent)); // Paper - Adventure
 +        SpawnCommand.playerJoin(bukkitPlayer); // Deepslate - Spawn functions
          this.cserver.getPluginManager().callEvent(playerJoinEvent);
  
          if (!player.connection.connection.isConnected()) {
 diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
-index 44200c0056fca59b312e5e9115b17e0bb69437bd..c591634e173da39764b4064963e4d500aaf07eee 100644
+index cf33202b996839c11bb52e5550b3e588e5b2dc2e..7645e1e393108c7dd27f7b9a03deeba151ae93cc 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/Config.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/Config.java
 @@ -1,5 +1,8 @@
@@ -59,89 +59,89 @@ index 44200c0056fca59b312e5e9115b17e0bb69437bd..c591634e173da39764b4064963e4d500
                  if(!config.contains("opCommandActive")) {
                      config.set("opCommandActive", true);
                  }
-+                if(!config.contains("spawnOnJoin")) {
-+                    config.set("spawnOnJoin", false);
-+                }
++            if(!config.contains("spawnOnJoin")) {
++                config.set("spawnOnJoin", false);
++            }
                  save();
-             } catch (IOException | InvalidConfigurationException e) {
-                 e.printStackTrace();
+         } catch (IOException | InvalidConfigurationException e) {
+             e.printStackTrace();
 @@ -50,6 +56,30 @@ public class Config {
              return config.getBoolean("opCommandActive");
          }
  
-+        public static boolean getSpawnOnJoin() {
-+            return config.getBoolean("spawnOnJoin");
-+        }
++    public static boolean getSpawnOnJoin() {
++        return config.getBoolean("spawnOnJoin");
++    }
 +
-+        public static void setSpawn(Location loc) {
-+            config.set("spawn" + ".world", loc.getWorld().getName());
-+            config.set("spawn" + ".X", loc.getX());
-+            config.set("spawn" + ".Y", loc.getY());
-+            config.set("spawn" + ".Z", loc.getZ());
-+            config.set("spawn" + ".pitch",(double) loc.getPitch());
-+            config.set("spawn" + ".yaw",(double) loc.getYaw());
-+            save();
-+        }
++    public static void setSpawn(Location loc) {
++        config.set("spawn" + ".world", loc.getWorld().getName());
++        config.set("spawn" + ".X", loc.getX());
++        config.set("spawn" + ".Y", loc.getY());
++        config.set("spawn" + ".Z", loc.getZ());
++        config.set("spawn" + ".pitch",(double) loc.getPitch());
++        config.set("spawn" + ".yaw",(double) loc.getYaw());
++        save();
++    }
 +
-+        public static Location getSpawn() {
-+            World world = Bukkit.getWorld(config.getString("spawn" + ".world"));
-+            double x = config.getDouble("spawn" + ".X");
-+            double y = config.getDouble("spawn" + ".Y");
-+            double z = config.getDouble("spawn" + ".Z");
-+            float pitch = (float) config.getDouble("spawn" + ".pitch");
-+            float yaw = (float) config.getDouble("spawn" + ".yaw");
-+            return new Location(world, x, y, z, yaw, pitch);
-+        }
++    public static Location getSpawn() {
++        World world = Bukkit.getWorld(config.getString("spawn" + ".world"));
++        double x = config.getDouble("spawn" + ".X");
++        double y = config.getDouble("spawn" + ".Y");
++        double z = config.getDouble("spawn" + ".Z");
++        float pitch = (float) config.getDouble("spawn" + ".pitch");
++        float yaw = (float) config.getDouble("spawn" + ".yaw");
++        return new Location(world, x, y, z, yaw, pitch);
++    }
 +
          public static String getDiscordLink() {
              return config.getString("discordLink");
          }
 diff --git a/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java b/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java
-index 60c6d01d6845f183a6e9899f04b3b8974b0ae42f..3470d789fd267a0b41a8590dd553c29f8345ce2f 100644
+index 7528c45a8fd24c61336e8773ab51e9886670064c..f28b4e1f3f228210aca64e66c0a2e2e933377dae 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java
 @@ -73,6 +73,15 @@ public class MessagesFile {
-                     message.add("&6questions, please ask a &9team member.");
-                     config.set("helpMessage", message);
-                 }
-+                if(!config.contains("spawnSet")) {
-+                    config.set("spawnSet", "&aThe spawn got set successfully");
-+                }
-+                if(!config.contains("spawnNotSet")) {
-+                    config.set("spawnNotSet", "&cThe spawn is not set");
-+                }
-+                if(!config.contains("spawnTeleport")) {
-+                    config.set("spawnTeleport", "&aYou got teleported to the spawn");
-+                }
-                 save();
-             } catch (IOException | InvalidConfigurationException e) {
-                 e.printStackTrace();
-@@ -160,5 +169,17 @@ public class MessagesFile {
+                 message.add("&6questions, please ask a &9team member.");
+                 config.set("helpMessage", message);
+             }
++            if(!config.contains("spawnSet")) {
++                config.set("spawnSet", "&aThe spawn got set successfully");
++            }
++            if(!config.contains("spawnNotSet")) {
++                config.set("spawnNotSet", "&cThe spawn is not set");
++            }
++            if(!config.contains("spawnTeleport")) {
++                config.set("spawnTeleport", "&aYou got teleported to the spawn");
++            }
+             save();
+         } catch (IOException | InvalidConfigurationException e) {
+             e.printStackTrace();
+@@ -159,5 +168,17 @@ public class MessagesFile {
              String prefix = config.getString("maintenanceOff");
              return prefix.replace("&", "§");
          }
-+        public static String getSpawnSet() {
-+            String prefix = config.getString("spawnSet");
-+            return prefix.replace("&", "§");
-+        }
-+        public static String getSpawnNotSet() {
-+            String prefix = config.getString("spawnNotSet");
-+            return prefix.replace("&", "§");
-+        }
-+        public static String getSpawnTeleport() {
-+            String prefix = config.getString("spawnTeleport");
-+            return prefix.replace("&", "§");
-+        }
++    public static String getSpawnSet() {
++        String prefix = config.getString("spawnSet");
++        return prefix.replace("&", "§");
++    }
++    public static String getSpawnNotSet() {
++        String prefix = config.getString("spawnNotSet");
++        return prefix.replace("&", "§");
++    }
++    public static String getSpawnTeleport() {
++        String prefix = config.getString("spawnTeleport");
++        return prefix.replace("&", "§");
++    }
  
  }
 diff --git a/src/main/java/net/pascalpex/deepslatemc/commands/SpawnCommand.java b/src/main/java/net/pascalpex/deepslatemc/commands/SpawnCommand.java
 new file mode 100644
-index 0000000000000000000000000000000000000000..8b79c6b4202f724e8dbe111f9bb8fd744f3184ff
+index 0000000000000000000000000000000000000000..f77b1929677128a9aadcb07a89ed42c091d5ae45
 --- /dev/null
 +++ b/src/main/java/net/pascalpex/deepslatemc/commands/SpawnCommand.java
 @@ -0,0 +1,62 @@
 +package net.pascalpex.deepslatemc.commands;
-+
++    
 +import net.pascalpex.deepslatemc.Config;
 +import net.pascalpex.deepslatemc.MessagesFile;
 +import org.bukkit.Bukkit;
@@ -203,10 +203,10 @@ index 0000000000000000000000000000000000000000..8b79c6b4202f724e8dbe111f9bb8fd74
 +
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 460d951d385fed544f88484b2c68cec6c4e044d3..dedabbb5e24996e166f6d127f9f1c0aa061af3aa 100644
+index fc6f037c37a3e567244943aa3cfb5d32a51becb3..4cb7c0a0e1c25d483a7ec8f21da1934fb0dd045d 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -1008,6 +1008,13 @@ public final class CraftServer implements Server {
+@@ -1039,6 +1039,13 @@ public final class CraftServer implements Server {
          MinecraftServer.getServer().server.getCommandMap().register("wartung", "Deepslate", new MaintenanceMode("wartung"));
          MinecraftServer.getServer().server.getCommandMap().register("help", "Deepslate", new HelpCommand("help"));
          MinecraftServer.getServer().server.getCommandMap().register("hilfe", "Deepslate", new HelpCommand("hilfe"));
