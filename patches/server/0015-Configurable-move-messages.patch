@@ -5,10 +5,10 @@ Subject: [PATCH] Configurable move messages
 
 
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index 20bf25ef4535e564bcf3c3a0ea37223931e64ef0..93fd51262e967aab0e74a6b3fa8494b42729fc5b 100644
+index 258dae4ae2bb2270f63c8ffc6695d0a30b4f47f5..f3fbb30ad280b6f19d1b5f326769d2a5f75d1c87 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-@@ -1439,7 +1439,9 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Ser
+@@ -1469,7 +1469,9 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Ser
  
                                  if (d11 - d10 > Math.max(f2, Math.pow((double) (org.spigotmc.SpigotConfig.movedTooQuicklyMultiplier * (float) i * speed), 2)) && !this.isSingleplayerOwner()) {
                                  // CraftBukkit end
@@ -19,7 +19,7 @@ index 20bf25ef4535e564bcf3c3a0ea37223931e64ef0..93fd51262e967aab0e74a6b3fa8494b4
                                      this.teleport(this.player.getX(), this.player.getY(), this.player.getZ(), this.player.getYRot(), this.player.getXRot());
                                      return;
                                  }
-@@ -1507,7 +1509,9 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Ser
+@@ -1537,7 +1539,9 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Ser
  
                              if (!this.player.isChangingDimension() && d11 > org.spigotmc.SpigotConfig.movedWronglyThreshold && !this.player.isSleeping() && !this.player.gameMode.isCreative() && this.player.gameMode.getGameModeForPlayer() != GameType.SPECTATOR) { // Spigot
                                  flag2 = true; // Paper - diff on change, this should be moved wrongly
@@ -31,20 +31,20 @@ index 20bf25ef4535e564bcf3c3a0ea37223931e64ef0..93fd51262e967aab0e74a6b3fa8494b4
  
                              this.player.absMoveTo(d0, d1, d2, f, f1);
 diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
-index ba80d45928ff1c25f213b4ebf1fd72c527c7d70e..35c475542482fc3f5faa70c52bfba65acde96f90 100644
+index 8d2ece0c1cb3474483a65b03a2a6349ecac7902f..e794bd569fc9ecf4fc34500d48a00ef9c2181727 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/Config.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/Config.java
 @@ -54,6 +54,10 @@ public class Config {
-                 if (!config.contains("metrics")) {
-                     config.set("metrics", true);
-                 }
+             if (!config.contains("metrics")) {
+                 config.set("metrics", true);
+             }
 +                if (!config.contains("messages")) {
 +                    config.set("messages" + ".movedWrongly", true);
 +                    config.set("messages" + ".movedQuickly", true);
 +                }
                  save();
-             } catch (IOException | InvalidConfigurationException e) {
-                 e.printStackTrace();
+         } catch (IOException | InvalidConfigurationException e) {
+             e.printStackTrace();
 @@ -133,4 +137,12 @@ public class Config {
              save();
          }

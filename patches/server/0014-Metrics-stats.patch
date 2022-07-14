@@ -1,32 +1,37 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Pascalpex <pascalpex@gmail.com>
-Date: Mon, 21 Mar 2022 15:55:41 +0100
+Date: Thu, 14 Jul 2022 15:11:09 +0200
 Subject: [PATCH] Metrics stats
 
 
-diff --git a/src/main/java/com/destroystokyo/paper/PaperConfig.java b/src/main/java/com/destroystokyo/paper/PaperConfig.java
-index 19d7ea19f91bb2ef94187d6db91f26a93a6d0be2..a64019984928df84aaf5d1d897ceb9c5796dc1dc 100644
---- a/src/main/java/com/destroystokyo/paper/PaperConfig.java
-+++ b/src/main/java/com/destroystokyo/paper/PaperConfig.java
-@@ -13,12 +13,14 @@ import java.nio.charset.StandardCharsets;
- import java.util.HashMap;
- import java.util.List;
- import java.util.Map;
-+import java.util.UUID;
- import java.util.concurrent.TimeUnit;
- import java.util.logging.Level;
- import java.util.regex.Pattern;
- 
- import com.google.common.collect.Lists;
- import net.minecraft.server.MinecraftServer;
+diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
+index e7d5ff0e49b3aa241ed25b2be49f4254ed6649d3..7691864f43f9701fc1336572186dc558bbfb5d25 100644
+--- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
++++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
+@@ -13,10 +13,7 @@ import java.net.Proxy;
+ import java.nio.charset.StandardCharsets;
+ import java.nio.file.Files;
+ import java.nio.file.Path;
+-import java.util.Collections;
+-import java.util.List;
+-import java.util.Locale;
+-import java.util.Optional;
++import java.util.*;
+ import java.util.function.BooleanSupplier;
+ import javax.annotation.Nullable;
+ import net.minecraft.DefaultUncaughtExceptionHandler;
+@@ -55,6 +52,7 @@ import net.minecraft.world.level.GameRules;
+ import net.minecraft.world.level.GameType;
+ import net.minecraft.world.level.block.entity.SkullBlockEntity;
+ import net.minecraft.world.level.storage.LevelStorageSource;
 +import net.pascalpex.deepslatemc.Config;
- import org.bukkit.Bukkit;
- import org.bukkit.ChatColor;
- import org.bukkit.command.Command;
-@@ -127,6 +129,14 @@ public class PaperConfig {
-             Metrics.PaperMetrics.startMetrics();
-             metricsStarted = true;
-         }
+ import net.pascalpex.deepslatemc.commands.*;
+ import org.slf4j.Logger;
+ 
+@@ -224,6 +222,14 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+         thread.start(); // Paper - start console thread after MinecraftServer.console & PaperConfig are initialized
+         io.papermc.paper.command.PaperCommands.registerCommands(this);
+         com.destroystokyo.paper.Metrics.PaperMetrics.startMetrics();
 +
 +        // Deepslate start - Metrics stats
 +        if(Config.getMetricsEnabled()) {
@@ -35,34 +40,34 @@ index 19d7ea19f91bb2ef94187d6db91f26a93a6d0be2..a64019984928df84aaf5d1d897ceb9c5
 +        }
 +        // Deepslate end
 +
-     }
- 
-     static void readConfig(Class<?> clazz, Object instance) {
+         // Purpur start
+         try {
+             org.purpurmc.purpur.PurpurConfig.init((java.io.File) options.valueOf("purpur-settings"));
 diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
-index 462ac1f4b48ac54d58c92f79a3c15b50e915071a..ba80d45928ff1c25f213b4ebf1fd72c527c7d70e 100644
+index 6dc972159ef97544491b693b248195b405b1b129..8d2ece0c1cb3474483a65b03a2a6349ecac7902f 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/Config.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/Config.java
-@@ -51,6 +51,9 @@ public class Config {
-                     worldsList.add("FantasyWorld");
-                     config.set("autoSmelt" + ".enabledWorlds", worldsList);
-                 }
-+                if (!config.contains("metrics")) {
-+                    config.set("metrics", true);
-+                }
-                 save();
-             } catch (IOException | InvalidConfigurationException e) {
-                 e.printStackTrace();
-@@ -65,6 +68,10 @@ public class Config {
+@@ -50,6 +50,9 @@ public class Config {
+                 List<String> worldsList = new ArrayList<>();
+                 worldsList.add("FantasyWorld");
+                 config.set("autoSmelt" + ".enabledWorlds", worldsList);
++            }
++            if (!config.contains("metrics")) {
++                config.set("metrics", true);
              }
+                 save();
+         } catch (IOException | InvalidConfigurationException e) {
+@@ -65,6 +68,10 @@ public class Config {
          }
+     }
  
-+        public static boolean getMetricsEnabled() {
-+            return config.getBoolean("metrics");
-+        }
++    public static boolean getMetricsEnabled() {
++        return config.getBoolean("metrics");
++    }
 +
-         public static int getAutoSmeltPrice() {
-             return config.getInt("autoSmelt" + ".price");
-         }
+     public static int getAutoSmeltPrice() {
+         return config.getInt("autoSmelt" + ".price");
+     }
 diff --git a/src/main/java/net/pascalpex/deepslatemc/util/Metrics.java b/src/main/java/net/pascalpex/deepslatemc/util/Metrics.java
 new file mode 100644
 index 0000000000000000000000000000000000000000..136d30d7e25895adf5be857aeac94c46cb330ec0
