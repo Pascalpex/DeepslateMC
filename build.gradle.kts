@@ -62,18 +62,18 @@ paperweight {
     remapRepo.set("https://maven.fabricmc.net/")
     decompileRepo.set("https://files.minecraftforge.net/maven/")
 
-    useStandardUpstream("mirai") {
-        url.set(github("Pascalpex", "MiraiPurpur"))
-        ref.set(providers.gradleProperty("miraiRef"))
+    useStandardUpstream("purpur") { // Temporarily rebased on Purpur
+        url.set(github("PurpurMC", "Purpur"))
+        ref.set(providers.gradleProperty("purpurRef"))
 
         withStandardPatcher {
-            baseName("mirai")
+            baseName("purpur")
 
             apiOutputDir.set(layout.projectDirectory.dir("deepslateMC-api"))
             serverOutputDir.set(layout.projectDirectory.dir("deepslateMC-server"))
 
-            apiSourceDirPath.set("mirai-api")
-            serverSourceDirPath.set("mirai-server")
+            apiSourceDirPath.set("Purpur-API")
+            serverSourceDirPath.set("Purpur-Server")
 
             remapRepo.set("https://maven.fabricmc.net/")
             decompileRepo.set("https://files.minecraftforge.net/maven/")

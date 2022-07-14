@@ -1,19 +1,19 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Pascalpex <pascalpex@gmail.com>
-Date: Wed, 13 Jul 2022 20:36:48 +0200
+Date: Thu, 14 Jul 2022 14:08:41 +0200
 Subject: [PATCH] Rebranding
 
 
 diff --git a/build.gradle.kts b/build.gradle.kts
-index a11a188efb6e031cc1067b58cbe66cdf869f79cb..ed52dce55d7b735189c49ad36b014008fc70ce10 100644
+index fd3805da1f276c76a2e814f755f6755245ec2ff4..a43edd2f8c2c97e10aa0275069d944e91ebc6f91 100644
 --- a/build.gradle.kts
 +++ b/build.gradle.kts
 @@ -9,7 +9,7 @@ plugins {
  }
  
  dependencies {
--    implementation(project(":mirai-api")) // Purpur // Mirai
-+    implementation(project(":deepslateMC-api")) // Purpur // Mirai // Deepslate
+-    implementation(project(":purpur-api")) // Purpur
++    implementation(project(":deepslateMC-api")) // Purpur // Deepslate
      // Pufferfish start
      implementation("io.papermc.paper:paper-mojangapi:1.19-R0.1-SNAPSHOT") {
          exclude("io.papermc.paper", "paper-api")
@@ -21,21 +21,21 @@ index a11a188efb6e031cc1067b58cbe66cdf869f79cb..ed52dce55d7b735189c49ad36b014008
          attributes(
              "Main-Class" to "org.bukkit.craftbukkit.Main",
              "Implementation-Title" to "CraftBukkit",
--            "Implementation-Version" to "git-Mirai-Purpur-$implementationVersion", // Pufferfish // Purpur // Mirai
-+            "Implementation-Version" to "git-DeepslateMC-$implementationVersion", // Pufferfish // Purpur // Mirai // Deepslate
+-            "Implementation-Version" to "git-Purpur-$implementationVersion",// Purpur
++            "Implementation-Version" to "git-DeepslateMC-$implementationVersion", // Purpur // Deepslate
              "Implementation-Vendor" to date, // Paper
              "Specification-Title" to "Bukkit",
              "Specification-Version" to project.version,
 diff --git a/src/main/java/com/destroystokyo/paper/Metrics.java b/src/main/java/com/destroystokyo/paper/Metrics.java
-index 14c8ff294758f6216594894adb6bb014c043b67a..5864771321d843841c575a390fa2a78e00719b71 100644
+index acd95cf1dc7f009b63e44e4404e1736283fd458e..d896f6813c38ef810cf9fc7d01b691bcef9db59b 100644
 --- a/src/main/java/com/destroystokyo/paper/Metrics.java
 +++ b/src/main/java/com/destroystokyo/paper/Metrics.java
 @@ -593,7 +593,7 @@ public class Metrics {
              boolean logFailedRequests = config.getBoolean("logFailedRequests", false);
              // Only start Metrics, if it's enabled in the config
              if (config.getBoolean("enabled", true)) {
--                Metrics metrics = new Metrics("Mirai", serverUUID, logFailedRequests, Bukkit.getLogger()); // Pufferfish // Purpur // Mirai
-+                Metrics metrics = new Metrics("DeepslateMC", serverUUID, logFailedRequests, Bukkit.getLogger()); // Pufferfish // Purpur // Mirai // Deepslate
+-                Metrics metrics = new Metrics("Purpur", serverUUID, logFailedRequests, Bukkit.getLogger()); // Purpur
++                Metrics metrics = new Metrics("DeepslateMC", serverUUID, logFailedRequests, Bukkit.getLogger()); // Purpur // Deepslate
  
                  metrics.addCustomChart(new Metrics.SimplePie("minecraft_version", () -> {
                      String minecraftVersion = Bukkit.getVersion();
@@ -43,8 +43,8 @@ index 14c8ff294758f6216594894adb6bb014c043b67a..5864771321d843841c575a390fa2a78e
  
                  metrics.addCustomChart(new Metrics.SingleLineChart("players", () -> Bukkit.getOnlinePlayers().size()));
                  metrics.addCustomChart(new Metrics.SimplePie("online_mode", () -> Bukkit.getOnlineMode() ? "online" : (io.papermc.paper.configuration.GlobalConfiguration.get().proxies.isProxyOnlineMode() ? "bungee" : "offline"))); // Purpur
--                metrics.addCustomChart(new Metrics.SimplePie("mirai_version", () -> (Metrics.class.getPackage().getImplementationVersion() != null) ? Metrics.class.getPackage().getImplementationVersion() : "unknown")); // Purpur // Mirai
-+                metrics.addCustomChart(new Metrics.SimplePie("deepslatemc_version", () -> (Metrics.class.getPackage().getImplementationVersion() != null) ? Metrics.class.getPackage().getImplementationVersion() : "unknown")); // Purpur // Mirai // Deepslate
+-                metrics.addCustomChart(new Metrics.SimplePie("purpur_version", () -> (Metrics.class.getPackage().getImplementationVersion() != null) ? Metrics.class.getPackage().getImplementationVersion() : "unknown")); // Purpur
++                metrics.addCustomChart(new Metrics.SimplePie("deepslatemc_version", () -> (Metrics.class.getPackage().getImplementationVersion() != null) ? Metrics.class.getPackage().getImplementationVersion() : "unknown")); // Purpur // Deepslate
  
                  metrics.addCustomChart(new Metrics.DrilldownPie("java_version", () -> {
                      Map<String, Map<String, Integer>> map = new HashMap<>();
@@ -79,59 +79,46 @@ index fba5dbdb7bcbb55400ef18342c9b54612972a718..2e3d9ee90ff26887ee4f0622ca410e8d
  
          return history != null ? Component.join(net.kyori.adventure.text.JoinConfiguration.separator(Component.newline()), history, updateMessage) : updateMessage; // Purpur
 diff --git a/src/main/java/com/destroystokyo/paper/console/PaperConsole.java b/src/main/java/com/destroystokyo/paper/console/PaperConsole.java
-index a88f4a9547960dc0067bc401a3b517d4601a4666..952db06bee3fce23a4ff896d570004ea178db958 100644
+index 005fdd2e2ebc0b6f7cb06b2efdb705b9ed23a1ea..c1baed7dd0e9eb8f668da6dedd07239e27063eee 100644
 --- a/src/main/java/com/destroystokyo/paper/console/PaperConsole.java
 +++ b/src/main/java/com/destroystokyo/paper/console/PaperConsole.java
 @@ -17,7 +17,7 @@ public final class PaperConsole extends SimpleTerminalConsole {
      @Override
      protected LineReader buildReader(LineReaderBuilder builder) {
          builder
--                .appName("Mirai") // Purpur // Mirai
-+                .appName("DeepslateMC") // Purpur // Mirai // Deepslate
+-                .appName("Purpur") // Purpur
++                .appName("DeepslateMC") // Purpur // Deepslate
                  .variable(LineReader.HISTORY_FILE, java.nio.file.Paths.get(".console_history"))
                  .completer(new ConsoleCommandCompleter(this.server))
                  .option(LineReader.Option.COMPLETE_IN_WORD, true);
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 73ee6c173329cddcd4129b341d45a6b248103102..63a52200e34baed69d3fa634f5886baa7953831f 100644
+index 2ece154b5e7daaa3e0b128145fc5e1d452125f72..94510ef33b072b66dd360021b52ae6174365fbff 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
 @@ -1682,7 +1682,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
  
      @DontObfuscate
      public String getServerModName() {
--        return org.purpurmc.purpur.PurpurConfig.serverModName; // Mirai - Mirai > // Purpur - Purpur > // Pufferfish - Pufferfish > // Paper - Paper > // Spigot - Spigot > // CraftBukkit - cb > vanilla!
-+        return "DeepslateMC"; // Deepslate - DeepslateMC > // Mirai - Mirai > // Purpur - Purpur > // Pufferfish - Pufferfish > // Paper - Paper > // Spigot - Spigot > // CraftBukkit - cb > vanilla!
+-        return org.purpurmc.purpur.PurpurConfig.serverModName; // Purpur - Purpur > // Paper - Paper > // Spigot - Spigot > // CraftBukkit - cb > vanilla!
++        return "DeepslateMC"; // Deepslate - DeepslateMC > // Purpur - Purpur > // Paper - Paper > // Spigot - Spigot > // CraftBukkit - cb > vanilla!
      }
  
      public SystemReport fillSystemReport(SystemReport details) {
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 237e70bd1523ba71f104bf392486839f21d9ffb3..d6f05bf04173cfb7d8c88add2f3713f976e0f27f 100644
+index 7208236ee3c604620fd0d0afe49215320e45e24b..c0a6b4d8bc1c2d713297d6a6665d5a2279eac03f 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -246,7 +246,7 @@ import javax.annotation.Nullable; // Paper
  import javax.annotation.Nonnull; // Paper
  
  public final class CraftServer implements Server {
--    private final String serverName = "Mirai"; // Paper // Pufferfish // Purpur // Mirai
-+    private final String serverName = "DeepslateMC"; // Paper // Pufferfish // Purpur // Mirai // Deepslate
+-    private final String serverName = "Purpur"; // Paper // Purpur
++    private final String serverName = "DeepslateMC"; // Paper // Purpur // Deepslate
      private final String serverVersion;
      private final String bukkitVersion = Versioning.getBukkitVersion();
      private final Logger logger = Logger.getLogger("Minecraft");
-diff --git a/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java b/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
-index ae2965796f5c0a5c8629159714a245557c17f423..eefc182f302f9828ab10189991484a72d7d4ba52 100644
---- a/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
-+++ b/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
-@@ -430,7 +430,7 @@ public final class CraftMagicNumbers implements UnsafeValues {
- 
-     @Override
-     public com.destroystokyo.paper.util.VersionFetcher getVersionFetcher() {
--        return new wtf.etil.mirai.MiraiVersionFetcher(); // Mirai
-+        return new com.destroystokyo.paper.PaperVersionFetcher(); // Pufferfish // Purpur // Deepslate
-     }
- 
-     @Override
 diff --git a/src/main/java/org/bukkit/craftbukkit/util/Versioning.java b/src/main/java/org/bukkit/craftbukkit/util/Versioning.java
-index 3e9a46500401da7634766b720677e11f3db28e76..05e870bae71e8e59e5a263ad757b356d151978d9 100644
+index fb87620c742ff7912f5e8ccd2a7930dd605576d9..05e870bae71e8e59e5a263ad757b356d151978d9 100644
 --- a/src/main/java/org/bukkit/craftbukkit/util/Versioning.java
 +++ b/src/main/java/org/bukkit/craftbukkit/util/Versioning.java
 @@ -1,29 +1,7 @@
@@ -148,7 +135,7 @@ index 3e9a46500401da7634766b720677e11f3db28e76..05e870bae71e8e59e5a263ad757b356d
      public static String getBukkitVersion() {
 -        String result = "Unknown-Version";
 -
--        InputStream stream = Bukkit.class.getClassLoader().getResourceAsStream("META-INF/maven/wtf.etil.mirai/mirai-api/pom.properties"); // Pufferfish // Purpur // Mirai
+-        InputStream stream = Bukkit.class.getClassLoader().getResourceAsStream("META-INF/maven/org.purpurmc.purpur/purpur-api/pom.properties"); // Purpur
 -        Properties properties = new Properties();
 -
 -        if (stream != null) {
@@ -166,15 +153,15 @@ index 3e9a46500401da7634766b720677e11f3db28e76..05e870bae71e8e59e5a263ad757b356d
      }
  }
 diff --git a/src/main/java/org/purpurmc/purpur/PurpurConfig.java b/src/main/java/org/purpurmc/purpur/PurpurConfig.java
-index e12459fac360198aeea604cdb82ae16aa3a93eea..6b23f0f57f19aee2dba831ea3e1f00f9de4d8eaa 100644
+index d44b8ce90db7c6c27f71aa841d6fb64b159b7b42..e0e9401563e1976946f8e192d76f0bfbaf0e8ba9 100644
 --- a/src/main/java/org/purpurmc/purpur/PurpurConfig.java
 +++ b/src/main/java/org/purpurmc/purpur/PurpurConfig.java
 @@ -235,7 +235,7 @@ public class PurpurConfig {
          if (!TimingsManager.hiddenConfigs.contains("settings.seed")) TimingsManager.hiddenConfigs.add("settings.seed");
      }
  
--    public static String serverModName = "Mirai"; // Mirai
-+    public static String serverModName = "DeepslateMC"; // Mirai // Deepslate
+-    public static String serverModName = "Purpur";
++    public static String serverModName = "DeepslateMC"; // Deepslate
      private static void serverModName() {
          serverModName = getString("settings.server-mod-name", serverModName);
      }
