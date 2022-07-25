@@ -92,10 +92,10 @@ index 005fdd2e2ebc0b6f7cb06b2efdb705b9ed23a1ea..c1baed7dd0e9eb8f668da6dedd07239e
                  .completer(new ConsoleCommandCompleter(this.server))
                  .option(LineReader.Option.COMPLETE_IN_WORD, true);
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 2ece154b5e7daaa3e0b128145fc5e1d452125f72..6008813eb1cf7b5f0bd27db512861d013d58cc3f 100644
+index d48a3203e67617e2f3f75756bf9effe31f439457..b25c4af9563e70c8cecd8bf07824db5a1edc1e7e 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
-@@ -913,7 +913,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -914,7 +914,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
          shutdownThread = Thread.currentThread();
          org.spigotmc.WatchdogThread.doStop(); // Paper
          if (!isSameThread()) {
@@ -104,7 +104,7 @@ index 2ece154b5e7daaa3e0b128145fc5e1d452125f72..6008813eb1cf7b5f0bd27db512861d01
              while (this.getRunningThread().isAlive()) {
                  this.getRunningThread().stop();
                  try {
-@@ -1682,7 +1682,13 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -1683,7 +1683,13 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
  
      @DontObfuscate
      public String getServerModName() {
@@ -120,7 +120,7 @@ index 2ece154b5e7daaa3e0b128145fc5e1d452125f72..6008813eb1cf7b5f0bd27db512861d01
  
      public SystemReport fillSystemReport(SystemReport details) {
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 7208236ee3c604620fd0d0afe49215320e45e24b..c0a6b4d8bc1c2d713297d6a6665d5a2279eac03f 100644
+index f61e0c8a12f2132b307b541525df729eda1a4f51..a4b6d5821e5cfabc4161614c17713e9d3bd517d6 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -246,7 +246,7 @@ import javax.annotation.Nullable; // Paper
