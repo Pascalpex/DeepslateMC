@@ -5,7 +5,7 @@ Subject: [PATCH] Spawn functions
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 7f1bf370f7b377f704368462baf2be83e29c942d..e56899e369f082241d5f42a4e15b1e6714e26da1 100644
+index f9ea91f8dae40dfa1ed5a84b7776b34b1fb465e5..886f1f6060454d8e1f668969c347f1400106b5f4 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 @@ -253,6 +253,13 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
@@ -23,10 +23,10 @@ index 7f1bf370f7b377f704368462baf2be83e29c942d..e56899e369f082241d5f42a4e15b1e67
  
          this.setPvpAllowed(dedicatedserverproperties.pvp);
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index 0a08ca4d89c9de14b3e967231f6d97a88cd1379f..df84ea01364288dbdc46fd5af7acc77f514747f3 100644
+index 6665f4995466a7b64249ec8c4a56732829b3d5db..f838c0d88f942ae5c6ec97245b548e45be54ff4e 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
-@@ -102,6 +102,7 @@ import net.minecraft.world.scores.Scoreboard; // Paper
+@@ -98,6 +98,7 @@ import net.minecraft.world.scores.Scoreboard; // Paper
  import net.minecraft.world.scores.Team;
  import net.pascalpex.deepslatemc.MessagesFile;
  import net.pascalpex.deepslatemc.commands.MaintenanceMode;
@@ -34,7 +34,7 @@ index 0a08ca4d89c9de14b3e967231f6d97a88cd1379f..df84ea01364288dbdc46fd5af7acc77f
  import org.slf4j.Logger;
  
  // CraftBukkit start
-@@ -364,6 +365,7 @@ public abstract class PlayerList {
+@@ -365,6 +366,7 @@ public abstract class PlayerList {
          player.containerMenu.transferTo(player.containerMenu, bukkitPlayer);
  
          PlayerJoinEvent playerJoinEvent = new PlayerJoinEvent(bukkitPlayer, PaperAdventure.asAdventure(ichatmutablecomponent)); // Paper - Adventure
@@ -203,7 +203,7 @@ index 0000000000000000000000000000000000000000..f77b1929677128a9aadcb07a89ed42c0
 +
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index fc6f037c37a3e567244943aa3cfb5d32a51becb3..4cb7c0a0e1c25d483a7ec8f21da1934fb0dd045d 100644
+index 4e3a312eed145f54b56b20d0ba40e4d5605b61b8..365db57a6f842f0bf8831201c26bf8f925336c6c 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -1039,6 +1039,13 @@ public final class CraftServer implements Server {

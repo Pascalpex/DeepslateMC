@@ -49,7 +49,7 @@ index acd95cf1dc7f009b63e44e4404e1736283fd458e..d896f6813c38ef810cf9fc7d01b691bc
                  metrics.addCustomChart(new Metrics.DrilldownPie("java_version", () -> {
                      Map<String, Map<String, Integer>> map = new HashMap<>();
 diff --git a/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java b/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java
-index fba5dbdb7bcbb55400ef18342c9b54612972a718..2e3d9ee90ff26887ee4f0622ca410e8df71f7208 100644
+index fba5dbdb7bcbb55400ef18342c9b54612972a718..054f0f0edb8ff0ec1826fd1f062d5f9dd8042887 100644
 --- a/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java
 +++ b/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java
 @@ -19,10 +19,11 @@ import java.util.stream.StreamSupport;
@@ -59,7 +59,7 @@ index fba5dbdb7bcbb55400ef18342c9b54612972a718..2e3d9ee90ff26887ee4f0622ca410e8d
 -    // Purpur start
 -    private static final String DOWNLOAD_PAGE = "https://purpurmc.org/downloads";
 +    // Purpur // Deepslate start
-+    private static final String GITHUB_BRANCH_NAME = "ver/1.19";
++    private static final String GITHUB_BRANCH_NAME = "ver/1.19.1";
 +    private static final String DOWNLOAD_PAGE = "https://pascalpex.ddns.net/files/deepslate/";
      private static int distance = -2; public int distance() { return distance; }
 -    // Purpur end
@@ -92,10 +92,10 @@ index 005fdd2e2ebc0b6f7cb06b2efdb705b9ed23a1ea..c1baed7dd0e9eb8f668da6dedd07239e
                  .completer(new ConsoleCommandCompleter(this.server))
                  .option(LineReader.Option.COMPLETE_IN_WORD, true);
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index d48a3203e67617e2f3f75756bf9effe31f439457..b25c4af9563e70c8cecd8bf07824db5a1edc1e7e 100644
+index e78170ae888146c2aab6b218f7501b911a70add6..2ede07b25cdc72f7a8a8a326c2964ea60e3048fd 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
-@@ -914,7 +914,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -916,7 +916,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
          shutdownThread = Thread.currentThread();
          org.spigotmc.WatchdogThread.doStop(); // Paper
          if (!isSameThread()) {
@@ -133,7 +133,7 @@ index f61e0c8a12f2132b307b541525df729eda1a4f51..a4b6d5821e5cfabc4161614c17713e9d
      private final String bukkitVersion = Versioning.getBukkitVersion();
      private final Logger logger = Logger.getLogger("Minecraft");
 diff --git a/src/main/java/org/bukkit/craftbukkit/util/Versioning.java b/src/main/java/org/bukkit/craftbukkit/util/Versioning.java
-index fb87620c742ff7912f5e8ccd2a7930dd605576d9..05e870bae71e8e59e5a263ad757b356d151978d9 100644
+index fb87620c742ff7912f5e8ccd2a7930dd605576d9..565936189ca35e189182c8f64dbc390bb2eca8e1 100644
 --- a/src/main/java/org/bukkit/craftbukkit/util/Versioning.java
 +++ b/src/main/java/org/bukkit/craftbukkit/util/Versioning.java
 @@ -1,29 +1,7 @@
@@ -164,7 +164,7 @@ index fb87620c742ff7912f5e8ccd2a7930dd605576d9..05e870bae71e8e59e5a263ad757b356d
 -        }
 -
 -        return result;
-+        return "1.19-R0.1-SNAPSHOT"; // Deepslate - Hardcode version
++        return "1.19.1-R0.1-SNAPSHOT"; // Deepslate - Hardcode version
      }
  }
 diff --git a/src/main/java/org/purpurmc/purpur/PurpurConfig.java b/src/main/java/org/purpurmc/purpur/PurpurConfig.java

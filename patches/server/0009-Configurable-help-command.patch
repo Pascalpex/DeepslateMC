@@ -5,10 +5,10 @@ Subject: [PATCH] Configurable help command
 
 
 diff --git a/src/main/java/net/minecraft/commands/Commands.java b/src/main/java/net/minecraft/commands/Commands.java
-index 839a7e4a94178512109e4f5cd21cdbc3c0072d66..60d8926375fc2389e4957f0ee123fc09c715c434 100644
+index 905d1dffa92d78448619dbf3ec3df70927ffcf8c..d469a90940a90f26c5a7263bc0658449a7b79304 100644
 --- a/src/main/java/net/minecraft/commands/Commands.java
 +++ b/src/main/java/net/minecraft/commands/Commands.java
-@@ -154,7 +154,7 @@ public class Commands {
+@@ -157,7 +157,7 @@ public class Commands {
          GameModeCommand.register(this.dispatcher);
          GameRuleCommand.register(this.dispatcher);
          GiveCommand.register(this.dispatcher, commandRegistryAccess);
@@ -18,7 +18,7 @@ index 839a7e4a94178512109e4f5cd21cdbc3c0072d66..60d8926375fc2389e4957f0ee123fc09
          KickCommand.register(this.dispatcher);
          KillCommand.register(this.dispatcher);
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 330658972ea47f5bc268d7bed9db803cd26e7fd8..7f1bf370f7b377f704368462baf2be83e29c942d 100644
+index 2dd98edae229ce95778952eef6866f697892396e..f9ea91f8dae40dfa1ed5a84b7776b34b1fb465e5 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 @@ -251,6 +251,8 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
@@ -100,7 +100,7 @@ index 0000000000000000000000000000000000000000..911e23651037de54edaf4084686e6097
 +
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 1f92277a37b4ba433368e0edf24ab2008032b1f0..fc6f037c37a3e567244943aa3cfb5d32a51becb3 100644
+index 20a504fc2fe52349d2bf7dad8c9f974d36676155..4e3a312eed145f54b56b20d0ba40e4d5605b61b8 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -1037,6 +1037,8 @@ public final class CraftServer implements Server {

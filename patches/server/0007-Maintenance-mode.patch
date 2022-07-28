@@ -5,7 +5,7 @@ Subject: [PATCH] Maintenance mode
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 4c838c4c931c2f54b598f630ec7c43a28d0858ff..330658972ea47f5bc268d7bed9db803cd26e7fd8 100644
+index 30986976dd99b18fa15acf77682e1d8e1728edf9..2dd98edae229ce95778952eef6866f697892396e 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 @@ -55,10 +55,7 @@ import net.minecraft.world.level.GameRules;
@@ -30,10 +30,10 @@ index 4c838c4c931c2f54b598f630ec7c43a28d0858ff..330658972ea47f5bc268d7bed9db803c
  
          this.setPvpAllowed(dedicatedserverproperties.pvp);
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index fecd65dc87a99a5692c59dd590b20327b1eb31c2..0a08ca4d89c9de14b3e967231f6d97a88cd1379f 100644
+index 366530e2bceb0680c99627abc2c4c48b67f9829d..6665f4995466a7b64249ec8c4a56732829b3d5db 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
-@@ -100,6 +100,8 @@ import net.minecraft.world.scores.Objective;
+@@ -96,6 +96,8 @@ import net.minecraft.world.scores.Objective;
  import net.minecraft.world.scores.PlayerTeam;
  import net.minecraft.world.scores.Scoreboard; // Paper
  import net.minecraft.world.scores.Team;
@@ -42,7 +42,7 @@ index fecd65dc87a99a5692c59dd590b20327b1eb31c2..0a08ca4d89c9de14b3e967231f6d97a8
  import org.slf4j.Logger;
  
  // CraftBukkit start
-@@ -749,6 +751,15 @@ public abstract class PlayerList {
+@@ -750,6 +752,15 @@ public abstract class PlayerList {
          Player player = entity.getBukkitEntity();
          PlayerLoginEvent event = new PlayerLoginEvent(player, hostname, ((java.net.InetSocketAddress) socketaddress).getAddress(), ((java.net.InetSocketAddress) loginlistener.connection.getRawAddress()).getAddress());
  
@@ -153,7 +153,7 @@ index 0000000000000000000000000000000000000000..5655e29747196c4882f900a569239bb1
 +    }
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 1305effc83030b69474ef5e4081c86a0e82ac8a5..1f92277a37b4ba433368e0edf24ab2008032b1f0 100644
+index 5a771ee47f210cf194123b349edbde70cb5d5e86..20a504fc2fe52349d2bf7dad8c9f974d36676155 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -105,10 +105,7 @@ import net.minecraft.world.level.storage.PlayerDataStorage;
