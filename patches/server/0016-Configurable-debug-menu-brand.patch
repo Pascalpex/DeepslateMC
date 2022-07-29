@@ -1,0 +1,49 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Pascalpex <pascalpex@gmail.com>
+Date: Fri, 29 Jul 2022 14:38:16 +0200
+Subject: [PATCH] Configurable debug menu brand
+
+
+diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
+index f838c0d88f942ae5c6ec97245b548e45be54ff4e..7ba9cd1fa577d2f5d4459faa9f3ef6a41fb73f0a 100644
+--- a/src/main/java/net/minecraft/server/players/PlayerList.java
++++ b/src/main/java/net/minecraft/server/players/PlayerList.java
+@@ -96,6 +96,7 @@ import net.minecraft.world.scores.Objective;
+ import net.minecraft.world.scores.PlayerTeam;
+ import net.minecraft.world.scores.Scoreboard; // Paper
+ import net.minecraft.world.scores.Team;
++import net.pascalpex.deepslatemc.Config;
+ import net.pascalpex.deepslatemc.MessagesFile;
+ import net.pascalpex.deepslatemc.commands.MaintenanceMode;
+ import net.pascalpex.deepslatemc.commands.SpawnCommand;
+@@ -279,7 +280,7 @@ public abstract class PlayerList {
+         // Spigot - view distance
+         playerconnection.send(new ClientboundLoginPacket(player.getId(), worlddata.isHardcore(), player.gameMode.getGameModeForPlayer(), player.gameMode.getPreviousGameModeForPlayer(), this.server.levelKeys(), this.registryHolder, worldserver1.dimensionTypeId(), worldserver1.dimension(), BiomeManager.obfuscateSeed(worldserver1.getSeed()), this.getMaxPlayers(), worldserver1.getChunkSource().chunkMap.playerChunkManager.getTargetSendDistance(), worldserver1.getChunkSource().chunkMap.playerChunkManager.getTargetTickViewDistance(), flag1, !flag, worldserver1.isDebug(), worldserver1.isFlat(), player.getLastDeathLocation())); // Paper - replace old player chunk management
+         player.getBukkitEntity().sendSupportedChannels(); // CraftBukkit
+-        playerconnection.send(new ClientboundCustomPayloadPacket(ClientboundCustomPayloadPacket.BRAND, (new FriendlyByteBuf(Unpooled.buffer())).writeUtf(this.getServer().getServerModName())));
++        playerconnection.send(new ClientboundCustomPayloadPacket(ClientboundCustomPayloadPacket.BRAND, (new FriendlyByteBuf(Unpooled.buffer())).writeUtf(Config.getF3name().replace("%player_name%", player.displayName) + "§r")));
+         playerconnection.send(new ClientboundChangeDifficultyPacket(worlddata.getDifficulty(), worlddata.isDifficultyLocked()));
+         playerconnection.send(new ClientboundPlayerAbilitiesPacket(player.getAbilities()));
+         playerconnection.send(new ClientboundSetCarriedItemPacket(player.getInventory().selected));
+diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
+index e794bd569fc9ecf4fc34500d48a00ef9c2181727..5ebe1334c3bb39fa76a82cbf671357cd8bb3fa8e 100644
+--- a/src/main/java/net/pascalpex/deepslatemc/Config.java
++++ b/src/main/java/net/pascalpex/deepslatemc/Config.java
+@@ -58,6 +58,9 @@ public class Config {
+                     config.set("messages" + ".movedWrongly", true);
+                     config.set("messages" + ".movedQuickly", true);
+                 }
++            if (!config.contains("f3name")) {
++                config.set("f3name", "&eDeepslateMC");
++            }
+                 save();
+         } catch (IOException | InvalidConfigurationException e) {
+             e.printStackTrace();
+@@ -145,4 +148,7 @@ public class Config {
+         return config.getBoolean("messages" + ".movedWrongly");
+     }
+ 
++    public static String getF3name() {
++        return config.getString("f3name").replace("&", "§");
++    }
+ }
