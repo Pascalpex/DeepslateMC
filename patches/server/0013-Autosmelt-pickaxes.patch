@@ -5,7 +5,7 @@ Subject: [PATCH] Autosmelt pickaxes
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index e56899e369f082241d5f42a4e15b1e6714e26da1..e7d5ff0e49b3aa241ed25b2be49f4254ed6649d3 100644
+index 886f1f6060454d8e1f668969c347f1400106b5f4..3a1ccc119862478dae2a494903b7f09d217e6a7d 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 @@ -253,6 +253,7 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
@@ -17,7 +17,7 @@ index e56899e369f082241d5f42a4e15b1e6714e26da1..e7d5ff0e49b3aa241ed25b2be49f4254
          MinecraftServer.getServer().server.getCommandMap().register("setspawn", "Deepslate", new SpawnCommand("setspawn"));
          MinecraftServer.getServer().server.getCommandMap().register("spawn", "Deepslate", new SpawnCommand("spawn"));
 diff --git a/src/main/java/net/minecraft/server/level/ServerPlayerGameMode.java b/src/main/java/net/minecraft/server/level/ServerPlayerGameMode.java
-index 4fb8ced22cb9f106fbe39ca233a844a7effb824a..912308dd17e89286b5a165d72b50293ed00478e7 100644
+index bd77301ef6cde21e1ee1966d2ffa418685f4a214..40ffbe2b614960e411c50da4f51a945f9037ec0a 100644
 --- a/src/main/java/net/minecraft/server/level/ServerPlayerGameMode.java
 +++ b/src/main/java/net/minecraft/server/level/ServerPlayerGameMode.java
 @@ -21,6 +21,9 @@ import net.minecraft.world.level.block.state.BlockState;
@@ -30,7 +30,7 @@ index 4fb8ced22cb9f106fbe39ca233a844a7effb824a..912308dd17e89286b5a165d72b50293e
  import org.slf4j.Logger;
  
  // CraftBukkit start
-@@ -357,6 +360,59 @@ public class ServerPlayerGameMode {
+@@ -353,6 +356,59 @@ public class ServerPlayerGameMode {
  
              event = new BlockBreakEvent(bblock, this.player.getBukkitEntity());
  
@@ -248,7 +248,7 @@ index 0000000000000000000000000000000000000000..0aa6ca538a87a370943d9dc117a4b33c
 +
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 4cb7c0a0e1c25d483a7ec8f21da1934fb0dd045d..e5a5fdade9e27598f539fada711e0a3fdcc803a6 100644
+index fd6376541867bc711f5105c6ab1b56d87ba3b4ab..903e5b79602b30d43b192ab20e9e2e099f3ec159 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -1039,6 +1039,7 @@ public final class CraftServer implements Server {
