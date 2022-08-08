@@ -5,10 +5,10 @@ Subject: [PATCH] Config and messages file
 
 
 diff --git a/src/main/java/net/minecraft/commands/Commands.java b/src/main/java/net/minecraft/commands/Commands.java
-index ffcc53399da282a525785426279c3194cf965c22..91a8f21481de9a92192b10eca202ebb8a28e0e3d 100644
+index 4bf5efd39938db79bba660efc2969022e8057abd..fed7929a92996ca35a59c690fe85ee197d174d10 100644
 --- a/src/main/java/net/minecraft/commands/Commands.java
 +++ b/src/main/java/net/minecraft/commands/Commands.java
-@@ -108,6 +108,8 @@ import net.minecraft.server.commands.WorldBorderCommand;
+@@ -107,6 +107,8 @@ import net.minecraft.server.commands.WorldBorderCommand;
  import net.minecraft.server.commands.data.DataCommands;
  import net.minecraft.server.level.ServerPlayer;
  import net.minecraft.util.profiling.jfr.JvmProfiler;
@@ -17,7 +17,7 @@ index ffcc53399da282a525785426279c3194cf965c22..91a8f21481de9a92192b10eca202ebb8
  import org.slf4j.Logger;
  
  // CraftBukkit start
-@@ -130,6 +132,10 @@ public class Commands {
+@@ -129,6 +131,10 @@ public class Commands {
  
      public Commands(Commands.CommandSelection environment, CommandBuildContext commandRegistryAccess) {
          this(); // CraftBukkit
