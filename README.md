@@ -17,7 +17,9 @@ You can find a full list of features, commands, permissions, config options and 
 ./gradlew applyPatches
 ./gradlew createReobfPaperclipJar
 ```
+## Support
+You can find support on our [discord](https://discord.gg/BGrhNnVczp)
 ## Download
 **Warning!**: Because the upstream is still quite experimental, this fork is as well
 
-[Download here](https://pascalpex.ddns.net/files/deepslate/)
+You can find the files on our [website](https://pascalpex.ddns.net/deepslate/)
