@@ -92,7 +92,7 @@ index 005fdd2e2ebc0b6f7cb06b2efdb705b9ed23a1ea..c1baed7dd0e9eb8f668da6dedd07239e
                  .completer(new ConsoleCommandCompleter(this.server))
                  .option(LineReader.Option.COMPLETE_IN_WORD, true);
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 626f97882f2335ccf22d25c40aa389e6b4884207..c2b83b8818ae6eedf3f6c0271f98a580d880881c 100644
+index 3d30dbb66d05f76545e119243cba4d549cbae714..307a96b8ed20f0bb4be77eaf5c76611c9c1e84cf 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
 @@ -916,7 +916,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
@@ -104,7 +104,7 @@ index 626f97882f2335ccf22d25c40aa389e6b4884207..c2b83b8818ae6eedf3f6c0271f98a580
              while (this.getRunningThread().isAlive()) {
                  this.getRunningThread().stop();
                  try {
-@@ -1684,7 +1684,13 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -1700,7 +1700,13 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
  
      @DontObfuscate
      public String getServerModName() {
@@ -120,7 +120,7 @@ index 626f97882f2335ccf22d25c40aa389e6b4884207..c2b83b8818ae6eedf3f6c0271f98a580
  
      public SystemReport fillSystemReport(SystemReport details) {
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 0afdaebb071061bc26ae302bfe0d86149227850c..4ad1ded350f0198d085bcba71795c245332cbfd5 100644
+index b9c0d8d598aeac99e1fbc77063e5e2f280ca1693..6ca7b46e7958c7e7afa6108df8e686816607c09b 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -248,7 +248,7 @@ import javax.annotation.Nullable; // Paper
