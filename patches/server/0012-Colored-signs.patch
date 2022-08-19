@@ -73,10 +73,10 @@ index 9adc717cffee5065863e2972ad749517e5a4a2a3..b11174e09339cb03160f205fcfbb3162
      public void handleKeepAlive(ServerboundKeepAlivePacket packet) {
          // Purpur start
 diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
-index 63c113db25cb1629393ce440a57f039d821210d2..203e2b74ea7cf1a6bbf02e10a9d50d2dead78343 100644
+index 988fd49ebe181c2e5e5837014c2cf1585b40939c..43ee43057acb8beb13a2acaaa9fd33a71a1df347 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/Config.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/Config.java
-@@ -41,6 +41,10 @@ public class Config {
+@@ -42,6 +42,10 @@ public class Config {
                  if(!config.contains("preventKnowledgebookClick")) {
                      config.set("preventKnowledgebookClick", false);
                  }
@@ -87,7 +87,7 @@ index 63c113db25cb1629393ce440a57f039d821210d2..203e2b74ea7cf1a6bbf02e10a9d50d2d
                  save();
          } catch (IOException | InvalidConfigurationException e) {
              e.printStackTrace();
-@@ -55,6 +59,14 @@ public class Config {
+@@ -56,6 +60,14 @@ public class Config {
          }
      }
  

@@ -31,10 +31,10 @@ index b11174e09339cb03160f205fcfbb3162ced47638..a73bb1b7f243c877e491249b1b6bb12c
  
                              this.player.absMoveTo(d0, d1, d2, f, f1);
 diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
-index 8d2ece0c1cb3474483a65b03a2a6349ecac7902f..e794bd569fc9ecf4fc34500d48a00ef9c2181727 100644
+index ab0f0ac083a020b0bf59e33536704fa4d10a4eb9..80bc5005908f3012f37a9ee25968d98176ebda7c 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/Config.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/Config.java
-@@ -54,6 +54,10 @@ public class Config {
+@@ -55,6 +55,10 @@ public class Config {
              if (!config.contains("metrics")) {
                  config.set("metrics", true);
              }
@@ -45,7 +45,7 @@ index 8d2ece0c1cb3474483a65b03a2a6349ecac7902f..e794bd569fc9ecf4fc34500d48a00ef9
                  save();
          } catch (IOException | InvalidConfigurationException e) {
              e.printStackTrace();
-@@ -133,4 +137,12 @@ public class Config {
+@@ -134,4 +138,12 @@ public class Config {
              save();
          }
  

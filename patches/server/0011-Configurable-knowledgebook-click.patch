@@ -5,10 +5,10 @@ Subject: [PATCH] Configurable knowledgebook click
 
 
 diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
-index 7645e1e393108c7dd27f7b9a03deeba151ae93cc..63c113db25cb1629393ce440a57f039d821210d2 100644
+index c4784f144b036bd489fcc37c8f531007869763e2..988fd49ebe181c2e5e5837014c2cf1585b40939c 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/Config.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/Config.java
-@@ -38,6 +38,9 @@ public class Config {
+@@ -39,6 +39,9 @@ public class Config {
              if(!config.contains("spawnOnJoin")) {
                  config.set("spawnOnJoin", false);
              }
@@ -18,7 +18,7 @@ index 7645e1e393108c7dd27f7b9a03deeba151ae93cc..63c113db25cb1629393ce440a57f039d
                  save();
          } catch (IOException | InvalidConfigurationException e) {
              e.printStackTrace();
-@@ -52,6 +55,10 @@ public class Config {
+@@ -53,6 +56,10 @@ public class Config {
          }
      }
  

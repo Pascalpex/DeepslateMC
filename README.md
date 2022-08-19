@@ -2,7 +2,7 @@
 <div align="center">
 
 # DeepslateMC
-### A fork of [Mirai](https://github.com/etil2jz/Mirai) that adds neat functionalities
+### A fork of [Purpur](https://github.com/PurpurMC/Purpur) that adds neat functionalities
 <br/>
 </div>
 
@@ -18,8 +18,6 @@ You can find a full list of features, commands, permissions, config options and 
 ./gradlew createReobfPaperclipJar
 ```
 ## Support
-You can find support on our [discord](https://discord.gg/BGrhNnVczp)
+You can find support on our [Discord server](https://discord.gg/BGrhNnVczp)
 ## Download
-**Warning!**: Because the upstream is still quite experimental, this fork is as well
-
 You can find the files on our [website](https://pascalpex.ddns.net/deepslate/)

@@ -28,10 +28,10 @@ index 9b9f39441212066d5d23c52b40becd1d447ec23b..30986976dd99b18fa15acf77682e1d8e
  
          this.setPvpAllowed(dedicatedserverproperties.pvp);
 diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
-index 0050bc0886dedcbfe0740ec1f295b4e0d303fb87..32c369a09346b40d0a683291badfe0addcde9897 100644
+index 1a843527d24e8a48fb6e0ad9d8fafa679512c868..8a4422bac75da53bb51cd3d80e7c5d868ed918b0 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/Config.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/Config.java
-@@ -47,4 +47,13 @@ public class Config {
+@@ -48,4 +48,13 @@ public class Config {
              return config.getString("discordLink");
          }
  
@@ -142,7 +142,7 @@ index 0000000000000000000000000000000000000000..f406beb184e03b67658eb2fe4ab3a3e4
 +    }
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index b387986b8120d0a3b1ce9d6c979bed5c97d384fb..3b6e7d0f0a453b1222cbaec7bff35cf91ee04851 100644
+index d432733acf98e321ae242eb3353d4e6f9a2adb05..a4914c114ed3da445ab064296690327a52c71d7e 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -105,6 +105,7 @@ import net.minecraft.world.level.storage.PlayerDataStorage;

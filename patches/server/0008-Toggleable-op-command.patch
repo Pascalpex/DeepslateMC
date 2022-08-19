@@ -5,7 +5,7 @@ Subject: [PATCH] Toggleable op command
 
 
 diff --git a/src/main/java/net/minecraft/commands/Commands.java b/src/main/java/net/minecraft/commands/Commands.java
-index fed7929a92996ca35a59c690fe85ee197d174d10..5cffa340df6db8a8142698246b396489d55f6fcd 100644
+index 644359b750764c5f0f8808cda913a98e91008c57..503eadd85d9e12a2d6bc8f5e9fc2d7a63eb42ac3 100644
 --- a/src/main/java/net/minecraft/commands/Commands.java
 +++ b/src/main/java/net/minecraft/commands/Commands.java
 @@ -203,7 +203,9 @@ public class Commands {
@@ -20,12 +20,12 @@ index fed7929a92996ca35a59c690fe85ee197d174d10..5cffa340df6db8a8142698246b396489
              PardonIpCommand.register(this.dispatcher);
              PerfCommand.register(this.dispatcher);
 diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
-index 32c369a09346b40d0a683291badfe0addcde9897..cf33202b996839c11bb52e5550b3e588e5b2dc2e 100644
+index 8a4422bac75da53bb51cd3d80e7c5d868ed918b0..ea344d78ed041a951188d148995885d0c536d710 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/Config.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/Config.java
-@@ -29,6 +29,9 @@ public class Config {
+@@ -30,6 +30,9 @@ public class Config {
                  if(!config.contains("discordLink")) {
-                     config.set("discordLink", "https://google.de/");
+                     config.set("discordLink", "https://discord.gg/BGrhNnVczp");
                  }
 +                if(!config.contains("opCommandActive")) {
 +                    config.set("opCommandActive", true);
@@ -33,7 +33,7 @@ index 32c369a09346b40d0a683291badfe0addcde9897..cf33202b996839c11bb52e5550b3e588
                  save();
          } catch (IOException | InvalidConfigurationException e) {
              e.printStackTrace();
-@@ -43,6 +46,10 @@ public class Config {
+@@ -44,6 +47,10 @@ public class Config {
          }
      }
  

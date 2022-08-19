@@ -5,7 +5,7 @@ Subject: [PATCH] Metrics stats
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index e7d5ff0e49b3aa241ed25b2be49f4254ed6649d3..7691864f43f9701fc1336572186dc558bbfb5d25 100644
+index 3a1ccc119862478dae2a494903b7f09d217e6a7d..1b8faa86994f9ef11f8b00a3e5878584d6157ce8 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 @@ -13,10 +13,7 @@ import java.net.Proxy;
@@ -44,10 +44,10 @@ index e7d5ff0e49b3aa241ed25b2be49f4254ed6649d3..7691864f43f9701fc1336572186dc558
          try {
              org.purpurmc.purpur.PurpurConfig.init((java.io.File) options.valueOf("purpur-settings"));
 diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
-index 6dc972159ef97544491b693b248195b405b1b129..8d2ece0c1cb3474483a65b03a2a6349ecac7902f 100644
+index fd22d6b96993fc3173a3dd178e8ec144b10fa2ae..ab0f0ac083a020b0bf59e33536704fa4d10a4eb9 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/Config.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/Config.java
-@@ -50,6 +50,9 @@ public class Config {
+@@ -51,6 +51,9 @@ public class Config {
                  List<String> worldsList = new ArrayList<>();
                  worldsList.add("FantasyWorld");
                  config.set("autoSmelt" + ".enabledWorlds", worldsList);
@@ -57,7 +57,7 @@ index 6dc972159ef97544491b693b248195b405b1b129..8d2ece0c1cb3474483a65b03a2a6349e
              }
                  save();
          } catch (IOException | InvalidConfigurationException e) {
-@@ -65,6 +68,10 @@ public class Config {
+@@ -66,6 +69,10 @@ public class Config {
          }
      }
  
