@@ -5,10 +5,10 @@ Subject: [PATCH] Autosmelt pickaxes
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 886f1f6060454d8e1f668969c347f1400106b5f4..3a1ccc119862478dae2a494903b7f09d217e6a7d 100644
+index cc5ca03f1bf0d9ff376bbb1e6148f2c2c60a1037..d3f767dc73db1e068f0af25290a62d397cf93fef 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-@@ -253,6 +253,7 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+@@ -254,6 +254,7 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
          MinecraftServer.getServer().server.getCommandMap().register("wartung", "Deepslate", new MaintenanceMode("wartung"));
          MinecraftServer.getServer().server.getCommandMap().register("help", "Deepslate", new HelpCommand("help"));
          MinecraftServer.getServer().server.getCommandMap().register("hilfe", "Deepslate", new HelpCommand("hilfe"));
@@ -248,7 +248,7 @@ index 0000000000000000000000000000000000000000..0aa6ca538a87a370943d9dc117a4b33c
 +
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 64f0285ff2a763b9614edf2cd4bb64737ef23c2c..c0125182c307cc128d74897054ac00f259d35c01 100644
+index b9c109512e61dd6eee898ac1f6e6d6bfc2ed10f8..b90ebc6ae35932da22749660065ad3a4da07f3b3 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -1041,6 +1041,7 @@ public final class CraftServer implements Server {

@@ -5,7 +5,7 @@ Subject: [PATCH] Rebranding
 
 
 diff --git a/build.gradle.kts b/build.gradle.kts
-index a9acec9feef3c5322ce2c312cd8800bcdaca0947..7bf02fbf038dfbb80a37087e6ea33f5a6f5c7235 100644
+index dc00d06f9bd4cc7403e0fe89822ed40ed2e148c8..74b40927568d285ce772e9e5e4a9dfa807f91df0 100644
 --- a/build.gradle.kts
 +++ b/build.gradle.kts
 @@ -9,7 +9,7 @@ plugins {
@@ -15,7 +15,7 @@ index a9acec9feef3c5322ce2c312cd8800bcdaca0947..7bf02fbf038dfbb80a37087e6ea33f5a
 -    implementation(project(":purpur-api")) // Purpur
 +    implementation(project(":deepslateMC-api")) // Purpur // Deepslate
      // Pufferfish start
-     implementation("io.papermc.paper:paper-mojangapi:1.19.2-R0.1-SNAPSHOT") { // Purpur
+     implementation("io.papermc.paper:paper-mojangapi:1.19.2-R0.1-SNAPSHOT") {
          exclude("io.papermc.paper", "paper-api")
 @@ -87,7 +87,7 @@ tasks.jar {
          attributes(
@@ -92,7 +92,7 @@ index 005fdd2e2ebc0b6f7cb06b2efdb705b9ed23a1ea..c1baed7dd0e9eb8f668da6dedd07239e
                  .completer(new ConsoleCommandCompleter(this.server))
                  .option(LineReader.Option.COMPLETE_IN_WORD, true);
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 3d30dbb66d05f76545e119243cba4d549cbae714..307a96b8ed20f0bb4be77eaf5c76611c9c1e84cf 100644
+index 24f767663b1190dcada3da554375e3a01064c462..a4ed08a0290f19d25d7d8bc284e314559554d194 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
 @@ -916,7 +916,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
@@ -104,7 +104,7 @@ index 3d30dbb66d05f76545e119243cba4d549cbae714..307a96b8ed20f0bb4be77eaf5c76611c
              while (this.getRunningThread().isAlive()) {
                  this.getRunningThread().stop();
                  try {
-@@ -1700,7 +1700,13 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -1701,7 +1701,13 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
  
      @DontObfuscate
      public String getServerModName() {
@@ -120,7 +120,7 @@ index 3d30dbb66d05f76545e119243cba4d549cbae714..307a96b8ed20f0bb4be77eaf5c76611c
  
      public SystemReport fillSystemReport(SystemReport details) {
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index b9c0d8d598aeac99e1fbc77063e5e2f280ca1693..6ca7b46e7958c7e7afa6108df8e686816607c09b 100644
+index d182eac78879b5e124bb62aded8a405b327275b4..146b81ea13c0d6c82a1c77ade0680ae23e16014c 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -248,7 +248,7 @@ import javax.annotation.Nullable; // Paper

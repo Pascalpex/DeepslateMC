@@ -5,7 +5,7 @@ Subject: [PATCH] Buildworld command
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 9b9f39441212066d5d23c52b40becd1d447ec23b..30986976dd99b18fa15acf77682e1d8e1728edf9 100644
+index b5858bc0a17318040e1533cde48a8afd972c037a..768cd4077f8d8642436bd904dde633f31a41d488 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 @@ -55,6 +55,7 @@ import net.minecraft.world.level.GameRules;
@@ -16,7 +16,7 @@ index 9b9f39441212066d5d23c52b40becd1d447ec23b..30986976dd99b18fa15acf77682e1d8e
  import net.pascalpex.deepslatemc.commands.ClearchatCommand;
  import net.pascalpex.deepslatemc.commands.DeepslateCommand;
  import net.pascalpex.deepslatemc.commands.DiscordCommand;
-@@ -247,6 +248,10 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+@@ -248,6 +249,10 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
          MinecraftServer.getServer().server.getCommandMap().register("dc", "Deepslate", new DiscordCommand("dc"));
          MinecraftServer.getServer().server.getCommandMap().register("cc", "Deepslate", new ClearchatCommand("cc"));
          MinecraftServer.getServer().server.getCommandMap().register("clearchat", "Deepslate", new ClearchatCommand("clearchat"));
@@ -142,7 +142,7 @@ index 0000000000000000000000000000000000000000..f406beb184e03b67658eb2fe4ab3a3e4
 +    }
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index d432733acf98e321ae242eb3353d4e6f9a2adb05..a4914c114ed3da445ab064296690327a52c71d7e 100644
+index ab1ceba28442ed73f5714a04838084543d6992a6..00372857462b4c9fc2929b6613104337ab6ad775 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -105,6 +105,7 @@ import net.minecraft.world.level.storage.PlayerDataStorage;

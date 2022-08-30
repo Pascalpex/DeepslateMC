@@ -5,10 +5,10 @@ Subject: [PATCH] Configurable move messages
 
 
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index b11174e09339cb03160f205fcfbb3162ced47638..a73bb1b7f243c877e491249b1b6bb12c1fe48e19 100644
+index f3d215dc879f07c8e7f21104e44a124f45815c5f..a901f2454861a45a05373c929f4408cd9d11715a 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-@@ -1553,7 +1553,9 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Tic
+@@ -1547,7 +1547,9 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Tic
  
                                  if (d11 - d10 > Math.max(f2, Math.pow((double) (org.spigotmc.SpigotConfig.movedTooQuicklyMultiplier * (float) i * speed), 2)) && !this.isSingleplayerOwner()) {
                                  // CraftBukkit end
@@ -19,7 +19,7 @@ index b11174e09339cb03160f205fcfbb3162ced47638..a73bb1b7f243c877e491249b1b6bb12c
                                      this.teleport(this.player.getX(), this.player.getY(), this.player.getZ(), this.player.getYRot(), this.player.getXRot());
                                      return;
                                  }
-@@ -1621,7 +1623,9 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Tic
+@@ -1615,7 +1617,9 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Tic
  
                              if (!this.player.isChangingDimension() && d11 > org.spigotmc.SpigotConfig.movedWronglyThreshold && !this.player.isSleeping() && !this.player.gameMode.isCreative() && this.player.gameMode.getGameModeForPlayer() != GameType.SPECTATOR) { // Spigot
                                  flag2 = true; // Paper - diff on change, this should be moved wrongly

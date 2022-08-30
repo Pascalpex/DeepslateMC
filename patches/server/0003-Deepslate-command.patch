@@ -5,7 +5,7 @@ Subject: [PATCH] Deepslate command
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 0bfdc4247a651f6c1caf7a95114be68bc7d77d7b..21c2ae6baf3c74f2e1134630bc8081856dd47016 100644
+index 33ec9cb7efd5623866c03506b8dcb28831b54b21..46f1117ced081b7215a01c840fa048d52442e5f7 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 @@ -55,6 +55,7 @@ import net.minecraft.world.level.GameRules;
@@ -16,7 +16,7 @@ index 0bfdc4247a651f6c1caf7a95114be68bc7d77d7b..21c2ae6baf3c74f2e1134630bc808185
  import org.slf4j.Logger;
  
  // CraftBukkit start
-@@ -238,6 +239,10 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+@@ -239,6 +240,10 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
          gg.pufferfish.pufferfish.PufferfishConfig.load(); // Pufferfish
          gg.pufferfish.pufferfish.PufferfishCommand.init(); // Pufferfish
  
@@ -156,7 +156,7 @@ index 0000000000000000000000000000000000000000..c13998092bac275a1ae33fc914b119a5
 +
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 4ad1ded350f0198d085bcba71795c245332cbfd5..6d6ff7bf9389e879328f359dfa3fc83473ba36a9 100644
+index 146b81ea13c0d6c82a1c77ade0680ae23e16014c..6c185213a1903e89224db94e2ac81233b710cea0 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -105,6 +105,7 @@ import net.minecraft.world.level.storage.PlayerDataStorage;
