@@ -23,7 +23,7 @@ index 016bc2ab0d7cd846d246bfa60aff31cae9964c87..cc5ca03f1bf0d9ff376bbb1e6148f2c2
  
          this.setPvpAllowed(dedicatedserverproperties.pvp);
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index 4e8a932ff2902a36d8836e722772a637fdef0620..721bd91d7492e61a1c06af3d24775477d296ec91 100644
+index 95f3086db3f3dea35f57e21115e47b7bff730ce0..df148910b933914423f3332e006ab8ce820523e7 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
 @@ -98,6 +98,7 @@ import net.minecraft.world.scores.Scoreboard; // Paper
@@ -34,7 +34,7 @@ index 4e8a932ff2902a36d8836e722772a637fdef0620..721bd91d7492e61a1c06af3d24775477
  import org.slf4j.Logger;
  
  // CraftBukkit start
-@@ -374,6 +375,7 @@ public abstract class PlayerList {
+@@ -371,6 +372,7 @@ public abstract class PlayerList {
          player.containerMenu.transferTo(player.containerMenu, bukkitPlayer);
  
          PlayerJoinEvent playerJoinEvent = new PlayerJoinEvent(bukkitPlayer, PaperAdventure.asAdventure(ichatmutablecomponent)); // Paper - Adventure
