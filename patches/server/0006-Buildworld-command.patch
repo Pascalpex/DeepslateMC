@@ -5,7 +5,7 @@ Subject: [PATCH] Buildworld command
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index b5858bc0a17318040e1533cde48a8afd972c037a..768cd4077f8d8642436bd904dde633f31a41d488 100644
+index 990f96f28c6dc493a25b4f2fef0ea087270307c8..620904b97780907c72741f3b7764fa82cb559836 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 @@ -55,6 +55,7 @@ import net.minecraft.world.level.GameRules;
@@ -142,7 +142,7 @@ index 0000000000000000000000000000000000000000..f406beb184e03b67658eb2fe4ab3a3e4
 +    }
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index ab1ceba28442ed73f5714a04838084543d6992a6..00372857462b4c9fc2929b6613104337ab6ad775 100644
+index 910e33728929c1c06d90a78e993ab68a2b676997..c4ce91239179d4aa736eb5c70c2a05562d42d936 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -105,6 +105,7 @@ import net.minecraft.world.level.storage.PlayerDataStorage;
@@ -153,7 +153,7 @@ index ab1ceba28442ed73f5714a04838084543d6992a6..00372857462b4c9fc2929b6613104337
  import net.pascalpex.deepslatemc.commands.ClearchatCommand;
  import net.pascalpex.deepslatemc.commands.DeepslateCommand;
  import net.pascalpex.deepslatemc.commands.DiscordCommand;
-@@ -1035,6 +1036,10 @@ public final class CraftServer implements Server {
+@@ -1040,6 +1041,10 @@ public final class CraftServer implements Server {
          MinecraftServer.getServer().server.getCommandMap().register("dc", "Deepslate", new DiscordCommand("dc"));
          MinecraftServer.getServer().server.getCommandMap().register("cc", "Deepslate", new ClearchatCommand("cc"));
          MinecraftServer.getServer().server.getCommandMap().register("clearchat", "Deepslate", new ClearchatCommand("clearchat"));
