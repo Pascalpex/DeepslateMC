@@ -5,7 +5,7 @@ Subject: [PATCH] Rebranding
 
 
 diff --git a/build.gradle.kts b/build.gradle.kts
-index 4e4bc7e55a81dc44d7f6cfc6a8761141d0d3bb6c..22fa1773ee7500f28ea66a07b42985c7883b46f6 100644
+index a61a0f4f1ce89681336d2ed246e6b616aa6fe73d..b3e83e9309bdd5b515caca5b7a6a10a47933b064 100644
 --- a/build.gradle.kts
 +++ b/build.gradle.kts
 @@ -9,7 +9,7 @@ plugins {
@@ -92,7 +92,7 @@ index 3cb56595822799926a8141e60a42f5d1edfc6de5..767f64d78660f4876587cf51d4eaccd2
                  .completer(new ConsoleCommandCompleter(this.server))
                  .option(LineReader.Option.COMPLETE_IN_WORD, true);
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 60bed3f87016b29508ea1a94db65a1f60d960de1..e53cfc4d2615a659c11714112b9a9ac6577039aa 100644
+index 13c9cddf7ac0af16676050e3bcdf22b7475a0387..e907c061b7dd80d4ee9b182c0fca74a6fd27eced 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
 @@ -926,7 +926,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
@@ -104,7 +104,7 @@ index 60bed3f87016b29508ea1a94db65a1f60d960de1..e53cfc4d2615a659c11714112b9a9ac6
              while (this.getRunningThread().isAlive()) {
                  this.getRunningThread().stop();
                  try {
-@@ -1682,7 +1682,13 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -1683,7 +1683,13 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
  
      @DontObfuscate
      public String getServerModName() {
@@ -168,10 +168,10 @@ index fb87620c742ff7912f5e8ccd2a7930dd605576d9..7c9b6a3279539983c5135746c568f5ac
      }
  }
 diff --git a/src/main/java/org/purpurmc/purpur/PurpurConfig.java b/src/main/java/org/purpurmc/purpur/PurpurConfig.java
-index f45b0002efd30b45633b31cf9995cfcbdf0f7504..e386c12f19f8562c908bad81091db40ecebcf369 100644
+index 14844cb8a402ac987f44a91b95d5ebdac73c6dfe..c21b54fa244e280ed7a72e7bd1a1afeca2fd8fe6 100644
 --- a/src/main/java/org/purpurmc/purpur/PurpurConfig.java
 +++ b/src/main/java/org/purpurmc/purpur/PurpurConfig.java
-@@ -239,7 +239,7 @@ public class PurpurConfig {
+@@ -244,7 +244,7 @@ public class PurpurConfig {
          if (!TimingsManager.hiddenConfigs.contains("settings.seed")) TimingsManager.hiddenConfigs.add("settings.seed");
      }
  

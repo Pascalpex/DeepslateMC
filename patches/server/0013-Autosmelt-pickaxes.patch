@@ -17,10 +17,10 @@ index a805a726618e2c03ac6f68c4ad47e96f4e5f613d..a81511989f68c66574bf2d3c1712be5e
          MinecraftServer.getServer().server.getCommandMap().register("setspawn", "Deepslate", new SpawnCommand("setspawn"));
          MinecraftServer.getServer().server.getCommandMap().register("spawn", "Deepslate", new SpawnCommand("spawn"));
 diff --git a/src/main/java/net/minecraft/server/level/ServerPlayerGameMode.java b/src/main/java/net/minecraft/server/level/ServerPlayerGameMode.java
-index bd77301ef6cde21e1ee1966d2ffa418685f4a214..40ffbe2b614960e411c50da4f51a945f9037ec0a 100644
+index 644812ce5251cba4e41277758363dfa350f4292d..3cd0c7ffda004957dc7adcc82eb4ce3bd38ba298 100644
 --- a/src/main/java/net/minecraft/server/level/ServerPlayerGameMode.java
 +++ b/src/main/java/net/minecraft/server/level/ServerPlayerGameMode.java
-@@ -21,6 +21,9 @@ import net.minecraft.world.level.block.state.BlockState;
+@@ -22,6 +22,9 @@ import net.minecraft.world.level.block.state.BlockState;
  import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
  import net.minecraft.world.phys.BlockHitResult;
  import net.minecraft.world.phys.Vec3;
@@ -30,7 +30,7 @@ index bd77301ef6cde21e1ee1966d2ffa418685f4a214..40ffbe2b614960e411c50da4f51a945f
  import org.slf4j.Logger;
  
  // CraftBukkit start
-@@ -353,6 +356,59 @@ public class ServerPlayerGameMode {
+@@ -354,6 +357,59 @@ public class ServerPlayerGameMode {
  
              event = new BlockBreakEvent(bblock, this.player.getBukkitEntity());
  
