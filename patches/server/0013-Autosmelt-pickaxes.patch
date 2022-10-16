@@ -17,10 +17,10 @@ index a805a726618e2c03ac6f68c4ad47e96f4e5f613d..a81511989f68c66574bf2d3c1712be5e
          MinecraftServer.getServer().server.getCommandMap().register("setspawn", "Deepslate", new SpawnCommand("setspawn"));
          MinecraftServer.getServer().server.getCommandMap().register("spawn", "Deepslate", new SpawnCommand("spawn"));
 diff --git a/src/main/java/net/minecraft/server/level/ServerPlayerGameMode.java b/src/main/java/net/minecraft/server/level/ServerPlayerGameMode.java
-index 644812ce5251cba4e41277758363dfa350f4292d..3cd0c7ffda004957dc7adcc82eb4ce3bd38ba298 100644
+index 4816b5bd54ae6e080af4c19df43d57e852e76146..88752bcc1b56ed5820eaaeca4fa60c5715547a54 100644
 --- a/src/main/java/net/minecraft/server/level/ServerPlayerGameMode.java
 +++ b/src/main/java/net/minecraft/server/level/ServerPlayerGameMode.java
-@@ -22,6 +22,9 @@ import net.minecraft.world.level.block.state.BlockState;
+@@ -21,6 +21,9 @@ import net.minecraft.world.level.block.state.BlockState;
  import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
  import net.minecraft.world.phys.BlockHitResult;
  import net.minecraft.world.phys.Vec3;
@@ -30,7 +30,7 @@ index 644812ce5251cba4e41277758363dfa350f4292d..3cd0c7ffda004957dc7adcc82eb4ce3b
  import org.slf4j.Logger;
  
  // CraftBukkit start
-@@ -354,6 +357,59 @@ public class ServerPlayerGameMode {
+@@ -353,6 +356,59 @@ public class ServerPlayerGameMode {
  
              event = new BlockBreakEvent(bblock, this.player.getBukkitEntity());
  
@@ -248,10 +248,10 @@ index 0000000000000000000000000000000000000000..0aa6ca538a87a370943d9dc117a4b33c
 +
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 97e8cab564e34ae281402b0ee7be740ab7e5f99b..f3761446e1daa681b11af4cb7ffbaef7ceac64dd 100644
+index d99399968eea96e00c052d9dc45ee53146c9223f..28adf8f86b938a71bc5c08e30a29bef86e6d1bc6 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -1046,6 +1046,7 @@ public final class CraftServer implements Server {
+@@ -1061,6 +1061,7 @@ public final class CraftServer implements Server {
          MinecraftServer.getServer().server.getCommandMap().register("wartung", "Deepslate", new MaintenanceMode("wartung"));
          MinecraftServer.getServer().server.getCommandMap().register("help", "Deepslate", new HelpCommand("help"));
          MinecraftServer.getServer().server.getCommandMap().register("hilfe", "Deepslate", new HelpCommand("hilfe"));
