@@ -61,16 +61,16 @@ paperweight {
     remapRepo.set(paperMavenPublicUrl)
     decompileRepo.set(paperMavenPublicUrl)
 
-    useStandardUpstream("purpur") {
-        url.set(github("PurpurMC", "Purpur"))
-        ref.set(providers.gradleProperty("purpurRef"))
+    useStandardUpstream("keyi") {
+        url.set(github("KeYiMC", "KeYi"))
+        ref.set(providers.gradleProperty("keyiRef"))
 
         withStandardPatcher {
             apiOutputDir.set(layout.projectDirectory.dir("deepslateMC-api"))
             serverOutputDir.set(layout.projectDirectory.dir("deepslateMC-server"))
 
-            apiSourceDirPath.set("Purpur-API")
-            serverSourceDirPath.set("Purpur-Server")
+            apiSourceDirPath.set("KeYi-API")
+            serverSourceDirPath.set("KeYi-Server")
         }
 
     }
