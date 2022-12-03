@@ -1,22 +1,22 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Pascalpex <pascalpex@gmail.com>
-Date: Thu, 14 Jul 2022 14:25:36 +0200
+Date: Sat, 3 Dec 2022 13:06:36 +0100
 Subject: [PATCH] Deepslate command
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index a029f51983bcfe49beab1359f282f0f957723ef2..c98759a0eb98759fa616e9758422f6bbf31022bd 100644
+index 642c56b17d98b5f527dfa271ee45c5e831c13bf6..877bda44141982589a16be4f64b61976180cbfe3 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-@@ -55,6 +55,7 @@ import net.minecraft.world.level.GameRules;
+@@ -57,6 +57,7 @@ import net.minecraft.world.level.GameRules;
  import net.minecraft.world.level.GameType;
  import net.minecraft.world.level.block.entity.SkullBlockEntity;
  import net.minecraft.world.level.storage.LevelStorageSource;
-+import net.pascalpex.deepslatemc.commands.DeepslateCommand;
++import net.pascalpex.deepslatemc.commands.*;
  import org.slf4j.Logger;
  
  // CraftBukkit start
-@@ -239,6 +240,10 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+@@ -241,6 +242,10 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
          gg.pufferfish.pufferfish.PufferfishConfig.load(); // Pufferfish
          gg.pufferfish.pufferfish.PufferfishCommand.init(); // Pufferfish
  
@@ -24,11 +24,11 @@ index a029f51983bcfe49beab1359f282f0f957723ef2..c98759a0eb98759fa616e9758422f6bb
 +        MinecraftServer.getServer().server.getCommandMap().register("deepslate", "Deepslate", new DeepslateCommand("deepslate"));
 +        // Deepslate end
 +
-         this.setPvpAllowed(dedicatedserverproperties.pvp);
-         this.setFlightAllowed(dedicatedserverproperties.allowFlight);
-         this.setMotd(dedicatedserverproperties.motd);
+         // KeYi start - init config
+         try {
+             cc.keyimc.keyi.KeyiConfig.init((java.io.File) options.valueOf("keyi-settings"));
 diff --git a/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java b/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java
-index 28901cafd9e58b5a111ef665019cec875318d297..cf13be02d96049534d46ab981c1dd78f8eccd0da 100644
+index 28901cafd9e58b5a111ef665019cec875318d297..96833e6e5dc97d13e0ea778530b0606937f14ae4 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java
 @@ -29,6 +29,12 @@ public class MessagesFile {
@@ -44,10 +44,10 @@ index 28901cafd9e58b5a111ef665019cec875318d297..cf13be02d96049534d46ab981c1dd78f
              save();
          } catch (IOException | InvalidConfigurationException e) {
              e.printStackTrace();
-@@ -48,4 +54,13 @@ public class MessagesFile {
+@@ -47,5 +53,13 @@ public class MessagesFile {
+         String prefix = config.getString("prefix");
          return prefix.replace("&", "§");
      }
- 
 +    public static String getWrongSyntax() {
 +        String prefix = config.getString("wrongSyntax");
 +        return prefix.replace("&", "§");
@@ -56,7 +56,7 @@ index 28901cafd9e58b5a111ef665019cec875318d297..cf13be02d96049534d46ab981c1dd78f
 +        String prefix = config.getString("configReloaded");
 +        return prefix.replace("&", "§");
 +    }
-+
+ 
  }
 diff --git a/src/main/java/net/pascalpex/deepslatemc/commands/DeepslateCommand.java b/src/main/java/net/pascalpex/deepslatemc/commands/DeepslateCommand.java
 new file mode 100644
@@ -156,18 +156,18 @@ index 0000000000000000000000000000000000000000..c13998092bac275a1ae33fc914b119a5
 +
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 62096362fd7185accd58c968d181f46e4775cf85..b92cf6b506956c9a3e565cb71532a5ea40c77c65 100644
+index 8fd1b751b1e601d2ea2ff31f896341e189e53c55..bd921ea322228bcfce8b0158d4133f1d26d01ca5 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -105,6 +105,7 @@ import net.minecraft.world.level.storage.PlayerDataStorage;
  import net.minecraft.world.level.storage.PrimaryLevelData;
  import net.minecraft.world.level.storage.loot.LootTables;
  import net.minecraft.world.phys.Vec3;
-+import net.pascalpex.deepslatemc.commands.DeepslateCommand;
++import net.pascalpex.deepslatemc.commands.*;
  import org.apache.commons.lang.Validate;
  import org.bukkit.BanList;
  import org.bukkit.Bukkit;
-@@ -1045,6 +1046,11 @@ public final class CraftServer implements Server {
+@@ -1014,6 +1015,11 @@ public final class CraftServer implements Server {
          org.spigotmc.SpigotConfig.registerCommands(); // Spigot
          io.papermc.paper.command.PaperCommands.registerCommands(this.console); // Paper
          org.purpurmc.purpur.PurpurConfig.registerCommands(); // Purpur
