@@ -74,7 +74,7 @@ index 0ae0c2a045739f98ecd10ecb3858bd7ceb7c8dfe..17c92c870169d3e82db2fd0eaee56b3a
  }
 diff --git a/src/main/java/net/pascalpex/deepslatemc/commands/BuildworldCommand.java b/src/main/java/net/pascalpex/deepslatemc/commands/BuildworldCommand.java
 new file mode 100644
-index 0000000000000000000000000000000000000000..a772f2b7164fc00367d09a011817d6184d09fac4
+index 0000000000000000000000000000000000000000..8b1b1a727a3b30176b05d31cbbaec1778273e1c5
 --- /dev/null
 +++ b/src/main/java/net/pascalpex/deepslatemc/commands/BuildworldCommand.java
 @@ -0,0 +1,51 @@
@@ -102,7 +102,7 @@ index 0000000000000000000000000000000000000000..a772f2b7164fc00367d09a011817d618
 +        String prefix = MessagesFile.getPrefix() + " ";
 +        if (sender instanceof Player) {
 +            Player player = (Player) sender;
-+            if(label.equalsIgnoreCase("setbuildworld") || label.equalsIgnoreCase("setbauwelt")) {
++            if(label.equalsIgnoreCase("setbuildworld")) {
 +                if(player.hasPermission("deepslate.setbuildworld")) {
 +                    World world = player.getLocation().getWorld();
 +                    Config.setBuildworld(world.getName());
@@ -111,7 +111,7 @@ index 0000000000000000000000000000000000000000..a772f2b7164fc00367d09a011817d618
 +                    player.sendMessage(prefix + MessagesFile.getNoPermissions());
 +                }
 +            }
-+            if(label.equalsIgnoreCase("bauwelt") || label.equalsIgnoreCase("buildworld")) {
++            if(label.equalsIgnoreCase("buildworld")) {
 +                if(player.hasPermission("deepslate.buildworld")) {
 +                    try {
 +                        player.teleport(Bukkit.getWorld(Config.getBuildworld()).getSpawnLocation());
