@@ -1,26 +1,22 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Pascalpex <pascalpex@gmail.com>
-Date: Thu, 14 Jul 2022 15:11:09 +0200
+Date: Sat, 3 Dec 2022 14:35:42 +0100
 Subject: [PATCH] Metrics stats
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 3a1ccc119862478dae2a494903b7f09d217e6a7d..1b8faa86994f9ef11f8b00a3e5878584d6157ce8 100644
+index 0ccbfe3116ceeb33e045aec818a4d2ec38021946..bdabbc947a40e2f9d2acd54b6198af4a89b86dad 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-@@ -13,10 +13,7 @@ import java.net.Proxy;
- import java.nio.charset.StandardCharsets;
- import java.nio.file.Files;
- import java.nio.file.Path;
--import java.util.Collections;
--import java.util.List;
--import java.util.Locale;
--import java.util.Optional;
-+import java.util.*;
+@@ -20,6 +20,7 @@ import java.util.Locale;
+ import java.util.Optional;
+ import java.util.concurrent.Executors;
  import java.util.function.BooleanSupplier;
++import java.util.UUID;
  import javax.annotation.Nullable;
  import net.minecraft.DefaultUncaughtExceptionHandler;
-@@ -55,6 +52,7 @@ import net.minecraft.world.level.GameRules;
+ import net.minecraft.DefaultUncaughtExceptionHandlerWithName;
+@@ -57,6 +58,7 @@ import net.minecraft.world.level.GameRules;
  import net.minecraft.world.level.GameType;
  import net.minecraft.world.level.block.entity.SkullBlockEntity;
  import net.minecraft.world.level.storage.LevelStorageSource;
@@ -28,7 +24,7 @@ index 3a1ccc119862478dae2a494903b7f09d217e6a7d..1b8faa86994f9ef11f8b00a3e5878584
  import net.pascalpex.deepslatemc.commands.*;
  import org.slf4j.Logger;
  
-@@ -224,6 +222,14 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+@@ -226,6 +228,14 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
          thread.start(); // Paper - start console thread after MinecraftServer.console & PaperConfig are initialized
          io.papermc.paper.command.PaperCommands.registerCommands(this);
          com.destroystokyo.paper.Metrics.PaperMetrics.startMetrics();
@@ -44,30 +40,28 @@ index 3a1ccc119862478dae2a494903b7f09d217e6a7d..1b8faa86994f9ef11f8b00a3e5878584
          try {
              org.purpurmc.purpur.PurpurConfig.init((java.io.File) options.valueOf("purpur-settings"));
 diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
-index fd22d6b96993fc3173a3dd178e8ec144b10fa2ae..ab0f0ac083a020b0bf59e33536704fa4d10a4eb9 100644
+index 51e722413faa6bf4c74b3162dc59c9a44f6bc44a..0df4bf9113fb47359a6fce8cf658e29f08c690bc 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/Config.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/Config.java
-@@ -51,6 +51,9 @@ public class Config {
-                 List<String> worldsList = new ArrayList<>();
+@@ -52,6 +52,9 @@ public class Config {
                  worldsList.add("FantasyWorld");
                  config.set("autoSmelt" + ".enabledWorlds", worldsList);
-+            }
+             }
 +            if (!config.contains("metrics")) {
 +                config.set("metrics", true);
-             }
-                 save();
++            }
+             save();
          } catch (IOException | InvalidConfigurationException e) {
-@@ -66,6 +69,10 @@ public class Config {
-         }
+             e.printStackTrace();
+@@ -117,5 +120,8 @@ public class Config {
+     public static List<String> getAutoSmeltWorlds() {
+         return (List<String>) config.getList("autoSmelt" + ".enabledWorlds");
      }
- 
 +    public static boolean getMetricsEnabled() {
 +        return config.getBoolean("metrics");
 +    }
-+
-     public static int getAutoSmeltPrice() {
-         return config.getInt("autoSmelt" + ".price");
-     }
+ 
+ }
 diff --git a/src/main/java/net/pascalpex/deepslatemc/util/Metrics.java b/src/main/java/net/pascalpex/deepslatemc/util/Metrics.java
 new file mode 100644
 index 0000000000000000000000000000000000000000..136d30d7e25895adf5be857aeac94c46cb330ec0
