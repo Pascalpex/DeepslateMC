@@ -1,11 +1,11 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Pascalpex <pascalpex@gmail.com>
-Date: Sun, 22 May 2022 13:50:56 +0200
+Date: Sat, 3 Dec 2022 16:02:06 +0100
 Subject: [PATCH] Configurable move messages
 
 
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index f3d215dc879f07c8e7f21104e44a124f45815c5f..a901f2454861a45a05373c929f4408cd9d11715a 100644
+index a5a521bb3494df0f1137a9384c15a7a421086644..c7b95c9e31836bfe0ba72fa62db02db5effddbc7 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 @@ -1547,7 +1547,9 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Tic
@@ -31,30 +31,29 @@ index f3d215dc879f07c8e7f21104e44a124f45815c5f..a901f2454861a45a05373c929f4408cd
  
                              this.player.absMoveTo(d0, d1, d2, f, f1);
 diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
-index ab0f0ac083a020b0bf59e33536704fa4d10a4eb9..80bc5005908f3012f37a9ee25968d98176ebda7c 100644
+index 0df4bf9113fb47359a6fce8cf658e29f08c690bc..5987bd375b876d50be0ff00123dd0914f4410cb4 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/Config.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/Config.java
 @@ -55,6 +55,10 @@ public class Config {
              if (!config.contains("metrics")) {
                  config.set("metrics", true);
              }
-+                if (!config.contains("messages")) {
-+                    config.set("messages" + ".movedWrongly", true);
-+                    config.set("messages" + ".movedQuickly", true);
-+                }
-                 save();
++            if (!config.contains("messages")) {
++                config.set("messages" + ".movedWrongly", true);
++                config.set("messages" + ".movedQuickly", true);
++            }
+             save();
          } catch (IOException | InvalidConfigurationException e) {
              e.printStackTrace();
-@@ -134,4 +138,12 @@ public class Config {
-             save();
-         }
- 
+@@ -123,5 +127,11 @@ public class Config {
+     public static boolean getMetricsEnabled() {
+         return config.getBoolean("metrics");
+     }
 +    public static boolean getMovedQuickly() {
 +        return config.getBoolean("messages" + ".movedQuickly");
 +    }
-+
 +    public static boolean getMovedWrongly() {
 +        return config.getBoolean("messages" + ".movedWrongly");
 +    }
-+
+ 
  }
