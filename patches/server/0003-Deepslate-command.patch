@@ -60,10 +60,10 @@ index 28901cafd9e58b5a111ef665019cec875318d297..96833e6e5dc97d13e0ea778530b06069
  }
 diff --git a/src/main/java/net/pascalpex/deepslatemc/commands/DeepslateCommand.java b/src/main/java/net/pascalpex/deepslatemc/commands/DeepslateCommand.java
 new file mode 100644
-index 0000000000000000000000000000000000000000..c13998092bac275a1ae33fc914b119a5318717bd
+index 0000000000000000000000000000000000000000..c01afb333b667c92275028ecf9e2c77a9e2f96b1
 --- /dev/null
 +++ b/src/main/java/net/pascalpex/deepslatemc/commands/DeepslateCommand.java
-@@ -0,0 +1,91 @@
+@@ -0,0 +1,90 @@
 +package net.pascalpex.deepslatemc.commands;
 +    
 +import net.pascalpex.deepslatemc.Config;
@@ -78,7 +78,6 @@ index 0000000000000000000000000000000000000000..c13998092bac275a1ae33fc914b119a5
 +import java.util.List;
 +import java.util.stream.Collectors;
 +import java.util.stream.Stream;
-+
 +    
 +public class DeepslateCommand extends Command {
 +

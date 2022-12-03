@@ -42,7 +42,7 @@ index 9a03cd8f8fc82450fdf7b46a405ea6b6482524d2..b0ed05f69d66a863042767768fc87092
 +
  }
 diff --git a/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java b/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java
-index 96833e6e5dc97d13e0ea778530b0606937f14ae4..1cce7cd55a42d599e98f2e49015bb74fcc2fe13a 100644
+index 96833e6e5dc97d13e0ea778530b0606937f14ae4..073ee76cdefd6f0e40f7f1f80312f25e2406118b 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java
 @@ -35,6 +35,12 @@ public class MessagesFile {
@@ -66,7 +66,7 @@ index 96833e6e5dc97d13e0ea778530b0606937f14ae4..1cce7cd55a42d599e98f2e49015bb74f
 +        String prefix = config.getString("onlyForPlayers");
 +        return prefix.replace("&", "§");
 +    }
-+   public static String getDiscordMessage() {
++    public static String getDiscordMessage() {
 +        String prefix = config.getString("discordMessage");
 +        return prefix.replace("&", "§");
 +    }
@@ -74,10 +74,10 @@ index 96833e6e5dc97d13e0ea778530b0606937f14ae4..1cce7cd55a42d599e98f2e49015bb74f
  }
 diff --git a/src/main/java/net/pascalpex/deepslatemc/commands/DiscordCommand.java b/src/main/java/net/pascalpex/deepslatemc/commands/DiscordCommand.java
 new file mode 100644
-index 0000000000000000000000000000000000000000..24717b7f0ead489c38635c7db36e22b88a2bd387
+index 0000000000000000000000000000000000000000..5b22618af4ea971d48e4559d6d008ac27a5b28a3
 --- /dev/null
 +++ b/src/main/java/net/pascalpex/deepslatemc/commands/DiscordCommand.java
-@@ -0,0 +1,32 @@
+@@ -0,0 +1,31 @@
 +package net.pascalpex.deepslatemc.commands;
 +    
 +import net.pascalpex.deepslatemc.Config;
@@ -85,7 +85,6 @@ index 0000000000000000000000000000000000000000..24717b7f0ead489c38635c7db36e22b8
 +import org.bukkit.command.Command;
 +import org.bukkit.command.CommandSender;
 +import org.bukkit.entity.Player;
-+import org.jetbrains.annotations.NotNull;
 +
 +public class DiscordCommand extends Command {
 +
@@ -96,7 +95,7 @@ index 0000000000000000000000000000000000000000..24717b7f0ead489c38635c7db36e22b8
 +    }
 +
 +    @Override
-+    public boolean execute(@NotNull CommandSender sender, @NotNull String commandLabel, @NotNull String[] args) {
++    public boolean execute(CommandSender sender, String commandLabel, String[] args) {
 +        String prefix = MessagesFile.getPrefix() + " ";
 +        if (commandLabel.equalsIgnoreCase("dc") || commandLabel.equalsIgnoreCase("discord")) {
 +            if (sender instanceof Player) {
