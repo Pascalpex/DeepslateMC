@@ -1,22 +1,14 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Pascalpex <pascalpex@gmail.com>
-Date: Mon, 21 Mar 2022 15:07:19 +0100
+Date: Sat, 3 Dec 2022 13:13:46 +0100
 Subject: [PATCH] Discord command
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index c98759a0eb98759fa616e9758422f6bbf31022bd..cbfdc01b8f50679ae05244810a752d9898ae6672 100644
+index 877bda44141982589a16be4f64b61976180cbfe3..617bac0fd5b30e3d26b00dd981a5671aa098411f 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-@@ -56,6 +56,7 @@ import net.minecraft.world.level.GameType;
- import net.minecraft.world.level.block.entity.SkullBlockEntity;
- import net.minecraft.world.level.storage.LevelStorageSource;
- import net.pascalpex.deepslatemc.commands.DeepslateCommand;
-+import net.pascalpex.deepslatemc.commands.DiscordCommand;
- import org.slf4j.Logger;
- 
- // CraftBukkit start
-@@ -242,6 +243,8 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+@@ -244,6 +244,8 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
  
          // Deepslate start
          MinecraftServer.getServer().server.getCommandMap().register("deepslate", "Deepslate", new DeepslateCommand("deepslate"));
@@ -24,74 +16,68 @@ index c98759a0eb98759fa616e9758422f6bbf31022bd..cbfdc01b8f50679ae05244810a752d98
 +        MinecraftServer.getServer().server.getCommandMap().register("dc", "Deepslate", new DiscordCommand("dc"));
          // Deepslate end
  
-         this.setPvpAllowed(dedicatedserverproperties.pvp);
+         // KeYi start - init config
 diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
-index 66389dedb5b0ad82839f5c324d6676591c108096..1a843527d24e8a48fb6e0ad9d8fafa679512c868 100644
+index 9a03cd8f8fc82450fdf7b46a405ea6b6482524d2..b0ed05f69d66a863042767768fc8709221abe232 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/Config.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/Config.java
-@@ -22,10 +22,15 @@ public class Config {
-                 List<String> header = new ArrayList<>();
-                 header.add("This is the main configuration file of DeepslateMC");
-                 header.add("You can find an explanation of all options here: https://github.com/Pascalpex/DeepslateMC/wiki");
-+                header.add("You can get support on our Discord server: https://discord.gg/BGrhNnVczp");
-                 config.options().setHeader(header);
+@@ -27,6 +27,10 @@ public class Config {
                  save();
              }
              config.load(configFile);
-+                if(!config.contains("discordLink")) {
-+                    config.set("discordLink", "https://discord.gg/BGrhNnVczp");
-+                }
-+                save();
++            if(!config.contains("discordLink")) {
++                config.set("discordLink", "https://discord.gg/BGrhNnVczp");
++            }
++            save();
          } catch (IOException | InvalidConfigurationException e) {
              e.printStackTrace();
          }
-@@ -39,4 +44,8 @@ public class Config {
+@@ -40,4 +44,8 @@ public class Config {
          }
      }
  
-+        public static String getDiscordLink() {
-+            return config.getString("discordLink");
-+        }
++    public static String getDiscordLink() {
++        return config.getString("discordLink");
++    }
 +
  }
 diff --git a/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java b/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java
-index cf13be02d96049534d46ab981c1dd78f8eccd0da..bb13ce36183389dab6ba595a63891bfab99d9401 100644
+index 96833e6e5dc97d13e0ea778530b0606937f14ae4..073ee76cdefd6f0e40f7f1f80312f25e2406118b 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java
 @@ -35,6 +35,12 @@ public class MessagesFile {
              if(!config.contains("configReloaded")) {
                  config.set("configReloaded", "&aConfig got reloaded successfully");
              }
-+                if(!config.contains("onlyForPlayers")) {
-+                    config.set("onlyForPlayers", "&cThis command can only be used by players");
-+                }
-+                if(!config.contains("discordMessage")) {
-+                    config.set("discordMessage", "&6The link to our Discord server: &b%link%");
-+                }
++            if(!config.contains("onlyForPlayers")) {
++                config.set("onlyForPlayers", "&cThis command can only be used by players");
++            }
++            if(!config.contains("discordMessage")) {
++                config.set("discordMessage", "&6The link to our Discord server: &b%link%");
++            }
              save();
          } catch (IOException | InvalidConfigurationException e) {
              e.printStackTrace();
-@@ -63,4 +69,14 @@ public class MessagesFile {
+@@ -61,5 +67,13 @@ public class MessagesFile {
+         String prefix = config.getString("configReloaded");
          return prefix.replace("&", "§");
      }
++    public static String getOnlyForPlayers() {
++        String prefix = config.getString("onlyForPlayers");
++        return prefix.replace("&", "§");
++    }
++    public static String getDiscordMessage() {
++        String prefix = config.getString("discordMessage");
++        return prefix.replace("&", "§");
++    }
  
-+        public static String getOnlyForPlayers() {
-+            String prefix = config.getString("onlyForPlayers");
-+            return prefix.replace("&", "§");
-+        }
-+
-+        public static String getDiscordMessage() {
-+            String prefix = config.getString("discordMessage");
-+            return prefix.replace("&", "§");
-+        }
-+
  }
 diff --git a/src/main/java/net/pascalpex/deepslatemc/commands/DiscordCommand.java b/src/main/java/net/pascalpex/deepslatemc/commands/DiscordCommand.java
 new file mode 100644
-index 0000000000000000000000000000000000000000..24717b7f0ead489c38635c7db36e22b88a2bd387
+index 0000000000000000000000000000000000000000..5b22618af4ea971d48e4559d6d008ac27a5b28a3
 --- /dev/null
 +++ b/src/main/java/net/pascalpex/deepslatemc/commands/DiscordCommand.java
-@@ -0,0 +1,32 @@
+@@ -0,0 +1,31 @@
 +package net.pascalpex.deepslatemc.commands;
 +    
 +import net.pascalpex.deepslatemc.Config;
@@ -99,7 +85,6 @@ index 0000000000000000000000000000000000000000..24717b7f0ead489c38635c7db36e22b8
 +import org.bukkit.command.Command;
 +import org.bukkit.command.CommandSender;
 +import org.bukkit.entity.Player;
-+import org.jetbrains.annotations.NotNull;
 +
 +public class DiscordCommand extends Command {
 +
@@ -110,7 +95,7 @@ index 0000000000000000000000000000000000000000..24717b7f0ead489c38635c7db36e22b8
 +    }
 +
 +    @Override
-+    public boolean execute(@NotNull CommandSender sender, @NotNull String commandLabel, @NotNull String[] args) {
++    public boolean execute(CommandSender sender, String commandLabel, String[] args) {
 +        String prefix = MessagesFile.getPrefix() + " ";
 +        if (commandLabel.equalsIgnoreCase("dc") || commandLabel.equalsIgnoreCase("discord")) {
 +            if (sender instanceof Player) {
@@ -125,18 +110,10 @@ index 0000000000000000000000000000000000000000..24717b7f0ead489c38635c7db36e22b8
 +    }
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index b92cf6b506956c9a3e565cb71532a5ea40c77c65..40e3e5f133dbd4e843124af8b8d0840430411f96 100644
+index bd921ea322228bcfce8b0158d4133f1d26d01ca5..05fd701ada3b7b57e8501e13ba05f4103471f7f6 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -106,6 +106,7 @@ import net.minecraft.world.level.storage.PrimaryLevelData;
- import net.minecraft.world.level.storage.loot.LootTables;
- import net.minecraft.world.phys.Vec3;
- import net.pascalpex.deepslatemc.commands.DeepslateCommand;
-+import net.pascalpex.deepslatemc.commands.DiscordCommand;
- import org.apache.commons.lang.Validate;
- import org.bukkit.BanList;
- import org.bukkit.Bukkit;
-@@ -1049,6 +1050,8 @@ public final class CraftServer implements Server {
+@@ -1018,6 +1018,8 @@ public final class CraftServer implements Server {
  
          // Deepslate start
          MinecraftServer.getServer().server.getCommandMap().register("deepslate", "Deepslate", new DeepslateCommand("deepslate"));

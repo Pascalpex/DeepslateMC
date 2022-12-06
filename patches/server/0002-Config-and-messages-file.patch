@@ -5,7 +5,7 @@ Subject: [PATCH] Config and messages file
 
 
 diff --git a/src/main/java/net/minecraft/commands/Commands.java b/src/main/java/net/minecraft/commands/Commands.java
-index 4bf5efd39938db79bba660efc2969022e8057abd..fed7929a92996ca35a59c690fe85ee197d174d10 100644
+index 6505112d94ad7d21a71663ae6516c5196abb6531..dee27ce771a2233985f2d3a16778f23f15ee737c 100644
 --- a/src/main/java/net/minecraft/commands/Commands.java
 +++ b/src/main/java/net/minecraft/commands/Commands.java
 @@ -107,6 +107,8 @@ import net.minecraft.server.commands.WorldBorderCommand;
@@ -30,10 +30,10 @@ index 4bf5efd39938db79bba660efc2969022e8057abd..fed7929a92996ca35a59c690fe85ee19
          ExecuteCommand.register(this.dispatcher, commandRegistryAccess);
 diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
 new file mode 100644
-index 0000000000000000000000000000000000000000..66389dedb5b0ad82839f5c324d6676591c108096
+index 0000000000000000000000000000000000000000..9a03cd8f8fc82450fdf7b46a405ea6b6482524d2
 --- /dev/null
 +++ b/src/main/java/net/pascalpex/deepslatemc/Config.java
-@@ -0,0 +1,42 @@
+@@ -0,0 +1,43 @@
 +package net.pascalpex.deepslatemc;
 +    
 +import org.bukkit.configuration.InvalidConfigurationException;
@@ -58,6 +58,7 @@ index 0000000000000000000000000000000000000000..66389dedb5b0ad82839f5c324d667659
 +                List<String> header = new ArrayList<>();
 +                header.add("This is the main configuration file of DeepslateMC");
 +                header.add("You can find an explanation of all options here: https://github.com/Pascalpex/DeepslateMC/wiki");
++                header.add("You can get support on our Discord server: https://discord.gg/BGrhNnVczp");
 +                config.options().setHeader(header);
 +                save();
 +            }

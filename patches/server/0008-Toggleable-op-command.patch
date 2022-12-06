@@ -5,7 +5,7 @@ Subject: [PATCH] Toggleable op command
 
 
 diff --git a/src/main/java/net/minecraft/commands/Commands.java b/src/main/java/net/minecraft/commands/Commands.java
-index 644359b750764c5f0f8808cda913a98e91008c57..503eadd85d9e12a2d6bc8f5e9fc2d7a63eb42ac3 100644
+index dee27ce771a2233985f2d3a16778f23f15ee737c..6d775d5d5934b3a9f6612dacf71617987e64679e 100644
 --- a/src/main/java/net/minecraft/commands/Commands.java
 +++ b/src/main/java/net/minecraft/commands/Commands.java
 @@ -203,7 +203,9 @@ public class Commands {
@@ -20,27 +20,26 @@ index 644359b750764c5f0f8808cda913a98e91008c57..503eadd85d9e12a2d6bc8f5e9fc2d7a6
              PardonIpCommand.register(this.dispatcher);
              PerfCommand.register(this.dispatcher);
 diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
-index 8a4422bac75da53bb51cd3d80e7c5d868ed918b0..ea344d78ed041a951188d148995885d0c536d710 100644
+index 14630aad16fe8ac38030674c52bc91d619e9abde..442fcec773f6232e9a84cfadd28a36f79cec43d9 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/Config.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/Config.java
 @@ -30,6 +30,9 @@ public class Config {
-                 if(!config.contains("discordLink")) {
-                     config.set("discordLink", "https://discord.gg/BGrhNnVczp");
-                 }
-+                if(!config.contains("opCommandActive")) {
-+                    config.set("opCommandActive", true);
-+                }
-                 save();
+             if(!config.contains("discordLink")) {
+                 config.set("discordLink", "https://discord.gg/BGrhNnVczp");
+             }
++            if(!config.contains("opCommandActive")) {
++                config.set("opCommandActive", true);
++            }
+             save();
          } catch (IOException | InvalidConfigurationException e) {
              e.printStackTrace();
-@@ -44,6 +47,10 @@ public class Config {
+@@ -44,6 +47,9 @@ public class Config {
          }
      }
  
-+        public static boolean getOpActive() {
-+            return config.getBoolean("opCommandActive");
-+        }
-+
-         public static String getDiscordLink() {
-             return config.getString("discordLink");
-         }
++    public static boolean getOpActive() {
++        return config.getBoolean("opCommandActive");
++    }
+     public static String getDiscordLink() {
+         return config.getString("discordLink");
+     }

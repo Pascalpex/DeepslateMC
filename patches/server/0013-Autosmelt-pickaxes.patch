@@ -1,21 +1,21 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Pascalpex <pascalpex@gmail.com>
-Date: Thu, 14 Jul 2022 14:59:53 +0200
+Date: Sat, 3 Dec 2022 14:28:20 +0100
 Subject: [PATCH] Autosmelt pickaxes
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index a805a726618e2c03ac6f68c4ad47e96f4e5f613d..a81511989f68c66574bf2d3c1712be5ee4489702 100644
+index 591724ee34ef1d3df2d61cf00b75533aa7f5e34d..0ccbfe3116ceeb33e045aec818a4d2ec38021946 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-@@ -254,6 +254,7 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
-         MinecraftServer.getServer().server.getCommandMap().register("wartung", "Deepslate", new MaintenanceMode("wartung"));
-         MinecraftServer.getServer().server.getCommandMap().register("help", "Deepslate", new HelpCommand("help"));
-         MinecraftServer.getServer().server.getCommandMap().register("hilfe", "Deepslate", new HelpCommand("hilfe"));
-+        MinecraftServer.getServer().server.getCommandMap().register("autosmelt", "Deepslate", new AutosmeltCommand("autosmelt"));
- 
+@@ -255,6 +255,7 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
          MinecraftServer.getServer().server.getCommandMap().register("setspawn", "Deepslate", new SpawnCommand("setspawn"));
          MinecraftServer.getServer().server.getCommandMap().register("spawn", "Deepslate", new SpawnCommand("spawn"));
+         MinecraftServer.getServer().server.getCommandMap().register("lobby", "Deepslate", new SpawnCommand("lobby"));
++        MinecraftServer.getServer().server.getCommandMap().register("autosmelt", "Deepslate", new AutosmeltCommand("autosmelt"));
+         // Deepslate end
+ 
+         // KeYi start - init config
 diff --git a/src/main/java/net/minecraft/server/level/ServerPlayerGameMode.java b/src/main/java/net/minecraft/server/level/ServerPlayerGameMode.java
 index 4816b5bd54ae6e080af4c19df43d57e852e76146..88752bcc1b56ed5820eaaeca4fa60c5715547a54 100644
 --- a/src/main/java/net/minecraft/server/level/ServerPlayerGameMode.java
@@ -91,46 +91,42 @@ index 4816b5bd54ae6e080af4c19df43d57e852e76146..88752bcc1b56ed5820eaaeca4fa60c57
              event.setCancelled(isSwordNoBreak);
  
 diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
-index 43ee43057acb8beb13a2acaaa9fd33a71a1df347..fd22d6b96993fc3173a3dd178e8ec144b10fa2ae 100644
+index 9a2ecd57135827d22448ae19650122af069faad0..51e722413faa6bf4c74b3162dc59c9a44f6bc44a 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/Config.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/Config.java
 @@ -46,6 +46,12 @@ public class Config {
-                     config.set("coloredSigns" + ".enabled", false);
-                     config.set("coloredSigns" + ".usePermission", true);
-                 }
+                 config.set("coloredSigns" + ".enabled", false);
+                 config.set("coloredSigns" + ".usePermission", true);
+             }
 +            if(!config.contains("autoSmelt")) {
 +                config.set("autoSmelt" + ".price", 30);
 +                List<String> worldsList = new ArrayList<>();
 +                worldsList.add("FantasyWorld");
 +                config.set("autoSmelt" + ".enabledWorlds", worldsList);
 +            }
-                 save();
+             save();
          } catch (IOException | InvalidConfigurationException e) {
              e.printStackTrace();
-@@ -60,6 +66,14 @@ public class Config {
-         }
+@@ -105,5 +111,11 @@ public class Config {
+     public static boolean getColoredSignsPermissionUse() {
+         return config.getBoolean("coloredSigns" + ".usePermission");
      }
- 
 +    public static int getAutoSmeltPrice() {
 +        return config.getInt("autoSmelt" + ".price");
 +    }
-+
 +    public static List<String> getAutoSmeltWorlds() {
 +        return (List<String>) config.getList("autoSmelt" + ".enabledWorlds");
 +    }
-+
-     public static boolean getColoredSignsEnabled() {
-         return config.getBoolean("coloredSigns" + ".enabled");
-     }
+ 
+ }
 diff --git a/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java b/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java
-index f28b4e1f3f228210aca64e66c0a2e2e933377dae..b82dc26e4dda493b53d55fd4ebc987b7d7d07591 100644
+index 155380686dcccb368820b45eab67a21bed9d85f1..60182222713d3c412f0332fd57911108e3fbea83 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java
-@@ -82,6 +82,22 @@ public class MessagesFile {
+@@ -82,6 +82,21 @@ public class MessagesFile {
              if(!config.contains("spawnTeleport")) {
                  config.set("spawnTeleport", "&aYou got teleported to the spawn");
              }
-+
 +            if(!config.contains("autoSmeltEnchanted")) {
 +                config.set("autoSmeltEnchanted", "&aYour pickaxe now has autosmelt");
 +            }
@@ -149,7 +145,7 @@ index f28b4e1f3f228210aca64e66c0a2e2e933377dae..b82dc26e4dda493b53d55fd4ebc987b7
              save();
          } catch (IOException | InvalidConfigurationException e) {
              e.printStackTrace();
-@@ -180,5 +196,25 @@ public class MessagesFile {
+@@ -171,5 +186,25 @@ public class MessagesFile {
          String prefix = config.getString("spawnTeleport");
          return prefix.replace("&", "§");
      }
@@ -177,10 +173,10 @@ index f28b4e1f3f228210aca64e66c0a2e2e933377dae..b82dc26e4dda493b53d55fd4ebc987b7
  }
 diff --git a/src/main/java/net/pascalpex/deepslatemc/commands/AutosmeltCommand.java b/src/main/java/net/pascalpex/deepslatemc/commands/AutosmeltCommand.java
 new file mode 100644
-index 0000000000000000000000000000000000000000..0aa6ca538a87a370943d9dc117a4b33c04e7e09c
+index 0000000000000000000000000000000000000000..baf1f1d28c6610aeec912e858a3e3fb2f17b74fb
 --- /dev/null
 +++ b/src/main/java/net/pascalpex/deepslatemc/commands/AutosmeltCommand.java
-@@ -0,0 +1,66 @@
+@@ -0,0 +1,64 @@
 +package net.pascalpex.deepslatemc.commands;
 +    
 +import net.pascalpex.deepslatemc.Config;
@@ -190,13 +186,12 @@ index 0000000000000000000000000000000000000000..0aa6ca538a87a370943d9dc117a4b33c
 +import org.bukkit.entity.Player;
 +import org.bukkit.inventory.ItemStack;
 +import org.bukkit.inventory.meta.ItemMeta;
-+import org.jetbrains.annotations.NotNull;
 +
 +import java.util.ArrayList;
 +
 +public class AutosmeltCommand extends Command {
 +
-+    public AutosmeltCommand(@NotNull String name) {
++    public AutosmeltCommand(String name) {
 +        super(name);
 +        this.description = "Enchants a pickaxe with autosmelt";
 +        this.usageMessage = "/autosmelt";
@@ -204,7 +199,7 @@ index 0000000000000000000000000000000000000000..0aa6ca538a87a370943d9dc117a4b33c
 +    }
 +
 +    @Override
-+    public boolean execute(@NotNull CommandSender sender, @NotNull String label, @NotNull String[] args) {
++    public boolean execute(CommandSender sender, String label, String[] args) {
 +        String prefix = MessagesFile.getPrefix() + " ";
 +        if (sender instanceof Player) {
 +            Player player = (Player) sender;
@@ -226,7 +221,6 @@ index 0000000000000000000000000000000000000000..0aa6ca538a87a370943d9dc117a4b33c
 +                                } else {
 +                                    player.sendMessage(prefix + MessagesFile.getAutoSmeltUnable());
 +                                }
-+
 +                            } else {
 +                                player.sendMessage(prefix + MessagesFile.getAutoSmeltNoPickaxe());
 +                            }
@@ -248,14 +242,14 @@ index 0000000000000000000000000000000000000000..0aa6ca538a87a370943d9dc117a4b33c
 +
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index d99399968eea96e00c052d9dc45ee53146c9223f..28adf8f86b938a71bc5c08e30a29bef86e6d1bc6 100644
+index 6a0352578cd3a95f698a4d51ec83b9688ec00144..3cdc9c75eb5f0bc20426682446da0a1232923c47 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -1061,6 +1061,7 @@ public final class CraftServer implements Server {
-         MinecraftServer.getServer().server.getCommandMap().register("wartung", "Deepslate", new MaintenanceMode("wartung"));
-         MinecraftServer.getServer().server.getCommandMap().register("help", "Deepslate", new HelpCommand("help"));
-         MinecraftServer.getServer().server.getCommandMap().register("hilfe", "Deepslate", new HelpCommand("hilfe"));
-+        MinecraftServer.getServer().server.getCommandMap().register("autosmelt", "Deepslate", new AutosmeltCommand("autosmelt"));
- 
+@@ -1029,6 +1029,7 @@ public final class CraftServer implements Server {
          MinecraftServer.getServer().server.getCommandMap().register("setspawn", "Deepslate", new SpawnCommand("setspawn"));
          MinecraftServer.getServer().server.getCommandMap().register("spawn", "Deepslate", new SpawnCommand("spawn"));
+         MinecraftServer.getServer().server.getCommandMap().register("lobby", "Deepslate", new SpawnCommand("lobby"));
++        MinecraftServer.getServer().server.getCommandMap().register("autosmelt", "Deepslate", new AutosmeltCommand("autosmelt"));
+         // Deepslate end
+ 
+         this.overrideAllCommandBlockCommands = this.commandsConfiguration.getStringList("command-block-overrides").contains("*");

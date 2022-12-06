@@ -1,34 +1,32 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Pascalpex <pascalpex@gmail.com>
-Date: Mon, 21 Mar 2022 15:37:52 +0100
+Date: Sat, 3 Dec 2022 14:16:43 +0100
 Subject: [PATCH] Configurable knowledgebook click
 
 
 diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
-index c4784f144b036bd489fcc37c8f531007869763e2..988fd49ebe181c2e5e5837014c2cf1585b40939c 100644
+index 6962584f335a75a4e23b68cc731e3d5856881e04..70cf7172bf95259294454ce94924ac24cf950279 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/Config.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/Config.java
 @@ -39,6 +39,9 @@ public class Config {
              if(!config.contains("spawnOnJoin")) {
                  config.set("spawnOnJoin", false);
              }
-+                if(!config.contains("preventKnowledgebookClick")) {
-+                    config.set("preventKnowledgebookClick", false);
-+                }
-                 save();
++            if(!config.contains("preventKnowledgebookClick")) {
++                config.set("preventKnowledgebookClick", false);
++            }
+             save();
          } catch (IOException | InvalidConfigurationException e) {
              e.printStackTrace();
-@@ -53,6 +56,10 @@ public class Config {
-         }
+@@ -89,5 +92,8 @@ public class Config {
+         float yaw = (float) config.getDouble("spawn" + ".yaw");
+         return new Location(world, x, y, z, yaw, pitch);
      }
- 
 +    public static boolean getPreventKnowledgebookClick() {
-+            return config.getBoolean("preventKnowledgebookClick");
-+        }
-+
-         public static boolean getOpActive() {
-             return config.getBoolean("opCommandActive");
-         }
++        return config.getBoolean("preventKnowledgebookClick");
++    }
+ 
+ }
 diff --git a/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java b/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
 index c47f6434d8c52d0524b0ce065ace5c45d589867f..600f18fd6c9c98e97b9555e52e44702ba5d2a7ba 100644
 --- a/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java

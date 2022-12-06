@@ -16,7 +16,7 @@ repositories {
 
 dependencies {
     remapper("net.fabricmc:tiny-remapper:0.8.6:fat")
-    decompiler("net.minecraftforge:forgeflower:2.0.605.1")
+    decompiler("org.quiltmc:quiltflower:1.9.0")
     paperclip("io.papermc:paperclip:3.0.2")
 }
 
@@ -61,16 +61,16 @@ paperweight {
     remapRepo.set(paperMavenPublicUrl)
     decompileRepo.set(paperMavenPublicUrl)
 
-    useStandardUpstream("purpur") {
-        url.set(github("PurpurMC", "Purpur"))
-        ref.set(providers.gradleProperty("purpurRef"))
+    useStandardUpstream("keyi") {
+        url.set(github("KeYiMC", "KeYi"))
+        ref.set(providers.gradleProperty("keyiRef"))
 
         withStandardPatcher {
             apiOutputDir.set(layout.projectDirectory.dir("deepslateMC-api"))
             serverOutputDir.set(layout.projectDirectory.dir("deepslateMC-server"))
 
-            apiSourceDirPath.set("Purpur-API")
-            serverSourceDirPath.set("Purpur-Server")
+            apiSourceDirPath.set("KeYi-API")
+            serverSourceDirPath.set("KeYi-Server")
         }
 
     }

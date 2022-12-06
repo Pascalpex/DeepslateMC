@@ -5,7 +5,7 @@ Subject: [PATCH] Configurable debug menu brand
 
 
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index df148910b933914423f3332e006ab8ce820523e7..bf1f3997244bd29c2ae4c8ceee919e06782555d4 100644
+index e035c9539f77c7dc3bf3e63d3591d0cb02e16b6f..ac9eda38ee45028284b9aa14a35be1c0493cb453 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
 @@ -96,6 +96,7 @@ import net.minecraft.world.scores.Objective;
@@ -26,24 +26,25 @@ index df148910b933914423f3332e006ab8ce820523e7..bf1f3997244bd29c2ae4c8ceee919e06
          playerconnection.send(new ClientboundPlayerAbilitiesPacket(player.getAbilities()));
          playerconnection.send(new ClientboundSetCarriedItemPacket(player.getInventory().selected));
 diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
-index 80bc5005908f3012f37a9ee25968d98176ebda7c..2f34fdd5c90e1756843036541b2bc91ab88f31a4 100644
+index 5987bd375b876d50be0ff00123dd0914f4410cb4..a818d97433e945ed25dbad89d2272b9f9a9426d3 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/Config.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/Config.java
 @@ -59,6 +59,9 @@ public class Config {
-                     config.set("messages" + ".movedWrongly", true);
-                     config.set("messages" + ".movedQuickly", true);
-                 }
+                 config.set("messages" + ".movedWrongly", true);
+                 config.set("messages" + ".movedQuickly", true);
+             }
 +            if (!config.contains("f3name")) {
 +                config.set("f3name", "&eDeepslateMC");
 +            }
-                 save();
+             save();
          } catch (IOException | InvalidConfigurationException e) {
              e.printStackTrace();
-@@ -146,4 +149,7 @@ public class Config {
+@@ -133,5 +136,8 @@ public class Config {
+     public static boolean getMovedWrongly() {
          return config.getBoolean("messages" + ".movedWrongly");
      }
- 
 +    public static String getF3name() {
 +        return config.getString("f3name").replace("&", "§");
 +    }
+ 
  }

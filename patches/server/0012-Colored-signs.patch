@@ -1,11 +1,11 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Pascalpex <pascalpex@gmail.com>
-Date: Mon, 21 Mar 2022 15:43:24 +0100
+Date: Sat, 3 Dec 2022 14:20:15 +0100
 Subject: [PATCH] Colored signs
 
 
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index 57dd2f5190e00bddbc575044ce5d9cc613e3c0df..da92a08ae9e45946c15977161082c3856f67957f 100644
+index 103616e0dd5f7a5517eb20529263ac3ca06dd786..a5a521bb3494df0f1137a9384c15a7a421086644 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 @@ -184,6 +184,7 @@ import net.minecraft.world.phys.Vec3;
@@ -73,32 +73,29 @@ index 57dd2f5190e00bddbc575044ce5d9cc613e3c0df..da92a08ae9e45946c15977161082c385
      public void handleKeepAlive(ServerboundKeepAlivePacket packet) {
          // Purpur start
 diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
-index 988fd49ebe181c2e5e5837014c2cf1585b40939c..43ee43057acb8beb13a2acaaa9fd33a71a1df347 100644
+index 70cf7172bf95259294454ce94924ac24cf950279..9a2ecd57135827d22448ae19650122af069faad0 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/Config.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/Config.java
 @@ -42,6 +42,10 @@ public class Config {
-                 if(!config.contains("preventKnowledgebookClick")) {
-                     config.set("preventKnowledgebookClick", false);
-                 }
-+                if(!config.contains("coloredSigns")) {
-+                    config.set("coloredSigns" + ".enabled", false);
-+                    config.set("coloredSigns" + ".usePermission", true);
-+                }
-                 save();
+             if(!config.contains("preventKnowledgebookClick")) {
+                 config.set("preventKnowledgebookClick", false);
+             }
++            if(!config.contains("coloredSigns")) {
++                config.set("coloredSigns" + ".enabled", false);
++                config.set("coloredSigns" + ".usePermission", true);
++            }
+             save();
          } catch (IOException | InvalidConfigurationException e) {
              e.printStackTrace();
-@@ -56,6 +60,14 @@ public class Config {
-         }
+@@ -95,5 +99,11 @@ public class Config {
+     public static boolean getPreventKnowledgebookClick() {
+         return config.getBoolean("preventKnowledgebookClick");
      }
- 
 +    public static boolean getColoredSignsEnabled() {
 +        return config.getBoolean("coloredSigns" + ".enabled");
 +    }
-+
 +    public static boolean getColoredSignsPermissionUse() {
 +        return config.getBoolean("coloredSigns" + ".usePermission");
 +    }
-+
-     public static boolean getPreventKnowledgebookClick() {
-             return config.getBoolean("preventKnowledgebookClick");
-         }
+ 
+ }
