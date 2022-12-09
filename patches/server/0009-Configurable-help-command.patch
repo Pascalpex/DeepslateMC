@@ -5,10 +5,10 @@ Subject: [PATCH] Configurable help command
 
 
 diff --git a/src/main/java/net/minecraft/commands/Commands.java b/src/main/java/net/minecraft/commands/Commands.java
-index 6d775d5d5934b3a9f6612dacf71617987e64679e..2c6e9ef27d1eade1be88f4cc9f2fd87704f25245 100644
+index 6a886db395fae3c856ee8a37aa51643a008bfa3d..5cf3244b1e0fcd63151348809a6e50f3a16bba5a 100644
 --- a/src/main/java/net/minecraft/commands/Commands.java
 +++ b/src/main/java/net/minecraft/commands/Commands.java
-@@ -156,7 +156,7 @@ public class Commands {
+@@ -164,7 +164,7 @@ public class Commands {
          GameModeCommand.register(this.dispatcher);
          GameRuleCommand.register(this.dispatcher);
          GiveCommand.register(this.dispatcher, commandRegistryAccess);
@@ -18,10 +18,10 @@ index 6d775d5d5934b3a9f6612dacf71617987e64679e..2c6e9ef27d1eade1be88f4cc9f2fd877
          KickCommand.register(this.dispatcher);
          KillCommand.register(this.dispatcher);
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 5d0f995bdcfd1659d44404dd435bf40cffb14077..9e20217574a7d38224ee924da530196d8e38e909 100644
+index 82a1aa95495170d1b68cfeff1f109eb90179c529..9a17aa89ba0142e22c69a0b246e9aa3f11a06268 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-@@ -251,6 +251,7 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+@@ -242,6 +242,7 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
          MinecraftServer.getServer().server.getCommandMap().register("setbuildworld", "Deepslate", new BuildworldCommand("setbuildworld"));
          MinecraftServer.getServer().server.getCommandMap().register("buildworld", "Deepslate", new BuildworldCommand("buildworld"));
          MinecraftServer.getServer().server.getCommandMap().register("maintenance", "Deepslate", new MaintenanceMode("maintenance"));
@@ -95,10 +95,10 @@ index 0000000000000000000000000000000000000000..18ff82e04111931e1d878abbf340d272
 +
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 9fe912c7b6ef178220a144bbb4ccf2c864493763..b8e564a4c2ded0d9a62511fec655326963b7663c 100644
+index b95eb7269107b89da42605ec5152e9efa515e897..693cc81ba2927761df82530a73fc5827195237be 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -1025,6 +1025,7 @@ public final class CraftServer implements Server {
+@@ -1038,6 +1038,7 @@ public final class CraftServer implements Server {
          MinecraftServer.getServer().server.getCommandMap().register("setbuildworld", "Deepslate", new BuildworldCommand("setbuildworld"));
          MinecraftServer.getServer().server.getCommandMap().register("buildworld", "Deepslate", new BuildworldCommand("buildworld"));
          MinecraftServer.getServer().server.getCommandMap().register("maintenance", "Deepslate", new MaintenanceMode("maintenance"));

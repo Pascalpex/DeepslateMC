@@ -5,19 +5,19 @@ Subject: [PATCH] Config and messages file
 
 
 diff --git a/src/main/java/net/minecraft/commands/Commands.java b/src/main/java/net/minecraft/commands/Commands.java
-index 6505112d94ad7d21a71663ae6516c5196abb6531..dee27ce771a2233985f2d3a16778f23f15ee737c 100644
+index 1a6f3c602437eaedbc96f1d47d08ff3ab25c0469..9aeff9301c6052951a9512c73b3b293bceb44763 100644
 --- a/src/main/java/net/minecraft/commands/Commands.java
 +++ b/src/main/java/net/minecraft/commands/Commands.java
-@@ -107,6 +107,8 @@ import net.minecraft.server.commands.WorldBorderCommand;
- import net.minecraft.server.commands.data.DataCommands;
+@@ -114,6 +114,8 @@ import net.minecraft.server.commands.data.DataCommands;
  import net.minecraft.server.level.ServerPlayer;
+ import net.minecraft.tags.TagKey;
  import net.minecraft.util.profiling.jfr.JvmProfiler;
 +import net.pascalpex.deepslatemc.Config;
 +import net.pascalpex.deepslatemc.MessagesFile;
  import org.slf4j.Logger;
  
  // CraftBukkit start
-@@ -129,6 +131,10 @@ public class Commands {
+@@ -136,6 +138,10 @@ public class Commands {
  
      public Commands(Commands.CommandSelection environment, CommandBuildContext commandRegistryAccess) {
          this(); // CraftBukkit
@@ -26,7 +26,7 @@ index 6505112d94ad7d21a71663ae6516c5196abb6531..dee27ce771a2233985f2d3a16778f23f
 +        MessagesFile.load();
 +        // Deepslate end
          AdvancementCommands.register(this.dispatcher);
-         AttributeCommand.register(this.dispatcher);
+         AttributeCommand.register(this.dispatcher, commandRegistryAccess);
          ExecuteCommand.register(this.dispatcher, commandRegistryAccess);
 diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
 new file mode 100644

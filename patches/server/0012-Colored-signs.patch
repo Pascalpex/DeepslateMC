@@ -1,22 +1,22 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Pascalpex <pascalpex@gmail.com>
-Date: Sat, 3 Dec 2022 14:20:15 +0100
+Date: Fri, 9 Dec 2022 21:31:04 +0100
 Subject: [PATCH] Colored signs
 
 
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index 103616e0dd5f7a5517eb20529263ac3ca06dd786..a5a521bb3494df0f1137a9384c15a7a421086644 100644
+index 45bdc5afa8b51ef381ac3c41c57cf0ad271658d0..9657af69b21911cb7bde9611292822250f7a397f 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-@@ -184,6 +184,7 @@ import net.minecraft.world.phys.Vec3;
+@@ -182,6 +182,7 @@ import net.minecraft.world.phys.Vec3;
  import net.minecraft.world.phys.shapes.BooleanOp;
  import net.minecraft.world.phys.shapes.Shapes;
  import net.minecraft.world.phys.shapes.VoxelShape;
 +import net.pascalpex.deepslatemc.Config;
- import org.apache.commons.lang3.StringUtils;
  import org.slf4j.Logger;
  
-@@ -3679,6 +3680,17 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Tic
+ // CraftBukkit start
+@@ -3535,6 +3536,17 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Tic
                  // Purpur end
              }
              SignChangeEvent event = new SignChangeEvent((org.bukkit.craftbukkit.block.CraftBlock) player.getWorld().getBlockAt(x, y, z), this.player.getBukkitEntity(), lines);
@@ -34,7 +34,7 @@ index 103616e0dd5f7a5517eb20529263ac3ca06dd786..a5a521bb3494df0f1137a9384c15a7a4
              this.cserver.getPluginManager().callEvent(event);
  
              if (!event.isCancelled()) {
-@@ -3696,6 +3708,37 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Tic
+@@ -3552,6 +3564,37 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Tic
  
      }
  

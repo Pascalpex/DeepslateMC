@@ -5,10 +5,10 @@ Subject: [PATCH] Discord command
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 877bda44141982589a16be4f64b61976180cbfe3..617bac0fd5b30e3d26b00dd981a5671aa098411f 100644
+index 8ddbc7d12d5577e9dbc7881ec4e8e9ea72efc961..d0bc28c820b9f834d059ca924673418693d5c078 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-@@ -244,6 +244,8 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+@@ -235,6 +235,8 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
  
          // Deepslate start
          MinecraftServer.getServer().server.getCommandMap().register("deepslate", "Deepslate", new DeepslateCommand("deepslate"));
@@ -110,10 +110,10 @@ index 0000000000000000000000000000000000000000..5b22618af4ea971d48e4559d6d008ac2
 +    }
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index bd921ea322228bcfce8b0158d4133f1d26d01ca5..05fd701ada3b7b57e8501e13ba05f4103471f7f6 100644
+index 7c8b0cf94da4346917775aee8acc9a7b8bdb8c23..4384a7315b5b217de5f51b76657432e66b8d7444 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -1018,6 +1018,8 @@ public final class CraftServer implements Server {
+@@ -1031,6 +1031,8 @@ public final class CraftServer implements Server {
  
          // Deepslate start
          MinecraftServer.getServer().server.getCommandMap().register("deepslate", "Deepslate", new DeepslateCommand("deepslate"));
