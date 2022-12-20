@@ -5,7 +5,7 @@ Subject: [PATCH] Metrics stats
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 9bb9bd4500d6b717ef92db8560c55fd23a2876fd..ce0079bb94af86afdd2443c01de2d60a55ab6acc 100644
+index d6811943a7540298c341887a999689ba07ace3b8..d5d7e58f7c91959d9699f342f5fa115c5035afc1 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 @@ -18,6 +18,7 @@ import java.util.List;
@@ -24,7 +24,7 @@ index 9bb9bd4500d6b717ef92db8560c55fd23a2876fd..ce0079bb94af86afdd2443c01de2d60a
  import net.pascalpex.deepslatemc.commands.*;
  import org.slf4j.Logger;
  
-@@ -219,6 +221,14 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+@@ -220,6 +222,14 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
          thread.start(); // Paper - start console thread after MinecraftServer.console & PaperConfig are initialized
          io.papermc.paper.command.PaperCommands.registerCommands(this);
          com.destroystokyo.paper.Metrics.PaperMetrics.startMetrics();

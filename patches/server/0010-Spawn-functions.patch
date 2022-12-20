@@ -5,10 +5,10 @@ Subject: [PATCH] Spawn functions
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 9a17aa89ba0142e22c69a0b246e9aa3f11a06268..24f27a6b18347da00d395eb40c041802b5675bcd 100644
+index 33b32474802ca7b4b378009badbb87d7e90bb22f..5391e823a648d456099cdad6e19c1ff7da9a2d66 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-@@ -243,6 +243,9 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+@@ -246,6 +246,9 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
          MinecraftServer.getServer().server.getCommandMap().register("buildworld", "Deepslate", new BuildworldCommand("buildworld"));
          MinecraftServer.getServer().server.getCommandMap().register("maintenance", "Deepslate", new MaintenanceMode("maintenance"));
          MinecraftServer.getServer().server.getCommandMap().register("help", "Deepslate", new HelpCommand("help"));
@@ -19,7 +19,7 @@ index 9a17aa89ba0142e22c69a0b246e9aa3f11a06268..24f27a6b18347da00d395eb40c041802
  
          // KeYi start - init config
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index bac48082e7f732c59ca370ca4be8e17df908a9c3..0e3e69df913301fa9ca500bc9c41c8cf0d1023dc 100644
+index 8d5ce658a018c0486d4687c14afe79cb970b2edb..fd8d72a72a11b020d78900a6d5033e4a548a070d 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
 @@ -102,6 +102,7 @@ import net.minecraft.world.scores.Scoreboard; // Paper
@@ -30,7 +30,7 @@ index bac48082e7f732c59ca370ca4be8e17df908a9c3..0e3e69df913301fa9ca500bc9c41c8cf
  import org.slf4j.Logger;
  
  // CraftBukkit start
-@@ -380,6 +381,7 @@ public abstract class PlayerList {
+@@ -318,6 +319,7 @@ public abstract class PlayerList {
          player.containerMenu.transferTo(player.containerMenu, bukkitPlayer);
  
          PlayerJoinEvent playerJoinEvent = new PlayerJoinEvent(bukkitPlayer, PaperAdventure.asAdventure(ichatmutablecomponent)); // Paper - Adventure
@@ -195,7 +195,7 @@ index 0000000000000000000000000000000000000000..ec53a7ba37bf6360dea2c9b980499863
 +
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 693cc81ba2927761df82530a73fc5827195237be..27e9623b9c837c8a8e280935c4d238709bd0bfe8 100644
+index 05b1f78df37ae0b840238b23f17faccbef61b657..a9b3f4d20f53114c52ff44c05a13a0cc7b784f3e 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -1039,6 +1039,9 @@ public final class CraftServer implements Server {

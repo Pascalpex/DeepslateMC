@@ -5,10 +5,10 @@ Subject: [PATCH] Maintenance mode
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 741e5d58fec61c0977fff56adbc11413a632293a..82a1aa95495170d1b68cfeff1f109eb90179c529 100644
+index ddb7a9697118c7a1f0d1ae387852deeba58f34b5..15c479f95efccd8a133033a0ef7aa3ac7224a11b 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-@@ -241,6 +241,7 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+@@ -244,6 +244,7 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
          MinecraftServer.getServer().server.getCommandMap().register("clearchat", "Deepslate", new ClearchatCommand("clearchat"));
          MinecraftServer.getServer().server.getCommandMap().register("setbuildworld", "Deepslate", new BuildworldCommand("setbuildworld"));
          MinecraftServer.getServer().server.getCommandMap().register("buildworld", "Deepslate", new BuildworldCommand("buildworld"));
@@ -17,7 +17,7 @@ index 741e5d58fec61c0977fff56adbc11413a632293a..82a1aa95495170d1b68cfeff1f109eb9
  
          // KeYi start - init config
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index 23cea7dd67dd1890a8fd34c294d140b30e89f59c..bac48082e7f732c59ca370ca4be8e17df908a9c3 100644
+index f3fc72e1ddbb65daaab3b5fe1c6210434a434050..8d5ce658a018c0486d4687c14afe79cb970b2edb 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
 @@ -100,6 +100,8 @@ import net.minecraft.world.scores.Objective;
@@ -29,7 +29,7 @@ index 23cea7dd67dd1890a8fd34c294d140b30e89f59c..bac48082e7f732c59ca370ca4be8e17d
  import org.slf4j.Logger;
  
  // CraftBukkit start
-@@ -764,6 +766,15 @@ public abstract class PlayerList {
+@@ -687,6 +689,15 @@ public abstract class PlayerList {
          Player player = entity.getBukkitEntity();
          PlayerLoginEvent event = new PlayerLoginEvent(player, loginlistener.connection.hostname, ((java.net.InetSocketAddress) socketaddress).getAddress(), ((java.net.InetSocketAddress) loginlistener.connection.getRawAddress()).getAddress());
  
@@ -136,7 +136,7 @@ index 0000000000000000000000000000000000000000..4a8b9abc9340ff38217c6b8cf66463b9
 +    }
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index bfd1dac4cd581b731b2f0e2602a57b87dc8f8752..b95eb7269107b89da42605ec5152e9efa515e897 100644
+index fd0e62dd34c62e7fd8abd0fb87fed48375ec55bb..bec664c523dc3cef198b4be95bcbf455030b2672 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -1037,6 +1037,7 @@ public final class CraftServer implements Server {

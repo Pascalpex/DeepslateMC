@@ -5,7 +5,7 @@ Subject: [PATCH] Deepslate command
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index f664f4e5a49ade081cd53c71e0760e344a39468a..8ddbc7d12d5577e9dbc7881ec4e8e9ea72efc961 100644
+index b217cb396b3f6e79c968a5614cce0459bb818445..43af3f4ea3fc5c0d29264ed4c8c4465d2a6772f8 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 @@ -50,6 +50,7 @@ import net.minecraft.world.level.GameRules;
@@ -16,9 +16,9 @@ index f664f4e5a49ade081cd53c71e0760e344a39468a..8ddbc7d12d5577e9dbc7881ec4e8e9ea
  import org.slf4j.Logger;
  
  // CraftBukkit start
-@@ -232,6 +233,10 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
-         // Paper end
-         // gg.pufferfish.pufferfish.PufferfishConfig.pufferfishFile = (java.io.File) options.valueOf("pufferfish-settings"); // Purpur
+@@ -235,6 +236,10 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+         gg.pufferfish.pufferfish.PufferfishConfig.load(); // Pufferfish
+         gg.pufferfish.pufferfish.PufferfishCommand.init(); // Pufferfish
  
 +        // Deepslate start
 +        MinecraftServer.getServer().server.getCommandMap().register("deepslate", "Deepslate", new DeepslateCommand("deepslate"));
@@ -26,7 +26,7 @@ index f664f4e5a49ade081cd53c71e0760e344a39468a..8ddbc7d12d5577e9dbc7881ec4e8e9ea
 +
          // KeYi start - init config
          try {
-             cc.keyimc.keyi.KeyiConfig.init((java.io.File) options.valueOf("keyi-settings"));
+             KGlobalConfig.getInstance().init();
 diff --git a/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java b/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java
 index 28901cafd9e58b5a111ef665019cec875318d297..96833e6e5dc97d13e0ea778530b0606937f14ae4 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java
@@ -155,7 +155,7 @@ index 0000000000000000000000000000000000000000..c01afb333b667c92275028ecf9e2c77a
 +
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 90cab0f11837f4866ab8cf39d914c1ad72f25411..7c8b0cf94da4346917775aee8acc9a7b8bdb8c23 100644
+index 101bfdc7079310fd2b5bc4d797f940f51961e698..f1c93735d8228fadb77a3ada29e98405a5476890 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -118,6 +118,7 @@ import net.minecraft.world.level.storage.PrimaryLevelData;
