@@ -162,11 +162,11 @@ index d779212cbb719a1d923a24823135c5d3543ae65c..632c7d18bcf3501e0f5d9b8340380fb8
      }
  }
 diff --git a/src/main/java/org/purpurmc/purpur/PurpurConfig.java b/src/main/java/org/purpurmc/purpur/PurpurConfig.java
-index cd60f79acdd2307bdae48a11d4f5ec3ff3fa225a..84c4599c45bc529509fc3a99b6b6be405bfab8f9 100644
+index 0675f0633006c6e76294b7bb7e73c589510c97dd..0c61942bcde34840971ea053336c9f926a6aa59b 100644
 --- a/src/main/java/org/purpurmc/purpur/PurpurConfig.java
 +++ b/src/main/java/org/purpurmc/purpur/PurpurConfig.java
-@@ -244,7 +244,7 @@ public class PurpurConfig {
-         if (!TimingsManager.hiddenConfigs.contains("settings.seed")) TimingsManager.hiddenConfigs.add("settings.seed");
+@@ -227,7 +227,7 @@ public class PurpurConfig {
+         deathMessageOnlyBroadcastToAffectedPlayer = getBoolean("settings.broadcasts.death.only-broadcast-to-affected-player", deathMessageOnlyBroadcastToAffectedPlayer);
      }
  
 -    public static String serverModName = "KeYi"; // KeYi
