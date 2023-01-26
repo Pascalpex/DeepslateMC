@@ -61,16 +61,16 @@ paperweight {
     remapRepo.set(paperMavenPublicUrl)
     decompileRepo.set(paperMavenPublicUrl)
 
-    useStandardUpstream("keyi") {
-        url.set(github("KeYiMC", "KeYi"))
-        ref.set(providers.gradleProperty("keyiRef"))
+    useStandardUpstream("fusion") {
+        url.set(github("IPECTER", "Fusion"))
+        ref.set(providers.gradleProperty("fusionRef"))
 
         withStandardPatcher {
             apiOutputDir.set(layout.projectDirectory.dir("deepslateMC-api"))
             serverOutputDir.set(layout.projectDirectory.dir("deepslateMC-server"))
 
-            apiSourceDirPath.set("KeYi-API")
-            serverSourceDirPath.set("KeYi-Server")
+            apiSourceDirPath.set("Fusion-API")
+            serverSourceDirPath.set("Fusion-Server")
         }
 
     }

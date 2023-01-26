@@ -2,7 +2,7 @@
 <div align="center">
 
 # DeepslateMC
-### A fork of [KeYi](https://github.com/KeYiMC/KeYi) that adds neat functionalities
+### A fork of [Fusion](https://github.com/IPECTER/Fusion) that adds neat functionalities
 <br/>
 </div>
 
