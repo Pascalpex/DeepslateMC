@@ -5,10 +5,10 @@ Subject: [PATCH] Buildworld command
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 645b31340b00e871c35e5799c68024fef8751abf..ddb7a9697118c7a1f0d1ae387852deeba58f34b5 100644
+index efd0a6dfc8a4d26ffbbaa3e91d04657608333a45..a2947e3559e7b89195f6c87d0b6fc307d94b9b9a 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-@@ -242,6 +242,8 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+@@ -250,6 +250,8 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
          MinecraftServer.getServer().server.getCommandMap().register("dc", "Deepslate", new DiscordCommand("dc"));
          MinecraftServer.getServer().server.getCommandMap().register("cc", "Deepslate", new ClearchatCommand("cc"));
          MinecraftServer.getServer().server.getCommandMap().register("clearchat", "Deepslate", new ClearchatCommand("clearchat"));
@@ -16,7 +16,7 @@ index 645b31340b00e871c35e5799c68024fef8751abf..ddb7a9697118c7a1f0d1ae387852deeb
 +        MinecraftServer.getServer().server.getCommandMap().register("buildworld", "Deepslate", new BuildworldCommand("buildworld"));
          // Deepslate end
  
-         // KeYi start - init config
+         this.setPvpAllowed(dedicatedserverproperties.pvp);
 diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
 index b0ed05f69d66a863042767768fc8709221abe232..14630aad16fe8ac38030674c52bc91d619e9abde 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/Config.java
@@ -130,10 +130,10 @@ index 0000000000000000000000000000000000000000..8b1b1a727a3b30176b05d31cbbaec177
 +    }
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 7771b4e1baea7381ccd45d8d653434ce08aaaf2d..fd0e62dd34c62e7fd8abd0fb87fed48375ec55bb 100644
+index 6cc95263e02e63aea1a27986d1b0f2bf0d9cba0d..606558c96ce2e19f609db28f4cbe2a8e50455725 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -1035,6 +1035,8 @@ public final class CraftServer implements Server {
+@@ -1074,6 +1074,8 @@ public final class CraftServer implements Server {
          MinecraftServer.getServer().server.getCommandMap().register("dc", "Deepslate", new DiscordCommand("dc"));
          MinecraftServer.getServer().server.getCommandMap().register("cc", "Deepslate", new ClearchatCommand("cc"));
          MinecraftServer.getServer().server.getCommandMap().register("clearchat", "Deepslate", new ClearchatCommand("clearchat"));

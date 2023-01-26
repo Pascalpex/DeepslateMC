@@ -5,7 +5,7 @@ Subject: [PATCH] Configurable debug menu brand
 
 
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index fd8d72a72a11b020d78900a6d5033e4a548a070d..b21c75721950f5f40c0be40148a9edca5858660d 100644
+index 16f9b1af3b379f7109217b201e68ac376e8ca984..32eb738463615821d83753c5c9cd430810ba23b4 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
 @@ -100,6 +100,7 @@ import net.minecraft.world.scores.Objective;

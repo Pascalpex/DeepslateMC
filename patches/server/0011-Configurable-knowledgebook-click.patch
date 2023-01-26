@@ -28,7 +28,7 @@ index 6962584f335a75a4e23b68cc731e3d5856881e04..70cf7172bf95259294454ce94924ac24
  
  }
 diff --git a/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java b/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
-index 2d49774f195c2f72004319b2e35763c7071969f1..14bf3540141c512a5a0b6aa0269eb3f5d3d7a23c 100644
+index b65c39645aa437fdb1ac745ec18bba11f63f092d..19477a39b3f2c7d60f882162e5f88eb1057e31de 100644
 --- a/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
 +++ b/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
 @@ -57,6 +57,7 @@ import net.minecraft.world.phys.BlockHitResult;

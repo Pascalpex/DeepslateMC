@@ -5,7 +5,7 @@ Subject: [PATCH] Configurable move messages
 
 
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index 3f71361323c1e91cf477dde2e1fdf54999ff5b82..ce54a1a28baaa998e4a88201999ceb5c48b4fb95 100644
+index f1ae5422d7339d1aea71b01b6005b752ef8af087..e9935fbbce1364fe2cdaa4233b2ac8d0df8dde44 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 @@ -1534,7 +1534,9 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Tic
