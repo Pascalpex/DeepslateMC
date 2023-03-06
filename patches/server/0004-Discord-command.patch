@@ -74,10 +74,10 @@ index 96833e6e5dc97d13e0ea778530b0606937f14ae4..073ee76cdefd6f0e40f7f1f80312f25e
  }
 diff --git a/src/main/java/net/pascalpex/deepslatemc/commands/DiscordCommand.java b/src/main/java/net/pascalpex/deepslatemc/commands/DiscordCommand.java
 new file mode 100644
-index 0000000000000000000000000000000000000000..5b22618af4ea971d48e4559d6d008ac27a5b28a3
+index 0000000000000000000000000000000000000000..a9beebbafcaf947107e70ba11fa196053fbbdf0f
 --- /dev/null
 +++ b/src/main/java/net/pascalpex/deepslatemc/commands/DiscordCommand.java
-@@ -0,0 +1,31 @@
+@@ -0,0 +1,26 @@
 +package net.pascalpex.deepslatemc.commands;
 +    
 +import net.pascalpex.deepslatemc.Config;
@@ -98,13 +98,8 @@ index 0000000000000000000000000000000000000000..5b22618af4ea971d48e4559d6d008ac2
 +    public boolean execute(CommandSender sender, String commandLabel, String[] args) {
 +        String prefix = MessagesFile.getPrefix() + " ";
 +        if (commandLabel.equalsIgnoreCase("dc") || commandLabel.equalsIgnoreCase("discord")) {
-+            if (sender instanceof Player) {
-+                Player player = (Player) sender;
-+                String link = Config.getDiscordLink();
-+                player.sendMessage(prefix + MessagesFile.getDiscordMessage().replace("%link%", link));
-+            } else {
-+                sender.sendMessage(prefix + MessagesFile.getOnlyForPlayers());
-+            }
++            String link = Config.getDiscordLink();
++            sender.sendMessage(prefix + MessagesFile.getDiscordMessage().replace("%link%", link));
 +        }
 +        return true;
 +    }
