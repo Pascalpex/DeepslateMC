@@ -1,0 +1,143 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Pascalpex <pascalpex@gmail.com>
+Date: Mon, 6 Mar 2023 12:58:01 +0100
+Subject: [PATCH] Tablist header footer
+
+
+diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
+index 9ed63183308b58d16b9faf0de2b6cc92ba6b4ffa..c607752774e64c20ed3a16aeecabfc3fd7b6ccf6 100644
+--- a/src/main/java/net/minecraft/server/players/PlayerList.java
++++ b/src/main/java/net/minecraft/server/players/PlayerList.java
+@@ -104,6 +104,7 @@ import net.pascalpex.deepslatemc.Config;
+ import net.pascalpex.deepslatemc.MessagesFile;
+ import net.pascalpex.deepslatemc.commands.MaintenanceMode;
+ import net.pascalpex.deepslatemc.commands.SpawnCommand;
++import net.pascalpex.deepslatemc.util.TablistUtil;
+ import org.slf4j.Logger;
+ 
+ // CraftBukkit start
+@@ -321,6 +322,11 @@ public abstract class PlayerList {
+ 
+         PlayerJoinEvent playerJoinEvent = new PlayerJoinEvent(bukkitPlayer, PaperAdventure.asAdventure(ichatmutablecomponent)); // Paper - Adventure
+         SpawnCommand.playerJoin(bukkitPlayer); // Deepslate - Spawn functions
++        // Deepslate start - Tablist
++        if (Config.getTablistEnabled()) {
++            TablistUtil.setTablist(bukkitPlayer);
++        }
++        // Deepslate end
+         this.cserver.getPluginManager().callEvent(playerJoinEvent);
+ 
+         if (!player.connection.connection.isConnected()) {
+diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
+index a818d97433e945ed25dbad89d2272b9f9a9426d3..13e1198f3813249baa5b21bc61a95d83a235c55e 100644
+--- a/src/main/java/net/pascalpex/deepslatemc/Config.java
++++ b/src/main/java/net/pascalpex/deepslatemc/Config.java
+@@ -62,6 +62,17 @@ public class Config {
+             if (!config.contains("f3name")) {
+                 config.set("f3name", "&eDeepslateMC");
+             }
++            if (!config.contains("tablist")) {
++                config.set("tablist" + ".enabled", false);
++                List<String> headerList = new ArrayList<>();
++                List<String> footerList = new ArrayList<>();
++                headerList.add("&4This is the");
++                headerList.add("&4default header");
++                footerList.add("&6This is the");
++                footerList.add("&6default footer");
++                config.set("tablist" + ".header", headerList);
++                config.set("tablist" + ".footer", footerList);
++            }
+             save();
+         } catch (IOException | InvalidConfigurationException e) {
+             e.printStackTrace();
+@@ -139,5 +150,14 @@ public class Config {
+     public static String getF3name() {
+         return config.getString("f3name").replace("&", "§");
+     }
++    public static boolean getTablistEnabled() {
++        return config.getBoolean("tablist" + ".enabled");
++    }
++    public static List<String> getHeader() {
++        return (List<String>) config.getList("tablist" + ".header");
++    }
++    public static List<String> getFooter() {
++        return (List<String>) config.getList("tablist" + ".footer");
++    }
+ 
+ }
+diff --git a/src/main/java/net/pascalpex/deepslatemc/commands/DeepslateCommand.java b/src/main/java/net/pascalpex/deepslatemc/commands/DeepslateCommand.java
+index c01afb333b667c92275028ecf9e2c77a9e2f96b1..273e2437f86e7405fdd32c4ad7cf52bf27e43e10 100644
+--- a/src/main/java/net/pascalpex/deepslatemc/commands/DeepslateCommand.java
++++ b/src/main/java/net/pascalpex/deepslatemc/commands/DeepslateCommand.java
+@@ -1,7 +1,8 @@
+ package net.pascalpex.deepslatemc.commands;
+-    
++
+ import net.pascalpex.deepslatemc.Config;
+ import net.pascalpex.deepslatemc.MessagesFile;
++import net.pascalpex.deepslatemc.util.TablistUtil;
+ import org.bukkit.ChatColor;
+ import org.bukkit.Location;
+ import org.bukkit.command.Command;
+@@ -45,6 +46,9 @@ public class DeepslateCommand extends Command {
+                         if(args[0].equalsIgnoreCase("reload")) {
+                             MessagesFile.load();
+                             Config.load();
++                            if (Config.getTablistEnabled()) {
++                                TablistUtil.reloadTablist();
++                            }
+                             player.sendMessage(prefix + MessagesFile.getConfigReloaded());
+                         } else {
+                             if(args[0].equalsIgnoreCase("version")) {
+diff --git a/src/main/java/net/pascalpex/deepslatemc/util/TablistUtil.java b/src/main/java/net/pascalpex/deepslatemc/util/TablistUtil.java
+new file mode 100644
+index 0000000000000000000000000000000000000000..9e4ac965e1c25f469663e7401e77b696c427da91
+--- /dev/null
++++ b/src/main/java/net/pascalpex/deepslatemc/util/TablistUtil.java
+@@ -0,0 +1,46 @@
++package net.pascalpex.deepslatemc.util;
++
++import net.pascalpex.deepslatemc.Config;
++import org.bukkit.Bukkit;
++import org.bukkit.entity.Player;
++
++public class TablistUtil {
++
++    private static boolean initiated = false;
++    private static String header = "";
++    private static String footer = "";
++
++    public static void setTablist(Player player) {
++        if(!initiated) {
++            reloadTablist();
++        }
++        player.setPlayerListHeader(header);
++        player.setPlayerListFooter(footer);
++    }
++
++    public static void reloadTablist() {
++        header = "";
++        footer = "";
++        for(String s : Config.getHeader()) {
++            if(!header.equals("")) {
++                header += "\n";
++            }
++            header += s;
++        }
++        for(String s : Config.getFooter()) {
++            if(!footer.equals("")) {
++                footer += "\n";
++            }
++            footer += s;
++        }
++        header = header.replace("&", "§");
++        footer = footer.replace("&", "§");
++
++        initiated = true;
++
++        for(Player player : Bukkit.getOnlinePlayers()) {
++            setTablist(player);
++        }
++    }
++    
++}
