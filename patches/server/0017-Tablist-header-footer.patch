@@ -5,10 +5,10 @@ Subject: [PATCH] Tablist header footer
 
 
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index 9ed63183308b58d16b9faf0de2b6cc92ba6b4ffa..c607752774e64c20ed3a16aeecabfc3fd7b6ccf6 100644
+index ac33d568e834fd8a6b86a31383a756404321a6f6..f0839dde980203ebf1d908a411801daab414ecab 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
-@@ -104,6 +104,7 @@ import net.pascalpex.deepslatemc.Config;
+@@ -105,6 +105,7 @@ import net.pascalpex.deepslatemc.Config;
  import net.pascalpex.deepslatemc.MessagesFile;
  import net.pascalpex.deepslatemc.commands.MaintenanceMode;
  import net.pascalpex.deepslatemc.commands.SpawnCommand;
@@ -16,7 +16,7 @@ index 9ed63183308b58d16b9faf0de2b6cc92ba6b4ffa..c607752774e64c20ed3a16aeecabfc3f
  import org.slf4j.Logger;
  
  // CraftBukkit start
-@@ -321,6 +322,11 @@ public abstract class PlayerList {
+@@ -327,6 +328,11 @@ public abstract class PlayerList {
  
          PlayerJoinEvent playerJoinEvent = new PlayerJoinEvent(bukkitPlayer, PaperAdventure.asAdventure(ichatmutablecomponent)); // Paper - Adventure
          SpawnCommand.playerJoin(bukkitPlayer); // Deepslate - Spawn functions
@@ -27,7 +27,7 @@ index 9ed63183308b58d16b9faf0de2b6cc92ba6b4ffa..c607752774e64c20ed3a16aeecabfc3f
 +        // Deepslate end
          this.cserver.getPluginManager().callEvent(playerJoinEvent);
  
-         if (!player.connection.connection.isConnected()) {
+         if (!player.connection.isAcceptingMessages()) {
 diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
 index a818d97433e945ed25dbad89d2272b9f9a9426d3..13e1198f3813249baa5b21bc61a95d83a235c55e 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/Config.java

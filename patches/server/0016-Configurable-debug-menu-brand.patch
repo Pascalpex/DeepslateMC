@@ -5,10 +5,10 @@ Subject: [PATCH] Configurable debug menu brand
 
 
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index 16f9b1af3b379f7109217b201e68ac376e8ca984..32eb738463615821d83753c5c9cd430810ba23b4 100644
+index fca56b78783db0ad36437bb97d7f5f3cbad097a2..ac33d568e834fd8a6b86a31383a756404321a6f6 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
-@@ -100,6 +100,7 @@ import net.minecraft.world.scores.Objective;
+@@ -101,6 +101,7 @@ import net.minecraft.world.scores.Objective;
  import net.minecraft.world.scores.PlayerTeam;
  import net.minecraft.world.scores.Scoreboard; // Paper
  import net.minecraft.world.scores.Team;
@@ -16,7 +16,7 @@ index 16f9b1af3b379f7109217b201e68ac376e8ca984..32eb738463615821d83753c5c9cd4308
  import net.pascalpex.deepslatemc.MessagesFile;
  import net.pascalpex.deepslatemc.commands.MaintenanceMode;
  import net.pascalpex.deepslatemc.commands.SpawnCommand;
-@@ -276,7 +277,7 @@ public abstract class PlayerList {
+@@ -277,7 +278,7 @@ public abstract class PlayerList {
          playerconnection.send(new ClientboundLoginPacket(player.getId(), worlddata.isHardcore(), player.gameMode.getGameModeForPlayer(), player.gameMode.getPreviousGameModeForPlayer(), this.server.levelKeys(), this.synchronizedRegistries, worldserver1.dimensionTypeId(), worldserver1.dimension(), BiomeManager.obfuscateSeed(worldserver1.getSeed()), this.getMaxPlayers(), worldserver1.getChunkSource().chunkMap.playerChunkManager.getTargetSendDistance(), worldserver1.getChunkSource().chunkMap.playerChunkManager.getTargetTickViewDistance(), flag1, !flag, worldserver1.isDebug(), worldserver1.isFlat(), player.getLastDeathLocation())); // Paper - replace old player chunk management
          player.getBukkitEntity().sendSupportedChannels(); // CraftBukkit
          playerconnection.send(new ClientboundUpdateEnabledFeaturesPacket(FeatureFlags.REGISTRY.toNames(worldserver1.enabledFeatures())));

@@ -5,10 +5,10 @@ Subject: [PATCH] Spawn functions
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index b5e96ddbc63efd7ffb0bbc47e1bc101268d76729..d8f47ceb64d54e59b0d74b05d1a5996f8991a1b9 100644
+index 64ebed8527995642ddd91abb757408dfe6a858a3..ba8e3362a8647d19fcbb20633ace55ddc228977c 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-@@ -254,6 +254,9 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+@@ -250,6 +250,9 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
          MinecraftServer.getServer().server.getCommandMap().register("buildworld", "Deepslate", new BuildworldCommand("buildworld"));
          MinecraftServer.getServer().server.getCommandMap().register("maintenance", "Deepslate", new MaintenanceMode("maintenance"));
          MinecraftServer.getServer().server.getCommandMap().register("help", "Deepslate", new HelpCommand("help"));
@@ -19,10 +19,10 @@ index b5e96ddbc63efd7ffb0bbc47e1bc101268d76729..d8f47ceb64d54e59b0d74b05d1a5996f
  
          this.setPvpAllowed(dedicatedserverproperties.pvp);
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index 1252204a8b3a44c60adb022bd38a22aac2d8955d..65ca3bd65d915bc8e44e3d2d9c3219737f3cb6c1 100644
+index fab09b9e2fb41d8d9dc80ce12894f93b77315daa..fca56b78783db0ad36437bb97d7f5f3cbad097a2 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
-@@ -102,6 +102,7 @@ import net.minecraft.world.scores.Scoreboard; // Paper
+@@ -103,6 +103,7 @@ import net.minecraft.world.scores.Scoreboard; // Paper
  import net.minecraft.world.scores.Team;
  import net.pascalpex.deepslatemc.MessagesFile;
  import net.pascalpex.deepslatemc.commands.MaintenanceMode;
@@ -30,14 +30,14 @@ index 1252204a8b3a44c60adb022bd38a22aac2d8955d..65ca3bd65d915bc8e44e3d2d9c321973
  import org.slf4j.Logger;
  
  // CraftBukkit start
-@@ -318,6 +319,7 @@ public abstract class PlayerList {
+@@ -324,6 +325,7 @@ public abstract class PlayerList {
          player.containerMenu.transferTo(player.containerMenu, bukkitPlayer);
  
          PlayerJoinEvent playerJoinEvent = new PlayerJoinEvent(bukkitPlayer, PaperAdventure.asAdventure(ichatmutablecomponent)); // Paper - Adventure
 +        SpawnCommand.playerJoin(bukkitPlayer); // Deepslate - Spawn functions
          this.cserver.getPluginManager().callEvent(playerJoinEvent);
  
-         if (!player.connection.connection.isConnected()) {
+         if (!player.connection.isAcceptingMessages()) {
 diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
 index 442fcec773f6232e9a84cfadd28a36f79cec43d9..6962584f335a75a4e23b68cc731e3d5856881e04 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/Config.java
@@ -195,10 +195,10 @@ index 0000000000000000000000000000000000000000..ec53a7ba37bf6360dea2c9b980499863
 +
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 271cbc907633ca9d1ef7406b8480dd5ade816bf4..240825e32441984ef49d4426d4de6a711ac1b89b 100644
+index 8465b4723e753c588b7870ec572ec796430a369c..f7f04eabbb0d056ec359ee4616cd7e7fb8e5c65e 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -1022,6 +1022,9 @@ public final class CraftServer implements Server {
+@@ -1016,6 +1016,9 @@ public final class CraftServer implements Server {
          MinecraftServer.getServer().server.getCommandMap().register("buildworld", "Deepslate", new BuildworldCommand("buildworld"));
          MinecraftServer.getServer().server.getCommandMap().register("maintenance", "Deepslate", new MaintenanceMode("maintenance"));
          MinecraftServer.getServer().server.getCommandMap().register("help", "Deepslate", new HelpCommand("help"));

@@ -1,7 +1,7 @@
 plugins {
     java
     `maven-publish`
-    id("com.github.johnrengelman.shadow") version "8.1.0" apply false
+    id("com.github.johnrengelman.shadow") version "8.1.1" apply false
     id("io.papermc.paperweight.patcher") version "1.5.3"
 }
 
@@ -17,7 +17,7 @@ repositories {
 dependencies {
     remapper("net.fabricmc:tiny-remapper:0.8.6:fat")
     decompiler("org.quiltmc:quiltflower:1.9.0")
-    paperclip("io.papermc:paperclip:3.0.2")
+    paperclip("io.papermc:paperclip:3.0.3")
 }
 
 allprojects {
@@ -61,16 +61,16 @@ paperweight {
     remapRepo.set(paperMavenPublicUrl)
     decompileRepo.set(paperMavenPublicUrl)
 
-    useStandardUpstream("fusion") {
-        url.set(github("IPECTER", "Fusion"))
-        ref.set(providers.gradleProperty("fusionRef"))
+    useStandardUpstream("plazma") {
+        url.set(github("PlazmaMC", "Plazma"))
+        ref.set(providers.gradleProperty("plazmaRef"))
 
         withStandardPatcher {
             apiOutputDir.set(layout.projectDirectory.dir("deepslateMC-api"))
             serverOutputDir.set(layout.projectDirectory.dir("deepslateMC-server"))
 
-            apiSourceDirPath.set("Fusion-API")
-            serverSourceDirPath.set("Fusion-Server")
+            apiSourceDirPath.set("Plazma-API")
+            serverSourceDirPath.set("Plazma-Server")
         }
 
     }

@@ -2,7 +2,7 @@
 <div align="center">
 
 # DeepslateMC
-### A fork of [Fusion](https://github.com/IPECTER/Fusion) that adds neat functionalities
+### A fork of [Plazma](https://github.com/PlazmaMC/Plazma) that adds neat functionalities
 <br/>
 </div>
 

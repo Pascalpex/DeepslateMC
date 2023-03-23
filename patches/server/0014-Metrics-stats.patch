@@ -1,21 +1,21 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Pascalpex <pascalpex@gmail.com>
-Date: Sat, 3 Dec 2022 14:35:42 +0100
+Date: Thu, 23 Mar 2023 11:27:31 +0100
 Subject: [PATCH] Metrics stats
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 3e4517dd16da7810884315b74d4ac07ce7a0ea77..42320faa289d2b4ed060eddff927d76256fc9120 100644
+index 493f0724b2a6cdf794eb9a7f4857679e1a23458c..47f8522a82e55f19fb1bfba15f92692bb321d06f 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-@@ -18,6 +18,7 @@ import java.util.List;
+@@ -17,6 +17,7 @@ import java.util.Collections;
+ import java.util.List;
  import java.util.Locale;
  import java.util.Optional;
- import java.util.function.BooleanSupplier;
 +import java.util.UUID;
+ import java.util.function.BooleanSupplier;
  import javax.annotation.Nullable;
  import net.minecraft.DefaultUncaughtExceptionHandler;
- import net.minecraft.DefaultUncaughtExceptionHandlerWithName;
 @@ -50,6 +51,7 @@ import net.minecraft.world.level.GameRules;
  import net.minecraft.world.level.GameType;
  import net.minecraft.world.level.block.entity.SkullBlockEntity;
@@ -24,9 +24,9 @@ index 3e4517dd16da7810884315b74d4ac07ce7a0ea77..42320faa289d2b4ed060eddff927d762
  import net.pascalpex.deepslatemc.commands.*;
  import org.slf4j.Logger;
  
-@@ -219,6 +221,14 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
-         thread.start(); // Paper - start console thread after MinecraftServer.console & PaperConfig are initialized
+@@ -224,6 +226,14 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
          io.papermc.paper.command.PaperCommands.registerCommands(this);
+         org.plazmamc.plazma.commands.PlazmaCommands.registerCommands(this);
          com.destroystokyo.paper.Metrics.PaperMetrics.startMetrics();
 +
 +        // Deepslate start - Metrics stats

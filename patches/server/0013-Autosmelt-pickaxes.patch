@@ -5,10 +5,10 @@ Subject: [PATCH] Autosmelt pickaxes
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index d8f47ceb64d54e59b0d74b05d1a5996f8991a1b9..1f633636225c30b26a02e26651402b76dce1cc53 100644
+index ba8e3362a8647d19fcbb20633ace55ddc228977c..493f0724b2a6cdf794eb9a7f4857679e1a23458c 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-@@ -257,6 +257,7 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+@@ -253,6 +253,7 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
          MinecraftServer.getServer().server.getCommandMap().register("setspawn", "Deepslate", new SpawnCommand("setspawn"));
          MinecraftServer.getServer().server.getCommandMap().register("spawn", "Deepslate", new SpawnCommand("spawn"));
          MinecraftServer.getServer().server.getCommandMap().register("lobby", "Deepslate", new SpawnCommand("lobby"));
@@ -17,7 +17,7 @@ index d8f47ceb64d54e59b0d74b05d1a5996f8991a1b9..1f633636225c30b26a02e26651402b76
  
          this.setPvpAllowed(dedicatedserverproperties.pvp);
 diff --git a/src/main/java/net/minecraft/server/level/ServerPlayerGameMode.java b/src/main/java/net/minecraft/server/level/ServerPlayerGameMode.java
-index 744c936c3aa9bd7bcf43ac3d78a08ece9cde87c3..2eacb11e4a295c955e855113fe993adfc384b219 100644
+index ebf1ac089202c06fd2cc593dc12c21fe2d0a8de8..92291db1e8c16f91321a6b01399baf1dfa444f68 100644
 --- a/src/main/java/net/minecraft/server/level/ServerPlayerGameMode.java
 +++ b/src/main/java/net/minecraft/server/level/ServerPlayerGameMode.java
 @@ -27,6 +27,9 @@ import net.minecraft.world.level.block.state.BlockState;
@@ -242,10 +242,10 @@ index 0000000000000000000000000000000000000000..baf1f1d28c6610aeec912e858a3e3fb2
 +
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 240825e32441984ef49d4426d4de6a711ac1b89b..4b469b405d7112696a8483b9e5a14526685b7207 100644
+index f7f04eabbb0d056ec359ee4616cd7e7fb8e5c65e..d1a075a9de626e63edda5457d1fa9cc6700418e1 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -1025,6 +1025,7 @@ public final class CraftServer implements Server {
+@@ -1019,6 +1019,7 @@ public final class CraftServer implements Server {
          MinecraftServer.getServer().server.getCommandMap().register("setspawn", "Deepslate", new SpawnCommand("setspawn"));
          MinecraftServer.getServer().server.getCommandMap().register("spawn", "Deepslate", new SpawnCommand("spawn"));
          MinecraftServer.getServer().server.getCommandMap().register("lobby", "Deepslate", new SpawnCommand("lobby"));

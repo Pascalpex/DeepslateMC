@@ -5,7 +5,7 @@ Subject: [PATCH] Deepslate command
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index cff911e146d84237f338cfebc0874c5082345fde..a37ba5d02568f48e337a039b2dde2d2f68bb8c23 100644
+index 429ccd583ecd136a63862e94b8eb36b371e28d0f..09698b76f6bad0b22d3e510368d4996aeb88ec35 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 @@ -50,6 +50,7 @@ import net.minecraft.world.level.GameRules;
@@ -16,7 +16,7 @@ index cff911e146d84237f338cfebc0874c5082345fde..a37ba5d02568f48e337a039b2dde2d2f
  import org.slf4j.Logger;
  
  // CraftBukkit start
-@@ -243,6 +244,10 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+@@ -239,6 +240,10 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
          gg.pufferfish.pufferfish.PufferfishConfig.load(); // Pufferfish
          gg.pufferfish.pufferfish.PufferfishCommand.init(); // Pufferfish
  
@@ -155,10 +155,10 @@ index 0000000000000000000000000000000000000000..c01afb333b667c92275028ecf9e2c77a
 +
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 7ab0ef6b6ffae2bf1b88adcf6d6e1880a085eba4..9ebcb0553b1a7f452feda1a292eb75a3d6bf2fc5 100644
+index 09716068ecb63423a91a9713cfdae181f675ffa8..4ccfe0ae6d3e09fcd4e534195ff24e75e44319d0 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -118,6 +118,7 @@ import net.minecraft.world.level.storage.PrimaryLevelData;
+@@ -110,6 +110,7 @@ import net.minecraft.world.level.storage.PrimaryLevelData;
  import net.minecraft.world.level.storage.WorldData;
  import net.minecraft.world.level.storage.loot.LootTables;
  import net.minecraft.world.phys.Vec3;
@@ -166,7 +166,7 @@ index 7ab0ef6b6ffae2bf1b88adcf6d6e1880a085eba4..9ebcb0553b1a7f452feda1a292eb75a3
  import org.apache.commons.lang.Validate;
  import org.bukkit.BanList;
  import org.bukkit.Bukkit;
-@@ -1010,6 +1011,11 @@ public final class CraftServer implements Server {
+@@ -1004,6 +1005,11 @@ public final class CraftServer implements Server {
          org.spigotmc.SpigotConfig.registerCommands(); // Spigot
          io.papermc.paper.command.PaperCommands.registerCommands(this.console); // Paper
          org.purpurmc.purpur.PurpurConfig.registerCommands(); // Purpur
