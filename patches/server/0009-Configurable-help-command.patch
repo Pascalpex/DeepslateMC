@@ -18,10 +18,10 @@ index 7525df71d35ec7a120616ca5be18257b54b1b7df..0b4c97e446c2b3b20a3d2b1622fa41d1
          KickCommand.register(this.dispatcher);
          KillCommand.register(this.dispatcher);
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 87944f1b6e51142a7ecc00e6d443ad5e92aace92..64ebed8527995642ddd91abb757408dfe6a858a3 100644
+index d3728735598ae4ae76bd0736bdb719d79dbf17eb..c8fa7598924563e9aa3802d40fe005ea86e869f9 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-@@ -249,6 +249,7 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+@@ -239,6 +239,7 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
          MinecraftServer.getServer().server.getCommandMap().register("setbuildworld", "Deepslate", new BuildworldCommand("setbuildworld"));
          MinecraftServer.getServer().server.getCommandMap().register("buildworld", "Deepslate", new BuildworldCommand("buildworld"));
          MinecraftServer.getServer().server.getCommandMap().register("maintenance", "Deepslate", new MaintenanceMode("maintenance"));

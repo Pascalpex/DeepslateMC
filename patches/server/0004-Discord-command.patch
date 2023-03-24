@@ -5,10 +5,10 @@ Subject: [PATCH] Discord command
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 09698b76f6bad0b22d3e510368d4996aeb88ec35..a0f05be6cb91c66c93c3a98638acb3b1c434395a 100644
+index caa66af425ea40ea5c3571a0097c537d0541d8ee..c17ff31f5b58f8b9a4e504d67a99fb16dc476115 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-@@ -242,6 +242,8 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+@@ -232,6 +232,8 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
  
          // Deepslate start
          MinecraftServer.getServer().server.getCommandMap().register("deepslate", "Deepslate", new DeepslateCommand("deepslate"));

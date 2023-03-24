@@ -5,10 +5,10 @@ Subject: [PATCH] Spawn functions
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 64ebed8527995642ddd91abb757408dfe6a858a3..ba8e3362a8647d19fcbb20633ace55ddc228977c 100644
+index c8fa7598924563e9aa3802d40fe005ea86e869f9..c6e72eab5c29837f656a74a309535c239774e47a 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-@@ -250,6 +250,9 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+@@ -240,6 +240,9 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
          MinecraftServer.getServer().server.getCommandMap().register("buildworld", "Deepslate", new BuildworldCommand("buildworld"));
          MinecraftServer.getServer().server.getCommandMap().register("maintenance", "Deepslate", new MaintenanceMode("maintenance"));
          MinecraftServer.getServer().server.getCommandMap().register("help", "Deepslate", new HelpCommand("help"));
@@ -19,7 +19,7 @@ index 64ebed8527995642ddd91abb757408dfe6a858a3..ba8e3362a8647d19fcbb20633ace55dd
  
          this.setPvpAllowed(dedicatedserverproperties.pvp);
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index fab09b9e2fb41d8d9dc80ce12894f93b77315daa..fca56b78783db0ad36437bb97d7f5f3cbad097a2 100644
+index 04149d2a15b9f62e48edd1038e033b55b34fe813..149ffa3a5fd531ad971e3e953d031c7744428037 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
 @@ -103,6 +103,7 @@ import net.minecraft.world.scores.Scoreboard; // Paper

@@ -5,10 +5,10 @@ Subject: [PATCH] Clearchat command
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index a0f05be6cb91c66c93c3a98638acb3b1c434395a..7551b159d8181089ca777e85d3cd6d8e5f7b6f55 100644
+index c17ff31f5b58f8b9a4e504d67a99fb16dc476115..35ff2b93e4007a3e7031d510ef99e4edb1614534 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-@@ -244,6 +244,8 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+@@ -234,6 +234,8 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
          MinecraftServer.getServer().server.getCommandMap().register("deepslate", "Deepslate", new DeepslateCommand("deepslate"));
          MinecraftServer.getServer().server.getCommandMap().register("discord", "Deepslate", new DiscordCommand("discord"));
          MinecraftServer.getServer().server.getCommandMap().register("dc", "Deepslate", new DiscordCommand("dc"));

@@ -5,10 +5,10 @@ Subject: [PATCH] Maintenance mode
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 4b396961f5abb791d140b77fa1418f7ee45c6370..87944f1b6e51142a7ecc00e6d443ad5e92aace92 100644
+index 48c1f58b880356b68087634db5bfe4310f4cfae3..d3728735598ae4ae76bd0736bdb719d79dbf17eb 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-@@ -248,6 +248,7 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+@@ -238,6 +238,7 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
          MinecraftServer.getServer().server.getCommandMap().register("clearchat", "Deepslate", new ClearchatCommand("clearchat"));
          MinecraftServer.getServer().server.getCommandMap().register("setbuildworld", "Deepslate", new BuildworldCommand("setbuildworld"));
          MinecraftServer.getServer().server.getCommandMap().register("buildworld", "Deepslate", new BuildworldCommand("buildworld"));
@@ -17,7 +17,7 @@ index 4b396961f5abb791d140b77fa1418f7ee45c6370..87944f1b6e51142a7ecc00e6d443ad5e
  
          this.setPvpAllowed(dedicatedserverproperties.pvp);
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index 1a288ebcaade0cc44c7d09478f4f2f8eee7a4269..fab09b9e2fb41d8d9dc80ce12894f93b77315daa 100644
+index 0615c92894f42ccc320a5a6f5e6c5289a2dee5f9..04149d2a15b9f62e48edd1038e033b55b34fe813 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
 @@ -101,6 +101,8 @@ import net.minecraft.world.scores.Objective;
