@@ -17,7 +17,7 @@ index c6e72eab5c29837f656a74a309535c239774e47a..6bde3a10de141161f9d81a2871572cbd
  
          this.setPvpAllowed(dedicatedserverproperties.pvp);
 diff --git a/src/main/java/net/minecraft/server/level/ServerPlayerGameMode.java b/src/main/java/net/minecraft/server/level/ServerPlayerGameMode.java
-index ebf1ac089202c06fd2cc593dc12c21fe2d0a8de8..92291db1e8c16f91321a6b01399baf1dfa444f68 100644
+index 75f29f6dddf50ccf7ef43ecfa602ccade3c9004d..769fb08375fdd6aad6d6e5cb4428235d08f806d9 100644
 --- a/src/main/java/net/minecraft/server/level/ServerPlayerGameMode.java
 +++ b/src/main/java/net/minecraft/server/level/ServerPlayerGameMode.java
 @@ -27,6 +27,9 @@ import net.minecraft.world.level.block.state.BlockState;
@@ -30,7 +30,7 @@ index ebf1ac089202c06fd2cc593dc12c21fe2d0a8de8..92291db1e8c16f91321a6b01399baf1d
  import org.slf4j.Logger;
  
  // CraftBukkit start
-@@ -353,6 +356,59 @@ public class ServerPlayerGameMode {
+@@ -361,6 +364,59 @@ public class ServerPlayerGameMode {
  
              event = new BlockBreakEvent(bblock, this.player.getBukkitEntity());
  

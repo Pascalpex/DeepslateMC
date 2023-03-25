@@ -5,12 +5,12 @@ Subject: [PATCH] Configurable move messages
 
 
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index 3c7ae596bd4c27ba136303fd671fd18a1ac98fc3..d619b5fc0a8fadde4e3a990014c9c6761c80a183 100644
+index 172cb3a38a278fdb3e133e36dd166342498f91d4..5af78a3509a703f14251e02af0a9d599bd034619 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 @@ -1537,7 +1537,9 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Tic
  
-                                 if (d11 - d10 > Math.max(f2, Math.pow((double) (org.spigotmc.SpigotConfig.movedTooQuicklyMultiplier * (float) i * speed), 2)) && !this.isSingleplayerOwner()) {
+                                 if (!(this.player.getLevel().plazmaLevelConfiguration().misc.checkSpectatorMovedToQuickly && this.player.isSpectator()) && d11 - d10 > Math.max(f2, Math.pow((double) (org.spigotmc.SpigotConfig.movedTooQuicklyMultiplier * (float) i * speed), 2)) && !this.isSingleplayerOwner()) { // Plazma
                                  // CraftBukkit end
 -                                    ServerGamePacketListenerImpl.LOGGER.warn("{} moved too quickly! {},{},{}", new Object[]{this.player.getName().getString(), d7, d8, d9});
 +                                    if (Config.getMovedQuickly()) { // Deepslate
