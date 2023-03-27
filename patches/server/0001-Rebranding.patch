@@ -5,7 +5,7 @@ Subject: [PATCH] Rebranding
 
 
 diff --git a/build.gradle.kts b/build.gradle.kts
-index e4de94641d33b3deadc44bbb5f23f666d79737ea..b2cd3e59d4ada1b6cbd2885fe688c480e50f58d5 100644
+index dc89b3a8956af69fa71a2bfa17c22aee6c5e9edf..5a812a5ddabac0541dc2fe4ae46a063e14e00be6 100644
 --- a/build.gradle.kts
 +++ b/build.gradle.kts
 @@ -7,7 +7,7 @@ plugins {
@@ -17,7 +17,7 @@ index e4de94641d33b3deadc44bbb5f23f666d79737ea..b2cd3e59d4ada1b6cbd2885fe688c480
      implementation("io.papermc.paper:paper-mojangapi:1.19.4-R0.1-SNAPSHOT") // Purpur
      // Paper start
      implementation("org.jline:jline-terminal-jansi:3.21.0")
-@@ -82,7 +82,7 @@ tasks.jar {
+@@ -81,7 +81,7 @@ tasks.jar {
          attributes(
              "Main-Class" to "org.bukkit.craftbukkit.Main",
              "Implementation-Title" to "CraftBukkit",
@@ -27,7 +27,7 @@ index e4de94641d33b3deadc44bbb5f23f666d79737ea..b2cd3e59d4ada1b6cbd2885fe688c480
              "Specification-Title" to "Bukkit",
              "Specification-Version" to project.version,
 diff --git a/src/main/java/com/destroystokyo/paper/Metrics.java b/src/main/java/com/destroystokyo/paper/Metrics.java
-index 7d80d2cf5d607d6051e99e4b08bc1b76098a79da..b74bcd3482fc78b9439312a0cd9738411c4ca7b4 100644
+index 067bcbcb81802a3a52ecff737ddf2c033696ecfb..1b55caf70db0d928afc7fb3e9e09c1eeec7104ea 100644
 --- a/src/main/java/com/destroystokyo/paper/Metrics.java
 +++ b/src/main/java/com/destroystokyo/paper/Metrics.java
 @@ -593,7 +593,7 @@ public class Metrics {
@@ -151,10 +151,10 @@ index 214690b1531d8b25e9bddb54f630e0d9b3504f96..1db2e21199cec5afcf7767e4a30fa13f
          /* CraftBukkit start - Replace everything
          OptionParser optionparser = new OptionParser();
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 6d2d1d99977d33fdd8c9a34b65bbca189852d1c0..3e885048d719e9cbd9645a11d0610b05b05bceaf 100644
+index 62507bb72288a01f15068aaaee5ae40f0655112c..8fcf552000fad12dd9de134e26324de0ae37283c 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
-@@ -931,7 +931,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -932,7 +932,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
          shutdownThread = Thread.currentThread();
          org.spigotmc.WatchdogThread.doStop(); // Paper
          if (!isSameThread()) {
@@ -163,7 +163,7 @@ index 6d2d1d99977d33fdd8c9a34b65bbca189852d1c0..3e885048d719e9cbd9645a11d0610b05
              while (this.getRunningThread().isAlive()) {
                  this.getRunningThread().stop();
                  try {
-@@ -1712,7 +1712,13 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -1713,7 +1713,13 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
  
      @DontObfuscate
      public String getServerModName() {
@@ -210,7 +210,7 @@ index d14e42612752ef1d5c37c492b62ed4a6d65c1e0e..9f30be694678926e6dade0b4301710d7
                      servergui.runFinalizers();
                  }
 diff --git a/src/main/java/net/minecraft/world/level/Level.java b/src/main/java/net/minecraft/world/level/Level.java
-index 058449f24eb3260dc230dad2a0b4c552d0b7f40e..c0ebb7763b35160446cf7c349dd7cf85b1e15aaf 100644
+index cf0ad841267cac84ed058dee6cdd62a835325feb..e90f86eec915cb22b92d328af1038e5f6e185bab 100644
 --- a/src/main/java/net/minecraft/world/level/Level.java
 +++ b/src/main/java/net/minecraft/world/level/Level.java
 @@ -1047,7 +1047,7 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
@@ -313,14 +313,13 @@ index 0e695ea608c4e4770f5491d54ad47616d4e857c6..880779fe4538c78eeb81ac6dad93d8c0
 -    // Plazma end
  }
 diff --git a/src/main/java/org/purpurmc/purpur/PurpurConfig.java b/src/main/java/org/purpurmc/purpur/PurpurConfig.java
-index ce960bc620d84e56c4e7fc9b721fd45c4cfc4dac..8a6c4c9545153b36670e6f902735c9db691e0e66 100644
+index 57534bdf23b8373078a5f39c930cdb1defd31416..7d2c4bc856a9d803766538fd1ef48baed5cf90e8 100644
 --- a/src/main/java/org/purpurmc/purpur/PurpurConfig.java
 +++ b/src/main/java/org/purpurmc/purpur/PurpurConfig.java
-@@ -229,8 +229,7 @@ public class PurpurConfig {
-         advancementOnlyBroadcastToAffectedPlayer  = getBoolean("settings.broadcasts.advancement.only-broadcast-to-affected-player", advancementOnlyBroadcastToAffectedPlayer);
+@@ -230,7 +230,7 @@ public class PurpurConfig {
          deathMessageOnlyBroadcastToAffectedPlayer = getBoolean("settings.broadcasts.death.only-broadcast-to-affected-player", deathMessageOnlyBroadcastToAffectedPlayer);
      }
--
+ 
 -    public static String serverModName = "Plazma"; // Plazma
 +    public static String serverModName = "DeepslateMC"; // Plazma // Deepslate
      private static void serverModName() {
