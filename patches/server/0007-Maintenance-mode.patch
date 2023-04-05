@@ -5,7 +5,7 @@ Subject: [PATCH] Maintenance mode
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 48c1f58b880356b68087634db5bfe4310f4cfae3..d3728735598ae4ae76bd0736bdb719d79dbf17eb 100644
+index 003bc6cabdec58db011e3ca2cf30204605e748d9..5934d134215836987416e0a047e66d84af457ec0 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 @@ -238,6 +238,7 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
@@ -17,7 +17,7 @@ index 48c1f58b880356b68087634db5bfe4310f4cfae3..d3728735598ae4ae76bd0736bdb719d7
  
          this.setPvpAllowed(dedicatedserverproperties.pvp);
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index 0615c92894f42ccc320a5a6f5e6c5289a2dee5f9..04149d2a15b9f62e48edd1038e033b55b34fe813 100644
+index 43a9fa8dbf55a4fdc75f8c2283e6188b283aa10b..f6d5de5a3270a759e25170610b1cc2da32313644 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
 @@ -101,6 +101,8 @@ import net.minecraft.world.scores.Objective;
@@ -29,7 +29,7 @@ index 0615c92894f42ccc320a5a6f5e6c5289a2dee5f9..04149d2a15b9f62e48edd1038e033b55
  import org.slf4j.Logger;
  
  // CraftBukkit start
-@@ -700,6 +702,15 @@ public abstract class PlayerList {
+@@ -704,6 +706,15 @@ public abstract class PlayerList {
          Player player = entity.getBukkitEntity();
          PlayerLoginEvent event = new PlayerLoginEvent(player, loginlistener.connection.hostname, ((java.net.InetSocketAddress) socketaddress).getAddress(), ((java.net.InetSocketAddress) loginlistener.connection.channel.remoteAddress()).getAddress());
  
@@ -136,7 +136,7 @@ index 0000000000000000000000000000000000000000..4a8b9abc9340ff38217c6b8cf66463b9
 +    }
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 1c29bab6383dba12fd1c0870dbd82772f0386339..511c6ecc60e9d5f2c151323927687e61a24e9499 100644
+index b59b32c1934b550e36ad8c8b7c056b760eb458be..a86f21a9e32c96a7db8ff5fa2686c211cc44bc38 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -1014,6 +1014,7 @@ public final class CraftServer implements Server {
