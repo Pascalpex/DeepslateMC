@@ -19,7 +19,7 @@ index 9815f65a51dbf9ebcceebad3a4c5d8b52001c92c..8a8a9e3a55a9aee1df9273798f03b4ef
  
          this.setPvpAllowed(dedicatedserverproperties.pvp);
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index f6d5de5a3270a759e25170610b1cc2da32313644..697d89fdd1d2043629723d6db36bd1134a8e342a 100644
+index 30c3ef1f36596cfefa43902d7fa5878a0189aa69..cf3f3b22abc4c0346e299e0d36b284a7074b4e18 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
 @@ -103,6 +103,7 @@ import net.minecraft.world.scores.Scoreboard; // Paper
@@ -30,7 +30,7 @@ index f6d5de5a3270a759e25170610b1cc2da32313644..697d89fdd1d2043629723d6db36bd113
  import org.slf4j.Logger;
  
  // CraftBukkit start
-@@ -328,6 +329,7 @@ public abstract class PlayerList {
+@@ -329,6 +330,7 @@ public abstract class PlayerList {
          player.containerMenu.transferTo(player.containerMenu, bukkitPlayer);
  
          PlayerJoinEvent playerJoinEvent = new PlayerJoinEvent(bukkitPlayer, PaperAdventure.asAdventure(ichatmutablecomponent)); // Paper - Adventure
@@ -195,7 +195,7 @@ index 0000000000000000000000000000000000000000..ec53a7ba37bf6360dea2c9b980499863
 +
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index db59fbe187562ccc3f38fcf4f8b48ac08173d409..3408286bf74e9365d7b306e9528675c2e49035e8 100644
+index 263ac90808727d4e7d28ca6ab7db15a2940b732c..e185757ddd06e7bfbe966625ec393897805efab1 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -1016,6 +1016,9 @@ public final class CraftServer implements Server {

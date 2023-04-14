@@ -17,7 +17,7 @@ index 003bc6cabdec58db011e3ca2cf30204605e748d9..5934d134215836987416e0a047e66d84
  
          this.setPvpAllowed(dedicatedserverproperties.pvp);
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index 43a9fa8dbf55a4fdc75f8c2283e6188b283aa10b..f6d5de5a3270a759e25170610b1cc2da32313644 100644
+index 6d3e66f91f6ba47a2cde29e68f6961fdf0bde4de..30c3ef1f36596cfefa43902d7fa5878a0189aa69 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
 @@ -101,6 +101,8 @@ import net.minecraft.world.scores.Objective;
@@ -29,7 +29,7 @@ index 43a9fa8dbf55a4fdc75f8c2283e6188b283aa10b..f6d5de5a3270a759e25170610b1cc2da
  import org.slf4j.Logger;
  
  // CraftBukkit start
-@@ -704,6 +706,15 @@ public abstract class PlayerList {
+@@ -705,6 +707,15 @@ public abstract class PlayerList {
          Player player = entity.getBukkitEntity();
          PlayerLoginEvent event = new PlayerLoginEvent(player, loginlistener.connection.hostname, ((java.net.InetSocketAddress) socketaddress).getAddress(), ((java.net.InetSocketAddress) loginlistener.connection.channel.remoteAddress()).getAddress());
  
@@ -136,7 +136,7 @@ index 0000000000000000000000000000000000000000..4a8b9abc9340ff38217c6b8cf66463b9
 +    }
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index b59b32c1934b550e36ad8c8b7c056b760eb458be..a86f21a9e32c96a7db8ff5fa2686c211cc44bc38 100644
+index 006c264a360569d7ca48a8fad5c846a82e71a46f..7405fc1320daf646ab67bfd5552d39cda113c2da 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -1014,6 +1014,7 @@ public final class CraftServer implements Server {

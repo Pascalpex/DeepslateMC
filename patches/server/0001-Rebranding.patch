@@ -151,7 +151,7 @@ index 214690b1531d8b25e9bddb54f630e0d9b3504f96..1db2e21199cec5afcf7767e4a30fa13f
          /* CraftBukkit start - Replace everything
          OptionParser optionparser = new OptionParser();
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 62507bb72288a01f15068aaaee5ae40f0655112c..8fcf552000fad12dd9de134e26324de0ae37283c 100644
+index 3c80e14392ee7a6bf5040d7cb81b7d894e162eff..09214632127bb8168d103271b5e65e7345135b4b 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
 @@ -932,7 +932,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
@@ -236,7 +236,7 @@ index d72f61f545c3929825e628607b85e0d25f79db1f..e0ebd9c9c82c099865a475531cbbd37a
  
      private static final int DEFAULT_SIZE_THRESHOLD = 1024 * 8;
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 5f06d41d74d769281a05d98db806172c92b88388..09716068ecb63423a91a9713cfdae181f675ffa8 100644
+index 9760095f77b6425610f93abac467f92742eb2178..ae05d310d465fd58e580d7a56aaa2c0fa8fbf40e 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -256,7 +256,7 @@ import javax.annotation.Nullable; // Paper
@@ -249,10 +249,10 @@ index 5f06d41d74d769281a05d98db806172c92b88388..09716068ecb63423a91a9713cfdae181
      private final String bukkitVersion = Versioning.getBukkitVersion();
      private final Logger logger = Logger.getLogger("Minecraft");
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java
-index 54cbe906619a30b5f7b5dbb344eebf3452e1b200..4c2b3b9c860d90c1c8025c06d5322656809ab759 100644
+index 00200576bad5a92c65df762239dbec9a6e9a239b..49460efaf63730718af1191ad219ccbe1544012b 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java
-@@ -883,7 +883,7 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {
+@@ -884,7 +884,7 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {
              return EntityCategory.WATER;
          }
  

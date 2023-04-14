@@ -5,7 +5,7 @@ Subject: [PATCH] Configurable debug menu brand
 
 
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index 697d89fdd1d2043629723d6db36bd1134a8e342a..d0d5b2ebebbad2e18bbcaf4f520c175098b3184e 100644
+index cf3f3b22abc4c0346e299e0d36b284a7074b4e18..58aeed58e9ec7c0955fb4a9f629e1da24ee2ae39 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
 @@ -101,6 +101,7 @@ import net.minecraft.world.scores.Objective;
@@ -16,7 +16,7 @@ index 697d89fdd1d2043629723d6db36bd1134a8e342a..d0d5b2ebebbad2e18bbcaf4f520c1750
  import net.pascalpex.deepslatemc.MessagesFile;
  import net.pascalpex.deepslatemc.commands.MaintenanceMode;
  import net.pascalpex.deepslatemc.commands.SpawnCommand;
-@@ -281,7 +282,7 @@ public abstract class PlayerList {
+@@ -282,7 +283,7 @@ public abstract class PlayerList {
          playerconnection.send(new ClientboundLoginPacket(player.getId(), worlddata.isHardcore(), player.gameMode.getGameModeForPlayer(), player.gameMode.getPreviousGameModeForPlayer(), this.server.levelKeys(), this.synchronizedRegistries, worldserver1.dimensionTypeId(), worldserver1.dimension(), BiomeManager.obfuscateSeed(worldserver1.getSeed()), this.getMaxPlayers(), worldserver1.getChunkSource().chunkMap.playerChunkManager.getTargetSendDistance(), worldserver1.getChunkSource().chunkMap.playerChunkManager.getTargetTickViewDistance(), flag1, !flag, worldserver1.isDebug(), worldserver1.isFlat(), player.getLastDeathLocation())); // Paper - replace old player chunk management
          player.getBukkitEntity().sendSupportedChannels(); // CraftBukkit
          playerconnection.send(new ClientboundUpdateEnabledFeaturesPacket(FeatureFlags.REGISTRY.toNames(worldserver1.enabledFeatures())));

@@ -5,10 +5,10 @@ Subject: [PATCH] Configurable move messages
 
 
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index 20b774d70750131368af1d55ea635ca415037350..d01cd015d25e9477d481258b4546a86d990f3eca 100644
+index 06233375f108c4d716b5b831153e9257e2f9d9bc..38eb45747216e029bfcdf0ea62746eb167616168 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-@@ -1545,7 +1545,9 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Tic
+@@ -1546,7 +1546,9 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Tic
  
                                  if (!(this.player.getLevel().plazmaLevelConfiguration().misc.checkSpectatorMovedToQuickly && this.player.isSpectator()) && d11 - d10 > Math.max(f2, Math.pow((double) (org.spigotmc.SpigotConfig.movedTooQuicklyMultiplier * (float) i * speed), 2)) && !this.isSingleplayerOwner()) { // Plazma
                                  // CraftBukkit end
@@ -19,7 +19,7 @@ index 20b774d70750131368af1d55ea635ca415037350..d01cd015d25e9477d481258b4546a86d
                                      this.teleport(this.player.getX(), this.player.getY(), this.player.getZ(), this.player.getYRot(), this.player.getXRot());
                                      return;
                                  }
-@@ -1613,7 +1615,9 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Tic
+@@ -1614,7 +1616,9 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Tic
  
                              if (!this.player.isChangingDimension() && d11 > org.spigotmc.SpigotConfig.movedWronglyThreshold && !this.player.isSleeping() && !this.player.gameMode.isCreative() && this.player.gameMode.getGameModeForPlayer() != GameType.SPECTATOR) { // Spigot
                                  flag2 = true; // Paper - diff on change, this should be moved wrongly

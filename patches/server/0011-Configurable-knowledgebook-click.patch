@@ -28,10 +28,10 @@ index 6962584f335a75a4e23b68cc731e3d5856881e04..70cf7172bf95259294454ce94924ac24
  
  }
 diff --git a/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java b/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
-index 16261aa799c34d7134f4c1489e2ab0a5db7992f0..84a93a76c05a2bede12f8c9f75fc6b0a7e836f7e 100644
+index a60948f4085232082f205ad4f0f627a28342bd36..9274210c8f8b3b8cf1d4511262e8b0390cbc558b 100644
 --- a/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
 +++ b/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
-@@ -59,6 +59,7 @@ import net.minecraft.world.phys.BlockHitResult;
+@@ -58,6 +58,7 @@ import net.minecraft.world.phys.BlockHitResult;
  import net.minecraft.world.phys.EntityHitResult;
  import net.minecraft.world.phys.HitResult;
  import net.minecraft.world.phys.Vec3;
@@ -39,7 +39,7 @@ index 16261aa799c34d7134f4c1489e2ab0a5db7992f0..84a93a76c05a2bede12f8c9f75fc6b0a
  import org.bukkit.Bukkit;
  import org.bukkit.Location; // Paper
  import org.bukkit.Material;
-@@ -534,6 +535,17 @@ public class CraftEventFactory {
+@@ -551,6 +552,17 @@ public class CraftEventFactory {
          Location interactionPoint =  hitVec == null ? null : new Location(craftWorld, hitVec.x, hitVec.y, hitVec.z);
          PlayerInteractEvent event = new PlayerInteractEvent(player, action, itemInHand, blockClicked, blockFace, (hand == null) ? null : ((hand == InteractionHand.OFF_HAND) ? EquipmentSlot.OFF_HAND : EquipmentSlot.HAND), interactionPoint);
          // Paper end
