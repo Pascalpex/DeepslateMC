@@ -5,7 +5,7 @@ Subject: [PATCH] Colored signs
 
 
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index 48f66a67c251d1183d59a3b8ad417980419a9906..06233375f108c4d716b5b831153e9257e2f9d9bc 100644
+index 6839e428b147562a80bb440cead874a96ee778b9..38123fea326dc34db31c91df67c87ee69c61d106 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 @@ -184,6 +184,7 @@ import net.minecraft.world.phys.Vec3;
@@ -16,7 +16,7 @@ index 48f66a67c251d1183d59a3b8ad417980419a9906..06233375f108c4d716b5b831153e9257
  import org.slf4j.Logger;
  
  // CraftBukkit start
-@@ -3581,6 +3582,17 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Tic
+@@ -3583,6 +3584,17 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Tic
                  // Purpur end
              }
              SignChangeEvent event = new SignChangeEvent((org.bukkit.craftbukkit.block.CraftBlock) player.getWorld().getBlockAt(x, y, z), this.player.getBukkitEntity(), lines);
@@ -34,7 +34,7 @@ index 48f66a67c251d1183d59a3b8ad417980419a9906..06233375f108c4d716b5b831153e9257
              this.cserver.getPluginManager().callEvent(event);
  
              if (!event.isCancelled()) {
-@@ -3598,6 +3610,37 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Tic
+@@ -3600,6 +3612,37 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Tic
  
      }
  
