@@ -118,7 +118,7 @@ index c468733f44ccb3ff4ba3c20921a4ec52658f0689..2813a39540fd46959deda58e061af4e8
          stringbuilder.append("// ");
          stringbuilder.append(CrashReport.getErrorComment());
 diff --git a/src/main/java/net/minecraft/server/Main.java b/src/main/java/net/minecraft/server/Main.java
-index 214690b1531d8b25e9bddb54f630e0d9b3504f96..1db2e21199cec5afcf7767e4a30fa13f27ed8b26 100644
+index 8a10f9b7b837c4d20eaf4a83827e36f14a180ea7..88528525f4286e57d9101fae96f505273d91b3af 100644
 --- a/src/main/java/net/minecraft/server/Main.java
 +++ b/src/main/java/net/minecraft/server/Main.java
 @@ -81,17 +81,17 @@ public class Main {
@@ -179,33 +179,33 @@ index 3c80e14392ee7a6bf5040d7cb81b7d894e162eff..09214632127bb8168d103271b5e65e73
  
      public SystemReport fillSystemReport(SystemReport details) {
 diff --git a/src/main/java/net/minecraft/server/gui/MinecraftServerGui.java b/src/main/java/net/minecraft/server/gui/MinecraftServerGui.java
-index d14e42612752ef1d5c37c492b62ed4a6d65c1e0e..9f30be694678926e6dade0b4301710d74f7f2c69 100644
+index 9133e57b83c3348b5cd7a6b31f5ec380e8a12560..2d29074a8c24bf7e69eaa8c28de843674b38353e 100644
 --- a/src/main/java/net/minecraft/server/gui/MinecraftServerGui.java
 +++ b/src/main/java/net/minecraft/server/gui/MinecraftServerGui.java
-@@ -51,7 +51,7 @@ public class MinecraftServerGui extends JComponent {
+@@ -56,7 +56,7 @@ public class MinecraftServerGui extends JComponent {
              ;
          }
  
--        final JFrame jframe = new JFrame("Plazma"); // Plazma
-+        final JFrame jframe = new JFrame("DeepslateMC"); // Plazma // Deepslate
+-        final JFrame jframe = new JFrame("Plazma Minecraft server"); // Purpur // Plazma
++        final JFrame jframe = new JFrame("DeepslateMC"); // Purpur // Plazma  // Deepslate
          final MinecraftServerGui servergui = new MinecraftServerGui(server);
  
          jframe.setDefaultCloseOperation(2);
-@@ -59,7 +59,7 @@ public class MinecraftServerGui extends JComponent {
+@@ -64,7 +64,7 @@ public class MinecraftServerGui extends JComponent {
          jframe.pack();
          jframe.setLocationRelativeTo((Component) null);
          jframe.setVisible(true);
--        jframe.setName("Plazma"); // Paper // Plazma
-+        jframe.setName("DeepslateMC"); // Paper // Plazma // Deepslate
+-        jframe.setName("Plazma Minecraft server"); // Paper // Purpur // Plazma
++        jframe.setName("DeepslateMC"); // Paper // Purpur // Plazma // Deepslate
  
          // Paper start - Add logo as frame image
          try {
-@@ -71,7 +71,7 @@ public class MinecraftServerGui extends JComponent {
+@@ -76,7 +76,7 @@ public class MinecraftServerGui extends JComponent {
          jframe.addWindowListener(new WindowAdapter() {
              public void windowClosing(WindowEvent windowevent) {
                  if (!servergui.isClosing.getAndSet(true)) {
--                    jframe.setTitle("Plazma - shutting down"); // Plazma
-+                    jframe.setTitle("DeepslateMC - shutting down"); // Plazma // Deepslate
+-                    jframe.setTitle("Plazma Minecraft server - shutting down!"); // Purpur // Plazma
++                    jframe.setTitle("DeepslateMC - shutting down"); // Purpur // Plazma // Deepslate
                      server.halt(true);
                      servergui.runFinalizers();
                  }
@@ -236,10 +236,10 @@ index d72f61f545c3929825e628607b85e0d25f79db1f..e0ebd9c9c82c099865a475531cbbd37a
  
      private static final int DEFAULT_SIZE_THRESHOLD = 1024 * 8;
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 9760095f77b6425610f93abac467f92742eb2178..ae05d310d465fd58e580d7a56aaa2c0fa8fbf40e 100644
+index 75290e5f555f1401b1b6904e8a44c97332bbd01f..fb245ae2a43a967d3b39b062296b36e428a63b4e 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -256,7 +256,7 @@ import javax.annotation.Nullable; // Paper
+@@ -257,7 +257,7 @@ import javax.annotation.Nullable; // Paper
  import javax.annotation.Nonnull; // Paper
  
  public final class CraftServer implements Server {
@@ -313,7 +313,7 @@ index 0e695ea608c4e4770f5491d54ad47616d4e857c6..880779fe4538c78eeb81ac6dad93d8c0
 -    // Plazma end
  }
 diff --git a/src/main/java/org/purpurmc/purpur/PurpurConfig.java b/src/main/java/org/purpurmc/purpur/PurpurConfig.java
-index 57534bdf23b8373078a5f39c930cdb1defd31416..7d2c4bc856a9d803766538fd1ef48baed5cf90e8 100644
+index b1cc96c751ae8f8befb0287d675d19c5a2768ba2..1dfd697d51a3163ad1a275ec1c5e13a6b23c60b6 100644
 --- a/src/main/java/org/purpurmc/purpur/PurpurConfig.java
 +++ b/src/main/java/org/purpurmc/purpur/PurpurConfig.java
 @@ -230,7 +230,7 @@ public class PurpurConfig {

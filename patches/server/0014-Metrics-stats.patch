@@ -5,7 +5,7 @@ Subject: [PATCH] Metrics stats
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 6bde3a10de141161f9d81a2871572cbd521b0b53..472aafb09db92904bd9c7e24895d7e9c9dcad26b 100644
+index 274e401772c655c000b0091f26ecf9097d115137..2bc0df6633cc745a0629e52a6fbd9472b5da6429 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 @@ -17,6 +17,7 @@ import java.util.Collections;
@@ -24,7 +24,7 @@ index 6bde3a10de141161f9d81a2871572cbd521b0b53..472aafb09db92904bd9c7e24895d7e9c
  import net.pascalpex.deepslatemc.commands.*;
  import org.slf4j.Logger;
  
-@@ -214,6 +216,14 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+@@ -215,6 +217,14 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
          io.papermc.paper.command.PaperCommands.registerCommands(this);
          org.plazmamc.plazma.commands.PlazmaCommands.registerCommands(this);
          com.destroystokyo.paper.Metrics.PaperMetrics.startMetrics();
