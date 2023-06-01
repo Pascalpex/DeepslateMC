@@ -5,7 +5,7 @@ Subject: [PATCH] Rebranding
 
 
 diff --git a/build.gradle.kts b/build.gradle.kts
-index dc89b3a8956af69fa71a2bfa17c22aee6c5e9edf..5a812a5ddabac0541dc2fe4ae46a063e14e00be6 100644
+index 46fda579a95f9ab92a1ba61cad8218024a722208..7f59036398ca0178aafb9cee0b15658dfda40608 100644
 --- a/build.gradle.kts
 +++ b/build.gradle.kts
 @@ -7,7 +7,7 @@ plugins {
@@ -96,7 +96,7 @@ index 19d1d136fc28d6c114f6bc44c6450d2df51c3cb9..0a7b7290e3da9eea0b36962fbc9295b4
                  .completer(new ConsoleCommandCompleter(this.server))
                  .option(LineReader.Option.COMPLETE_IN_WORD, true);
 diff --git a/src/main/java/net/minecraft/CrashReport.java b/src/main/java/net/minecraft/CrashReport.java
-index c468733f44ccb3ff4ba3c20921a4ec52658f0689..2813a39540fd46959deda58e061af4e8e611a7b7 100644
+index 7e124979a2843b7f0a365e51d23192731747e6bf..619841da4e3f12425fde62e11746af7fd4ea760b 100644
 --- a/src/main/java/net/minecraft/CrashReport.java
 +++ b/src/main/java/net/minecraft/CrashReport.java
 @@ -35,7 +35,7 @@ public class CrashReport {
@@ -151,7 +151,7 @@ index 8a10f9b7b837c4d20eaf4a83827e36f14a180ea7..88528525f4286e57d9101fae96f50527
          /* CraftBukkit start - Replace everything
          OptionParser optionparser = new OptionParser();
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 3c80e14392ee7a6bf5040d7cb81b7d894e162eff..09214632127bb8168d103271b5e65e7345135b4b 100644
+index a358a821e2ed71fdb2e85c71b75fda00fdad7f9b..4e4a9471ecc95e55cd8149ba20aa0c1489761ec7 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
 @@ -932,7 +932,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
@@ -210,7 +210,7 @@ index 9133e57b83c3348b5cd7a6b31f5ec380e8a12560..2d29074a8c24bf7e69eaa8c28de84367
                      servergui.runFinalizers();
                  }
 diff --git a/src/main/java/net/minecraft/world/level/Level.java b/src/main/java/net/minecraft/world/level/Level.java
-index cf0ad841267cac84ed058dee6cdd62a835325feb..e90f86eec915cb22b92d328af1038e5f6e185bab 100644
+index 24756bb1913eb1f00dc367dd9c9741a3805ef3b4..f59dc3e0fd2060be0d78e20fdf9dd7326e207336 100644
 --- a/src/main/java/net/minecraft/world/level/Level.java
 +++ b/src/main/java/net/minecraft/world/level/Level.java
 @@ -1047,7 +1047,7 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
@@ -236,10 +236,10 @@ index d72f61f545c3929825e628607b85e0d25f79db1f..e0ebd9c9c82c099865a475531cbbd37a
  
      private static final int DEFAULT_SIZE_THRESHOLD = 1024 * 8;
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 75290e5f555f1401b1b6904e8a44c97332bbd01f..fb245ae2a43a967d3b39b062296b36e428a63b4e 100644
+index 5df6fd278a6555e483ea4ebc4e9625907585f77f..0154cec699bfc145f827f3747f0a70de50b96cfe 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -257,7 +257,7 @@ import javax.annotation.Nullable; // Paper
+@@ -259,7 +259,7 @@ import javax.annotation.Nullable; // Paper
  import javax.annotation.Nonnull; // Paper
  
  public final class CraftServer implements Server {

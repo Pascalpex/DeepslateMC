@@ -155,7 +155,7 @@ index 0000000000000000000000000000000000000000..c01afb333b667c92275028ecf9e2c77a
 +
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index fb245ae2a43a967d3b39b062296b36e428a63b4e..161bff05add2a7f4a8068b29c77668b284632ba1 100644
+index 0154cec699bfc145f827f3747f0a70de50b96cfe..16660bcc563c56d101ab93b5223f4cd0b26798de 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -110,6 +110,7 @@ import net.minecraft.world.level.storage.PrimaryLevelData;
@@ -166,7 +166,7 @@ index fb245ae2a43a967d3b39b062296b36e428a63b4e..161bff05add2a7f4a8068b29c77668b2
  import org.apache.commons.lang.Validate;
  import org.bukkit.BanList;
  import org.bukkit.Bukkit;
-@@ -1005,6 +1006,11 @@ public final class CraftServer implements Server {
+@@ -1007,6 +1008,11 @@ public final class CraftServer implements Server {
          org.spigotmc.SpigotConfig.registerCommands(); // Spigot
          io.papermc.paper.command.PaperCommands.registerCommands(this.console); // Paper
          org.purpurmc.purpur.PurpurConfig.registerCommands(); // Purpur
