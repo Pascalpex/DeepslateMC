@@ -236,10 +236,10 @@ index d72f61f545c3929825e628607b85e0d25f79db1f..e0ebd9c9c82c099865a475531cbbd37a
  
      private static final int DEFAULT_SIZE_THRESHOLD = 1024 * 8;
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 5df6fd278a6555e483ea4ebc4e9625907585f77f..0154cec699bfc145f827f3747f0a70de50b96cfe 100644
+index 84fb7f6cdad5e7a5389e2469bfd6fb961cd1b299..778a832e325d1f95d732ad6fef2bf407329d0851 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -259,7 +259,7 @@ import javax.annotation.Nullable; // Paper
+@@ -262,7 +262,7 @@ import javax.annotation.Nullable; // Paper
  import javax.annotation.Nonnull; // Paper
  
  public final class CraftServer implements Server {
@@ -313,10 +313,10 @@ index 0e695ea608c4e4770f5491d54ad47616d4e857c6..880779fe4538c78eeb81ac6dad93d8c0
 -    // Plazma end
  }
 diff --git a/src/main/java/org/purpurmc/purpur/PurpurConfig.java b/src/main/java/org/purpurmc/purpur/PurpurConfig.java
-index b1cc96c751ae8f8befb0287d675d19c5a2768ba2..1dfd697d51a3163ad1a275ec1c5e13a6b23c60b6 100644
+index 072cc011abded538ae643b36cfb1f861d564bcec..b2f9bd0cc2687da00ee705302600e77d25460004 100644
 --- a/src/main/java/org/purpurmc/purpur/PurpurConfig.java
 +++ b/src/main/java/org/purpurmc/purpur/PurpurConfig.java
-@@ -230,7 +230,7 @@ public class PurpurConfig {
+@@ -232,7 +232,7 @@ public class PurpurConfig {
          deathMessageOnlyBroadcastToAffectedPlayer = getBoolean("settings.broadcasts.death.only-broadcast-to-affected-player", deathMessageOnlyBroadcastToAffectedPlayer);
      }
  
