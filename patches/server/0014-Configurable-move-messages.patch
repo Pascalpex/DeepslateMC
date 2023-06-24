@@ -5,23 +5,31 @@ Subject: [PATCH] Configurable move messages
 
 
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index e3b26db8a82b58a9f52e74833da1857543ac84ae..e832cd1b284b4e452943ac4fb79c96d6ecf3eab2 100644
+index 881fac8b71c0f97bc18c1cac47dc025f2f6a859d..56631241ce627653310f3109693f78ee0b04f5f8 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-@@ -1547,7 +1547,9 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Tic
+@@ -184,6 +184,7 @@ import net.minecraft.world.phys.Vec3;
+ import net.minecraft.world.phys.shapes.BooleanOp;
+ import net.minecraft.world.phys.shapes.Shapes;
+ import net.minecraft.world.phys.shapes.VoxelShape;
++import net.pascalpex.deepslatemc.Config;
+ import org.slf4j.Logger;
  
-                                 if (!(this.player.getLevel().plazmaLevelConfiguration().misc.checkSpectatorMovedToQuickly && this.player.isSpectator()) && d11 - d10 > Math.max(f2, Math.pow((double) (org.spigotmc.SpigotConfig.movedTooQuicklyMultiplier * (float) i * speed), 2)) && !this.isSingleplayerOwner()) { // Plazma
+ // CraftBukkit start
+@@ -1548,7 +1549,9 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Tic
+ 
+                                 if (d10 - d9 > Math.max(f2, Math.pow((double) (org.spigotmc.SpigotConfig.movedTooQuicklyMultiplier * (float) i * speed), 2)) && !this.isSingleplayerOwner()) {
                                  // CraftBukkit end
--                                    ServerGamePacketListenerImpl.LOGGER.warn("{} moved too quickly! {},{},{}", new Object[]{this.player.getName().getString(), d7, d8, d9});
+-                                    ServerGamePacketListenerImpl.LOGGER.warn("{} moved too quickly! {},{},{}", new Object[]{this.player.getName().getString(), d6, d7, d8});
 +                                    if (Config.getMovedQuickly()) { // Deepslate
-+                                        ServerGamePacketListenerImpl.LOGGER.warn("{} moved too quickly! {},{},{}", new Object[]{this.player.getName().getString(), d7, d8, d9});
++                                        ServerGamePacketListenerImpl.LOGGER.warn("{} moved too quickly! {},{},{}", new Object[]{this.player.getName().getString(), d6, d7, d8});
 +                                    }
                                      this.teleport(this.player.getX(), this.player.getY(), this.player.getZ(), this.player.getYRot(), this.player.getXRot());
                                      return;
                                  }
-@@ -1615,7 +1617,9 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Tic
+@@ -1616,7 +1619,9 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Tic
  
-                             if (!this.player.isChangingDimension() && d11 > org.spigotmc.SpigotConfig.movedWronglyThreshold && !this.player.isSleeping() && !this.player.gameMode.isCreative() && this.player.gameMode.getGameModeForPlayer() != GameType.SPECTATOR) { // Spigot
+                             if (!this.player.isChangingDimension() && d10 > org.spigotmc.SpigotConfig.movedWronglyThreshold && !this.player.isSleeping() && !this.player.gameMode.isCreative() && this.player.gameMode.getGameModeForPlayer() != GameType.SPECTATOR) { // Spigot
                                  flag2 = true; // Paper - diff on change, this should be moved wrongly
 -                                ServerGamePacketListenerImpl.LOGGER.warn("{} moved wrongly!, ({})", this.player.getName().getString(), d11); // Purpur
 +                                if (Config.getMovedWrongly()) { // Deepslate
@@ -29,12 +37,12 @@ index e3b26db8a82b58a9f52e74833da1857543ac84ae..e832cd1b284b4e452943ac4fb79c96d6
 +                                }
                              }
  
-                             this.player.absMoveTo(d0, d1, d2, f, f1);
+                             // Paper start - optimise out extra getCubes
 diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
-index 0df4bf9113fb47359a6fce8cf658e29f08c690bc..5987bd375b876d50be0ff00123dd0914f4410cb4 100644
+index f7169129f698a6e2202a522fdad42c26a6eeb137..e9edc8c53f01184f33cd66593fba7ff6952e265f 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/Config.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/Config.java
-@@ -55,6 +55,10 @@ public class Config {
+@@ -51,6 +51,10 @@ public class Config {
              if (!config.contains("metrics")) {
                  config.set("metrics", true);
              }
@@ -45,7 +53,7 @@ index 0df4bf9113fb47359a6fce8cf658e29f08c690bc..5987bd375b876d50be0ff00123dd0914
              save();
          } catch (IOException | InvalidConfigurationException e) {
              e.printStackTrace();
-@@ -123,5 +127,11 @@ public class Config {
+@@ -113,5 +117,11 @@ public class Config {
      public static boolean getMetricsEnabled() {
          return config.getBoolean("metrics");
      }

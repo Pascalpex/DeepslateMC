@@ -5,7 +5,7 @@ Subject: [PATCH] Metrics stats
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 274e401772c655c000b0091f26ecf9097d115137..2bc0df6633cc745a0629e52a6fbd9472b5da6429 100644
+index e05454be3d045464af39f384c939ef7e93a619cf..348e78fe2e5fd397b32d779c5ac7632f44a3f5d1 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 @@ -17,6 +17,7 @@ import java.util.Collections;
@@ -24,9 +24,9 @@ index 274e401772c655c000b0091f26ecf9097d115137..2bc0df6633cc745a0629e52a6fbd9472
  import net.pascalpex.deepslatemc.commands.*;
  import org.slf4j.Logger;
  
-@@ -215,6 +217,14 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+@@ -220,6 +222,14 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+         thread.start(); // Paper - start console thread after MinecraftServer.console & PaperConfig are initialized
          io.papermc.paper.command.PaperCommands.registerCommands(this);
-         org.plazmamc.plazma.commands.PlazmaCommands.registerCommands(this);
          com.destroystokyo.paper.Metrics.PaperMetrics.startMetrics();
 +
 +        // Deepslate start - Metrics stats
@@ -40,10 +40,10 @@ index 274e401772c655c000b0091f26ecf9097d115137..2bc0df6633cc745a0629e52a6fbd9472
          try {
              org.purpurmc.purpur.PurpurConfig.init((java.io.File) options.valueOf("purpur-settings"));
 diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
-index 51e722413faa6bf4c74b3162dc59c9a44f6bc44a..0df4bf9113fb47359a6fce8cf658e29f08c690bc 100644
+index c09cedea6d28baea144db0307ff693ac96902235..f7169129f698a6e2202a522fdad42c26a6eeb137 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/Config.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/Config.java
-@@ -52,6 +52,9 @@ public class Config {
+@@ -48,6 +48,9 @@ public class Config {
                  worldsList.add("FantasyWorld");
                  config.set("autoSmelt" + ".enabledWorlds", worldsList);
              }
@@ -53,7 +53,7 @@ index 51e722413faa6bf4c74b3162dc59c9a44f6bc44a..0df4bf9113fb47359a6fce8cf658e29f
              save();
          } catch (IOException | InvalidConfigurationException e) {
              e.printStackTrace();
-@@ -117,5 +120,8 @@ public class Config {
+@@ -107,5 +110,8 @@ public class Config {
      public static List<String> getAutoSmeltWorlds() {
          return (List<String>) config.getList("autoSmelt" + ".enabledWorlds");
      }

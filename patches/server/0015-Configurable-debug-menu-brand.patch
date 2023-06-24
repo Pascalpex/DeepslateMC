@@ -1,11 +1,11 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Pascalpex <pascalpex@gmail.com>
-Date: Fri, 9 Dec 2022 21:35:32 +0100
+Date: Sat, 24 Jun 2023 17:05:11 +0200
 Subject: [PATCH] Configurable debug menu brand
 
 
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index ef32b567081ab9af7609c45096a75020c176c622..dc432fbcb3dc47b3d34bb4994c14e0433a2ae529 100644
+index 5cc2def86269288d477455d81c69257ad46bc992..c6bc25ae1eef98a0f282e0fb069670253ec0e51d 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
 @@ -101,6 +101,7 @@ import net.minecraft.world.scores.Objective;
@@ -16,8 +16,8 @@ index ef32b567081ab9af7609c45096a75020c176c622..dc432fbcb3dc47b3d34bb4994c14e043
  import net.pascalpex.deepslatemc.MessagesFile;
  import net.pascalpex.deepslatemc.commands.MaintenanceMode;
  import net.pascalpex.deepslatemc.commands.SpawnCommand;
-@@ -284,7 +285,7 @@ public abstract class PlayerList {
-         playerconnection.send(new ClientboundLoginPacket(player.getId(), worlddata.isHardcore(), player.gameMode.getGameModeForPlayer(), player.gameMode.getPreviousGameModeForPlayer(), this.server.levelKeys(), this.synchronizedRegistries, worldserver1.dimensionTypeId(), worldserver1.dimension(), BiomeManager.obfuscateSeed(worldserver1.getSeed()), this.getMaxPlayers(), worldserver1.getChunkSource().chunkMap.playerChunkManager.getTargetSendDistance(), worldserver1.getChunkSource().chunkMap.playerChunkManager.getTargetTickViewDistance(), flag1, !flag, worldserver1.isDebug(), worldserver1.isFlat(), player.getLastDeathLocation())); // Paper - replace old player chunk management
+@@ -291,7 +292,7 @@ public abstract class PlayerList {
+         playerconnection.send(new ClientboundLoginPacket(player.getId(), worlddata.isHardcore(), player.gameMode.getGameModeForPlayer(), player.gameMode.getPreviousGameModeForPlayer(), this.server.levelKeys(), this.synchronizedRegistries, worldserver1.dimensionTypeId(), worldserver1.dimension(), BiomeManager.obfuscateSeed(worldserver1.getSeed()), this.getMaxPlayers(), worldserver1.getWorld().getSendViewDistance(), worldserver1.getWorld().getSimulationDistance(), flag1, !flag, worldserver1.isDebug(), worldserver1.isFlat(), player.getLastDeathLocation(), player.getPortalCooldown())); // Paper - replace old player chunk management
          player.getBukkitEntity().sendSupportedChannels(); // CraftBukkit
          playerconnection.send(new ClientboundUpdateEnabledFeaturesPacket(FeatureFlags.REGISTRY.toNames(worldserver1.enabledFeatures())));
 -        playerconnection.send(new ClientboundCustomPayloadPacket(ClientboundCustomPayloadPacket.BRAND, (new FriendlyByteBuf(Unpooled.buffer())).writeUtf(this.getServer().getServerModName())));
@@ -26,10 +26,10 @@ index ef32b567081ab9af7609c45096a75020c176c622..dc432fbcb3dc47b3d34bb4994c14e043
          playerconnection.send(new ClientboundPlayerAbilitiesPacket(player.getAbilities()));
          playerconnection.send(new ClientboundSetCarriedItemPacket(player.getInventory().selected));
 diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
-index 5987bd375b876d50be0ff00123dd0914f4410cb4..a818d97433e945ed25dbad89d2272b9f9a9426d3 100644
+index e9edc8c53f01184f33cd66593fba7ff6952e265f..1d4f094b0601c2167f5a5df51e14bc2aad9ec796 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/Config.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/Config.java
-@@ -59,6 +59,9 @@ public class Config {
+@@ -55,6 +55,9 @@ public class Config {
                  config.set("messages" + ".movedWrongly", true);
                  config.set("messages" + ".movedQuickly", true);
              }
@@ -39,7 +39,7 @@ index 5987bd375b876d50be0ff00123dd0914f4410cb4..a818d97433e945ed25dbad89d2272b9f
              save();
          } catch (IOException | InvalidConfigurationException e) {
              e.printStackTrace();
-@@ -133,5 +136,8 @@ public class Config {
+@@ -123,5 +126,8 @@ public class Config {
      public static boolean getMovedWrongly() {
          return config.getBoolean("messages" + ".movedWrongly");
      }

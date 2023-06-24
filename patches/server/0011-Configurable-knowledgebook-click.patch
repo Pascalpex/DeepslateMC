@@ -1,6 +1,6 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Pascalpex <pascalpex@gmail.com>
-Date: Sat, 3 Dec 2022 14:16:43 +0100
+Date: Sat, 24 Jun 2023 16:42:31 +0200
 Subject: [PATCH] Configurable knowledgebook click
 
 
@@ -28,20 +28,20 @@ index 6962584f335a75a4e23b68cc731e3d5856881e04..70cf7172bf95259294454ce94924ac24
  
  }
 diff --git a/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java b/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
-index bfb8039a65fbfdb6d2fa6fc4fdeb146fbc4e147f..bd5b52197096041091c378aa7a6c18549f2c17eb 100644
+index 420ba2f8adcf15a32598c39c88439a4bd55c89fc..5cbc5caf42678ea47ea315af805793725b3b5231 100644
 --- a/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
 +++ b/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
-@@ -58,6 +58,7 @@ import net.minecraft.world.phys.BlockHitResult;
+@@ -59,6 +59,7 @@ import net.minecraft.world.phys.BlockHitResult;
  import net.minecraft.world.phys.EntityHitResult;
  import net.minecraft.world.phys.HitResult;
  import net.minecraft.world.phys.Vec3;
 +import net.pascalpex.deepslatemc.Config;
  import org.bukkit.Bukkit;
- import org.bukkit.Location; // Paper
  import org.bukkit.Material;
-@@ -553,6 +554,17 @@ public class CraftEventFactory {
-         Location interactionPoint =  hitVec == null ? null : new Location(craftWorld, hitVec.x, hitVec.y, hitVec.z);
-         PlayerInteractEvent event = new PlayerInteractEvent(player, action, itemInHand, blockClicked, blockFace, (hand == null) ? null : ((hand == InteractionHand.OFF_HAND) ? EquipmentSlot.OFF_HAND : EquipmentSlot.HAND), interactionPoint);
+ import org.bukkit.NamespacedKey;
+@@ -558,6 +559,17 @@ public class CraftEventFactory {
+             event.setUseItemInHand(Result.DENY);
+         }
          // Paper end
 +        // Deepslate start - Configurable knowledgebook click
 +        if (Config.getPreventKnowledgebookClick()) {
@@ -54,6 +54,6 @@ index bfb8039a65fbfdb6d2fa6fc4fdeb146fbc4e147f..bd5b52197096041091c378aa7a6c1854
 +            }
 +        }
 +        // Deepslate end
-         if (cancelledBlock) {
-             event.setUseInteractedBlock(Event.Result.DENY);
-         }
+         craftServer.getPluginManager().callEvent(event);
+ 
+         // Purpur start
