@@ -5,7 +5,7 @@ Subject: [PATCH] Deepslate command
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 778b79ce3530781705f6d6ae11a2631f186e3763..c52b394458d597b4cf50628fc8db5f887d53fe67 100644
+index feb6f43de55ce0141d1b39e252a3f2cbfeb929e0..8a423e94473433a28789413b62266a1e5e70e5d1 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 @@ -50,6 +50,7 @@ import net.minecraft.world.level.GameRules;
@@ -16,10 +16,11 @@ index 778b79ce3530781705f6d6ae11a2631f186e3763..c52b394458d597b4cf50628fc8db5f88
  import org.slf4j.Logger;
  
  // CraftBukkit start
-@@ -230,6 +231,10 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
-         gg.pufferfish.pufferfish.PufferfishConfig.load(); // Pufferfish
+@@ -236,6 +237,11 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
          gg.pufferfish.pufferfish.PufferfishCommand.init(); // Pufferfish
- 
+         dev.etil.mirai.MiraiConfig.load(); // Mirai
+         dev.etil.mirai.MiraiCommand.init(); // Mirai
++
 +        // Deepslate start
 +        MinecraftServer.getServer().server.getCommandMap().register("deepslate", "Deepslate", new DeepslateCommand("deepslate"));
 +        // Deepslate end
@@ -155,18 +156,18 @@ index 0000000000000000000000000000000000000000..c01afb333b667c92275028ecf9e2c77a
 +
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 778a832e325d1f95d732ad6fef2bf407329d0851..59f2149b744088fd25aea3070fe9fa39b07f49ea 100644
+index 1f3f07de11bc3f290d31f6d96df7ba119749c00f..002b825f994b599b0a8c1ee803d8a9e6b64f2012 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -111,6 +111,7 @@ import net.minecraft.world.level.storage.PrimaryLevelData;
- import net.minecraft.world.level.storage.WorldData;
- import net.minecraft.world.level.storage.loot.LootTables;
+@@ -115,6 +115,7 @@ import net.minecraft.world.level.storage.WorldData;
+ import net.minecraft.world.level.storage.loot.LootDataManager;
+ import net.minecraft.world.level.validation.ContentValidationException;
  import net.minecraft.world.phys.Vec3;
 +import net.pascalpex.deepslatemc.commands.*;
- import org.apache.commons.lang.Validate;
  import org.bukkit.BanList;
  import org.bukkit.Bukkit;
-@@ -1027,6 +1028,11 @@ public final class CraftServer implements Server {
+ import org.bukkit.ChatColor;
+@@ -1103,6 +1104,11 @@ public final class CraftServer implements Server {
          org.spigotmc.SpigotConfig.registerCommands(); // Spigot
          io.papermc.paper.command.PaperCommands.registerCommands(this.console); // Paper
          org.purpurmc.purpur.PurpurConfig.registerCommands(); // Purpur

@@ -15,7 +15,7 @@ repositories {
 }
 
 dependencies {
-    remapper("net.fabricmc:tiny-remapper:0.8.6:fat")
+    remapper("net.fabricmc:tiny-remapper:0.8.7:fat")
     decompiler("org.quiltmc:quiltflower:1.9.0")
     paperclip("io.papermc:paperclip:3.0.3")
 }
@@ -61,16 +61,16 @@ paperweight {
     remapRepo.set(paperMavenPublicUrl)
     decompileRepo.set(paperMavenPublicUrl)
 
-    useStandardUpstream("plazma") {
-        url.set(github("PlazmaMC", "Plazma"))
-        ref.set(providers.gradleProperty("plazmaRef"))
+    useStandardUpstream("mirai") {
+        url.set(github("Dreeam-qwq", "Mirai"))
+        ref.set(providers.gradleProperty("miraiRef"))
 
         withStandardPatcher {
             apiOutputDir.set(layout.projectDirectory.dir("deepslateMC-api"))
             serverOutputDir.set(layout.projectDirectory.dir("deepslateMC-server"))
 
-            apiSourceDirPath.set("Plazma-API")
-            serverSourceDirPath.set("Plazma-Server")
+            apiSourceDirPath.set("mirai-api")
+            serverSourceDirPath.set("mirai-server")
         }
 
     }
