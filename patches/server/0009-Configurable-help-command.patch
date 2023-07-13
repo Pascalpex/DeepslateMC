@@ -95,10 +95,10 @@ index 0000000000000000000000000000000000000000..18ff82e04111931e1d878abbf340d272
 +
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index e396d175683e571072b15c707d220584cda27618..81c6c6c2989f4a85efab35e2c0a6ea5258f8cae3 100644
+index 058e61055efd2de0276b64367afd4c058086cc30..8b290182806784efaf69e35e371c97be34e61ad1 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -1114,6 +1114,7 @@ public final class CraftServer implements Server {
+@@ -1117,6 +1117,7 @@ public final class CraftServer implements Server {
          MinecraftServer.getServer().server.getCommandMap().register("setbuildworld", "Deepslate", new BuildworldCommand("setbuildworld"));
          MinecraftServer.getServer().server.getCommandMap().register("buildworld", "Deepslate", new BuildworldCommand("buildworld"));
          MinecraftServer.getServer().server.getCommandMap().register("maintenance", "Deepslate", new MaintenanceMode("maintenance"));
