@@ -329,10 +329,10 @@ index be7b3fe2dc84493dcde9e185717b0b7c7c2e9822..9ff441b682073de7d31a434e9f05ee39
                      servergui.runFinalizers();
                  }
 diff --git a/src/main/java/net/minecraft/world/level/Level.java b/src/main/java/net/minecraft/world/level/Level.java
-index 30464d2214ea377486e67c1363bf4bca0d1b252c..09f9cd87340f12ffd2ab2dcc3c50761e6675c65f 100644
+index f09ba32a44b5c867158a41991dd295633f616f30..27438caa8cc9fe959d5b9b75696139b2bb7a06d9 100644
 --- a/src/main/java/net/minecraft/world/level/Level.java
 +++ b/src/main/java/net/minecraft/world/level/Level.java
-@@ -1034,7 +1034,7 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
+@@ -1035,7 +1035,7 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
              TickingBlockEntity tickingblockentity = (TickingBlockEntity) this.blockEntityTickers.get(tileTickPosition);
              // Spigot start
              if (tickingblockentity == null) {
