@@ -5,7 +5,7 @@ Subject: [PATCH] Configurable move messages
 
 
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index 881fac8b71c0f97bc18c1cac47dc025f2f6a859d..56631241ce627653310f3109693f78ee0b04f5f8 100644
+index 089371685024a17230b740eb497fbab9cf2c26a0..8f2f78f630142b460357a5c355e13ade081dbe32 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 @@ -184,6 +184,7 @@ import net.minecraft.world.phys.Vec3;
@@ -16,28 +16,24 @@ index 881fac8b71c0f97bc18c1cac47dc025f2f6a859d..56631241ce627653310f3109693f78ee
  import org.slf4j.Logger;
  
  // CraftBukkit start
-@@ -1548,7 +1549,9 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Tic
- 
-                                 if (d10 - d9 > Math.max(f2, Math.pow((double) (org.spigotmc.SpigotConfig.movedTooQuicklyMultiplier * (float) i * speed), 2)) && !this.isSingleplayerOwner()) {
-                                 // CraftBukkit end
--                                    ServerGamePacketListenerImpl.LOGGER.warn("{} moved too quickly! {},{},{}", new Object[]{this.player.getName().getString(), d6, d7, d8});
-+                                    if (Config.getMovedQuickly()) { // Deepslate
-+                                        ServerGamePacketListenerImpl.LOGGER.warn("{} moved too quickly! {},{},{}", new Object[]{this.player.getName().getString(), d6, d7, d8});
-+                                    }
+@@ -1560,7 +1561,7 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Tic
+                                     io.papermc.paper.event.player.PlayerFailMoveEvent event = fireFailMove(io.papermc.paper.event.player.PlayerFailMoveEvent.FailReason.MOVED_TOO_QUICKLY,
+                                         toX, toY, toZ, toYaw, toPitch, true);
+                                     if (!event.isAllowed()) {
+-                                        if (event.getLogWarning())
++                                        if (event.getLogWarning() && Config.getMovedQuickly()) // Deepslate
+                                     ServerGamePacketListenerImpl.LOGGER.warn("{} moved too quickly! {},{},{}", new Object[]{this.player.getName().getString(), d6, d7, d8});
                                      this.teleport(this.player.getX(), this.player.getY(), this.player.getZ(), this.player.getYRot(), this.player.getXRot());
                                      return;
-                                 }
-@@ -1616,7 +1619,9 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Tic
- 
-                             if (!this.player.isChangingDimension() && d10 > org.spigotmc.SpigotConfig.movedWronglyThreshold && !this.player.isSleeping() && !this.player.gameMode.isCreative() && this.player.gameMode.getGameModeForPlayer() != GameType.SPECTATOR) { // Spigot
+@@ -1635,7 +1636,7 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Tic
+                                     toX, toY, toZ, toYaw, toPitch, true);
+                                 if (!event.isAllowed()) {
                                  flag2 = true; // Paper - diff on change, this should be moved wrongly
--                                ServerGamePacketListenerImpl.LOGGER.warn("{} moved wrongly!, ({})", this.player.getName().getString(), d11); // Purpur
-+                                if (Config.getMovedWrongly()) { // Deepslate
-+                                    ServerGamePacketListenerImpl.LOGGER.warn("{} moved wrongly!, ({})", this.player.getName().getString(), d11); // Purpur
-+                                }
-                             }
- 
-                             // Paper start - optimise out extra getCubes
+-                                    if (event.getLogWarning())
++                                    if (event.getLogWarning() && Config.getMovedWrongly()) // Deepslate
+                                         ServerGamePacketListenerImpl.LOGGER.warn("{} moved wrongly!, ({})", this.player.getName().getString(), d11); // Purpur
+                                 }
+                                 // Paper end
 diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
 index f7169129f698a6e2202a522fdad42c26a6eeb137..e9edc8c53f01184f33cd66593fba7ff6952e265f 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/Config.java
