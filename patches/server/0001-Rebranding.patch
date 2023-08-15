@@ -355,7 +355,7 @@ index 81554c321a78258ff78da3801f00d0fb90b9e113..445afbaf9a3f29df9b001922dee69458
  
      private static final int DEFAULT_SIZE_THRESHOLD = 1024 * 8;
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 0caac5f3fa1845a33924672b8e2268ea28935ed5..d8fd6ffe522aff119ee09610ddac76b50b936932 100644
+index 18c6abc3df5cffc1e459df6bd939657f33141f32..892d1cd22c46d963393e722ac5afa52dd7ea4cec 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -267,7 +267,7 @@ import javax.annotation.Nullable; // Paper
@@ -368,10 +368,10 @@ index 0caac5f3fa1845a33924672b8e2268ea28935ed5..d8fd6ffe522aff119ee09610ddac76b5
      private final String bukkitVersion = Versioning.getBukkitVersion();
      private final Logger logger = Logger.getLogger("Minecraft");
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java
-index 14c22d5247c8b449ea5dd89292764df491892fde..5b9d45341a2c8c8443e8d8bc4164e484d8d0d8a7 100644
+index 99dd93c066d4acc177de7f03ae45e491b535f4d1..bf48d1ceea4ea948c0a7aae2ae2d7bd854c497d8 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java
-@@ -912,7 +912,7 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {
+@@ -907,7 +907,7 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {
              return EntityCategory.WATER;
          }
  
@@ -394,7 +394,7 @@ index a4567188e2fe3f922bb6aeb71a2845d1a1be536f..37a33889f6eb58b7841afb6f94c1f691
                  // (async tasks must live with race-conditions if they attempt to cancel between these few lines of code)
              }
 diff --git a/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java b/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
-index 8e7e11a2e61f1d2154ca9987148b9cf5d72fd862..b90d39c821754dc959b28f38c61727ad13f54d65 100644
+index c6952480b9cb260ad72e03b99f76fa344481b039..82bb8694237d945a4a3527dabe5c4588741325a4 100644
 --- a/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
 +++ b/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
 @@ -470,7 +470,7 @@ public final class CraftMagicNumbers implements UnsafeValues {
@@ -447,7 +447,7 @@ index 1e6a999812495e370d7253ad1d7463280deeacb7..39365b702b6f42a4ee888acb4cd5f1cb
      }
  }
 diff --git a/src/main/java/org/purpurmc/purpur/PurpurConfig.java b/src/main/java/org/purpurmc/purpur/PurpurConfig.java
-index f5074ade33ec3f7620207c0829f44012d2749719..5ede448f5cd47efacc3d3beea06383ee119f49e6 100644
+index 1663d2d96ccb500c4e24ce3ac2050cd46f810871..379236874662dd48cf936e5a29738c7bc4585889 100644
 --- a/src/main/java/org/purpurmc/purpur/PurpurConfig.java
 +++ b/src/main/java/org/purpurmc/purpur/PurpurConfig.java
 @@ -229,7 +229,7 @@ public class PurpurConfig {
