@@ -5,7 +5,7 @@ Subject: [PATCH] Buildworld command
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 7346260c7725d1d10bed6a06de4713f93b460e2a..ef7e0b43d1b0d59bd14df7d175292cf231672684 100644
+index 087f2f24d5c8aff06ac5f436e984a9df7eaf7f1d..ba9b1d4eea438fbf36904216589b79226e57698a 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 @@ -244,6 +244,8 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
@@ -130,10 +130,10 @@ index 0000000000000000000000000000000000000000..8b1b1a727a3b30176b05d31cbbaec177
 +    }
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index b74a0b5041058774c6171c291971b0e103fd9a9d..d1b9e11757a0c170f16ad5a41a3d247e27f88209 100644
+index 0b5894ebe551d775c2b640c7ce2c1c7598d18c04..e9d32d3a413c94e3ac27c5ddc51e7f07c7522472 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -1115,6 +1115,8 @@ public final class CraftServer implements Server {
+@@ -1093,6 +1093,8 @@ public final class CraftServer implements Server {
          MinecraftServer.getServer().server.getCommandMap().register("dc", "Deepslate", new DiscordCommand("dc"));
          MinecraftServer.getServer().server.getCommandMap().register("cc", "Deepslate", new ClearchatCommand("cc"));
          MinecraftServer.getServer().server.getCommandMap().register("clearchat", "Deepslate", new ClearchatCommand("clearchat"));

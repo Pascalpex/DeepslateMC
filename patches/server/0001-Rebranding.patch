@@ -5,7 +5,7 @@ Subject: [PATCH] Rebranding
 
 
 diff --git a/build.gradle.kts b/build.gradle.kts
-index e896e91e79f181a1962b5a723eef12434652e921..eb607be892af64e07398065e8f6161a7ca708b76 100644
+index d20320b132fa1fe3b6dc8cbb66aeb2b1363b93e4..135c0e849ed7d3e9314cc5c6113ef98263af70df 100644
 --- a/build.gradle.kts
 +++ b/build.gradle.kts
 @@ -14,7 +14,7 @@ val alsoShade: Configuration by configurations.creating
@@ -248,7 +248,7 @@ index b5b6657e52e4f7a630229bd3ba433438af293e22..a83c164f481c53ad393b3536faca8fb7
          stringbuilder.append("// ");
          stringbuilder.append(CrashReport.getErrorComment());
 diff --git a/src/main/java/net/minecraft/server/Main.java b/src/main/java/net/minecraft/server/Main.java
-index 3586ecbf649fad6dddc7980244628b6553c6c589..15a8c4dbeff456b9d120bdaa82e710607355c721 100644
+index ed35da7a3b09e693a4a45b4ed31ea3fb23456788..096f75f8d1205c0d9beb0c49cea5cb2213c588d3 100644
 --- a/src/main/java/net/minecraft/server/Main.java
 +++ b/src/main/java/net/minecraft/server/Main.java
 @@ -81,6 +81,17 @@ public class Main {
@@ -329,10 +329,10 @@ index be7b3fe2dc84493dcde9e185717b0b7c7c2e9822..9ff441b682073de7d31a434e9f05ee39
                      servergui.runFinalizers();
                  }
 diff --git a/src/main/java/net/minecraft/world/level/Level.java b/src/main/java/net/minecraft/world/level/Level.java
-index f09ba32a44b5c867158a41991dd295633f616f30..27438caa8cc9fe959d5b9b75696139b2bb7a06d9 100644
+index 6ca5b710c94b9a45024364694d2f07d1837b6a4c..0024a5c705eb4b08d416addcd6faad06296eb932 100644
 --- a/src/main/java/net/minecraft/world/level/Level.java
 +++ b/src/main/java/net/minecraft/world/level/Level.java
-@@ -1035,7 +1035,7 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
+@@ -1034,7 +1034,7 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
              TickingBlockEntity tickingblockentity = (TickingBlockEntity) this.blockEntityTickers.get(tileTickPosition);
              // Spigot start
              if (tickingblockentity == null) {
@@ -355,7 +355,7 @@ index 81554c321a78258ff78da3801f00d0fb90b9e113..445afbaf9a3f29df9b001922dee69458
  
      private static final int DEFAULT_SIZE_THRESHOLD = 1024 * 8;
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 48068b1cb7fa4e640e6b8de5b7fc6f8cef526738..8b72c7d77d06e3c2dd237659be00bf303a16f9d0 100644
+index 372928ec7b5dc6f241484b394cc4034a5bfde5fd..f242c3f0738e2c6f8328e181b41f36a9ec0181f1 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -267,7 +267,7 @@ import javax.annotation.Nullable; // Paper
@@ -368,10 +368,10 @@ index 48068b1cb7fa4e640e6b8de5b7fc6f8cef526738..8b72c7d77d06e3c2dd237659be00bf30
      private final String bukkitVersion = Versioning.getBukkitVersion();
      private final Logger logger = Logger.getLogger("Minecraft");
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java
-index 99dd93c066d4acc177de7f03ae45e491b535f4d1..bf48d1ceea4ea948c0a7aae2ae2d7bd854c497d8 100644
+index b473f89c59c0fc080fadd0d4db320895e917fd41..8635b878d93dd933e966a7d00b4f98f36fc94384 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java
-@@ -907,7 +907,7 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {
+@@ -912,7 +912,7 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {
              return EntityCategory.WATER;
          }
  
@@ -460,7 +460,7 @@ index eb91748f4625dfecb53e8aae4091d5c552bb0a0a..299e073f952a06e850306216ef019263
          serverModName = getString("settings.server-mod-name", serverModName);
      }
 diff --git a/src/main/java/org/spigotmc/WatchdogThread.java b/src/main/java/org/spigotmc/WatchdogThread.java
-index 6d2f4de6e80376c7ddfa134ae1a21a94060b39c3..89b80a339df574aaa388431f23dad1e63f264539 100644
+index 251638283615e05479a473587155446135262ba7..1b032a0720c02cbbb23aeaabeb332316efa5d5a9 100644
 --- a/src/main/java/org/spigotmc/WatchdogThread.java
 +++ b/src/main/java/org/spigotmc/WatchdogThread.java
 @@ -96,7 +96,7 @@ public final class WatchdogThread extends io.papermc.paper.util.TickThread // Pa
