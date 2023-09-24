@@ -2,7 +2,7 @@ plugins {
     java
     `maven-publish`
     id("com.github.johnrengelman.shadow") version "8.1.1" apply false
-    id("io.papermc.paperweight.patcher") version "1.5.6"
+    id("io.papermc.paperweight.patcher") version "1.5.7-SNAPSHOT"
 }
 
 val paperMavenPublicUrl = "https://papermc.io/repo/repository/maven-public/"
@@ -62,7 +62,7 @@ paperweight {
     decompileRepo.set(paperMavenPublicUrl)
 
     useStandardUpstream("mirai") {
-        url.set(github("Pascalpex", "Mirai"))
+        url.set(github("Dreeam-qwq", "Mirai"))
         ref.set(providers.gradleProperty("miraiRef"))
 
         withStandardPatcher {
