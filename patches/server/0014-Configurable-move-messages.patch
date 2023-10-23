@@ -5,10 +5,10 @@ Subject: [PATCH] Configurable move messages
 
 
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index f1891f027f400bf0d1d49e88b1aeb72fe688d5d8..28ee537e8e855c5c1cf4f76d0f5d52fd58f03607 100644
+index c4218e0bf3ca98b21ad23f4f394bd3e2b82c97ea..6648cb74b593789ef2e00724e04900044b5bc7e7 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-@@ -184,6 +184,7 @@ import net.minecraft.world.phys.Vec3;
+@@ -178,6 +178,7 @@ import net.minecraft.world.phys.Vec3;
  import net.minecraft.world.phys.shapes.BooleanOp;
  import net.minecraft.world.phys.shapes.Shapes;
  import net.minecraft.world.phys.shapes.VoxelShape;
@@ -16,7 +16,7 @@ index f1891f027f400bf0d1d49e88b1aeb72fe688d5d8..28ee537e8e855c5c1cf4f76d0f5d52fd
  import org.slf4j.Logger;
  
  // CraftBukkit start
-@@ -1572,7 +1573,7 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Tic
+@@ -1441,7 +1442,7 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
                                      io.papermc.paper.event.player.PlayerFailMoveEvent event = fireFailMove(io.papermc.paper.event.player.PlayerFailMoveEvent.FailReason.MOVED_TOO_QUICKLY,
                                          toX, toY, toZ, toYaw, toPitch, true);
                                      if (!event.isAllowed()) {
@@ -25,7 +25,7 @@ index f1891f027f400bf0d1d49e88b1aeb72fe688d5d8..28ee537e8e855c5c1cf4f76d0f5d52fd
                                      ServerGamePacketListenerImpl.LOGGER.warn("{} moved too quickly! {},{},{}", new Object[]{this.player.getName().getString(), d6, d7, d8});
                                      this.teleport(this.player.getX(), this.player.getY(), this.player.getZ(), this.player.getYRot(), this.player.getXRot());
                                      return;
-@@ -1647,7 +1648,7 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Tic
+@@ -1516,7 +1517,7 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
                                      toX, toY, toZ, toYaw, toPitch, true);
                                  if (!event.isAllowed()) {
                                  flag2 = true; // Paper - diff on change, this should be moved wrongly

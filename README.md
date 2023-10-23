@@ -2,7 +2,7 @@
 <div align="center">
 
 # DeepslateMC
-### A fork of [Mirai-Purpur](https://github.com/Dreeam-qwq/Mirai/tree/purpur/1.20.1) that adds neat functionalities
+### A fork of [Mirai-Purpur](https://github.com/Dreeam-qwq/Mirai/tree/purpur/1.20.2) that adds neat functionalities
 <br/>
 </div>
 

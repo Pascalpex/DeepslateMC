@@ -1,30 +1,30 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Pascalpex <pascalpex@gmail.com>
-Date: Sat, 24 Jun 2023 17:05:11 +0200
+Date: Mon, 23 Oct 2023 15:58:07 +0200
 Subject: [PATCH] Configurable debug menu brand
 
 
-diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index 5cc2def86269288d477455d81c69257ad46bc992..c6bc25ae1eef98a0f282e0fb069670253ec0e51d 100644
---- a/src/main/java/net/minecraft/server/players/PlayerList.java
-+++ b/src/main/java/net/minecraft/server/players/PlayerList.java
-@@ -101,6 +101,7 @@ import net.minecraft.world.scores.Objective;
- import net.minecraft.world.scores.PlayerTeam;
- import net.minecraft.world.scores.Scoreboard; // Paper
- import net.minecraft.world.scores.Team;
+diff --git a/src/main/java/net/minecraft/network/protocol/common/custom/BrandPayload.java b/src/main/java/net/minecraft/network/protocol/common/custom/BrandPayload.java
+index 09bbaa644620d978655c6499de3412d1ec6b7366..863c481792a90a8037b9335638c2a7a5d96dd4d9 100644
+--- a/src/main/java/net/minecraft/network/protocol/common/custom/BrandPayload.java
++++ b/src/main/java/net/minecraft/network/protocol/common/custom/BrandPayload.java
+@@ -2,6 +2,7 @@ package net.minecraft.network.protocol.common.custom;
+ 
+ import net.minecraft.network.FriendlyByteBuf;
+ import net.minecraft.resources.ResourceLocation;
 +import net.pascalpex.deepslatemc.Config;
- import net.pascalpex.deepslatemc.MessagesFile;
- import net.pascalpex.deepslatemc.commands.MaintenanceMode;
- import net.pascalpex.deepslatemc.commands.SpawnCommand;
-@@ -291,7 +292,7 @@ public abstract class PlayerList {
-         playerconnection.send(new ClientboundLoginPacket(player.getId(), worlddata.isHardcore(), player.gameMode.getGameModeForPlayer(), player.gameMode.getPreviousGameModeForPlayer(), this.server.levelKeys(), this.synchronizedRegistries, worldserver1.dimensionTypeId(), worldserver1.dimension(), BiomeManager.obfuscateSeed(worldserver1.getSeed()), this.getMaxPlayers(), worldserver1.getWorld().getSendViewDistance(), worldserver1.getWorld().getSimulationDistance(), flag1, !flag, worldserver1.isDebug(), worldserver1.isFlat(), player.getLastDeathLocation(), player.getPortalCooldown())); // Paper - replace old player chunk management
-         player.getBukkitEntity().sendSupportedChannels(); // CraftBukkit
-         playerconnection.send(new ClientboundUpdateEnabledFeaturesPacket(FeatureFlags.REGISTRY.toNames(worldserver1.enabledFeatures())));
--        playerconnection.send(new ClientboundCustomPayloadPacket(ClientboundCustomPayloadPacket.BRAND, (new FriendlyByteBuf(Unpooled.buffer())).writeUtf(this.getServer().getServerModName())));
-+        playerconnection.send(new ClientboundCustomPayloadPacket(ClientboundCustomPayloadPacket.BRAND, (new FriendlyByteBuf(Unpooled.buffer())).writeUtf(Config.getF3name().replace("%player_name%", player.displayName) + "§r")));
-         playerconnection.send(new ClientboundChangeDifficultyPacket(worlddata.getDifficulty(), worlddata.isDifficultyLocked()));
-         playerconnection.send(new ClientboundPlayerAbilitiesPacket(player.getAbilities()));
-         playerconnection.send(new ClientboundSetCarriedItemPacket(player.getInventory().selected));
+ 
+ public record BrandPayload(String brand) implements CustomPacketPayload {
+     public static final ResourceLocation ID = new ResourceLocation("brand");
+@@ -12,7 +13,7 @@ public record BrandPayload(String brand) implements CustomPacketPayload {
+ 
+     @Override
+     public void write(FriendlyByteBuf buf) {
+-        buf.writeUtf(this.brand);
++        buf.writeUtf(Config.getF3name() + "§r");
+     }
+ 
+     @Override
 diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
 index e9edc8c53f01184f33cd66593fba7ff6952e265f..1d4f094b0601c2167f5a5df51e14bc2aad9ec796 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/Config.java

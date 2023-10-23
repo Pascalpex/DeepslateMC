@@ -1,14 +1,18 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Pascalpex <pascalpex@gmail.com>
-Date: Mon, 6 Mar 2023 12:58:01 +0100
+Date: Mon, 23 Oct 2023 16:03:28 +0200
 Subject: [PATCH] Tablist header footer
 
 
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index c6bc25ae1eef98a0f282e0fb069670253ec0e51d..152dd33b6d19f1ef5f8072566505ded25f4ffe42 100644
+index cadf652ab1568a92594bdc361b6e062c03e1ac2f..86f41480ac23c86ccc20a7ecc8f0ffca7a9b38cd 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
-@@ -105,6 +105,7 @@ import net.pascalpex.deepslatemc.Config;
+@@ -102,9 +102,11 @@ import net.minecraft.world.scores.Objective;
+ import net.minecraft.world.scores.PlayerTeam;
+ import net.minecraft.world.scores.Scoreboard; // Paper
+ import net.minecraft.world.scores.Team;
++import net.pascalpex.deepslatemc.Config;
  import net.pascalpex.deepslatemc.MessagesFile;
  import net.pascalpex.deepslatemc.commands.MaintenanceMode;
  import net.pascalpex.deepslatemc.commands.SpawnCommand;
@@ -16,9 +20,9 @@ index c6bc25ae1eef98a0f282e0fb069670253ec0e51d..152dd33b6d19f1ef5f8072566505ded2
  import org.slf4j.Logger;
  
  // CraftBukkit start
-@@ -341,6 +342,11 @@ public abstract class PlayerList {
+@@ -326,6 +328,11 @@ public abstract class PlayerList {
  
-         PlayerJoinEvent playerJoinEvent = new PlayerJoinEvent(bukkitPlayer, PaperAdventure.asAdventure(ichatmutablecomponent)); // Paper - Adventure
+         PlayerJoinEvent playerJoinEvent = new PlayerJoinEvent(bukkitPlayer, io.papermc.paper.adventure.PaperAdventure.asAdventure(ichatmutablecomponent)); // Paper - Adventure
          SpawnCommand.playerJoin(bukkitPlayer); // Deepslate - Spawn functions
 +        // Deepslate start - Tablist
 +        if (Config.getTablistEnabled()) {
@@ -66,13 +70,11 @@ index 1d4f094b0601c2167f5a5df51e14bc2aad9ec796..0cb2de6d8db888b85d563bd7031efcb5
  
  }
 diff --git a/src/main/java/net/pascalpex/deepslatemc/commands/DeepslateCommand.java b/src/main/java/net/pascalpex/deepslatemc/commands/DeepslateCommand.java
-index c01afb333b667c92275028ecf9e2c77a9e2f96b1..273e2437f86e7405fdd32c4ad7cf52bf27e43e10 100644
+index c01afb333b667c92275028ecf9e2c77a9e2f96b1..250ae07f0b22e2d9739623ea8691e4aa5b9ff914 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/commands/DeepslateCommand.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/commands/DeepslateCommand.java
-@@ -1,7 +1,8 @@
- package net.pascalpex.deepslatemc.commands;
--    
-+
+@@ -2,6 +2,7 @@ package net.pascalpex.deepslatemc.commands;
+     
  import net.pascalpex.deepslatemc.Config;
  import net.pascalpex.deepslatemc.MessagesFile;
 +import net.pascalpex.deepslatemc.util.TablistUtil;
@@ -91,12 +93,12 @@ index c01afb333b667c92275028ecf9e2c77a9e2f96b1..273e2437f86e7405fdd32c4ad7cf52bf
                              if(args[0].equalsIgnoreCase("version")) {
 diff --git a/src/main/java/net/pascalpex/deepslatemc/util/TablistUtil.java b/src/main/java/net/pascalpex/deepslatemc/util/TablistUtil.java
 new file mode 100644
-index 0000000000000000000000000000000000000000..9e4ac965e1c25f469663e7401e77b696c427da91
+index 0000000000000000000000000000000000000000..c6df5cc5ce25c7edfbaaea3c24cc661dfca3cc84
 --- /dev/null
 +++ b/src/main/java/net/pascalpex/deepslatemc/util/TablistUtil.java
 @@ -0,0 +1,46 @@
 +package net.pascalpex.deepslatemc.util;
-+
++    
 +import net.pascalpex.deepslatemc.Config;
 +import org.bukkit.Bukkit;
 +import org.bukkit.entity.Player;
@@ -134,10 +136,10 @@ index 0000000000000000000000000000000000000000..9e4ac965e1c25f469663e7401e77b696
 +        footer = footer.replace("&", "§");
 +
 +        initiated = true;
-+
++        
 +        for(Player player : Bukkit.getOnlinePlayers()) {
 +            setTablist(player);
 +        }
 +    }
-+    
++
 +}
