@@ -5,7 +5,7 @@ Subject: [PATCH] Tablist header footer
 
 
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index cadf652ab1568a92594bdc361b6e062c03e1ac2f..86f41480ac23c86ccc20a7ecc8f0ffca7a9b38cd 100644
+index 9bb3dccdabc3724bd066b61aba33f16f3a627ca0..0344f5da146735deb4c65b439c8c6f57fb47362a 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
 @@ -102,9 +102,11 @@ import net.minecraft.world.scores.Objective;
@@ -20,7 +20,7 @@ index cadf652ab1568a92594bdc361b6e062c03e1ac2f..86f41480ac23c86ccc20a7ecc8f0ffca
  import org.slf4j.Logger;
  
  // CraftBukkit start
-@@ -326,6 +328,11 @@ public abstract class PlayerList {
+@@ -347,6 +349,11 @@ public abstract class PlayerList {
  
          PlayerJoinEvent playerJoinEvent = new PlayerJoinEvent(bukkitPlayer, io.papermc.paper.adventure.PaperAdventure.asAdventure(ichatmutablecomponent)); // Paper - Adventure
          SpawnCommand.playerJoin(bukkitPlayer); // Deepslate - Spawn functions
