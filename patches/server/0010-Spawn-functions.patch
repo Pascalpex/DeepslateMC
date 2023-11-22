@@ -5,7 +5,7 @@ Subject: [PATCH] Spawn functions
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 76ce9f3203c9b97c50380ff6eaebbdab7edfdef1..78df831b74fe00cabf346167f50314f5ff652421 100644
+index db15087d92db686bd8e03d0f63fca3f98b0348a0..b640a9991acbc1e98c819a8192f2f105dfcab3e1 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 @@ -249,6 +249,9 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
@@ -195,10 +195,10 @@ index 0000000000000000000000000000000000000000..ec53a7ba37bf6360dea2c9b980499863
 +
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index c46f1beb86cf285bf797224321ef0ba404c81c7f..babea450ef8bbdb6c98101e32d05861aa3bb631a 100644
+index e2ccaa5e2fb584b2f05efb239dba878aafa584b6..dce570e0067eea2c12880058086c15556402bd24 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -1101,6 +1101,9 @@ public final class CraftServer implements Server {
+@@ -1103,6 +1103,9 @@ public final class CraftServer implements Server {
          MinecraftServer.getServer().server.getCommandMap().register("buildworld", "Deepslate", new BuildworldCommand("buildworld"));
          MinecraftServer.getServer().server.getCommandMap().register("maintenance", "Deepslate", new MaintenanceMode("maintenance"));
          MinecraftServer.getServer().server.getCommandMap().register("help", "Deepslate", new HelpCommand("help"));

@@ -356,10 +356,10 @@ index db571f658f636cdda1dcdbaffa0c4da67fae11ad..4c568cfa5eaf3a0c35647d7567b26e72
  
      private static final int DEFAULT_SIZE_THRESHOLD = 1024 * 8;
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 6486a25d8151867015521574140efc6d64019d89..e1d135cb43866cff84c74612ac1c24a28a864afa 100644
+index 08efeefca59f9aea2925129551e29c3658f41f2e..73f6eb8c1fa55b9295fecf9897fc374387a73af2 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -269,7 +269,7 @@ import javax.annotation.Nullable; // Paper
+@@ -271,7 +271,7 @@ import javax.annotation.Nullable; // Paper
  import javax.annotation.Nonnull; // Paper
  
  public final class CraftServer implements Server {
@@ -369,7 +369,7 @@ index 6486a25d8151867015521574140efc6d64019d89..e1d135cb43866cff84c74612ac1c24a2
      private final String bukkitVersion = Versioning.getBukkitVersion();
      private final Logger logger = Logger.getLogger("Minecraft");
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java
-index 7815588b609d411d4f22279bac234fc4f9744f49..b4e635e49e4e2a6f684bde43fb6faedd05ad6d30 100644
+index 0d1bdbcb60a9f726b7fed169794b22d37227fe1e..a934029e171aaa9b1dce0b5d509c4c33d0c941bf 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java
 @@ -912,7 +912,7 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {

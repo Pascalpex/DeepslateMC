@@ -5,7 +5,7 @@ Subject: [PATCH] Deepslate command
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index b9cc843ddd245d2260b440e1c9143a9fd7b161cc..4aca871f3557a2ad08a8fb3bb55aadbfecb9d696 100644
+index 01d0c93972401f4084df6081ba49a2ee77258c9f..eea2ed8c67d40891c6e82a85875da9b46b1436b5 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 @@ -50,6 +50,7 @@ import net.minecraft.world.level.GameRules;
@@ -156,7 +156,7 @@ index 0000000000000000000000000000000000000000..c01afb333b667c92275028ecf9e2c77a
 +
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index a6b3b08e2f6f2b51a66d8c870522fbc9463fa9b5..2ca6f04a1a4d85ab85e4cdb8365460b8348db542 100644
+index 73f6eb8c1fa55b9295fecf9897fc374387a73af2..b1b101a712e4fc7779b6529dd18fcb9d0857b49e 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -119,6 +119,7 @@ import net.minecraft.world.level.storage.WorldData;
@@ -167,7 +167,7 @@ index a6b3b08e2f6f2b51a66d8c870522fbc9463fa9b5..2ca6f04a1a4d85ab85e4cdb8365460b8
  import org.bukkit.BanList;
  import org.bukkit.Bukkit;
  import org.bukkit.ChatColor;
-@@ -1089,6 +1090,11 @@ public final class CraftServer implements Server {
+@@ -1091,6 +1092,11 @@ public final class CraftServer implements Server {
          org.spigotmc.SpigotConfig.registerCommands(); // Spigot
          io.papermc.paper.command.PaperCommands.registerCommands(this.console); // Paper
          org.purpurmc.purpur.PurpurConfig.registerCommands(); // Purpur

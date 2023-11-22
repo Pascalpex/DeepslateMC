@@ -5,7 +5,7 @@ Subject: [PATCH] Maintenance mode
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 15e94bfb6c44c0714dcdd65aa0a9d57523ed7b0b..cf82c597402de73f88698f2ab5440325e46310f2 100644
+index 51ca9312c1007e6078fdf6e23fa57cf57d30be9f..84fdf0da1fa6801e7fbc6359208e29fe98264d3c 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 @@ -247,6 +247,7 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
@@ -136,10 +136,10 @@ index 0000000000000000000000000000000000000000..4a8b9abc9340ff38217c6b8cf66463b9
 +    }
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 966ac154188fabde0c7d0f9b1965898299b1f078..1a0e65f5aaa6fae977ad4cc277d0996c2c80570d 100644
+index 255bb1bf4f8a421f01888d327f75677d537ab18e..920cb59ce5a0a4a5d45b7e277b9751207bef6c61 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -1099,6 +1099,7 @@ public final class CraftServer implements Server {
+@@ -1101,6 +1101,7 @@ public final class CraftServer implements Server {
          MinecraftServer.getServer().server.getCommandMap().register("clearchat", "Deepslate", new ClearchatCommand("clearchat"));
          MinecraftServer.getServer().server.getCommandMap().register("setbuildworld", "Deepslate", new BuildworldCommand("setbuildworld"));
          MinecraftServer.getServer().server.getCommandMap().register("buildworld", "Deepslate", new BuildworldCommand("buildworld"));

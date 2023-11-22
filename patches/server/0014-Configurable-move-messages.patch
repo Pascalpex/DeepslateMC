@@ -5,7 +5,7 @@ Subject: [PATCH] Configurable move messages
 
 
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index 865b9e328eae9be57d2e998348709a14877530bc..1d683eb799c982d661fad31267096b684e4bed9e 100644
+index 45bc25983ccb5f3fee7f5386c090e8b0cc353003..f86d807f054e106588d3fd90c823a5021f4e14c3 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 @@ -178,6 +178,7 @@ import net.minecraft.world.phys.Vec3;
@@ -16,7 +16,7 @@ index 865b9e328eae9be57d2e998348709a14877530bc..1d683eb799c982d661fad31267096b68
  import org.slf4j.Logger;
  
  // CraftBukkit start
-@@ -1444,7 +1445,7 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
+@@ -1445,7 +1446,7 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
                                      io.papermc.paper.event.player.PlayerFailMoveEvent event = fireFailMove(io.papermc.paper.event.player.PlayerFailMoveEvent.FailReason.MOVED_TOO_QUICKLY,
                                          toX, toY, toZ, toYaw, toPitch, true);
                                      if (!event.isAllowed()) {
@@ -25,7 +25,7 @@ index 865b9e328eae9be57d2e998348709a14877530bc..1d683eb799c982d661fad31267096b68
                                      ServerGamePacketListenerImpl.LOGGER.warn("{} moved too quickly! {},{},{}", new Object[]{this.player.getName().getString(), d6, d7, d8});
                                      this.teleport(this.player.getX(), this.player.getY(), this.player.getZ(), this.player.getYRot(), this.player.getXRot());
                                      return;
-@@ -1519,7 +1520,7 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
+@@ -1520,7 +1521,7 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
                                      toX, toY, toZ, toYaw, toPitch, true);
                                  if (!event.isAllowed()) {
                                  flag2 = true; // Paper - diff on change, this should be moved wrongly
