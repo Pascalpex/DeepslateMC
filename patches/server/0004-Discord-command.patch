@@ -5,10 +5,10 @@ Subject: [PATCH] Discord command
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index eea2ed8c67d40891c6e82a85875da9b46b1436b5..c5ffd9b844cd2e5d9d4cbe30944070f2d53acfb5 100644
+index 5d24297450cccff8aa69facad579b5dbb8e3ca21..ba5268faa67bc61e81cc7a19bafab7c0e0b752a7 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-@@ -241,6 +241,8 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+@@ -246,6 +246,8 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
  
          // Deepslate start
          MinecraftServer.getServer().server.getCommandMap().register("deepslate", "Deepslate", new DeepslateCommand("deepslate"));
@@ -42,7 +42,7 @@ index 9a03cd8f8fc82450fdf7b46a405ea6b6482524d2..b0ed05f69d66a863042767768fc87092
 +
  }
 diff --git a/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java b/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java
-index 96833e6e5dc97d13e0ea778530b0606937f14ae4..073ee76cdefd6f0e40f7f1f80312f25e2406118b 100644
+index bbb210b1896057038dddbe2f330e6c7bc201215b..e19fd8ad70398cf5fb61f972470a92768191c7a4 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java
 @@ -35,6 +35,12 @@ public class MessagesFile {
@@ -105,10 +105,10 @@ index 0000000000000000000000000000000000000000..a9beebbafcaf947107e70ba11fa19605
 +    }
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index b1b101a712e4fc7779b6529dd18fcb9d0857b49e..7221324ce8bca225d75b19fbe7f9e76a6b3f3dcb 100644
+index 5641a824f2cfe7fc131eba5f45f069483adeb38d..ca69636fad11309e5b1660766b30fa64f53133e4 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -1095,6 +1095,8 @@ public final class CraftServer implements Server {
+@@ -1092,6 +1092,8 @@ public final class CraftServer implements Server {
  
          // Deepslate start
          MinecraftServer.getServer().server.getCommandMap().register("deepslate", "Deepslate", new DeepslateCommand("deepslate"));

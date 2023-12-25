@@ -5,7 +5,7 @@ Subject: [PATCH] Configurable knowledgebook click
 
 
 diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
-index 6962584f335a75a4e23b68cc731e3d5856881e04..70cf7172bf95259294454ce94924ac24cf950279 100644
+index 678e7c2c0e34864e1031bf7af7ddd2cc0362e654..040d2f1cc091b426678205bfff742444b669c920 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/Config.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/Config.java
 @@ -39,6 +39,9 @@ public class Config {
@@ -18,7 +18,7 @@ index 6962584f335a75a4e23b68cc731e3d5856881e04..70cf7172bf95259294454ce94924ac24
              save();
          } catch (IOException | InvalidConfigurationException e) {
              e.printStackTrace();
-@@ -89,5 +92,8 @@ public class Config {
+@@ -87,5 +90,8 @@ public class Config {
          float yaw = (float) config.getDouble("spawn" + ".yaw");
          return new Location(world, x, y, z, yaw, pitch);
      }
@@ -28,7 +28,7 @@ index 6962584f335a75a4e23b68cc731e3d5856881e04..70cf7172bf95259294454ce94924ac24
  
  }
 diff --git a/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java b/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
-index f33d6e9785acbd21a0b366587aa170cc1509bf58..334a30951885adf3c43d348a3b98a01fed89791f 100644
+index 7feace95794a2e1e4b0b14b5d0bc236db352ff65..b5b4fbbe5f30fad7644deea2fd405091b577e98d 100644
 --- a/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
 +++ b/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
 @@ -63,6 +63,7 @@ import net.minecraft.world.phys.BlockHitResult;

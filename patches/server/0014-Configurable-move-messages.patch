@@ -1,31 +1,31 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Pascalpex <pascalpex@gmail.com>
-Date: Sat, 3 Dec 2022 16:02:06 +0100
+Date: Mon, 25 Dec 2023 15:35:26 +0100
 Subject: [PATCH] Configurable move messages
 
 
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index 45bc25983ccb5f3fee7f5386c090e8b0cc353003..f86d807f054e106588d3fd90c823a5021f4e14c3 100644
+index 1acd2580294af4e7f07a5c5e767d8e3093efca17..e6e4ff696eaa8faac9a4f4f9342fa0cdce20f467 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-@@ -178,6 +178,7 @@ import net.minecraft.world.phys.Vec3;
+@@ -189,6 +189,7 @@ import net.minecraft.world.phys.Vec3;
  import net.minecraft.world.phys.shapes.BooleanOp;
  import net.minecraft.world.phys.shapes.Shapes;
  import net.minecraft.world.phys.shapes.VoxelShape;
 +import net.pascalpex.deepslatemc.Config;
- import org.slf4j.Logger;
- 
- // CraftBukkit start
-@@ -1445,7 +1446,7 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
-                                     io.papermc.paper.event.player.PlayerFailMoveEvent event = fireFailMove(io.papermc.paper.event.player.PlayerFailMoveEvent.FailReason.MOVED_TOO_QUICKLY,
-                                         toX, toY, toZ, toYaw, toPitch, true);
-                                     if (!event.isAllowed()) {
--                                        if (event.getLogWarning())
-+                                        if (event.getLogWarning() && Config.getMovedQuickly()) // Deepslate
-                                     ServerGamePacketListenerImpl.LOGGER.warn("{} moved too quickly! {},{},{}", new Object[]{this.player.getName().getString(), d6, d7, d8});
-                                     this.teleport(this.player.getX(), this.player.getY(), this.player.getZ(), this.player.getYRot(), this.player.getXRot());
-                                     return;
-@@ -1520,7 +1521,7 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
+ import org.bukkit.craftbukkit.util.permissions.CraftDefaultPermissions;
+ import org.apache.commons.lang3.StringUtils;
+ import org.galemc.gale.configuration.GaleGlobalConfiguration;
+@@ -1489,7 +1490,7 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
+                                         io.papermc.paper.event.player.PlayerFailMoveEvent event = fireFailMove(io.papermc.paper.event.player.PlayerFailMoveEvent.FailReason.MOVED_TOO_QUICKLY,
+                                             toX, toY, toZ, toYaw, toPitch, true);
+                                         if (!event.isAllowed()) {
+-                                            if (event.getLogWarning())
++                                            if (event.getLogWarning() && Config.getMovedQuickly()) // Deepslate
+                                                 ServerGamePacketListenerImpl.LOGGER.warn("{} moved too quickly! {},{},{}", new Object[]{this.player.getName().getString(), d6, d7, d8});
+                                             this.teleport(this.player.getX(), this.player.getY(), this.player.getZ(), this.player.getYRot(), this.player.getXRot());
+                                             return;
+@@ -1565,7 +1566,7 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
                                      toX, toY, toZ, toYaw, toPitch, true);
                                  if (!event.isAllowed()) {
                                  flag2 = true; // Paper - diff on change, this should be moved wrongly
@@ -35,7 +35,7 @@ index 45bc25983ccb5f3fee7f5386c090e8b0cc353003..f86d807f054e106588d3fd90c823a502
                                  }
                                  // Paper end
 diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
-index f7169129f698a6e2202a522fdad42c26a6eeb137..e9edc8c53f01184f33cd66593fba7ff6952e265f 100644
+index f3346fcd2b6786218df690a31470a58c5d673ff0..46b696f83a80f7eef9d92ace646d55ef6165d726 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/Config.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/Config.java
 @@ -51,6 +51,10 @@ public class Config {
@@ -49,7 +49,7 @@ index f7169129f698a6e2202a522fdad42c26a6eeb137..e9edc8c53f01184f33cd66593fba7ff6
              save();
          } catch (IOException | InvalidConfigurationException e) {
              e.printStackTrace();
-@@ -113,5 +117,11 @@ public class Config {
+@@ -111,5 +115,11 @@ public class Config {
      public static boolean getMetricsEnabled() {
          return config.getBoolean("metrics");
      }

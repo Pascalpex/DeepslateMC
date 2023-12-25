@@ -1,23 +1,23 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Pascalpex <pascalpex@gmail.com>
-Date: Thu, 14 Jul 2022 14:17:46 +0200
+Date: Mon, 25 Dec 2023 15:08:18 +0100
 Subject: [PATCH] Config and messages file
 
 
 diff --git a/src/main/java/net/minecraft/commands/Commands.java b/src/main/java/net/minecraft/commands/Commands.java
-index 2fd376789bb24b14101e289733631a9a4b68fa1c..212bd15c747794c2c49ba94c352c0191ca3da3cc 100644
+index 67bdb686bcec2722d078bbf02c57664783a3bfb5..7dfeabefd9fe3e3a56f2b4e9129bd71a04afd772 100644
 --- a/src/main/java/net/minecraft/commands/Commands.java
 +++ b/src/main/java/net/minecraft/commands/Commands.java
-@@ -120,6 +120,8 @@ import net.minecraft.server.commands.data.DataCommands;
- import net.minecraft.server.level.ServerPlayer;
+@@ -131,6 +131,8 @@ import net.minecraft.server.level.ServerPlayer;
  import net.minecraft.tags.TagKey;
  import net.minecraft.util.profiling.jfr.JvmProfiler;
+ import net.minecraft.world.level.GameRules;
 +import net.pascalpex.deepslatemc.Config;
 +import net.pascalpex.deepslatemc.MessagesFile;
  import org.slf4j.Logger;
  
  // CraftBukkit start
-@@ -143,6 +145,10 @@ public class Commands {
+@@ -155,6 +157,10 @@ public class Commands {
  
      public Commands(Commands.CommandSelection environment, CommandBuildContext commandRegistryAccess) {
          this(); // CraftBukkit
@@ -79,12 +79,12 @@ index 0000000000000000000000000000000000000000..9a03cd8f8fc82450fdf7b46a405ea6b6
 +}
 diff --git a/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java b/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java
 new file mode 100644
-index 0000000000000000000000000000000000000000..28901cafd9e58b5a111ef665019cec875318d297
+index 0000000000000000000000000000000000000000..8226030ae3e7b9c9ab85262b536efc3986f716f9
 --- /dev/null
 +++ b/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java
 @@ -0,0 +1,51 @@
 +package net.pascalpex.deepslatemc;
-+    
++
 +import org.bukkit.configuration.InvalidConfigurationException;
 +import org.bukkit.configuration.file.FileConfiguration;
 +import org.bukkit.configuration.file.YamlConfiguration;

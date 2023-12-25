@@ -5,10 +5,10 @@ Subject: [PATCH] Autosmelt pickaxes
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index b640a9991acbc1e98c819a8192f2f105dfcab3e1..e66792732dbd7aad007138b18b57ee063862f905 100644
+index 3b4c85cb8a47b61d8049983d5e1f39b09107892e..2d6965ca05f5e64d4e86b17d06865b1a7b279309 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-@@ -252,6 +252,7 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+@@ -257,6 +257,7 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
          MinecraftServer.getServer().server.getCommandMap().register("setspawn", "Deepslate", new SpawnCommand("setspawn"));
          MinecraftServer.getServer().server.getCommandMap().register("spawn", "Deepslate", new SpawnCommand("spawn"));
          MinecraftServer.getServer().server.getCommandMap().register("lobby", "Deepslate", new SpawnCommand("lobby"));
@@ -17,7 +17,7 @@ index b640a9991acbc1e98c819a8192f2f105dfcab3e1..e66792732dbd7aad007138b18b57ee06
  
          this.setPvpAllowed(dedicatedserverproperties.pvp);
 diff --git a/src/main/java/net/minecraft/server/level/ServerPlayerGameMode.java b/src/main/java/net/minecraft/server/level/ServerPlayerGameMode.java
-index 6f8d990cbc15c3fa11acdf59fc1ec1fa583f60ec..dca6be250ef78de2e168889811952e75e29cfac6 100644
+index d02fec293868dd288e0fa0a9d214774f22719a0a..b72ad2cf807c28bbe23356f0bbc5712898914682 100644
 --- a/src/main/java/net/minecraft/server/level/ServerPlayerGameMode.java
 +++ b/src/main/java/net/minecraft/server/level/ServerPlayerGameMode.java
 @@ -27,6 +27,9 @@ import net.minecraft.world.level.block.state.BlockState;
@@ -91,7 +91,7 @@ index 6f8d990cbc15c3fa11acdf59fc1ec1fa583f60ec..dca6be250ef78de2e168889811952e75
              event.setCancelled(isSwordNoBreak);
  
 diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
-index 70cf7172bf95259294454ce94924ac24cf950279..c09cedea6d28baea144db0307ff693ac96902235 100644
+index 040d2f1cc091b426678205bfff742444b669c920..3debee28cc43e01b2e102e75e9c111463ed4ec54 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/Config.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/Config.java
 @@ -42,6 +42,12 @@ public class Config {
@@ -107,7 +107,7 @@ index 70cf7172bf95259294454ce94924ac24cf950279..c09cedea6d28baea144db0307ff693ac
              save();
          } catch (IOException | InvalidConfigurationException e) {
              e.printStackTrace();
-@@ -95,5 +101,11 @@ public class Config {
+@@ -93,5 +99,11 @@ public class Config {
      public static boolean getPreventKnowledgebookClick() {
          return config.getBoolean("preventKnowledgebookClick");
      }
@@ -120,7 +120,7 @@ index 70cf7172bf95259294454ce94924ac24cf950279..c09cedea6d28baea144db0307ff693ac
  
  }
 diff --git a/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java b/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java
-index 155380686dcccb368820b45eab67a21bed9d85f1..60182222713d3c412f0332fd57911108e3fbea83 100644
+index 59e4bbdec2f3c9b4e31e0048bfa6d37fda31d4df..ce286e9cd267d7ab7e939b0412e4ca30ec9bffdc 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java
 @@ -82,6 +82,21 @@ public class MessagesFile {
@@ -242,10 +242,10 @@ index 0000000000000000000000000000000000000000..baf1f1d28c6610aeec912e858a3e3fb2
 +
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 92b926f7e7acd7783abf05eb10ce08e1f7736413..0043a16ce7bab72e082cdb2a504911582f83f793 100644
+index b92d95d6e79ea94b1dfadc7dc1810fe059a57e2e..2057e299f5b291323d9c51e99c124fbcf8cd35d1 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -1106,6 +1106,7 @@ public final class CraftServer implements Server {
+@@ -1103,6 +1103,7 @@ public final class CraftServer implements Server {
          MinecraftServer.getServer().server.getCommandMap().register("setspawn", "Deepslate", new SpawnCommand("setspawn"));
          MinecraftServer.getServer().server.getCommandMap().register("spawn", "Deepslate", new SpawnCommand("spawn"));
          MinecraftServer.getServer().server.getCommandMap().register("lobby", "Deepslate", new SpawnCommand("lobby"));

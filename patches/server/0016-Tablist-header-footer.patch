@@ -1,26 +1,26 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Pascalpex <pascalpex@gmail.com>
-Date: Mon, 23 Oct 2023 16:03:28 +0200
+Date: Mon, 25 Dec 2023 15:56:49 +0100
 Subject: [PATCH] Tablist header footer
 
 
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index 9bb3dccdabc3724bd066b61aba33f16f3a627ca0..0344f5da146735deb4c65b439c8c6f57fb47362a 100644
+index 484ebac18e8de6df1238c50167862c109f47c3bd..82a73b02f9fec29cbae07b0df23ed6a579eec4d9 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
-@@ -102,9 +102,11 @@ import net.minecraft.world.scores.Objective;
+@@ -103,9 +103,11 @@ import net.minecraft.world.phys.Vec3;
+ import net.minecraft.world.scores.DisplaySlot;
+ import net.minecraft.world.scores.Objective;
  import net.minecraft.world.scores.PlayerTeam;
- import net.minecraft.world.scores.Scoreboard; // Paper
- import net.minecraft.world.scores.Team;
 +import net.pascalpex.deepslatemc.Config;
  import net.pascalpex.deepslatemc.MessagesFile;
  import net.pascalpex.deepslatemc.commands.MaintenanceMode;
  import net.pascalpex.deepslatemc.commands.SpawnCommand;
 +import net.pascalpex.deepslatemc.util.TablistUtil;
+ import org.galemc.gale.configuration.GaleGlobalConfiguration;
  import org.slf4j.Logger;
  
- // CraftBukkit start
-@@ -347,6 +349,11 @@ public abstract class PlayerList {
+@@ -358,6 +360,11 @@ public abstract class PlayerList {
  
          PlayerJoinEvent playerJoinEvent = new PlayerJoinEvent(bukkitPlayer, io.papermc.paper.adventure.PaperAdventure.asAdventure(ichatmutablecomponent)); // Paper - Adventure
          SpawnCommand.playerJoin(bukkitPlayer); // Deepslate - Spawn functions
@@ -33,7 +33,7 @@ index 9bb3dccdabc3724bd066b61aba33f16f3a627ca0..0344f5da146735deb4c65b439c8c6f57
  
          if (!player.connection.isAcceptingMessages()) {
 diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
-index 1d4f094b0601c2167f5a5df51e14bc2aad9ec796..0cb2de6d8db888b85d563bd7031efcb54669d43d 100644
+index d09379b9e668dc01d71740ece750d968deee8c46..15caaf6d1f07a17b4cdcb27cf8d84992e1211a34 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/Config.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/Config.java
 @@ -58,6 +58,17 @@ public class Config {
@@ -54,7 +54,7 @@ index 1d4f094b0601c2167f5a5df51e14bc2aad9ec796..0cb2de6d8db888b85d563bd7031efcb5
              save();
          } catch (IOException | InvalidConfigurationException e) {
              e.printStackTrace();
-@@ -129,5 +140,14 @@ public class Config {
+@@ -127,5 +138,14 @@ public class Config {
      public static String getF3name() {
          return config.getString("f3name").replace("&", "§");
      }
@@ -70,11 +70,11 @@ index 1d4f094b0601c2167f5a5df51e14bc2aad9ec796..0cb2de6d8db888b85d563bd7031efcb5
  
  }
 diff --git a/src/main/java/net/pascalpex/deepslatemc/commands/DeepslateCommand.java b/src/main/java/net/pascalpex/deepslatemc/commands/DeepslateCommand.java
-index c01afb333b667c92275028ecf9e2c77a9e2f96b1..250ae07f0b22e2d9739623ea8691e4aa5b9ff914 100644
+index c11d3597dbc49a1f6d75a55f427c55fc55d68a29..952422775b768a43bb95c62e33475edb96c492ee 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/commands/DeepslateCommand.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/commands/DeepslateCommand.java
 @@ -2,6 +2,7 @@ package net.pascalpex.deepslatemc.commands;
-     
+ 
  import net.pascalpex.deepslatemc.Config;
  import net.pascalpex.deepslatemc.MessagesFile;
 +import net.pascalpex.deepslatemc.util.TablistUtil;
@@ -82,7 +82,7 @@ index c01afb333b667c92275028ecf9e2c77a9e2f96b1..250ae07f0b22e2d9739623ea8691e4aa
  import org.bukkit.Location;
  import org.bukkit.command.Command;
 @@ -45,6 +46,9 @@ public class DeepslateCommand extends Command {
-                         if(args[0].equalsIgnoreCase("reload")) {
+                         if (args[0].equalsIgnoreCase("reload")) {
                              MessagesFile.load();
                              Config.load();
 +                            if (Config.getTablistEnabled()) {
@@ -90,15 +90,15 @@ index c01afb333b667c92275028ecf9e2c77a9e2f96b1..250ae07f0b22e2d9739623ea8691e4aa
 +                            }
                              player.sendMessage(prefix + MessagesFile.getConfigReloaded());
                          } else {
-                             if(args[0].equalsIgnoreCase("version")) {
+                             if (args[0].equalsIgnoreCase("version")) {
 diff --git a/src/main/java/net/pascalpex/deepslatemc/util/TablistUtil.java b/src/main/java/net/pascalpex/deepslatemc/util/TablistUtil.java
 new file mode 100644
-index 0000000000000000000000000000000000000000..c6df5cc5ce25c7edfbaaea3c24cc661dfca3cc84
+index 0000000000000000000000000000000000000000..906708e425ee1ae110f350d951b1e9463684b1aa
 --- /dev/null
 +++ b/src/main/java/net/pascalpex/deepslatemc/util/TablistUtil.java
 @@ -0,0 +1,46 @@
 +package net.pascalpex.deepslatemc.util;
-+    
++
 +import net.pascalpex.deepslatemc.Config;
 +import org.bukkit.Bukkit;
 +import org.bukkit.entity.Player;
@@ -110,7 +110,7 @@ index 0000000000000000000000000000000000000000..c6df5cc5ce25c7edfbaaea3c24cc661d
 +    private static String footer = "";
 +
 +    public static void setTablist(Player player) {
-+        if(!initiated) {
++        if (!initiated) {
 +            reloadTablist();
 +        }
 +        player.setPlayerListHeader(header);
@@ -120,14 +120,14 @@ index 0000000000000000000000000000000000000000..c6df5cc5ce25c7edfbaaea3c24cc661d
 +    public static void reloadTablist() {
 +        header = "";
 +        footer = "";
-+        for(String s : Config.getHeader()) {
-+            if(!header.equals("")) {
++        for (String s : Config.getHeader()) {
++            if (!header.equals("")) {
 +                header += "\n";
 +            }
 +            header += s;
 +        }
-+        for(String s : Config.getFooter()) {
-+            if(!footer.equals("")) {
++        for (String s : Config.getFooter()) {
++            if (!footer.equals("")) {
 +                footer += "\n";
 +            }
 +            footer += s;
@@ -136,8 +136,8 @@ index 0000000000000000000000000000000000000000..c6df5cc5ce25c7edfbaaea3c24cc661d
 +        footer = footer.replace("&", "§");
 +
 +        initiated = true;
-+        
-+        for(Player player : Bukkit.getOnlinePlayers()) {
++
++        for (Player player : Bukkit.getOnlinePlayers()) {
 +            setTablist(player);
 +        }
 +    }

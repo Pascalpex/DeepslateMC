@@ -1,0 +1,38 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Simon Gardling <titaniumtown@gmail.com>
+Date: Mon, 13 Dec 2021 11:28:08 -0500
+Subject: [PATCH] Skip event if no listeners
+
+Original code by GaleMC, licensed under GPL v3
+You can find the original code on https://github.com/GaleMC/Gale
+
+This patch is based on the following patch:
+"skip event if no listeners"
+By: Simon Gardling <titaniumtown@gmail.com>
+As part of: JettPack (https://gitlab.com/Titaniumtown/JettPack)
+Licensed under: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
+
+diff --git a/src/main/java/org/bukkit/plugin/SimplePluginManager.java b/src/main/java/org/bukkit/plugin/SimplePluginManager.java
+index cb01547706de416dd41879bf479d93fa0e7e23c9..88b7c365efa324637fa54b143060dc37d54db74e 100644
+--- a/src/main/java/org/bukkit/plugin/SimplePluginManager.java
++++ b/src/main/java/org/bukkit/plugin/SimplePluginManager.java
+@@ -634,6 +634,19 @@ public final class SimplePluginManager implements PluginManager {
+         HandlerList handlers = event.getHandlers();
+         RegisteredListener[] listeners = handlers.getRegisteredListeners();
+ 
++        // Gale start - JettPack - skip events without listeners
++        if (listeners.length == 0) {
++            return;
++        }
++        // Gale end - JettPack - skip events without listeners
++
++        // Paper - replace callEvent by merging to below method
++        if (event.isAsynchronous() && server.isPrimaryThread()) {
++            throw new IllegalStateException(event.getEventName() + " may only be triggered asynchronously.");
++        } else if (!event.isAsynchronous() && !server.isPrimaryThread() && !server.isStopping() ) {
++            throw new IllegalStateException(event.getEventName() + " may only be triggered synchronously.");
++        }
++
+         for (RegisteredListener registration : listeners) {
+             if (!registration.getPlugin().isEnabled()) {
+                 continue;

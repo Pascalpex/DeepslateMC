@@ -15,7 +15,7 @@ repositories {
 }
 
 dependencies {
-    remapper("net.fabricmc:tiny-remapper:0.8.11:fat")
+    remapper("net.fabricmc:tiny-remapper:0.9.0:fat")
     decompiler("org.vineflower:vineflower:1.9.3")
     paperclip("io.papermc:paperclip:3.0.3")
 }
@@ -61,16 +61,16 @@ paperweight {
     remapRepo.set(paperMavenPublicUrl)
     decompileRepo.set(paperMavenPublicUrl)
 
-    useStandardUpstream("mirai") {
-        url.set(github("Dreeam-qwq", "Mirai"))
-        ref.set(providers.gradleProperty("miraiRef"))
+    useStandardUpstream("leaf") {
+        url.set(github("Winds-Studio", "Leaf"))
+        ref.set(providers.gradleProperty("leafRef"))
 
         withStandardPatcher {
             apiOutputDir.set(layout.projectDirectory.dir("deepslateMC-api"))
             serverOutputDir.set(layout.projectDirectory.dir("deepslateMC-server"))
 
-            apiSourceDirPath.set("mirai-api")
-            serverSourceDirPath.set("mirai-server")
+            apiSourceDirPath.set("Leaf-API")
+            serverSourceDirPath.set("Leaf-Server")
         }
 
     }

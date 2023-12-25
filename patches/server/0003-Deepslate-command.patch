@@ -1,26 +1,25 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Pascalpex <pascalpex@gmail.com>
-Date: Sat, 3 Dec 2022 13:06:36 +0100
+Date: Mon, 25 Dec 2023 15:14:18 +0100
 Subject: [PATCH] Deepslate command
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 01d0c93972401f4084df6081ba49a2ee77258c9f..eea2ed8c67d40891c6e82a85875da9b46b1436b5 100644
+index 3db403505f2829680648e9ff2bc2c1288b4e70cf..5d24297450cccff8aa69facad579b5dbb8e3ca21 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-@@ -50,6 +50,7 @@ import net.minecraft.world.level.GameRules;
- import net.minecraft.world.level.GameType;
- import net.minecraft.world.level.block.entity.SkullBlockEntity;
+@@ -49,6 +49,7 @@ import net.minecraft.world.level.block.entity.SkullBlockEntity;
  import net.minecraft.world.level.storage.LevelStorageSource;
+ import org.galemc.gale.command.GaleCommands;
+ import org.galemc.gale.configuration.GaleGlobalConfiguration;
 +import net.pascalpex.deepslatemc.commands.*;
  import org.slf4j.Logger;
  
  // CraftBukkit start
-@@ -237,6 +238,11 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+@@ -243,6 +244,10 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+         // Gale start - Pufferfish - SIMD support
+         org.dreeam.leaf.LeafConfig.load(); // Leaf
  
-         dev.etil.mirai.MiraiConfig.load(); // Mirai
-         dev.etil.mirai.MiraiCommand.init(); // Mirai
-+
 +        // Deepslate start
 +        MinecraftServer.getServer().server.getCommandMap().register("deepslate", "Deepslate", new DeepslateCommand("deepslate"));
 +        // Deepslate end
@@ -29,7 +28,7 @@ index 01d0c93972401f4084df6081ba49a2ee77258c9f..eea2ed8c67d40891c6e82a85875da9b4
          this.setFlightAllowed(dedicatedserverproperties.allowFlight);
          this.setMotd(dedicatedserverproperties.motd);
 diff --git a/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java b/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java
-index 28901cafd9e58b5a111ef665019cec875318d297..96833e6e5dc97d13e0ea778530b0606937f14ae4 100644
+index 8226030ae3e7b9c9ab85262b536efc3986f716f9..bbb210b1896057038dddbe2f330e6c7bc201215b 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java
 @@ -29,6 +29,12 @@ public class MessagesFile {
@@ -61,12 +60,12 @@ index 28901cafd9e58b5a111ef665019cec875318d297..96833e6e5dc97d13e0ea778530b06069
  }
 diff --git a/src/main/java/net/pascalpex/deepslatemc/commands/DeepslateCommand.java b/src/main/java/net/pascalpex/deepslatemc/commands/DeepslateCommand.java
 new file mode 100644
-index 0000000000000000000000000000000000000000..c01afb333b667c92275028ecf9e2c77a9e2f96b1
+index 0000000000000000000000000000000000000000..c11d3597dbc49a1f6d75a55f427c55fc55d68a29
 --- /dev/null
 +++ b/src/main/java/net/pascalpex/deepslatemc/commands/DeepslateCommand.java
 @@ -0,0 +1,90 @@
 +package net.pascalpex.deepslatemc.commands;
-+    
++
 +import net.pascalpex.deepslatemc.Config;
 +import net.pascalpex.deepslatemc.MessagesFile;
 +import org.bukkit.ChatColor;
@@ -79,7 +78,7 @@ index 0000000000000000000000000000000000000000..c01afb333b667c92275028ecf9e2c77a
 +import java.util.List;
 +import java.util.stream.Collectors;
 +import java.util.stream.Stream;
-+    
++
 +public class DeepslateCommand extends Command {
 +
 +    public DeepslateCommand(String name) {
@@ -104,17 +103,17 @@ index 0000000000000000000000000000000000000000..c01afb333b667c92275028ecf9e2c77a
 +            String prefix = MessagesFile.getPrefix() + " ";
 +            if (sender instanceof Player) {
 +                Player player = (Player) sender;
-+                if(player.hasPermission("deepslate.command")) {
-+                    if(args.length == 0) {
++                if (player.hasPermission("deepslate.command")) {
++                    if (args.length == 0) {
 +                        player.sendMessage(prefix + MessagesFile.getWrongSyntax().replace("%usage%", "/deepslate [reload | version]"));
 +                    }
-+                    if(args.length == 1) {
-+                        if(args[0].equalsIgnoreCase("reload")) {
++                    if (args.length == 1) {
++                        if (args[0].equalsIgnoreCase("reload")) {
 +                            MessagesFile.load();
 +                            Config.load();
 +                            player.sendMessage(prefix + MessagesFile.getConfigReloaded());
 +                        } else {
-+                            if(args[0].equalsIgnoreCase("version")) {
++                            if (args[0].equalsIgnoreCase("version")) {
 +                                String deepslateVersion = this.getClass().getPackage().getImplementationVersion().replace('"', ' ').replace(" ", "");
 +                                player.sendMessage(prefix + ChatColor.GOLD + "This server is running DeepslateMC from Pascalpex: " + deepslateVersion);
 +                            } else {
@@ -122,23 +121,23 @@ index 0000000000000000000000000000000000000000..c01afb333b667c92275028ecf9e2c77a
 +                            }
 +                        }
 +                    }
-+                    if(args.length >= 2) {
++                    if (args.length >= 2) {
 +                        player.sendMessage(prefix + MessagesFile.getWrongSyntax().replace("%usage%", "/deepslate [reload | version]"));
 +                    }
 +                } else {
 +                    player.sendMessage(prefix + ChatColor.GOLD + "This server is running DeepslateMC from Pascalpex");
 +                }
 +            } else {
-+                if(args.length == 0) {
++                if (args.length == 0) {
 +                    sender.sendMessage(prefix + MessagesFile.getWrongSyntax().replace("%usage%", "/deepslate [reload | version]"));
 +                }
-+                if(args.length == 1) {
-+                    if(args[0].equalsIgnoreCase("reload")) {
++                if (args.length == 1) {
++                    if (args[0].equalsIgnoreCase("reload")) {
 +                        MessagesFile.load();
 +                        Config.load();
 +                        sender.sendMessage(prefix + MessagesFile.getConfigReloaded());
 +                    } else {
-+                        if(args[0].equalsIgnoreCase("version")) {
++                        if (args[0].equalsIgnoreCase("version")) {
 +                            String deepslateVersion = this.getClass().getPackage().getImplementationVersion().replace('"', ' ').replace(" ", "");
 +                            sender.sendMessage(prefix + ChatColor.GOLD + "This server is running DeepslateMC from Pascalpex: " + deepslateVersion);
 +                        } else {
@@ -146,7 +145,7 @@ index 0000000000000000000000000000000000000000..c01afb333b667c92275028ecf9e2c77a
 +                        }
 +                    }
 +                }
-+                if(args.length >= 2) {
++                if (args.length >= 2) {
 +                    sender.sendMessage(prefix + MessagesFile.getWrongSyntax().replace("%usage%", "/deepslate [reload | version]"));
 +                }
 +            }
@@ -156,10 +155,10 @@ index 0000000000000000000000000000000000000000..c01afb333b667c92275028ecf9e2c77a
 +
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 73f6eb8c1fa55b9295fecf9897fc374387a73af2..b1b101a712e4fc7779b6529dd18fcb9d0857b49e 100644
+index 57a67949622a138f94ef5a5fb1bf1a6400683c17..5641a824f2cfe7fc131eba5f45f069483adeb38d 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -119,6 +119,7 @@ import net.minecraft.world.level.storage.WorldData;
+@@ -121,6 +121,7 @@ import net.minecraft.world.level.storage.PrimaryLevelData;
  import net.minecraft.world.level.storage.loot.LootDataManager;
  import net.minecraft.world.level.validation.ContentValidationException;
  import net.minecraft.world.phys.Vec3;
@@ -167,7 +166,7 @@ index 73f6eb8c1fa55b9295fecf9897fc374387a73af2..b1b101a712e4fc7779b6529dd18fcb9d
  import org.bukkit.BanList;
  import org.bukkit.Bukkit;
  import org.bukkit.ChatColor;
-@@ -1091,6 +1092,11 @@ public final class CraftServer implements Server {
+@@ -1088,6 +1089,11 @@ public final class CraftServer implements Server {
          org.spigotmc.SpigotConfig.registerCommands(); // Spigot
          io.papermc.paper.command.PaperCommands.registerCommands(this.console); // Paper
          org.purpurmc.purpur.PurpurConfig.registerCommands(); // Purpur
@@ -178,4 +177,4 @@ index 73f6eb8c1fa55b9295fecf9897fc374387a73af2..b1b101a712e4fc7779b6529dd18fcb9d
 +
          this.overrideAllCommandBlockCommands = this.commandsConfiguration.getStringList("command-block-overrides").contains("*");
          this.ignoreVanillaPermissions = this.commandsConfiguration.getBoolean("ignore-vanilla-permissions");
- 
+         top.leavesmc.leaves.protocol.core.LeavesProtocolManager.handleServerReload(); // Leaves - protocol
