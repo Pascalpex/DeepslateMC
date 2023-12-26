@@ -5,7 +5,7 @@ Subject: [PATCH] Rebranding
 
 
 diff --git a/build.gradle.kts b/build.gradle.kts
-index 3d2439e90e1cb97b9b2c26c03f1dd03d5fd37552..e36361e709e0a1416cc9fa9dc25235d4c47c38d9 100644
+index 3eaf0bb6022f5891e643060be47a86c6240dc07a..826607c7beafeddd1fbb43d2277502f551c8a5ce 100644
 --- a/build.gradle.kts
 +++ b/build.gradle.kts
 @@ -29,7 +29,7 @@ dependencies {
@@ -124,7 +124,7 @@ index 43ba5c26f40a9b00480198e10141275c07938994..d3be147bd697bbc7f4a9a3bcb4df8774
          /* CraftBukkit start - Replace everything
          OptionParser optionparser = new OptionParser();
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 625822b060683bfdf3b79f82ed5eea68ff8ade85..fe8248acec0ddbc377a30f55ada5547d575ce587 100644
+index fb3bbe36c7bf67be65f0978ead2d4c778c32ba82..41a68732fd9a8a04bbe96be38adc96ddaad054de 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
 @@ -947,7 +947,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
@@ -136,7 +136,7 @@ index 625822b060683bfdf3b79f82ed5eea68ff8ade85..fe8248acec0ddbc377a30f55ada5547d
              // Gale end - branding changes
              while (this.getRunningThread().isAlive()) {
                  this.getRunningThread().stop();
-@@ -1828,7 +1828,13 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -1830,7 +1830,13 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
  
      @DontObfuscate
      public String getServerModName() {
