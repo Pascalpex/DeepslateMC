@@ -105,10 +105,10 @@ index 0000000000000000000000000000000000000000..a9beebbafcaf947107e70ba11fa19605
 +    }
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 5641a824f2cfe7fc131eba5f45f069483adeb38d..ca69636fad11309e5b1660766b30fa64f53133e4 100644
+index ecc3debe4af3a0adc89872dc085c003939a356d6..21cb1623a14bdc21ddcedbdf578526f1953af58e 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -1092,6 +1092,8 @@ public final class CraftServer implements Server {
+@@ -1093,6 +1093,8 @@ public final class CraftServer implements Server {
  
          // Deepslate start
          MinecraftServer.getServer().server.getCommandMap().register("deepslate", "Deepslate", new DeepslateCommand("deepslate"));

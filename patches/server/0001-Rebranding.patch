@@ -5,11 +5,11 @@ Subject: [PATCH] Rebranding
 
 
 diff --git a/build.gradle.kts b/build.gradle.kts
-index 3eaf0bb6022f5891e643060be47a86c6240dc07a..826607c7beafeddd1fbb43d2277502f551c8a5ce 100644
+index 8f5648aa89f3a2a66d67cc8810dd9ace5436996f..d20a0ad5251abdf40790f972afa5a7e20d1d30dd 100644
 --- a/build.gradle.kts
 +++ b/build.gradle.kts
-@@ -29,7 +29,7 @@ dependencies {
-     extraRuntime(platform("net.kyori:adventure-bom:4.15.0-SNAPSHOT"))
+@@ -15,7 +15,7 @@ val alsoShade: Configuration by configurations.creating
+ dependencies {
      // Gale start - project setup
      // Depend on own API
 -    implementation(project(":leaf-api")) // Leaf
@@ -17,7 +17,7 @@ index 3eaf0bb6022f5891e643060be47a86c6240dc07a..826607c7beafeddd1fbb43d2277502f5
      // Depend on Paper MojangAPI
      implementation("io.papermc.paper:paper-mojangapi:${project.version}") {
          exclude("io.papermc.paper", "paper-api")
-@@ -120,7 +120,7 @@ tasks.jar {
+@@ -104,7 +104,7 @@ tasks.jar {
          attributes(
              "Main-Class" to "org.bukkit.craftbukkit.Main",
              "Implementation-Title" to "CraftBukkit",
@@ -182,19 +182,6 @@ index be7b3fe2dc84493dcde9e185717b0b7c7c2e9822..9ff441b682073de7d31a434e9f05ee39
                      server.halt(true);
                      servergui.runFinalizers();
                  }
-diff --git a/src/main/java/net/minecraft/world/level/Level.java b/src/main/java/net/minecraft/world/level/Level.java
-index d39919b746f0824fecc62ba01c94c5fe0fad9616..09550074176da318a49bdc1f1a8204c7729c5629 100644
---- a/src/main/java/net/minecraft/world/level/Level.java
-+++ b/src/main/java/net/minecraft/world/level/Level.java
-@@ -1343,7 +1343,7 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
-             TickingBlockEntity tickingblockentity = (TickingBlockEntity) this.blockEntityTickers.get(this.tileTickPosition);
-             // Spigot start
-             if (tickingblockentity == null) {
--                this.getCraftServer().getLogger().severe("Spigot has detected a null entity and has removed it, preventing a crash");
-+                this.getCraftServer().getLogger().severe("DeepslateMC has detected a null entity and has removed it, preventing a crash"); // Deepslate
-                 tilesThisCycle--;
-                 continue;
-             }
 diff --git a/src/main/java/net/minecraft/world/level/chunk/storage/RegionFileStorage.java b/src/main/java/net/minecraft/world/level/chunk/storage/RegionFileStorage.java
 index db571f658f636cdda1dcdbaffa0c4da67fae11ad..4c568cfa5eaf3a0c35647d7567b26e729b9203ad 100644
 --- a/src/main/java/net/minecraft/world/level/chunk/storage/RegionFileStorage.java
@@ -209,10 +196,10 @@ index db571f658f636cdda1dcdbaffa0c4da67fae11ad..4c568cfa5eaf3a0c35647d7567b26e72
  
      private static final int DEFAULT_SIZE_THRESHOLD = 1024 * 8;
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 65df49ab8b9407bbdd884d7122022284ca39501a..57a67949622a138f94ef5a5fb1bf1a6400683c17 100644
+index 7419bc9ae4f254c4c758b6955f3ef4ba7da89a81..05ea427ee3b1b3349f399a0b975fcb93183f7cbb 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -273,7 +273,7 @@ import javax.annotation.Nullable; // Paper
+@@ -267,7 +267,7 @@ import javax.annotation.Nullable; // Paper
  import javax.annotation.Nonnull; // Paper
  
  public final class CraftServer implements Server {
@@ -222,10 +209,10 @@ index 65df49ab8b9407bbdd884d7122022284ca39501a..57a67949622a138f94ef5a5fb1bf1a64
      private final String bukkitVersion = Versioning.getBukkitVersion();
      private final Logger logger = Logger.getLogger("Minecraft");
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java
-index f346ef373a1eeaa063a90302e20ee90821d63e40..98994ca125bcb6d7d26db0164211820b3d266f11 100644
+index d46fbc76fd6934e3c19a9ef237f759c0488da040..abd0601faff0a7f4adb5df0ba96090083d2614c6 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java
-@@ -917,7 +917,7 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {
+@@ -915,7 +915,7 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {
              return EntityCategory.WATER;
          }
  
