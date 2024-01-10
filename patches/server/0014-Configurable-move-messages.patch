@@ -35,10 +35,10 @@ index 1acd2580294af4e7f07a5c5e767d8e3093efca17..e6e4ff696eaa8faac9a4f4f9342fa0cd
                                  }
                                  // Paper end
 diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
-index f3346fcd2b6786218df690a31470a58c5d673ff0..46b696f83a80f7eef9d92ace646d55ef6165d726 100644
+index 907357b7cb92aabc5c1835f593246fef289c0483..2ac86918a792cafc877efd3ab4d8f8d5c10e91b7 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/Config.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/Config.java
-@@ -51,6 +51,10 @@ public class Config {
+@@ -54,6 +54,10 @@ public class Config {
              if (!config.contains("metrics")) {
                  config.set("metrics", true);
              }
@@ -49,7 +49,7 @@ index f3346fcd2b6786218df690a31470a58c5d673ff0..46b696f83a80f7eef9d92ace646d55ef
              save();
          } catch (IOException | InvalidConfigurationException e) {
              e.printStackTrace();
-@@ -111,5 +115,11 @@ public class Config {
+@@ -121,5 +125,11 @@ public class Config {
      public static boolean getMetricsEnabled() {
          return config.getBoolean("metrics");
      }

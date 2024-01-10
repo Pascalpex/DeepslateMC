@@ -26,10 +26,10 @@ index 09bbaa644620d978655c6499de3412d1ec6b7366..863c481792a90a8037b9335638c2a7a5
  
      @Override
 diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
-index 46b696f83a80f7eef9d92ace646d55ef6165d726..d09379b9e668dc01d71740ece750d968deee8c46 100644
+index 2ac86918a792cafc877efd3ab4d8f8d5c10e91b7..94e629c3d977e8f15cc5a3912feeed97ea02c839 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/Config.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/Config.java
-@@ -55,6 +55,9 @@ public class Config {
+@@ -58,6 +58,9 @@ public class Config {
                  config.set("messages" + ".movedWrongly", true);
                  config.set("messages" + ".movedQuickly", true);
              }
@@ -39,7 +39,7 @@ index 46b696f83a80f7eef9d92ace646d55ef6165d726..d09379b9e668dc01d71740ece750d968
              save();
          } catch (IOException | InvalidConfigurationException e) {
              e.printStackTrace();
-@@ -121,5 +124,8 @@ public class Config {
+@@ -131,5 +134,8 @@ public class Config {
      public static boolean getMovedWrongly() {
          return config.getBoolean("messages" + ".movedWrongly");
      }

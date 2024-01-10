@@ -5,10 +5,10 @@ Subject: [PATCH] Configurable knowledgebook click
 
 
 diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
-index 678e7c2c0e34864e1031bf7af7ddd2cc0362e654..040d2f1cc091b426678205bfff742444b669c920 100644
+index 5971700571a7347dc017a541c2901ab35b1e8d5a..467c6fe3c2c01fd66e858b20f8e4c6bab501cd7c 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/Config.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/Config.java
-@@ -39,6 +39,9 @@ public class Config {
+@@ -42,6 +42,9 @@ public class Config {
              if(!config.contains("spawnOnJoin")) {
                  config.set("spawnOnJoin", false);
              }
@@ -18,7 +18,7 @@ index 678e7c2c0e34864e1031bf7af7ddd2cc0362e654..040d2f1cc091b426678205bfff742444
              save();
          } catch (IOException | InvalidConfigurationException e) {
              e.printStackTrace();
-@@ -87,5 +90,8 @@ public class Config {
+@@ -97,5 +100,8 @@ public class Config {
          float yaw = (float) config.getDouble("spawn" + ".yaw");
          return new Location(world, x, y, z, yaw, pitch);
      }

@@ -20,12 +20,12 @@ index 7dfeabefd9fe3e3a56f2b4e9129bd71a04afd772..a2f30d2c34dd15906470e360529b56ea
              PardonIpCommand.register(this.dispatcher);
              PerfCommand.register(this.dispatcher);
 diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
-index 14630aad16fe8ac38030674c52bc91d619e9abde..442fcec773f6232e9a84cfadd28a36f79cec43d9 100644
+index 97119bdc69d79216241bf1cf0c0b2ae5b230134b..8e3c0ae0486535a940f517bbcef23572d4cef724 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/Config.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/Config.java
-@@ -30,6 +30,9 @@ public class Config {
-             if(!config.contains("discordLink")) {
-                 config.set("discordLink", "https://discord.gg/BGrhNnVczp");
+@@ -33,6 +33,9 @@ public class Config {
+             if(!config.contains("maintenance")) {
+                 config.set("maintenance", false);
              }
 +            if(!config.contains("opCommandActive")) {
 +                config.set("opCommandActive", true);
@@ -33,7 +33,7 @@ index 14630aad16fe8ac38030674c52bc91d619e9abde..442fcec773f6232e9a84cfadd28a36f7
              save();
          } catch (IOException | InvalidConfigurationException e) {
              e.printStackTrace();
-@@ -44,6 +47,9 @@ public class Config {
+@@ -47,6 +50,9 @@ public class Config {
          }
      }
  

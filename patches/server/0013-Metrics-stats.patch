@@ -40,10 +40,10 @@ index 2d6965ca05f5e64d4e86b17d06865b1a7b279309..70930c399ffc4c1a200e7b6103ad1ff2
          try {
              org.purpurmc.purpur.PurpurConfig.init((java.io.File) options.valueOf("purpur-settings"));
 diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
-index 3debee28cc43e01b2e102e75e9c111463ed4ec54..f3346fcd2b6786218df690a31470a58c5d673ff0 100644
+index b42ac2fb0bfca93aff0549c1409a27524af42501..907357b7cb92aabc5c1835f593246fef289c0483 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/Config.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/Config.java
-@@ -48,6 +48,9 @@ public class Config {
+@@ -51,6 +51,9 @@ public class Config {
                  worldsList.add("FantasyWorld");
                  config.set("autoSmelt" + ".enabledWorlds", worldsList);
              }
@@ -53,7 +53,7 @@ index 3debee28cc43e01b2e102e75e9c111463ed4ec54..f3346fcd2b6786218df690a31470a58c
              save();
          } catch (IOException | InvalidConfigurationException e) {
              e.printStackTrace();
-@@ -105,5 +108,8 @@ public class Config {
+@@ -115,5 +118,8 @@ public class Config {
      public static List<String> getAutoSmeltWorlds() {
          return (List<String>) config.getList("autoSmelt" + ".enabledWorlds");
      }

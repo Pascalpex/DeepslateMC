@@ -19,13 +19,13 @@ index 85dac6053e26a98d89abe09648392547417eef8b..3b4c85cb8a47b61d8049983d5e1f39b0
  
          this.setPvpAllowed(dedicatedserverproperties.pvp);
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index a51d14b2b76af62a69d7c42ed9f5b33d9991f87e..484ebac18e8de6df1238c50167862c109f47c3bd 100644
+index ae2139b892b5968dafae394b7b0e086164af108d..493d2ba907b18737b2f8bd885a6c875e3be4c1f0 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
 @@ -105,6 +105,7 @@ import net.minecraft.world.scores.Objective;
  import net.minecraft.world.scores.PlayerTeam;
+ import net.pascalpex.deepslatemc.Config;
  import net.pascalpex.deepslatemc.MessagesFile;
- import net.pascalpex.deepslatemc.commands.MaintenanceMode;
 +import net.pascalpex.deepslatemc.commands.SpawnCommand;
  import org.galemc.gale.configuration.GaleGlobalConfiguration;
  import org.slf4j.Logger;
@@ -39,7 +39,7 @@ index a51d14b2b76af62a69d7c42ed9f5b33d9991f87e..484ebac18e8de6df1238c50167862c10
  
          if (!player.connection.isAcceptingMessages()) {
 diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
-index 442fcec773f6232e9a84cfadd28a36f79cec43d9..678e7c2c0e34864e1031bf7af7ddd2cc0362e654 100644
+index 8e3c0ae0486535a940f517bbcef23572d4cef724..5971700571a7347dc017a541c2901ab35b1e8d5a 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/Config.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/Config.java
 @@ -1,5 +1,8 @@
@@ -52,7 +52,7 @@ index 442fcec773f6232e9a84cfadd28a36f79cec43d9..678e7c2c0e34864e1031bf7af7ddd2cc
  import org.bukkit.configuration.InvalidConfigurationException;
  import org.bukkit.configuration.file.FileConfiguration;
  import org.bukkit.configuration.file.YamlConfiguration;
-@@ -33,6 +36,9 @@ public class Config {
+@@ -36,6 +39,9 @@ public class Config {
              if(!config.contains("opCommandActive")) {
                  config.set("opCommandActive", true);
              }
@@ -62,8 +62,8 @@ index 442fcec773f6232e9a84cfadd28a36f79cec43d9..678e7c2c0e34864e1031bf7af7ddd2cc
              save();
          } catch (IOException | InvalidConfigurationException e) {
              e.printStackTrace();
-@@ -60,5 +66,26 @@ public class Config {
-         config.set("buildworld", worldName);
+@@ -70,5 +76,26 @@ public class Config {
+         config.set("maintenance", !getMaintenanceMode());
          save();
      }
 +    public static boolean getSpawnOnJoin() {

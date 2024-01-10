@@ -17,15 +17,15 @@ index 2ac92d733c63032aefe815e2eda380cdc1d535fa..f5374cfc948192334af9a95a3fa4d55f
  
          this.setPvpAllowed(dedicatedserverproperties.pvp);
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index f30825df1eb2a4a9383b1fe33fa76ebba98bc999..a51d14b2b76af62a69d7c42ed9f5b33d9991f87e 100644
+index f30825df1eb2a4a9383b1fe33fa76ebba98bc999..ae2139b892b5968dafae394b7b0e086164af108d 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
 @@ -103,6 +103,8 @@ import net.minecraft.world.phys.Vec3;
  import net.minecraft.world.scores.DisplaySlot;
  import net.minecraft.world.scores.Objective;
  import net.minecraft.world.scores.PlayerTeam;
++import net.pascalpex.deepslatemc.Config;
 +import net.pascalpex.deepslatemc.MessagesFile;
-+import net.pascalpex.deepslatemc.commands.MaintenanceMode;
  import org.galemc.gale.configuration.GaleGlobalConfiguration;
  import org.slf4j.Logger;
  
@@ -34,7 +34,7 @@ index f30825df1eb2a4a9383b1fe33fa76ebba98bc999..a51d14b2b76af62a69d7c42ed9f5b33d
          PlayerLoginEvent event = new PlayerLoginEvent(player, loginlistener.connection.hostname, ((java.net.InetSocketAddress) socketaddress).getAddress(), ((java.net.InetSocketAddress) loginlistener.connection.channel.remoteAddress()).getAddress());
  
 +        // Deepslate start - Maintenance mode
-+        if(MaintenanceMode.maintenanceMode) {
++        if(Config.getMaintenanceMode()) {
 +            if(!player.hasPermission("deepslate.maintenancebypass")) {
 +                String prefix = MessagesFile.getPrefix();
 +                event.disallow(PlayerLoginEvent.Result.KICK_OTHER, prefix + MessagesFile.getMaintenanceKick());
@@ -45,6 +45,33 @@ index f30825df1eb2a4a9383b1fe33fa76ebba98bc999..a51d14b2b76af62a69d7c42ed9f5b33d
          // Paper start - Fix MC-158900
          UserBanListEntry gameprofilebanentry;
          if (getBans().isBanned(gameprofile) && (gameprofilebanentry = getBans().get(gameprofile)) != null) {
+diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
+index 14630aad16fe8ac38030674c52bc91d619e9abde..97119bdc69d79216241bf1cf0c0b2ae5b230134b 100644
+--- a/src/main/java/net/pascalpex/deepslatemc/Config.java
++++ b/src/main/java/net/pascalpex/deepslatemc/Config.java
+@@ -30,6 +30,9 @@ public class Config {
+             if(!config.contains("discordLink")) {
+                 config.set("discordLink", "https://discord.gg/BGrhNnVczp");
+             }
++            if(!config.contains("maintenance")) {
++                config.set("maintenance", false);
++            }
+             save();
+         } catch (IOException | InvalidConfigurationException e) {
+             e.printStackTrace();
+@@ -54,5 +57,12 @@ public class Config {
+         config.set("buildworld", worldName);
+         save();
+     }
++    public static boolean getMaintenanceMode() {
++        return config.getBoolean("maintenance");
++    }
++    public static void toggleMaintenanceMode() {
++        config.set("maintenance", !getMaintenanceMode());
++        save();
++    }
+ 
+ }
 diff --git a/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java b/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java
 index df09b60305cbdaa6f62f0e250ae843fdfc24d68f..bc2a5a3938e58609bc5f4f23dc50b90eb3a47026 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java
@@ -85,20 +112,19 @@ index df09b60305cbdaa6f62f0e250ae843fdfc24d68f..bc2a5a3938e58609bc5f4f23dc50b90e
  }
 diff --git a/src/main/java/net/pascalpex/deepslatemc/commands/MaintenanceMode.java b/src/main/java/net/pascalpex/deepslatemc/commands/MaintenanceMode.java
 new file mode 100644
-index 0000000000000000000000000000000000000000..4a8b9abc9340ff38217c6b8cf66463b9048d9602
+index 0000000000000000000000000000000000000000..213d709d0c0ff430420f6ee885f5ea6e4a94e837
 --- /dev/null
 +++ b/src/main/java/net/pascalpex/deepslatemc/commands/MaintenanceMode.java
-@@ -0,0 +1,46 @@
+@@ -0,0 +1,43 @@
 +package net.pascalpex.deepslatemc.commands;
 +
++import net.pascalpex.deepslatemc.Config;
 +import net.pascalpex.deepslatemc.MessagesFile;
 +import org.bukkit.command.Command;
 +import org.bukkit.command.CommandSender;
 +import org.bukkit.entity.Player;
 +
 +public class MaintenanceMode extends Command {
-+    public static boolean maintenanceMode = false;
-+
 +    public MaintenanceMode(String name) {
 +        super(name);
 +        this.description = "Toggles the maintenance mode";
@@ -111,25 +137,23 @@ index 0000000000000000000000000000000000000000..4a8b9abc9340ff38217c6b8cf66463b9
 +        if (sender instanceof Player) {
 +            Player player = (Player)sender;
 +            if (label.equalsIgnoreCase("maintenance") && player.hasPermission("deepslate.maintenance")) {
-+                if (maintenanceMode) {
-+                    maintenanceMode = false;
++                if (Config.getMaintenanceMode()) {
 +                    player.sendMessage(prefix + MessagesFile.getMaintenanceOff());
 +                } else {
-+                    maintenanceMode = true;
 +                    player.sendMessage(prefix + MessagesFile.getMaintenanceOn());
 +                }
++                Config.toggleMaintenanceMode();
 +            } else {
 +                player.sendMessage(prefix + MessagesFile.getNoPermissions());
 +            }
 +        }
 +        else if (label.equalsIgnoreCase("maintenance")) {
-+            if (maintenanceMode) {
-+                maintenanceMode = false;
++            if (Config.getMaintenanceMode()) {
 +                sender.sendMessage(prefix + MessagesFile.getMaintenanceOff());
 +            } else {
-+                maintenanceMode = true;
 +                sender.sendMessage(prefix + MessagesFile.getMaintenanceOn());
 +            }
++            Config.toggleMaintenanceMode();
 +        }
 +
 +        return true;

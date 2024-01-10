@@ -91,10 +91,10 @@ index d02fec293868dd288e0fa0a9d214774f22719a0a..b72ad2cf807c28bbe23356f0bbc57128
              event.setCancelled(isSwordNoBreak);
  
 diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
-index 040d2f1cc091b426678205bfff742444b669c920..3debee28cc43e01b2e102e75e9c111463ed4ec54 100644
+index 467c6fe3c2c01fd66e858b20f8e4c6bab501cd7c..b42ac2fb0bfca93aff0549c1409a27524af42501 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/Config.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/Config.java
-@@ -42,6 +42,12 @@ public class Config {
+@@ -45,6 +45,12 @@ public class Config {
              if(!config.contains("preventKnowledgebookClick")) {
                  config.set("preventKnowledgebookClick", false);
              }
@@ -107,7 +107,7 @@ index 040d2f1cc091b426678205bfff742444b669c920..3debee28cc43e01b2e102e75e9c11146
              save();
          } catch (IOException | InvalidConfigurationException e) {
              e.printStackTrace();
-@@ -93,5 +99,11 @@ public class Config {
+@@ -103,5 +109,11 @@ public class Config {
      public static boolean getPreventKnowledgebookClick() {
          return config.getBoolean("preventKnowledgebookClick");
      }
