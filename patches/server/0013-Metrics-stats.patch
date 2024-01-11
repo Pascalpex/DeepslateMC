@@ -64,7 +64,7 @@ index b42ac2fb0bfca93aff0549c1409a27524af42501..907357b7cb92aabc5c1835f593246fef
  }
 diff --git a/src/main/java/net/pascalpex/deepslatemc/util/Metrics.java b/src/main/java/net/pascalpex/deepslatemc/util/Metrics.java
 new file mode 100644
-index 0000000000000000000000000000000000000000..830dfd8e2ee157d57b0aae96d20cbdf3fa2e11be
+index 0000000000000000000000000000000000000000..72fff84c97d23e9bb11d048e33f25a689d583b24
 --- /dev/null
 +++ b/src/main/java/net/pascalpex/deepslatemc/util/Metrics.java
 @@ -0,0 +1,44 @@
@@ -102,7 +102,7 @@ index 0000000000000000000000000000000000000000..830dfd8e2ee157d57b0aae96d20cbdf3
 +            String minecraftVersion = Bukkit.getVersion();
 +            minecraftVersion = minecraftVersion.substring(minecraftVersion.indexOf("MC: ") + 4, minecraftVersion.length() - 1);
 +            String deepslateVersion = this.getClass().getPackage().getImplementationVersion().replace('"', ' ').replace(" ", "");
-+            String urlString = "https://pascalpex.ddns.net/metrics/deepslate/submit.php?uuid=" + uuid.toString() + "&players=" + players + "&mc=" + minecraftVersion + "&deepslate=" + deepslateVersion;
++            String urlString = "https://pascalpex.de/metrics/deepslate/submit.php?uuid=" + uuid.toString() + "&players=" + players + "&mc=" + minecraftVersion + "&deepslate=" + deepslateVersion;
 +            try {
 +                URL url = new URL(urlString);
 +                url.openConnection().getInputStream();

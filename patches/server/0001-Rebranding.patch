@@ -57,7 +57,7 @@ index 1ea04a20247c7154fc3e59693f28b993ff78e2b8..efca5f36d9214187a3d1a080e3ef950f
                  metrics.addCustomChart(new Metrics.DrilldownPie("java_version", () -> {
                      Map<String, Map<String, Integer>> map = new HashMap<>(2); // Gale - metrics - reduce HashMap capacity
 diff --git a/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java b/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java
-index 03f5ec3c4f8eac9cecfef0f257b90090aece5017..44edc7ea5cd85efcb8a657d00650fdb145936ae2 100644
+index 03f5ec3c4f8eac9cecfef0f257b90090aece5017..335347fb286c7282932e3b597e4b403da6c2de31 100644
 --- a/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java
 +++ b/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java
 @@ -22,12 +22,12 @@ import java.util.stream.StreamSupport;
@@ -65,7 +65,7 @@ index 03f5ec3c4f8eac9cecfef0f257b90090aece5017..44edc7ea5cd85efcb8a657d00650fdb1
  
      public PaperVersionFetcher() {
 -        super("master", "https://papermc.io/downloads/paper", "Paper", "PaperMC", "PaperMC", "Paper");
-+        super("ver/1.20.4", "https://pascalpex.ddns.net/deepslate/", "DeepslateMC", "Pascalpex", "Pascalpex", "DeepslateMC"); // Deepslate
++        super("ver/1.20.4", "https://pascalpex.de/deepslate/", "DeepslateMC", "Pascalpex", "Pascalpex", "DeepslateMC"); // Deepslate
      }
  
      @Override
