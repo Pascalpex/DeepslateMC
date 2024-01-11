@@ -79,7 +79,7 @@ index 0000000000000000000000000000000000000000..9a03cd8f8fc82450fdf7b46a405ea6b6
 +}
 diff --git a/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java b/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java
 new file mode 100644
-index 0000000000000000000000000000000000000000..4edd1c22fc11940a9667d9b5e7b990cffc6cea61
+index 0000000000000000000000000000000000000000..52bce26c273a56f629a8052773458d9289a135a6
 --- /dev/null
 +++ b/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java
 @@ -0,0 +1,51 @@
@@ -106,7 +106,7 @@ index 0000000000000000000000000000000000000000..4edd1c22fc11940a9667d9b5e7b990cf
 +                configFile.createNewFile();
 +                List<String> header = new ArrayList<>();
 +                header.add("This is the messages file of DeepslateMC");
-+                header.add("You can find some pre-translated files here: https://pascalpex.defiles/deepslate/translations/");
++                header.add("You can find some pre-translated files here: https://pascalpex.de/files/deepslate/translations/");
 +                config.options().setHeader(header);
 +                save();
 +            }
