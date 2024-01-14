@@ -5,7 +5,7 @@ Subject: [PATCH] Rebranding
 
 
 diff --git a/build.gradle.kts b/build.gradle.kts
-index a6ac60d7d57e4b0662b0c30f7bc43ba84179d697..62f784a2ff440465b09385d0bfb9001b3049738b 100644
+index 0baaa2bcd05ea65c5fbb9ae646b3a9eeb12bac14..b52f68908abbc8663c70500e652bf4080ad850a9 100644
 --- a/build.gradle.kts
 +++ b/build.gradle.kts
 @@ -15,7 +15,7 @@ val alsoShade: Configuration by configurations.creating
@@ -124,10 +124,10 @@ index 43ba5c26f40a9b00480198e10141275c07938994..d3be147bd697bbc7f4a9a3bcb4df8774
          /* CraftBukkit start - Replace everything
          OptionParser optionparser = new OptionParser();
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index fb3bbe36c7bf67be65f0978ead2d4c778c32ba82..41a68732fd9a8a04bbe96be38adc96ddaad054de 100644
+index 1b4e0c7f23186afd88c7a71e296a5ca958f1c1d8..370915e9b6fc5fdf8615a8a5df191afeeccc4308 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
-@@ -947,7 +947,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -945,7 +945,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
              We do not want people to report thread issues to Paper,
              but we do want people to report thread issues to Gale.
               */
@@ -136,7 +136,7 @@ index fb3bbe36c7bf67be65f0978ead2d4c778c32ba82..41a68732fd9a8a04bbe96be38adc96dd
              // Gale end - branding changes
              while (this.getRunningThread().isAlive()) {
                  this.getRunningThread().stop();
-@@ -1830,7 +1830,13 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -1828,7 +1828,13 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
  
      @DontObfuscate
      public String getServerModName() {
@@ -152,15 +152,15 @@ index fb3bbe36c7bf67be65f0978ead2d4c778c32ba82..41a68732fd9a8a04bbe96be38adc96dd
  
      public SystemReport fillSystemReport(SystemReport details) {
 diff --git a/src/main/java/net/minecraft/server/gui/MinecraftServerGui.java b/src/main/java/net/minecraft/server/gui/MinecraftServerGui.java
-index be7b3fe2dc84493dcde9e185717b0b7c7c2e9822..9ff441b682073de7d31a434e9f05ee39fbd7094a 100644
+index 4eb4d9eebe72089faaf6683103ef44e5e024c3f3..b257809b55333f65037852949210290dcde78f15 100644
 --- a/src/main/java/net/minecraft/server/gui/MinecraftServerGui.java
 +++ b/src/main/java/net/minecraft/server/gui/MinecraftServerGui.java
 @@ -56,7 +56,7 @@ public class MinecraftServerGui extends JComponent {
              ;
          }
  
--        final JFrame jframe = new JFrame("Purpur Minecraft server"); // Purpur
-+        final JFrame jframe = new JFrame("DeepslateMC Minecraft server"); // Purpur // Deepslate
+-        final JFrame jframe = new JFrame(org.dreeam.leaf.LeafConfig.serverGuiName); // Purpur // Leaf - Configurable server Gui name
++        final JFrame jframe = new JFrame(org.dreeam.leaf.LeafConfig.serverGuiName.equalsIgnoreCase("Leaf Minecraft server") ? "DeepslateMC Minecraft server" : org.dreeam.leaf.LeafConfig.serverGuiName); // Purpur // Leaf - Configurable server Gui name // Deepslate
          final MinecraftServerGui servergui = new MinecraftServerGui(server);
  
          jframe.setDefaultCloseOperation(2);
@@ -168,8 +168,8 @@ index be7b3fe2dc84493dcde9e185717b0b7c7c2e9822..9ff441b682073de7d31a434e9f05ee39
          jframe.pack();
          jframe.setLocationRelativeTo((Component) null);
          jframe.setVisible(true);
--        jframe.setName("Purpur Minecraft server"); // Paper // Purpur
-+        jframe.setName("DeepslateMC Minecraft server"); // Paper // Purpur // Deepslate
+-        jframe.setName(org.dreeam.leaf.LeafConfig.serverGuiName); // Paper // Purpur // Leaf - Configurable server Gui name
++        jframe.setName(org.dreeam.leaf.LeafConfig.serverGuiName.equalsIgnoreCase("Leaf Minecraft server") ? "DeepslateMC Minecraft server" : org.dreeam.leaf.LeafConfig.serverGuiName); // Paper // Purpur // Leaf - Configurable server Gui name // Deepslate
  
          // Paper start - Add logo as frame image
          try {
@@ -183,7 +183,7 @@ index be7b3fe2dc84493dcde9e185717b0b7c7c2e9822..9ff441b682073de7d31a434e9f05ee39
                      servergui.runFinalizers();
                  }
 diff --git a/src/main/java/net/minecraft/world/level/chunk/storage/RegionFileStorage.java b/src/main/java/net/minecraft/world/level/chunk/storage/RegionFileStorage.java
-index db571f658f636cdda1dcdbaffa0c4da67fae11ad..4c568cfa5eaf3a0c35647d7567b26e729b9203ad 100644
+index 6eaeb2db0da59611501f2b1a63b5b48816a0ba48..bcba5e4f3b63cecddaef08867ef32d1ea0c2ec4a 100644
 --- a/src/main/java/net/minecraft/world/level/chunk/storage/RegionFileStorage.java
 +++ b/src/main/java/net/minecraft/world/level/chunk/storage/RegionFileStorage.java
 @@ -153,7 +153,7 @@ public class RegionFileStorage implements AutoCloseable {
