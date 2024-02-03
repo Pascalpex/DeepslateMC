@@ -5,7 +5,7 @@ Subject: [PATCH] Configurable move messages
 
 
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index 5736cb60316da784590ef03d5808376254aae20b..d80bb15c3a5a523611a3a4bc0af881e75ba58d4d 100644
+index e64c8942668830ca9e460b519cceb4397e0b4b56..0be3909d87bb83a3760599f6107a47ec5bd1d877 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 @@ -189,6 +189,7 @@ import net.minecraft.world.phys.Vec3;
@@ -16,24 +16,24 @@ index 5736cb60316da784590ef03d5808376254aae20b..d80bb15c3a5a523611a3a4bc0af881e7
  import org.bukkit.craftbukkit.util.permissions.CraftDefaultPermissions;
  import org.apache.commons.lang3.StringUtils;
  import org.galemc.gale.configuration.GaleGlobalConfiguration;
-@@ -1487,7 +1488,7 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
+@@ -1484,7 +1485,7 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
                                          io.papermc.paper.event.player.PlayerFailMoveEvent event = fireFailMove(io.papermc.paper.event.player.PlayerFailMoveEvent.FailReason.MOVED_TOO_QUICKLY,
                                              toX, toY, toZ, toYaw, toPitch, true);
                                          if (!event.isAllowed()) {
--                                            if (event.getLogWarning())
-+                                            if (event.getLogWarning() && Config.getMovedQuickly()) // Deepslate
+-                                            if (!org.dreeam.leaf.LeafConfig.disableMovedWronglyThreshold && event.getLogWarning()) // Leaves - disable can
++                                            if (Config.getMovedQuickly() && !org.dreeam.leaf.LeafConfig.disableMovedWronglyThreshold && event.getLogWarning()) // Leaves - disable can // Deepslate
                                                  ServerGamePacketListenerImpl.LOGGER.warn("{} moved too quickly! {},{},{}", new Object[]{this.player.getName().getString(), d6, d7, d8});
                                              this.teleport(this.player.getX(), this.player.getY(), this.player.getZ(), this.player.getYRot(), this.player.getXRot());
                                              return;
-@@ -1563,7 +1564,7 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
+@@ -1560,7 +1561,7 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
                                      toX, toY, toZ, toYaw, toPitch, true);
                                  if (!event.isAllowed()) {
-                                 flag2 = true; // Paper - diff on change, this should be moved wrongly
+                                     movedWrongly = true;
 -                                    if (event.getLogWarning())
 +                                    if (event.getLogWarning() && Config.getMovedWrongly()) // Deepslate
-                                         ServerGamePacketListenerImpl.LOGGER.warn("{} moved wrongly!, ({})", this.player.getName().getString(), d11); // Purpur
+                                 ServerGamePacketListenerImpl.LOGGER.warn("{} moved wrongly!, ({})", this.player.getName().getString(), d11); // Purpur
                                  }
-                                 // Paper end
+                             }
 diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
 index 907357b7cb92aabc5c1835f593246fef289c0483..2ac86918a792cafc877efd3ab4d8f8d5c10e91b7 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/Config.java
