@@ -5,7 +5,7 @@ Subject: [PATCH] Deepslate command
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 3db403505f2829680648e9ff2bc2c1288b4e70cf..5d24297450cccff8aa69facad579b5dbb8e3ca21 100644
+index b235b739fea8820e5a1ff35c5cfd52aa8571d9ac..d4814922eadd2b763a9ed443367345c6a4cdc226 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 @@ -49,6 +49,7 @@ import net.minecraft.world.level.block.entity.SkullBlockEntity;
@@ -28,7 +28,7 @@ index 3db403505f2829680648e9ff2bc2c1288b4e70cf..5d24297450cccff8aa69facad579b5db
          this.setFlightAllowed(dedicatedserverproperties.allowFlight);
          this.setMotd(dedicatedserverproperties.motd);
 diff --git a/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java b/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java
-index 8226030ae3e7b9c9ab85262b536efc3986f716f9..bbb210b1896057038dddbe2f330e6c7bc201215b 100644
+index 52bce26c273a56f629a8052773458d9289a135a6..800643141f7004e2ae9510497df895005b13229f 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java
 @@ -29,6 +29,12 @@ public class MessagesFile {
@@ -155,7 +155,7 @@ index 0000000000000000000000000000000000000000..c11d3597dbc49a1f6d75a55f427c55fc
 +
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 05ea427ee3b1b3349f399a0b975fcb93183f7cbb..ecc3debe4af3a0adc89872dc085c003939a356d6 100644
+index 00ab8cd6fd5d25f1a915e8b0115c0446bd3ddfd3..75bce7d4965ee28a4d8778b804ac9883bf764de5 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -115,6 +115,7 @@ import net.minecraft.world.level.storage.PrimaryLevelData;
@@ -166,7 +166,7 @@ index 05ea427ee3b1b3349f399a0b975fcb93183f7cbb..ecc3debe4af3a0adc89872dc085c0039
  import org.bukkit.BanList;
  import org.bukkit.Bukkit;
  import org.bukkit.ChatColor;
-@@ -1089,6 +1090,11 @@ public final class CraftServer implements Server {
+@@ -1106,6 +1107,11 @@ public final class CraftServer implements Server {
          org.spigotmc.SpigotConfig.registerCommands(); // Spigot
          io.papermc.paper.command.PaperCommands.registerCommands(this.console); // Paper
          org.purpurmc.purpur.PurpurConfig.registerCommands(); // Purpur

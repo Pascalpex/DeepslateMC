@@ -5,7 +5,7 @@ Subject: [PATCH] Rebranding
 
 
 diff --git a/build.gradle.kts b/build.gradle.kts
-index bc77b529a6345ccc79c344cfe807ff93396307d6..6dc74aa82aa6fcc1cd772f26b6405dd7f6c001f8 100644
+index d6cb7d2356dabc05eff372ddc8f9aaf4ca0f80e7..d5885120c601485a8e6ea6039073a93ba081410e 100644
 --- a/build.gradle.kts
 +++ b/build.gradle.kts
 @@ -15,7 +15,7 @@ val alsoShade: Configuration by configurations.creating
@@ -196,10 +196,10 @@ index 8ee307a453e79e59444f5c5b8b45ffc7755237c7..f7e0f4f13fa7229804884a60ff0155bd
  
      private static CompoundTag readOversizedChunk(org.purpurmc.purpur.region.AbstractRegionFile regionfile, ChunkPos chunkCoordinate) throws IOException { // LinearPurpur
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 30e31c99778eceb867c7c1eb4974a9cfdd422435..7f195b2b2497cbb3c891086fe40848cbf477f602 100644
+index a1317e374066d2abe20064bc47e20f4b19db9705..00ab8cd6fd5d25f1a915e8b0115c0446bd3ddfd3 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -267,7 +267,7 @@ import javax.annotation.Nullable; // Paper
+@@ -269,7 +269,7 @@ import javax.annotation.Nullable; // Paper
  import javax.annotation.Nonnull; // Paper
  
  public final class CraftServer implements Server {
@@ -209,10 +209,10 @@ index 30e31c99778eceb867c7c1eb4974a9cfdd422435..7f195b2b2497cbb3c891086fe40848cb
      private final String bukkitVersion = Versioning.getBukkitVersion();
      private final Logger logger = Logger.getLogger("Minecraft");
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java
-index eeea7b8b6436cc0ff7a940f64a7d1dd321f0cba4..49ad8bab0d5b40de8133c4fde187324739c5fb31 100644
+index 0dd670c7734d9983532ef20e3293d2a8f7567d91..47e18b08a88a1b4d2a6eb0cfdd5ee5ce49c0808a 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java
-@@ -915,7 +915,7 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {
+@@ -953,7 +953,7 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {
              return EntityCategory.WATER;
          }
  
@@ -235,10 +235,10 @@ index 4ee1c3461d21feab3a54e76a7c2ab80b6ea2ab38..47c0f4aa3bf05f589b7aef3762b825b8
                  // (async tasks must live with race-conditions if they attempt to cancel between these few lines of code)
              }
 diff --git a/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java b/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
-index 19d2015437c764f0cc5970b05de33f037b96caf0..f9286fa4b9328537aa9e021000a07f2bf05e7d39 100644
+index 48ba783a9525cc86a9f648ed2504b0223e4b512c..f6d62da6bc6d60ba222fc3bbdf2bbb02392ede84 100644
 --- a/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
 +++ b/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
-@@ -472,7 +472,7 @@ public final class CraftMagicNumbers implements UnsafeValues {
+@@ -487,7 +487,7 @@ public final class CraftMagicNumbers implements UnsafeValues {
  
      @Override
      public com.destroystokyo.paper.util.VersionFetcher getVersionFetcher() {

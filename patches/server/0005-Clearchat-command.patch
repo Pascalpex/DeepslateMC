@@ -5,7 +5,7 @@ Subject: [PATCH] Clearchat command
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index ba5268faa67bc61e81cc7a19bafab7c0e0b752a7..79d55f16a5322a6cd97ff79cb64afddc82185e7f 100644
+index c0e8de8dea72ab789f3ba22efb8c582ab3323619..ab89606a25b2b00085787a92ca5e4f8345cc4959 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 @@ -248,6 +248,8 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
@@ -18,7 +18,7 @@ index ba5268faa67bc61e81cc7a19bafab7c0e0b752a7..79d55f16a5322a6cd97ff79cb64afddc
  
          this.setPvpAllowed(dedicatedserverproperties.pvp);
 diff --git a/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java b/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java
-index e19fd8ad70398cf5fb61f972470a92768191c7a4..dd76ab680de190ae77e7da076079d71abcfedeba 100644
+index 092f25e176d9dc43ce7fafc7befe75df4b7d6aa1..67b1efd8e81b0c756b21bf04c19dbd3030fefe69 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/MessagesFile.java
 @@ -41,6 +41,12 @@ public class MessagesFile {
@@ -87,10 +87,10 @@ index 0000000000000000000000000000000000000000..8fbb23119c33b11fe341701abfa9c345
 +    }
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 21cb1623a14bdc21ddcedbdf578526f1953af58e..252d728caf6b455b9b006cdd3f45f1fe913872e3 100644
+index d182f1f8b8bfe373e5f74a683676c5a47d53f929..95f71698eea8f37fc9386e484d5d651e868a2039 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -1095,6 +1095,8 @@ public final class CraftServer implements Server {
+@@ -1112,6 +1112,8 @@ public final class CraftServer implements Server {
          MinecraftServer.getServer().server.getCommandMap().register("deepslate", "Deepslate", new DeepslateCommand("deepslate"));
          MinecraftServer.getServer().server.getCommandMap().register("discord", "Deepslate", new DiscordCommand("discord"));
          MinecraftServer.getServer().server.getCommandMap().register("dc", "Deepslate", new DiscordCommand("dc"));

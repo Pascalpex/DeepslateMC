@@ -28,10 +28,10 @@ index 5971700571a7347dc017a541c2901ab35b1e8d5a..467c6fe3c2c01fd66e858b20f8e4c6ba
  
  }
 diff --git a/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java b/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
-index 51ed919b56ded23309be1093280a92331c090780..9f350827b9a9f01cdfd0c36e016c289fc5243f96 100644
+index 069ea4dc556d179d166e1dba3527c9def7129e65..10fbbcd36853e6a2d285fc896dc4d274ac3172cb 100644
 --- a/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
 +++ b/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
-@@ -62,6 +62,7 @@ import net.minecraft.world.phys.BlockHitResult;
+@@ -61,6 +61,7 @@ import net.minecraft.world.phys.BlockHitResult;
  import net.minecraft.world.phys.EntityHitResult;
  import net.minecraft.world.phys.HitResult;
  import net.minecraft.world.phys.Vec3;
