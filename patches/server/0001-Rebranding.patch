@@ -102,7 +102,7 @@ index 99c5038672b09d0874125e3df280174c1e8151e6..e32f25b7c281e2aea8c0c0537e36fe5f
  
      public String getTitle() {
 diff --git a/src/main/java/net/minecraft/server/Main.java b/src/main/java/net/minecraft/server/Main.java
-index 96cb26fae947006ae7bceb3187ed2c28c4214f16..e81f8420b29d340a49346ded69d03a2214981d60 100644
+index 8e391265a40e3f7a97a26e1bdf5da9fde5d199fc..04ea6b24489e6bddf16957fb91cb9948aca78281 100644
 --- a/src/main/java/net/minecraft/server/Main.java
 +++ b/src/main/java/net/minecraft/server/Main.java
 @@ -76,6 +76,17 @@ public class Main {
@@ -183,10 +183,10 @@ index 0f20cb3dcf4aac8a8c6cd7408808dec962869c1a..39bac363b73f99d715dcd7e3a756790e
                      servergui.runFinalizers();
                  }
 diff --git a/src/main/java/net/minecraft/world/level/chunk/storage/RegionFileStorage.java b/src/main/java/net/minecraft/world/level/chunk/storage/RegionFileStorage.java
-index 8ee307a453e79e59444f5c5b8b45ffc7755237c7..f7e0f4f13fa7229804884a60ff0155bd7c69d608 100644
+index 6d696f6945c4e08d58616505b961e56fd5a04fcf..cee4cea9a214e3a812e842aa9ef2cd254bd74a36 100644
 --- a/src/main/java/net/minecraft/world/level/chunk/storage/RegionFileStorage.java
 +++ b/src/main/java/net/minecraft/world/level/chunk/storage/RegionFileStorage.java
-@@ -195,7 +195,7 @@ public class RegionFileStorage implements AutoCloseable {
+@@ -196,7 +196,7 @@ public class RegionFileStorage implements AutoCloseable {
  
      // Paper start
      private static void printOversizedLog(String msg, Path file, int x, int z) {
@@ -283,7 +283,7 @@ index 17e3ee3a73a2347e9f0baa0ed1640a3b0e75ed16..4bc788d338f3e53062c0c46622e836fb
      }
  }
 diff --git a/src/main/java/org/purpurmc/purpur/PurpurConfig.java b/src/main/java/org/purpurmc/purpur/PurpurConfig.java
-index d13bc7e913ebe816598f6104f928c90b320fee18..7f9565431bd935b6fc6b3dc8c09b0804b13c866d 100644
+index e45c11bf2c42e6d57f803349d8ca6936ac98c995..6662d1790dec3ce0a5b490cfaa1b08eb9bbfa90e 100644
 --- a/src/main/java/org/purpurmc/purpur/PurpurConfig.java
 +++ b/src/main/java/org/purpurmc/purpur/PurpurConfig.java
 @@ -231,7 +231,7 @@ public class PurpurConfig {
