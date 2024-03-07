@@ -5,7 +5,7 @@ Subject: [PATCH] Deepslate command
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index b235b739fea8820e5a1ff35c5cfd52aa8571d9ac..d4814922eadd2b763a9ed443367345c6a4cdc226 100644
+index 4ba34682cf4f8e610d8d456785a0da5591aa0c24..067bda3cd4d860949abf89f1168db17ff70a6522 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 @@ -49,6 +49,7 @@ import net.minecraft.world.level.block.entity.SkullBlockEntity;
@@ -17,8 +17,8 @@ index b235b739fea8820e5a1ff35c5cfd52aa8571d9ac..d4814922eadd2b763a9ed443367345c6
  
  // CraftBukkit start
 @@ -243,6 +244,10 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+         } catch (Throwable ignored) {}
          // Gale start - Pufferfish - SIMD support
-         org.dreeam.leaf.LeafConfig.load(); // Leaf
  
 +        // Deepslate start
 +        MinecraftServer.getServer().server.getCommandMap().register("deepslate", "Deepslate", new DeepslateCommand("deepslate"));
@@ -155,7 +155,7 @@ index 0000000000000000000000000000000000000000..c11d3597dbc49a1f6d75a55f427c55fc
 +
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 00ab8cd6fd5d25f1a915e8b0115c0446bd3ddfd3..75bce7d4965ee28a4d8778b804ac9883bf764de5 100644
+index 70922be160b409b240e91b28816dbca7f20b8705..4475f9a44699c0d631cfa11f39c8fc33b2228b7b 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -115,6 +115,7 @@ import net.minecraft.world.level.storage.PrimaryLevelData;

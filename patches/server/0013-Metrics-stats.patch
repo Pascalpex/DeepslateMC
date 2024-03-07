@@ -5,7 +5,7 @@ Subject: [PATCH] Metrics stats
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index bf12736428781199e432d1f9e1776a58d529203b..29f0f0b3f7256ba06dd45db346ebf45dc9f562a8 100644
+index 53d2042f66d2c7b61c1141080f1f8a79705356d5..985d3a82f2e6440bad7d9133b6c6b42dfa3cd039 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 @@ -12,6 +12,7 @@ import java.nio.file.Files;
@@ -24,7 +24,7 @@ index bf12736428781199e432d1f9e1776a58d529203b..29f0f0b3f7256ba06dd45db346ebf45d
  import org.galemc.gale.command.GaleCommands;
  import org.galemc.gale.configuration.GaleGlobalConfiguration;
  import net.pascalpex.deepslatemc.commands.*;
-@@ -224,6 +226,12 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+@@ -225,6 +227,12 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
          io.papermc.paper.command.PaperCommands.registerCommands(this); // Paper - setup /paper command
          GaleCommands.registerCommands(this); // Gale - Gale commands - register commands
          com.destroystokyo.paper.Metrics.PaperMetrics.startMetrics(); // Paper - start metrics

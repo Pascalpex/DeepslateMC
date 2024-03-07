@@ -5,7 +5,7 @@ Subject: [PATCH] Maintenance mode
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 1a326f83d6c95c424184c2770174bc84688f4f99..b9b8754d3872f959bc576795c1fc42065a2f3203 100644
+index 23c87d3b4db6e2ec7ed9e1a677520141b57b391b..9d5324c58b7b5128e63243a887ae1621b8ecee92 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 @@ -252,6 +252,7 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
@@ -17,7 +17,7 @@ index 1a326f83d6c95c424184c2770174bc84688f4f99..b9b8754d3872f959bc576795c1fc4206
  
          this.setPvpAllowed(dedicatedserverproperties.pvp);
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index d9640b2a08101e9bd65323019c1de9c087822dde..addb66943bd11d899aac365b93d03613c9437b4c 100644
+index 25c7f47382f8a9949e2785c36f67dcf455d33f5a..457f3d30471aab1dbc3e7722b01eabb8b11f0ec0 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
 @@ -103,6 +103,8 @@ import net.minecraft.world.phys.Vec3;
@@ -29,7 +29,7 @@ index d9640b2a08101e9bd65323019c1de9c087822dde..addb66943bd11d899aac365b93d03613
  import org.galemc.gale.configuration.GaleGlobalConfiguration;
  import org.slf4j.Logger;
  
-@@ -751,6 +753,15 @@ public abstract class PlayerList {
+@@ -752,6 +754,15 @@ public abstract class PlayerList {
          Player player = entity.getBukkitEntity();
          PlayerLoginEvent event = new PlayerLoginEvent(player, loginlistener.connection.hostname, ((java.net.InetSocketAddress) socketaddress).getAddress(), ((java.net.InetSocketAddress) loginlistener.connection.channel.remoteAddress()).getAddress());
  
@@ -44,7 +44,7 @@ index d9640b2a08101e9bd65323019c1de9c087822dde..addb66943bd11d899aac365b93d03613
 +
          // Paper start - Fix MC-158900
          UserBanListEntry gameprofilebanentry;
-         if (getBans().isBanned(gameprofile) && (gameprofilebanentry = getBans().get(gameprofile)) != null) {
+         if (this.bans.isBanned(gameprofile) && (gameprofilebanentry = this.bans.get(gameprofile)) != null) {
 diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
 index 14630aad16fe8ac38030674c52bc91d619e9abde..97119bdc69d79216241bf1cf0c0b2ae5b230134b 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/Config.java
@@ -160,7 +160,7 @@ index 0000000000000000000000000000000000000000..213d709d0c0ff430420f6ee885f5ea6e
 +    }
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 85816196503073925b2b646fcb81e4f67985816d..ad4d024449fc4043479a7953660e9f588c62028b 100644
+index d162516cf51171446ba949ef509702dd38b48127..5cea77b63b797081d71d2aadc7d3748ad6e81a52 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -1116,6 +1116,7 @@ public final class CraftServer implements Server {

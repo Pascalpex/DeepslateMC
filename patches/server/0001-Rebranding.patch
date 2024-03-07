@@ -5,7 +5,7 @@ Subject: [PATCH] Rebranding
 
 
 diff --git a/build.gradle.kts b/build.gradle.kts
-index e4c2e47e05f61f354fef5263fc4f8fec3c36ac65..5e8cd7193ce8815a4cfbc5d0629a76e8761cc805 100644
+index 9d7cc530187263c6a4ed99df2c79d66d76749cc6..89362ee1a5dd27d2990df931668394fafd99c699 100644
 --- a/build.gradle.kts
 +++ b/build.gradle.kts
 @@ -15,7 +15,7 @@ val alsoShade: Configuration by configurations.creating
@@ -17,7 +17,7 @@ index e4c2e47e05f61f354fef5263fc4f8fec3c36ac65..5e8cd7193ce8815a4cfbc5d0629a76e8
      // Depend on Paper MojangAPI
      implementation("io.papermc.paper:paper-mojangapi:${project.version}") {
          exclude("io.papermc.paper", "paper-api")
-@@ -106,7 +106,7 @@ tasks.jar {
+@@ -112,7 +112,7 @@ tasks.jar {
          attributes(
              "Main-Class" to "org.bukkit.craftbukkit.Main",
              "Implementation-Title" to "CraftBukkit",
@@ -124,7 +124,7 @@ index 8e391265a40e3f7a97a26e1bdf5da9fde5d199fc..04ea6b24489e6bddf16957fb91cb9948
          /* CraftBukkit start - Replace everything
          OptionParser optionparser = new OptionParser();
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 80cd6dc6a46b5472b1d00b6fb05da91a637fc531..98374729e1a001d5a0a2a24f281be1b7a8359cdf 100644
+index 754fff2c0305f2bf5ce1d080f0f0d9128a0fbb2e..b16acf31d52dfe807f0e3099717e6275c279b83c 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
 @@ -943,7 +943,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
@@ -140,9 +140,9 @@ index 80cd6dc6a46b5472b1d00b6fb05da91a637fc531..98374729e1a001d5a0a2a24f281be1b7
  
      @DontObfuscate
      public String getServerModName() {
--        return org.dreeam.leaf.LeafConfig.serverModName; // Paper // Gale - branding changes // Leaf - Configurable server mod name
+-        return org.dreeam.leaf.config.modules.misc.ServerBrand.serverModName; // Paper // Gale - branding changes // Leaf - Configurable server mod name
 +        // Deepslate start
-+        final String leafModName = org.dreeam.leaf.LeafConfig.serverModName; // Paper // Gale - branding changes // Leaf - Configurable server mod name
++        final String leafModName = org.dreeam.leaf.config.modules.misc.ServerBrand.serverModName; // Paper // Gale - branding changes // Leaf - Configurable server mod name
 +        return switch (leafModName) {
 +            case "Leaf" -> "DeepslateMC";
 +            default -> leafModName;
@@ -152,15 +152,15 @@ index 80cd6dc6a46b5472b1d00b6fb05da91a637fc531..98374729e1a001d5a0a2a24f281be1b7
  
      public SystemReport fillSystemReport(SystemReport details) {
 diff --git a/src/main/java/net/minecraft/server/gui/MinecraftServerGui.java b/src/main/java/net/minecraft/server/gui/MinecraftServerGui.java
-index 0f20cb3dcf4aac8a8c6cd7408808dec962869c1a..39bac363b73f99d715dcd7e3a756790e1b5941fb 100644
+index 41fa7b642708d15292879d583a247fd820d5ed03..679c7460d165d10bf9b31b94e4fe6f4c052638af 100644
 --- a/src/main/java/net/minecraft/server/gui/MinecraftServerGui.java
 +++ b/src/main/java/net/minecraft/server/gui/MinecraftServerGui.java
 @@ -56,7 +56,7 @@ public class MinecraftServerGui extends JComponent {
              ;
          }
  
--        final JFrame jframe = new JFrame(org.dreeam.leaf.LeafConfig.serverGuiName); // Purpur // Leaf - Configurable server Gui name
-+        final JFrame jframe = new JFrame(org.dreeam.leaf.LeafConfig.serverGuiName.equalsIgnoreCase("Leaf Console") ? "DeepslateMC Minecraft server" : org.dreeam.leaf.LeafConfig.serverGuiName); // Purpur // Leaf - Configurable server Gui name // Deepslate
+-        final JFrame jframe = new JFrame(org.dreeam.leaf.config.modules.misc.ServerBrand.serverGUIName); // Purpur // Leaf - Configurable server GUI name
++        final JFrame jframe = new JFrame(org.dreeam.leaf.config.modules.misc.ServerBrand.serverGUIName.equalsIgnoreCase("Leaf Console") ? "DeepslateMC Minecraft server" : org.dreeam.leaf.config.modules.misc.ServerBrand.serverGUIName); // Purpur // Leaf - Configurable server GUI name // Deepslate
          final MinecraftServerGui servergui = new MinecraftServerGui(server);
  
          jframe.setDefaultCloseOperation(2);
@@ -168,8 +168,8 @@ index 0f20cb3dcf4aac8a8c6cd7408808dec962869c1a..39bac363b73f99d715dcd7e3a756790e
          jframe.pack();
          jframe.setLocationRelativeTo((Component) null);
          jframe.setVisible(true);
--        jframe.setName(org.dreeam.leaf.LeafConfig.serverGuiName); // Paper - Improve ServerGUI // Purpur // Leaf - Configurable server Gui name
-+        jframe.setName(org.dreeam.leaf.LeafConfig.serverGuiName.equalsIgnoreCase("Leaf Console") ? "DeepslateMC Minecraft server" : org.dreeam.leaf.LeafConfig.serverGuiName); // Paper - Improve ServerGUI // Purpur // Leaf - Configurable server Gui name // Deepslate
+-        jframe.setName(org.dreeam.leaf.config.modules.misc.ServerBrand.serverGUIName); // Paper - Improve ServerGUI // Purpur // Leaf - Configurable server GUI name
++        jframe.setName(org.dreeam.leaf.config.modules.misc.ServerBrand.serverGUIName.equalsIgnoreCase("Leaf Console") ? "DeepslateMC Minecraft server" : org.dreeam.leaf.config.modules.misc.ServerBrand.serverGUIName); // Paper - Improve ServerGUI // Purpur // Leaf - Configurable server Gui name // Deepslate
  
          // Paper start - Improve ServerGUI
          try {
@@ -177,8 +177,8 @@ index 0f20cb3dcf4aac8a8c6cd7408808dec962869c1a..39bac363b73f99d715dcd7e3a756790e
          jframe.addWindowListener(new WindowAdapter() {
              public void windowClosing(WindowEvent windowevent) {
                  if (!servergui.isClosing.getAndSet(true)) {
--                    jframe.setTitle("Purpur Minecraft server - shutting down!"); // Purpur
-+                    jframe.setTitle("DeepslateMC Minecraft server - shutting down!"); // Purpur // Deepslate
+-                    jframe.setTitle(org.dreeam.leaf.config.modules.misc.ServerBrand.serverGUIName + " - shutting down!"); // Purpur // Leaf - Configurable server GUI name
++                    jframe.setTitle((org.dreeam.leaf.config.modules.misc.ServerBrand.serverGUIName.equalsIgnoreCase("Leaf Console") ? "DeepslateMC Minecraft server" : org.dreeam.leaf.config.modules.misc.ServerBrand.serverGUIName) + " - shutting down!"); // Purpur // Leaf - Configurable server GUI name
                      server.halt(true);
                      servergui.runFinalizers();
                  }
@@ -196,7 +196,7 @@ index 6d696f6945c4e08d58616505b961e56fd5a04fcf..cee4cea9a214e3a812e842aa9ef2cd25
  
      private static CompoundTag readOversizedChunk(org.purpurmc.purpur.region.AbstractRegionFile regionfile, ChunkPos chunkCoordinate) throws IOException { // LinearPurpur
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index a1317e374066d2abe20064bc47e20f4b19db9705..00ab8cd6fd5d25f1a915e8b0115c0446bd3ddfd3 100644
+index c7faba7ff1101f68fef4a67c502e45a66ec77b93..70922be160b409b240e91b28816dbca7f20b8705 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -269,7 +269,7 @@ import javax.annotation.Nullable; // Paper
@@ -209,7 +209,7 @@ index a1317e374066d2abe20064bc47e20f4b19db9705..00ab8cd6fd5d25f1a915e8b0115c0446
      private final String bukkitVersion = Versioning.getBukkitVersion();
      private final Logger logger = Logger.getLogger("Minecraft");
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java
-index 0dd670c7734d9983532ef20e3293d2a8f7567d91..47e18b08a88a1b4d2a6eb0cfdd5ee5ce49c0808a 100644
+index fcb2687c7183114ecd36d4a190969f148f71ea8e..415eed8e849789de5e0ad9d81da3cc3f484a00ff 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java
 @@ -953,7 +953,7 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {
@@ -283,10 +283,10 @@ index 17e3ee3a73a2347e9f0baa0ed1640a3b0e75ed16..4bc788d338f3e53062c0c46622e836fb
      }
  }
 diff --git a/src/main/java/org/purpurmc/purpur/PurpurConfig.java b/src/main/java/org/purpurmc/purpur/PurpurConfig.java
-index e45c11bf2c42e6d57f803349d8ca6936ac98c995..6662d1790dec3ce0a5b490cfaa1b08eb9bbfa90e 100644
+index e6d44744b2a560789cde22a3b4b87eef7874c701..0563965af18447b1d14af14f81b5a8ebb01560fd 100644
 --- a/src/main/java/org/purpurmc/purpur/PurpurConfig.java
 +++ b/src/main/java/org/purpurmc/purpur/PurpurConfig.java
-@@ -231,7 +231,7 @@ public class PurpurConfig {
+@@ -239,7 +239,7 @@ public class PurpurConfig {
          deathMessageOnlyBroadcastToAffectedPlayer = getBoolean("settings.broadcasts.death.only-broadcast-to-affected-player", deathMessageOnlyBroadcastToAffectedPlayer);
      }
  
