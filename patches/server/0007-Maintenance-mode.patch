@@ -5,10 +5,10 @@ Subject: [PATCH] Maintenance mode
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 23c87d3b4db6e2ec7ed9e1a677520141b57b391b..9d5324c58b7b5128e63243a887ae1621b8ecee92 100644
+index 33ae466bf8598ffb013a53f9ba0bc6f041c7f988..115b128d60de5c9f8cf41774f5ad13f80184cc50 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-@@ -252,6 +252,7 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+@@ -251,6 +251,7 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
          MinecraftServer.getServer().server.getCommandMap().register("clearchat", "Deepslate", new ClearchatCommand("clearchat"));
          MinecraftServer.getServer().server.getCommandMap().register("setbuildworld", "Deepslate", new BuildworldCommand("setbuildworld"));
          MinecraftServer.getServer().server.getCommandMap().register("buildworld", "Deepslate", new BuildworldCommand("buildworld"));

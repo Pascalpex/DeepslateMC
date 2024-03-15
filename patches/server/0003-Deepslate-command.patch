@@ -5,7 +5,7 @@ Subject: [PATCH] Deepslate command
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 4ba34682cf4f8e610d8d456785a0da5591aa0c24..067bda3cd4d860949abf89f1168db17ff70a6522 100644
+index a83fb872a1d186a3547c12f518e1bb0067fffaf7..a3bf6bef15e5eb2a833768d906c3e6e9f31ba9d8 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 @@ -49,6 +49,7 @@ import net.minecraft.world.level.block.entity.SkullBlockEntity;
@@ -16,7 +16,7 @@ index 4ba34682cf4f8e610d8d456785a0da5591aa0c24..067bda3cd4d860949abf89f1168db17f
  import org.slf4j.Logger;
  
  // CraftBukkit start
-@@ -243,6 +244,10 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+@@ -242,6 +243,10 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
          } catch (Throwable ignored) {}
          // Gale start - Pufferfish - SIMD support
  
