@@ -17,7 +17,7 @@ index 33ae466bf8598ffb013a53f9ba0bc6f041c7f988..115b128d60de5c9f8cf41774f5ad13f8
  
          this.setPvpAllowed(dedicatedserverproperties.pvp);
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index 25c7f47382f8a9949e2785c36f67dcf455d33f5a..457f3d30471aab1dbc3e7722b01eabb8b11f0ec0 100644
+index 25c7f47382f8a9949e2785c36f67dcf455d33f5a..eb8a18c4ebc5522ac867415528490bd37b808b33 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
 @@ -103,6 +103,8 @@ import net.minecraft.world.phys.Vec3;
@@ -29,22 +29,22 @@ index 25c7f47382f8a9949e2785c36f67dcf455d33f5a..457f3d30471aab1dbc3e7722b01eabb8
  import org.galemc.gale.configuration.GaleGlobalConfiguration;
  import org.slf4j.Logger;
  
-@@ -752,6 +754,15 @@ public abstract class PlayerList {
-         Player player = entity.getBukkitEntity();
-         PlayerLoginEvent event = new PlayerLoginEvent(player, loginlistener.connection.hostname, ((java.net.InetSocketAddress) socketaddress).getAddress(), ((java.net.InetSocketAddress) loginlistener.connection.channel.remoteAddress()).getAddress());
+@@ -355,6 +357,15 @@ public abstract class PlayerList {
+         player.containerMenu.transferTo(player.containerMenu, bukkitPlayer);
  
+         PlayerJoinEvent playerJoinEvent = new PlayerJoinEvent(bukkitPlayer, io.papermc.paper.adventure.PaperAdventure.asAdventure(ichatmutablecomponent)); // Paper - Adventure
 +        // Deepslate start - Maintenance mode
 +        if(Config.getMaintenanceMode()) {
-+            if(!player.hasPermission("deepslate.maintenancebypass")) {
++            if(!bukkitPlayer.hasPermission("deepslate.maintenancebypass")) {
 +                String prefix = MessagesFile.getPrefix();
-+                event.disallow(PlayerLoginEvent.Result.KICK_OTHER, prefix + MessagesFile.getMaintenanceKick());
++                bukkitPlayer.kickPlayer(prefix + MessagesFile.getMaintenanceKick());
++                return;
 +            }
 +        }
 +        // Deepslate end
-+
-         // Paper start - Fix MC-158900
-         UserBanListEntry gameprofilebanentry;
-         if (this.bans.isBanned(gameprofile) && (gameprofilebanentry = this.bans.get(gameprofile)) != null) {
+         this.cserver.getPluginManager().callEvent(playerJoinEvent);
+ 
+         if (!player.connection.isAcceptingMessages()) {
 diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
 index 14630aad16fe8ac38030674c52bc91d619e9abde..97119bdc69d79216241bf1cf0c0b2ae5b230134b 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/Config.java

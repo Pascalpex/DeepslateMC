@@ -19,7 +19,7 @@ index f797185199c3406a93787a6b6b428a2b469d2e50..37c51cf3588ae56cd09ea912b355c7d8
  
          this.setPvpAllowed(dedicatedserverproperties.pvp);
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index 457f3d30471aab1dbc3e7722b01eabb8b11f0ec0..d447e4b127c6e524c480661ce386b530ef4ec2d0 100644
+index eb8a18c4ebc5522ac867415528490bd37b808b33..3eec77744c1388088be0afb18450b3e3e0032547 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
 @@ -105,6 +105,7 @@ import net.minecraft.world.scores.Objective;
@@ -30,10 +30,10 @@ index 457f3d30471aab1dbc3e7722b01eabb8b11f0ec0..d447e4b127c6e524c480661ce386b530
  import org.galemc.gale.configuration.GaleGlobalConfiguration;
  import org.slf4j.Logger;
  
-@@ -357,6 +358,7 @@ public abstract class PlayerList {
-         player.containerMenu.transferTo(player.containerMenu, bukkitPlayer);
- 
-         PlayerJoinEvent playerJoinEvent = new PlayerJoinEvent(bukkitPlayer, io.papermc.paper.adventure.PaperAdventure.asAdventure(ichatmutablecomponent)); // Paper - Adventure
+@@ -366,6 +367,7 @@ public abstract class PlayerList {
+             }
+         }
+         // Deepslate end
 +        SpawnCommand.playerJoin(bukkitPlayer); // Deepslate - Spawn functions
          this.cserver.getPluginManager().callEvent(playerJoinEvent);
  
