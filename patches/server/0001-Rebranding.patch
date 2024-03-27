@@ -5,7 +5,7 @@ Subject: [PATCH] Rebranding
 
 
 diff --git a/build.gradle.kts b/build.gradle.kts
-index 9d7cc530187263c6a4ed99df2c79d66d76749cc6..89362ee1a5dd27d2990df931668394fafd99c699 100644
+index 6eaa616acb8c6f21c6554b0bead67ac7cf613933..06ba7588b8a5aa2c49be512c737f8cc1091baf52 100644
 --- a/build.gradle.kts
 +++ b/build.gradle.kts
 @@ -15,7 +15,7 @@ val alsoShade: Configuration by configurations.creating
@@ -102,7 +102,7 @@ index 99c5038672b09d0874125e3df280174c1e8151e6..e32f25b7c281e2aea8c0c0537e36fe5f
  
      public String getTitle() {
 diff --git a/src/main/java/net/minecraft/server/Main.java b/src/main/java/net/minecraft/server/Main.java
-index 8e391265a40e3f7a97a26e1bdf5da9fde5d199fc..04ea6b24489e6bddf16957fb91cb9948aca78281 100644
+index 81e4b635de48f526498b47a6a49a9ead6685614b..cb9df75ffe7963b8b439b85531473af4fdf21e42 100644
 --- a/src/main/java/net/minecraft/server/Main.java
 +++ b/src/main/java/net/minecraft/server/Main.java
 @@ -76,6 +76,17 @@ public class Main {
@@ -124,7 +124,7 @@ index 8e391265a40e3f7a97a26e1bdf5da9fde5d199fc..04ea6b24489e6bddf16957fb91cb9948
          /* CraftBukkit start - Replace everything
          OptionParser optionparser = new OptionParser();
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 754fff2c0305f2bf5ce1d080f0f0d9128a0fbb2e..b16acf31d52dfe807f0e3099717e6275c279b83c 100644
+index 78b787edacb65496eb7d84b452dc637deaa094e4..d3dfbbe7ad6c997cf6017f91615c60ab35f4d9a7 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
 @@ -943,7 +943,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
@@ -136,7 +136,7 @@ index 754fff2c0305f2bf5ce1d080f0f0d9128a0fbb2e..b16acf31d52dfe807f0e3099717e6275
              // Gale end - branding changes
              while (this.getRunningThread().isAlive()) {
                  this.getRunningThread().stop();
-@@ -1817,7 +1817,13 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -1827,7 +1827,13 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
  
      @DontObfuscate
      public String getServerModName() {
@@ -152,7 +152,7 @@ index 754fff2c0305f2bf5ce1d080f0f0d9128a0fbb2e..b16acf31d52dfe807f0e3099717e6275
  
      public SystemReport fillSystemReport(SystemReport details) {
 diff --git a/src/main/java/net/minecraft/server/gui/MinecraftServerGui.java b/src/main/java/net/minecraft/server/gui/MinecraftServerGui.java
-index 41fa7b642708d15292879d583a247fd820d5ed03..679c7460d165d10bf9b31b94e4fe6f4c052638af 100644
+index ec12537241adb04a9b8ae4515d581b6b2ae61ac6..3a92e328eb549b0e8f37aa4084d87b14ba4ff03f 100644
 --- a/src/main/java/net/minecraft/server/gui/MinecraftServerGui.java
 +++ b/src/main/java/net/minecraft/server/gui/MinecraftServerGui.java
 @@ -56,7 +56,7 @@ public class MinecraftServerGui extends JComponent {
@@ -209,7 +209,7 @@ index c7faba7ff1101f68fef4a67c502e45a66ec77b93..70922be160b409b240e91b28816dbca7
      private final String bukkitVersion = Versioning.getBukkitVersion();
      private final Logger logger = Logger.getLogger("Minecraft");
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java
-index fcb2687c7183114ecd36d4a190969f148f71ea8e..415eed8e849789de5e0ad9d81da3cc3f484a00ff 100644
+index a806028abda555247d9ab4fa3e67a118f550c77e..64d2fc6de2aabb11f9a03b5f56822c27b7d623df 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java
 @@ -953,7 +953,7 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {
