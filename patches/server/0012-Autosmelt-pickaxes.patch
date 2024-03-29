@@ -5,7 +5,7 @@ Subject: [PATCH] Autosmelt pickaxes
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 37c51cf3588ae56cd09ea912b355c7d8dcf9c69f..725bd6db4d06e1c6c6b1efa6474c3e5f7c32da7f 100644
+index ff0193b8d6a3f44ea2a898d6d083947b6ff94f98..e2b14b471404ffbb258522dce335777227eaa319 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 @@ -256,6 +256,7 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
@@ -242,10 +242,10 @@ index 0000000000000000000000000000000000000000..baf1f1d28c6610aeec912e858a3e3fb2
 +
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index a1aaeb00155a4e06ea132230447760f9e37d5176..1a14d5862a05a61fc0dc904b58fd41eb41cce138 100644
+index 1b3d1b4178f8e2561b0d825f61452acc47c6da1c..fe2d02d84a5c75a351d4c6fb9e4f323f99abcfd8 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -1121,6 +1121,7 @@ public final class CraftServer implements Server {
+@@ -1125,6 +1125,7 @@ public final class CraftServer implements Server {
          MinecraftServer.getServer().server.getCommandMap().register("setspawn", "Deepslate", new SpawnCommand("setspawn"));
          MinecraftServer.getServer().server.getCommandMap().register("spawn", "Deepslate", new SpawnCommand("spawn"));
          MinecraftServer.getServer().server.getCommandMap().register("lobby", "Deepslate", new SpawnCommand("lobby"));

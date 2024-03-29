@@ -5,7 +5,7 @@ Subject: [PATCH] Spawn functions
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index f797185199c3406a93787a6b6b428a2b469d2e50..37c51cf3588ae56cd09ea912b355c7d8dcf9c69f 100644
+index ddf145edf274207871a10a5eb58777c1ad0b47e3..ff0193b8d6a3f44ea2a898d6d083947b6ff94f98 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 @@ -253,6 +253,9 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
@@ -19,7 +19,7 @@ index f797185199c3406a93787a6b6b428a2b469d2e50..37c51cf3588ae56cd09ea912b355c7d8
  
          this.setPvpAllowed(dedicatedserverproperties.pvp);
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index eb8a18c4ebc5522ac867415528490bd37b808b33..3eec77744c1388088be0afb18450b3e3e0032547 100644
+index 946e55d30c83470643bb99ce8bea2cfc01169abf..e4998589f6719e45e51d98ee8e66bac45e1555e0 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
 @@ -105,6 +105,7 @@ import net.minecraft.world.scores.Objective;
@@ -194,10 +194,10 @@ index 0000000000000000000000000000000000000000..24e67e218432ea852a285b13d56b48e4
 +
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index b8a59431c5b5baabb336fe72b4e9d46dd213ff04..a1aaeb00155a4e06ea132230447760f9e37d5176 100644
+index 0851630ef834e0bff3dc54464a9d651ec37ea378..1b3d1b4178f8e2561b0d825f61452acc47c6da1c 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -1118,6 +1118,9 @@ public final class CraftServer implements Server {
+@@ -1122,6 +1122,9 @@ public final class CraftServer implements Server {
          MinecraftServer.getServer().server.getCommandMap().register("buildworld", "Deepslate", new BuildworldCommand("buildworld"));
          MinecraftServer.getServer().server.getCommandMap().register("maintenance", "Deepslate", new MaintenanceMode("maintenance"));
          MinecraftServer.getServer().server.getCommandMap().register("help", "Deepslate", new HelpCommand("help"));
