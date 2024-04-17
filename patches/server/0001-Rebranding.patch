@@ -5,7 +5,7 @@ Subject: [PATCH] Rebranding
 
 
 diff --git a/build.gradle.kts b/build.gradle.kts
-index 370c43af11cd862a31a980549ad822cab2277c05..d7a3046b022194844f01bc59146edfcf527b659c 100644
+index 98846d73a121cf0b7b41498be1bae24cf4168f56..8f5521b0de55e686c0232a431c2f9809633f908c 100644
 --- a/build.gradle.kts
 +++ b/build.gradle.kts
 @@ -15,7 +15,7 @@ val alsoShade: Configuration by configurations.creating
@@ -102,7 +102,7 @@ index 99c5038672b09d0874125e3df280174c1e8151e6..e32f25b7c281e2aea8c0c0537e36fe5f
  
      public String getTitle() {
 diff --git a/src/main/java/net/minecraft/server/Main.java b/src/main/java/net/minecraft/server/Main.java
-index 81e4b635de48f526498b47a6a49a9ead6685614b..cb9df75ffe7963b8b439b85531473af4fdf21e42 100644
+index 081bdffb914acb275f47dc47ce54eb84d69f912d..6fdf5ea1c54c8b044342f2e87cea954c5a037335 100644
 --- a/src/main/java/net/minecraft/server/Main.java
 +++ b/src/main/java/net/minecraft/server/Main.java
 @@ -76,6 +76,17 @@ public class Main {
@@ -124,7 +124,7 @@ index 81e4b635de48f526498b47a6a49a9ead6685614b..cb9df75ffe7963b8b439b85531473af4
          /* CraftBukkit start - Replace everything
          OptionParser optionparser = new OptionParser();
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 78b787edacb65496eb7d84b452dc637deaa094e4..d3dfbbe7ad6c997cf6017f91615c60ab35f4d9a7 100644
+index 7ff74086641bdaaa211e7cc00e169b93e146fb39..0429ab3700092ba2216254db46735db2ec8f6e62 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
 @@ -943,7 +943,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
@@ -209,10 +209,10 @@ index 15c3d62262a589844dbaa8ac357402aa592cd351..a75455bbce42fffcbfda80cdb9dcfcc2
      private final String bukkitVersion = Versioning.getBukkitVersion();
      private final Logger logger = Logger.getLogger("Minecraft");
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java
-index a806028abda555247d9ab4fa3e67a118f550c77e..64d2fc6de2aabb11f9a03b5f56822c27b7d623df 100644
+index ccc5eb9d048e90174b9a7963d8a6dfe79307d8ec..63c47ecc2bc52209812517baf32c213ff6445138 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftLivingEntity.java
-@@ -953,7 +953,7 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {
+@@ -969,7 +969,7 @@ public class CraftLivingEntity extends CraftEntity implements LivingEntity {
              return EntityCategory.WATER;
          }
  
@@ -235,10 +235,10 @@ index 4ee1c3461d21feab3a54e76a7c2ab80b6ea2ab38..47c0f4aa3bf05f589b7aef3762b825b8
                  // (async tasks must live with race-conditions if they attempt to cancel between these few lines of code)
              }
 diff --git a/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java b/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
-index 48ba783a9525cc86a9f648ed2504b0223e4b512c..f6d62da6bc6d60ba222fc3bbdf2bbb02392ede84 100644
+index aff95d844d810fb145b7587fef28df66e47d6530..7435b0b2db718265ed33b44dfd763972fed07fab 100644
 --- a/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
 +++ b/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
-@@ -487,7 +487,7 @@ public final class CraftMagicNumbers implements UnsafeValues {
+@@ -492,7 +492,7 @@ public final class CraftMagicNumbers implements UnsafeValues {
  
      @Override
      public com.destroystokyo.paper.util.VersionFetcher getVersionFetcher() {
