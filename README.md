@@ -15,7 +15,7 @@ You can find a full list of features, commands, permissions, config options and 
 ## Building
 ```
 ./gradlew applyPatches
-./gradlew createReobfPaperclipJar
+./gradlew createMojmapPaperclipJar
 ```
 ## Support
 You can find support on our [Discord server](https://discord.gg/BGrhNnVczp)

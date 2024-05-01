@@ -13,10 +13,10 @@ As part of: JettPack (https://gitlab.com/Titaniumtown/JettPack)
 Licensed under: GPL-3.0 (https://www.gnu.org/licenses/gpl-3.0.html)
 
 diff --git a/src/main/java/org/bukkit/plugin/SimplePluginManager.java b/src/main/java/org/bukkit/plugin/SimplePluginManager.java
-index cb01547706de416dd41879bf479d93fa0e7e23c9..88b7c365efa324637fa54b143060dc37d54db74e 100644
+index b598ad80bbcc256c1440a5ab79321b93ae9f12ed..69134735c0075c822f16c4327b50b59a37317677 100644
 --- a/src/main/java/org/bukkit/plugin/SimplePluginManager.java
 +++ b/src/main/java/org/bukkit/plugin/SimplePluginManager.java
-@@ -634,6 +634,19 @@ public final class SimplePluginManager implements PluginManager {
+@@ -646,6 +646,19 @@ public final class SimplePluginManager implements PluginManager {
          HandlerList handlers = event.getHandlers();
          RegisteredListener[] listeners = handlers.getRegisteredListeners();
  
