@@ -5,10 +5,10 @@ Subject: [PATCH] Tablist header footer
 
 
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index 3eec77744c1388088be0afb18450b3e3e0032547..c6ad0fe316c6b69d21db717f558376f3d0702467 100644
+index c0359539ed5f4406935f6d1703e0bba2c7ff3916..7219cfeead196670a50f17886684be32a4cceb40 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
-@@ -106,6 +106,7 @@ import net.minecraft.world.scores.PlayerTeam;
+@@ -108,6 +108,7 @@ import net.minecraft.world.scores.PlayerTeam;
  import net.pascalpex.deepslatemc.Config;
  import net.pascalpex.deepslatemc.MessagesFile;
  import net.pascalpex.deepslatemc.commands.SpawnCommand;
@@ -16,7 +16,7 @@ index 3eec77744c1388088be0afb18450b3e3e0032547..c6ad0fe316c6b69d21db717f558376f3
  import org.galemc.gale.configuration.GaleGlobalConfiguration;
  import org.slf4j.Logger;
  
-@@ -368,6 +369,11 @@ public abstract class PlayerList {
+@@ -370,6 +371,11 @@ public abstract class PlayerList {
          }
          // Deepslate end
          SpawnCommand.playerJoin(bukkitPlayer); // Deepslate - Spawn functions

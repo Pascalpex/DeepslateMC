@@ -1,14 +1,14 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Pascalpex <pascalpex@gmail.com>
-Date: Mon, 25 Dec 2023 15:35:26 +0100
+Date: Wed, 1 May 2024 20:23:20 +0200
 Subject: [PATCH] Configurable move messages
 
 
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index 8c35a1a612eaa866f4ce4e23e3c0eaf3ce8f491c..5fb2e0bc75338da055f5a4aae10d637a01a501ac 100644
+index 7aa64742d7967a74e4078af168b6b2bac005ccd1..b944123a553dc63ab2e6f3983b5745921c7fe26a 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-@@ -189,6 +189,7 @@ import net.minecraft.world.phys.Vec3;
+@@ -196,6 +196,7 @@ import net.minecraft.world.phys.Vec3;
  import net.minecraft.world.phys.shapes.BooleanOp;
  import net.minecraft.world.phys.shapes.Shapes;
  import net.minecraft.world.phys.shapes.VoxelShape;
@@ -16,7 +16,7 @@ index 8c35a1a612eaa866f4ce4e23e3c0eaf3ce8f491c..5fb2e0bc75338da055f5a4aae10d637a
  import org.bukkit.craftbukkit.util.permissions.CraftDefaultPermissions;
  import org.apache.commons.lang3.StringUtils;
  import org.galemc.gale.configuration.GaleGlobalConfiguration;
-@@ -1502,7 +1503,7 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
+@@ -1462,7 +1463,7 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
                                          io.papermc.paper.event.player.PlayerFailMoveEvent event = fireFailMove(io.papermc.paper.event.player.PlayerFailMoveEvent.FailReason.MOVED_TOO_QUICKLY,
                                              toX, toY, toZ, toYaw, toPitch, true);
                                          if (!event.isAllowed()) {
@@ -25,15 +25,15 @@ index 8c35a1a612eaa866f4ce4e23e3c0eaf3ce8f491c..5fb2e0bc75338da055f5a4aae10d637a
                                                  ServerGamePacketListenerImpl.LOGGER.warn("{} moved too quickly! {},{},{}", new Object[]{this.player.getName().getString(), d6, d7, d8});
                                              this.teleport(this.player.getX(), this.player.getY(), this.player.getZ(), this.player.getYRot(), this.player.getXRot());
                                              return;
-@@ -1578,7 +1579,7 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
+@@ -1538,7 +1539,7 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
                                      toX, toY, toZ, toYaw, toPitch, true);
                                  if (!event.isAllowed()) {
                                      movedWrongly = true;
 -                                    if (event.getLogWarning())
 +                                    if (event.getLogWarning() && Config.getMovedWrongly()) // Deepslate
+                                 // Paper end
                                  ServerGamePacketListenerImpl.LOGGER.warn("{} moved wrongly!, ({})", this.player.getName().getString(), d11); // Purpur
-                                 }
-                             }
+                                 } // Paper
 diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
 index 907357b7cb92aabc5c1835f593246fef289c0483..2ac86918a792cafc877efd3ab4d8f8d5c10e91b7 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/Config.java

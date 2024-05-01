@@ -1,14 +1,14 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Pascalpex <pascalpex@gmail.com>
-Date: Sat, 3 Dec 2022 14:28:20 +0100
+Date: Wed, 1 May 2024 20:15:07 +0200
 Subject: [PATCH] Autosmelt pickaxes
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index ff0193b8d6a3f44ea2a898d6d083947b6ff94f98..e2b14b471404ffbb258522dce335777227eaa319 100644
+index 0a74b89005d3921dfffb3ca1bbafbfacb6f17e46..108b5279119813328acad468fe1c854cfe442745 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-@@ -256,6 +256,7 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+@@ -269,6 +269,7 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
          MinecraftServer.getServer().server.getCommandMap().register("setspawn", "Deepslate", new SpawnCommand("setspawn"));
          MinecraftServer.getServer().server.getCommandMap().register("spawn", "Deepslate", new SpawnCommand("spawn"));
          MinecraftServer.getServer().server.getCommandMap().register("lobby", "Deepslate", new SpawnCommand("lobby"));
@@ -17,20 +17,20 @@ index ff0193b8d6a3f44ea2a898d6d083947b6ff94f98..e2b14b471404ffbb258522dce3357772
  
          this.setPvpAllowed(dedicatedserverproperties.pvp);
 diff --git a/src/main/java/net/minecraft/server/level/ServerPlayerGameMode.java b/src/main/java/net/minecraft/server/level/ServerPlayerGameMode.java
-index 8e87d799586103b8a743ebc0cfb8da7fca3c856a..917faea1c62aecda03ff42376e3e532d1f934aaa 100644
+index 6d194797d8fe2cd6e5652d596f4bc66ffc3b6375..8c8890d7e5b158b952efaf7c42d3ca0a05081b64 100644
 --- a/src/main/java/net/minecraft/server/level/ServerPlayerGameMode.java
 +++ b/src/main/java/net/minecraft/server/level/ServerPlayerGameMode.java
-@@ -27,6 +27,9 @@ import net.minecraft.world.level.block.state.BlockState;
+@@ -27,6 +27,9 @@ import net.minecraft.world.level.block.entity.BlockEntity;
+ import net.minecraft.world.level.block.state.BlockState;
  import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
  import net.minecraft.world.phys.BlockHitResult;
- import net.minecraft.world.phys.Vec3;
 +import net.pascalpex.deepslatemc.Config;
 +import org.bukkit.Material;
 +import org.bukkit.entity.Player;
  import org.slf4j.Logger;
  
  // CraftBukkit start
-@@ -359,6 +362,59 @@ public class ServerPlayerGameMode {
+@@ -362,6 +365,59 @@ public class ServerPlayerGameMode {
  
              event = new BlockBreakEvent(bblock, this.player.getBukkitEntity());
  
@@ -173,12 +173,12 @@ index 2d73eda26639d6ff45da8aa3e26359a54b51e002..370a8e702a71d03ec0fddf7c465c973d
  }
 diff --git a/src/main/java/net/pascalpex/deepslatemc/commands/AutosmeltCommand.java b/src/main/java/net/pascalpex/deepslatemc/commands/AutosmeltCommand.java
 new file mode 100644
-index 0000000000000000000000000000000000000000..baf1f1d28c6610aeec912e858a3e3fb2f17b74fb
+index 0000000000000000000000000000000000000000..b89d430274e0c71a63e33c57f3b0824802565372
 --- /dev/null
 +++ b/src/main/java/net/pascalpex/deepslatemc/commands/AutosmeltCommand.java
 @@ -0,0 +1,64 @@
 +package net.pascalpex.deepslatemc.commands;
-+    
++
 +import net.pascalpex.deepslatemc.Config;
 +import net.pascalpex.deepslatemc.MessagesFile;
 +import org.bukkit.command.Command;
@@ -242,10 +242,10 @@ index 0000000000000000000000000000000000000000..baf1f1d28c6610aeec912e858a3e3fb2
 +
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 1b3d1b4178f8e2561b0d825f61452acc47c6da1c..fe2d02d84a5c75a351d4c6fb9e4f323f99abcfd8 100644
+index a2dfa44c1860ed5fe8762b9054a14942309fe567..1ddc49863b74f7f7712cb988c0a115d54d4d2a6d 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -1125,6 +1125,7 @@ public final class CraftServer implements Server {
+@@ -1124,6 +1124,7 @@ public final class CraftServer implements Server {
          MinecraftServer.getServer().server.getCommandMap().register("setspawn", "Deepslate", new SpawnCommand("setspawn"));
          MinecraftServer.getServer().server.getCommandMap().register("spawn", "Deepslate", new SpawnCommand("spawn"));
          MinecraftServer.getServer().server.getCommandMap().register("lobby", "Deepslate", new SpawnCommand("lobby"));

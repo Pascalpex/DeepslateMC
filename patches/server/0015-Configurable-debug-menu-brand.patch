@@ -1,25 +1,25 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Pascalpex <pascalpex@gmail.com>
-Date: Mon, 23 Oct 2023 15:58:07 +0200
+Date: Wed, 1 May 2024 20:28:24 +0200
 Subject: [PATCH] Configurable debug menu brand
 
 
 diff --git a/src/main/java/net/minecraft/network/protocol/common/custom/BrandPayload.java b/src/main/java/net/minecraft/network/protocol/common/custom/BrandPayload.java
-index 09bbaa644620d978655c6499de3412d1ec6b7366..863c481792a90a8037b9335638c2a7a5d96dd4d9 100644
+index 72085ca248bdab074842d321938689a802d294ce..5c2e1035c08d19c30df369edff412586b4c8628f 100644
 --- a/src/main/java/net/minecraft/network/protocol/common/custom/BrandPayload.java
 +++ b/src/main/java/net/minecraft/network/protocol/common/custom/BrandPayload.java
 @@ -2,6 +2,7 @@ package net.minecraft.network.protocol.common.custom;
  
  import net.minecraft.network.FriendlyByteBuf;
- import net.minecraft.resources.ResourceLocation;
+ import net.minecraft.network.codec.StreamCodec;
 +import net.pascalpex.deepslatemc.Config;
  
  public record BrandPayload(String brand) implements CustomPacketPayload {
-     public static final ResourceLocation ID = new ResourceLocation("brand");
+     public static final StreamCodec<FriendlyByteBuf, BrandPayload> STREAM_CODEC = CustomPacketPayload.codec(BrandPayload::write, BrandPayload::new);
 @@ -12,7 +13,7 @@ public record BrandPayload(String brand) implements CustomPacketPayload {
+     }
  
-     @Override
-     public void write(FriendlyByteBuf buf) {
+     private void write(FriendlyByteBuf buf) {
 -        buf.writeUtf(this.brand);
 +        buf.writeUtf(Config.getF3name() + "§r");
      }

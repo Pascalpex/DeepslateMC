@@ -1,11 +1,11 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Pascalpex <pascalpex@gmail.com>
-Date: Mon, 25 Dec 2023 15:32:39 +0100
+Date: Wed, 1 May 2024 20:19:00 +0200
 Subject: [PATCH] Metrics stats
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 725bd6db4d06e1c6c6b1efa6474c3e5f7c32da7f..79c10de6388a54f1bb50526d94dafbc6a0946fb3 100644
+index 108b5279119813328acad468fe1c854cfe442745..411516f50b8a4c959931f56ca55097552405cde1 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 @@ -12,6 +12,7 @@ import java.nio.file.Files;
@@ -16,15 +16,15 @@ index 725bd6db4d06e1c6c6b1efa6474c3e5f7c32da7f..79c10de6388a54f1bb50526d94dafbc6
  import java.util.function.BooleanSupplier;
  import javax.annotation.Nullable;
  
-@@ -47,6 +48,7 @@ import net.minecraft.world.level.GameRules;
+@@ -52,6 +53,7 @@ import net.minecraft.world.level.GameRules;
  import net.minecraft.world.level.GameType;
  import net.minecraft.world.level.block.entity.SkullBlockEntity;
  import net.minecraft.world.level.storage.LevelStorageSource;
 +import net.pascalpex.deepslatemc.Config;
+ import net.pascalpex.deepslatemc.commands.*;
  import org.galemc.gale.command.GaleCommands;
  import org.galemc.gale.configuration.GaleGlobalConfiguration;
- import net.pascalpex.deepslatemc.commands.*;
-@@ -224,6 +226,12 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+@@ -237,6 +239,12 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
          io.papermc.paper.command.PaperCommands.registerCommands(this); // Paper - setup /paper command
          GaleCommands.registerCommands(this); // Gale - Gale commands - register commands
          com.destroystokyo.paper.Metrics.PaperMetrics.startMetrics(); // Paper - start metrics
