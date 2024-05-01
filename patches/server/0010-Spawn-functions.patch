@@ -5,10 +5,10 @@ Subject: [PATCH] Spawn functions
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index ddf145edf274207871a10a5eb58777c1ad0b47e3..ff0193b8d6a3f44ea2a898d6d083947b6ff94f98 100644
+index b07d264f9a26a7b702135b617529280bc3c108df..0a74b89005d3921dfffb3ca1bbafbfacb6f17e46 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-@@ -253,6 +253,9 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+@@ -266,6 +266,9 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
          MinecraftServer.getServer().server.getCommandMap().register("buildworld", "Deepslate", new BuildworldCommand("buildworld"));
          MinecraftServer.getServer().server.getCommandMap().register("maintenance", "Deepslate", new MaintenanceMode("maintenance"));
          MinecraftServer.getServer().server.getCommandMap().register("help", "Deepslate", new HelpCommand("help"));
@@ -19,10 +19,10 @@ index ddf145edf274207871a10a5eb58777c1ad0b47e3..ff0193b8d6a3f44ea2a898d6d083947b
  
          this.setPvpAllowed(dedicatedserverproperties.pvp);
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index 946e55d30c83470643bb99ce8bea2cfc01169abf..e4998589f6719e45e51d98ee8e66bac45e1555e0 100644
+index c0ec84ed666bcf2155ebf33000e8a2a4a82b82c0..c0359539ed5f4406935f6d1703e0bba2c7ff3916 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
-@@ -105,6 +105,7 @@ import net.minecraft.world.scores.Objective;
+@@ -107,6 +107,7 @@ import net.minecraft.world.scores.Objective;
  import net.minecraft.world.scores.PlayerTeam;
  import net.pascalpex.deepslatemc.Config;
  import net.pascalpex.deepslatemc.MessagesFile;
@@ -30,7 +30,7 @@ index 946e55d30c83470643bb99ce8bea2cfc01169abf..e4998589f6719e45e51d98ee8e66bac4
  import org.galemc.gale.configuration.GaleGlobalConfiguration;
  import org.slf4j.Logger;
  
-@@ -366,6 +367,7 @@ public abstract class PlayerList {
+@@ -368,6 +369,7 @@ public abstract class PlayerList {
              }
          }
          // Deepslate end
@@ -194,10 +194,10 @@ index 0000000000000000000000000000000000000000..24e67e218432ea852a285b13d56b48e4
 +
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 0851630ef834e0bff3dc54464a9d651ec37ea378..1b3d1b4178f8e2561b0d825f61452acc47c6da1c 100644
+index 60ecb3f52b14014280815f5d1b0eae3d2b7ce7d8..a2dfa44c1860ed5fe8762b9054a14942309fe567 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -1122,6 +1122,9 @@ public final class CraftServer implements Server {
+@@ -1121,6 +1121,9 @@ public final class CraftServer implements Server {
          MinecraftServer.getServer().server.getCommandMap().register("buildworld", "Deepslate", new BuildworldCommand("buildworld"));
          MinecraftServer.getServer().server.getCommandMap().register("maintenance", "Deepslate", new MaintenanceMode("maintenance"));
          MinecraftServer.getServer().server.getCommandMap().register("help", "Deepslate", new HelpCommand("help"));

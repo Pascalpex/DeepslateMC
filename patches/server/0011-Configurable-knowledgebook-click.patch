@@ -28,7 +28,7 @@ index 5971700571a7347dc017a541c2901ab35b1e8d5a..467c6fe3c2c01fd66e858b20f8e4c6ba
  
  }
 diff --git a/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java b/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
-index b82a6143526bd1d4ecd4591c1253cdb0b913fe09..c83a5906d37b4d57b929c21ea4bf0df7b2aad2d8 100644
+index 6fed586c9a778f7a57e1b4ca2e6f2dbc15c8769d..6b19d65ef3b140c089494339cff086b69d04c4c7 100644
 --- a/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
 +++ b/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
 @@ -61,6 +61,7 @@ import net.minecraft.world.phys.BlockHitResult;
@@ -39,7 +39,7 @@ index b82a6143526bd1d4ecd4591c1253cdb0b913fe09..c83a5906d37b4d57b929c21ea4bf0df7
  import org.bukkit.Bukkit;
  import org.bukkit.Location;
  import org.bukkit.Material;
-@@ -591,6 +592,17 @@ public class CraftEventFactory {
+@@ -590,6 +591,17 @@ public class CraftEventFactory {
              event.setUseItemInHand(Result.DENY);
          }
          // Paper end

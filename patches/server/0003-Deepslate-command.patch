@@ -1,22 +1,22 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Pascalpex <pascalpex@gmail.com>
-Date: Mon, 25 Dec 2023 15:14:18 +0100
+Date: Wed, 1 May 2024 20:08:34 +0200
 Subject: [PATCH] Deepslate command
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index fbe299dc0e2d0903075f64f199a498c3e57f07ab..36e8fa4221e8da894c592a9ec40a567a065df1ae 100644
+index e21b5f7d1e6f951865094be7ed824b38d4d3c499..5213f973d9147a9a2d6a40914f457b63650cc56e 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-@@ -49,6 +49,7 @@ import net.minecraft.world.level.block.entity.SkullBlockEntity;
+@@ -52,6 +52,7 @@ import net.minecraft.world.level.GameRules;
+ import net.minecraft.world.level.GameType;
+ import net.minecraft.world.level.block.entity.SkullBlockEntity;
  import net.minecraft.world.level.storage.LevelStorageSource;
++import net.pascalpex.deepslatemc.commands.*;
  import org.galemc.gale.command.GaleCommands;
  import org.galemc.gale.configuration.GaleGlobalConfiguration;
-+import net.pascalpex.deepslatemc.commands.*;
  import org.slf4j.Logger;
- 
- // CraftBukkit start
-@@ -242,6 +243,10 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+@@ -255,6 +256,10 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
          } catch (Throwable ignored) {}
          // Gale start - Pufferfish - SIMD support
  
@@ -155,18 +155,18 @@ index 0000000000000000000000000000000000000000..c11d3597dbc49a1f6d75a55f427c55fc
 +
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index a75455bbce42fffcbfda80cdb9dcfcc2eff4885f..6300a24825ab40f4cc28ba97216a25bb8a870c70 100644
+index b71b3ba3953d855dcfe752bc8da35292cd2b1e4b..8679b63de4ed2f36aba058224884e3cddddf0173 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -115,6 +115,7 @@ import net.minecraft.world.level.storage.PrimaryLevelData;
- import net.minecraft.world.level.storage.loot.LootDataManager;
+@@ -116,6 +116,7 @@ import net.minecraft.world.level.storage.PlayerDataStorage;
+ import net.minecraft.world.level.storage.PrimaryLevelData;
  import net.minecraft.world.level.validation.ContentValidationException;
  import net.minecraft.world.phys.Vec3;
 +import net.pascalpex.deepslatemc.commands.*;
  import org.bukkit.BanList;
  import org.bukkit.Bukkit;
  import org.bukkit.ChatColor;
-@@ -1110,6 +1111,11 @@ public final class CraftServer implements Server {
+@@ -1109,6 +1110,11 @@ public final class CraftServer implements Server {
          org.spigotmc.SpigotConfig.registerCommands(); // Spigot
          io.papermc.paper.command.PaperCommands.registerCommands(this.console); // Paper
          org.purpurmc.purpur.PurpurConfig.registerCommands(); // Purpur
@@ -177,4 +177,4 @@ index a75455bbce42fffcbfda80cdb9dcfcc2eff4885f..6300a24825ab40f4cc28ba97216a25bb
 +
          this.overrideAllCommandBlockCommands = this.commandsConfiguration.getStringList("command-block-overrides").contains("*");
          this.ignoreVanillaPermissions = this.commandsConfiguration.getBoolean("ignore-vanilla-permissions");
-         top.leavesmc.leaves.protocol.core.LeavesProtocolManager.handleServerReload(); // Leaves - protocol
+ 

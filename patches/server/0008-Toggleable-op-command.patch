@@ -5,10 +5,10 @@ Subject: [PATCH] Toggleable op command
 
 
 diff --git a/src/main/java/net/minecraft/commands/Commands.java b/src/main/java/net/minecraft/commands/Commands.java
-index 7dfeabefd9fe3e3a56f2b4e9129bd71a04afd772..a2f30d2c34dd15906470e360529b56eabf7a5f73 100644
+index fbede1c1814eb24e11c2d389e153f6c808a6e9bb..7d81ebb08d862c43d152769503a30afaeade4b73 100644
 --- a/src/main/java/net/minecraft/commands/Commands.java
 +++ b/src/main/java/net/minecraft/commands/Commands.java
-@@ -244,7 +244,9 @@ public class Commands {
+@@ -245,7 +245,9 @@ public class Commands {
              BanListCommands.register(this.dispatcher);
              BanPlayerCommands.register(this.dispatcher);
              DeOpCommands.register(this.dispatcher);
