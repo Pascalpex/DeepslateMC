@@ -1,0 +1,67 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Pascalpex <pascalpex@gmail.com>
+Date: Sat, 4 May 2024 16:28:59 +0200
+Subject: [PATCH] Custom playerlist hover text
+
+
+diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
+index d2f5a363d13a42d420c6f8e9071dc57181844a02..30dc66840dcd624c9a5007e6b85522992d056e0d 100644
+--- a/src/main/java/net/minecraft/server/MinecraftServer.java
++++ b/src/main/java/net/minecraft/server/MinecraftServer.java
+@@ -135,6 +135,7 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemp
+ import net.minecraft.world.level.storage.WorldData;
+ import net.minecraft.world.phys.Vec2;
+ import net.minecraft.world.phys.Vec3;
++import net.pascalpex.deepslatemc.Config;
+ import org.galemc.gale.configuration.GaleConfigurations;
+ import org.slf4j.Logger;
+ 
+@@ -1672,6 +1673,18 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+         List<ServerPlayer> list = this.playerList.getPlayers();
+         int i = this.getMaxPlayers();
+ 
++        // Deepslate start - Custom playerlist hover text
++        if(Config.getPlayerlistHoverEnabled()) {
++            List<String> textList = Config.getPlayerlistHoverLines();
++            ObjectArrayList<GameProfile> objectarraylist = new ObjectArrayList(textList.size());
++            for(String line : textList) {
++                GameProfile profile = new GameProfile(UUID.randomUUID(), line.replace("&", "§"));
++                objectarraylist.add(profile);
++            }
++            return new ServerStatus.Players(i, list.size(), objectarraylist);
++        }
++        // Deepslate end
++
+         if (this.hidesOnlinePlayers()) {
+             return new ServerStatus.Players(i, list.size(), List.of());
+         } else {
+diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
+index cc38e0b87f4b78666372345140bc36d146f10c30..23765d710b135dec16a52fd10b7b9cc8f298779c 100644
+--- a/src/main/java/net/pascalpex/deepslatemc/Config.java
++++ b/src/main/java/net/pascalpex/deepslatemc/Config.java
+@@ -72,6 +72,13 @@ public class Config {
+                 config.set("tablist" + ".header", headerList);
+                 config.set("tablist" + ".footer", footerList);
+             }
++            if(!config.contains("playerlistHover")) {
++                config.set("playerlistHover" + ".enabled", false);
++                List<String> lines = new ArrayList<>();
++                lines.add("&6This is the");
++                lines.add("&6default text");
++                config.set("playerlistHover" + ".lines", lines);
++            }
+             save();
+         } catch (IOException | InvalidConfigurationException e) {
+             e.printStackTrace();
+@@ -157,5 +164,11 @@ public class Config {
+     public static List<String> getFooter() {
+         return (List<String>) config.getList("tablist" + ".footer");
+     }
++    public static boolean getPlayerlistHoverEnabled() {
++        return config.getBoolean("playerlistHover" + ".enabled");
++    }
++    public static List<String> getPlayerlistHoverLines() {
++        return (List<String>) config.getList("playerlistHover" + ".lines");
++    }
+ 
+ }
