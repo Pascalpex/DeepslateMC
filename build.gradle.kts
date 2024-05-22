@@ -1,7 +1,7 @@
 plugins {
     java
     `maven-publish`
-    id("io.papermc.paperweight.patcher") version "1.6.3"
+    id("io.papermc.paperweight.patcher") version "1.7.1"
 }
 
 val paperMavenPublicUrl = "https://papermc.io/repo/repository/maven-public/"
@@ -51,7 +51,6 @@ subprojects {
         maven("https://repo.md-5.net/content/repositories/releases/")
         maven("https://hub.spigotmc.org/nexus/content/groups/public/")
         maven("https://jitpack.io")
-        maven("https://s01.oss.sonatype.org/content/repositories/snapshots/") // TODO - Adventure snapshot
     }
 }
 

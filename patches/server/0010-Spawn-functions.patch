@@ -5,10 +5,10 @@ Subject: [PATCH] Spawn functions
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index b07d264f9a26a7b702135b617529280bc3c108df..0a74b89005d3921dfffb3ca1bbafbfacb6f17e46 100644
+index b8822e1f745265aef8ac2c58233a5931a0e7e396..359bb76253e5934e534af08d325900931b62ef2a 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-@@ -266,6 +266,9 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+@@ -265,6 +265,9 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
          MinecraftServer.getServer().server.getCommandMap().register("buildworld", "Deepslate", new BuildworldCommand("buildworld"));
          MinecraftServer.getServer().server.getCommandMap().register("maintenance", "Deepslate", new MaintenanceMode("maintenance"));
          MinecraftServer.getServer().server.getCommandMap().register("help", "Deepslate", new HelpCommand("help"));
@@ -19,7 +19,7 @@ index b07d264f9a26a7b702135b617529280bc3c108df..0a74b89005d3921dfffb3ca1bbafbfac
  
          this.setPvpAllowed(dedicatedserverproperties.pvp);
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index c0ec84ed666bcf2155ebf33000e8a2a4a82b82c0..c0359539ed5f4406935f6d1703e0bba2c7ff3916 100644
+index 6ab4613852fe5eeda6946ea332707a1f561ca28c..228fab0775710d048814039d10979cee16e6e5ea 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
 @@ -107,6 +107,7 @@ import net.minecraft.world.scores.Objective;
@@ -194,10 +194,10 @@ index 0000000000000000000000000000000000000000..24e67e218432ea852a285b13d56b48e4
 +
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 60ecb3f52b14014280815f5d1b0eae3d2b7ce7d8..a2dfa44c1860ed5fe8762b9054a14942309fe567 100644
+index 31cef00260a35e0efeff71d21f4ce0cbd0168bcf..c747e27d0557cb918324cc683d4d16fcd31b07fc 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -1121,6 +1121,9 @@ public final class CraftServer implements Server {
+@@ -1102,6 +1102,9 @@ public final class CraftServer implements Server {
          MinecraftServer.getServer().server.getCommandMap().register("buildworld", "Deepslate", new BuildworldCommand("buildworld"));
          MinecraftServer.getServer().server.getCommandMap().register("maintenance", "Deepslate", new MaintenanceMode("maintenance"));
          MinecraftServer.getServer().server.getCommandMap().register("help", "Deepslate", new HelpCommand("help"));

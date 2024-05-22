@@ -5,7 +5,7 @@ Subject: [PATCH] Config and messages file
 
 
 diff --git a/src/main/java/net/minecraft/commands/Commands.java b/src/main/java/net/minecraft/commands/Commands.java
-index 9f48fc9bc38e0138c45000456a49c78d310b4959..fbede1c1814eb24e11c2d389e153f6c808a6e9bb 100644
+index 13d066f4d0c115445b807db22d365ad14926b734..f96c05fa9ba7a01176c820d0c28023386313a87f 100644
 --- a/src/main/java/net/minecraft/commands/Commands.java
 +++ b/src/main/java/net/minecraft/commands/Commands.java
 @@ -133,6 +133,8 @@ import net.minecraft.server.level.ServerPlayer;
@@ -20,7 +20,7 @@ index 9f48fc9bc38e0138c45000456a49c78d310b4959..fbede1c1814eb24e11c2d389e153f6c8
 @@ -156,6 +158,10 @@ public class Commands {
  
      public Commands(Commands.CommandSelection environment, CommandBuildContext commandRegistryAccess) {
-         this(); // CraftBukkit
+         // Paper
 +        // Deepslate start
 +        Config.load();
 +        MessagesFile.load();

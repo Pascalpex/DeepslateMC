@@ -5,27 +5,38 @@ Subject: [PATCH] Rebranding
 
 
 diff --git a/build.gradle.kts b/build.gradle.kts
-index 506bdb19310291ec8770226cdcfbd0e104f5ba7e..212a501f2b57a66c90181084f73a69f35ed4cda0 100644
+index d5d3b8b48528082fc0967ad1398cc972dc0eb127..529dc6e986ea0ac8f5e63640d2d82aed2918ef68 100644
 --- a/build.gradle.kts
 +++ b/build.gradle.kts
-@@ -14,7 +14,7 @@ val alsoShade: Configuration by configurations.creating
+@@ -13,7 +13,7 @@ configurations.named(log4jPlugins.compileClasspathConfigurationName) {
+ val alsoShade: Configuration by configurations.creating
+ 
  dependencies {
-     // Gale start - project setup
-     // Depend on own API
--    implementation(project(":leaf-api")) // Leaf
-+    implementation(project(":deepslateMC-api")) // Leaf // Deepslate
-     // Depend on Paper MojangAPI
-     implementation("io.papermc.paper:paper-mojangapi:${project.version}") {
-         exclude("io.papermc.paper", "paper-api")
-@@ -121,7 +121,7 @@ tasks.jar {
+-    implementation(project(":leaf-api")) // Gale start - project setup - Depend on own API // Leaf
++    implementation(project(":deepslateMC-api")) // Gale start - project setup - Depend on own API // Leaf // Deepslate
+ 
+     implementation("com.electronwill.night-config:toml:3.6.7") // Leaf - Night config // Dreeam TODO: Bump to 3.7.1
+ 
+@@ -116,14 +116,14 @@ tasks.jar {
+         val gitBranch = git("rev-parse", "--abbrev-ref", "HEAD").getText().trim() // Paper
          attributes(
              "Main-Class" to "org.bukkit.craftbukkit.Main",
-             "Implementation-Title" to "CraftBukkit",
--            "Implementation-Version" to "git-Leaf-$implementationVersion", // Gale - branding changes // Leaf
-+            "Implementation-Version" to "git-DeepslateMC-$implementationVersion", // Gale - branding changes // Leaf // Deepslate
+-            "Implementation-Title" to "Leaf", // Gale - branding changes // Leaf
++            "Implementation-Title" to "DeepslateMC", // Gale - branding changes // Leaf // Deepslate
+             "Implementation-Version" to implementationVersion,
              "Implementation-Vendor" to date, // Paper
-             "Specification-Title" to "Bukkit",
+-            "Specification-Title" to "Leaf", // Gale - branding changes // Leaf
++            "Specification-Title" to "DeepslateMC", // Gale - branding changes // Leaf // Deepslate
              "Specification-Version" to project.version,
+-            "Specification-Vendor" to "Winds Studio", // Gale - branding changes // Leaf
+-            "Brand-Id" to "winds-studio:leaf", // Gale - branding changes // Leaf
+-            "Brand-Name" to "Leaf", // Gale - branding changes // Leaf
++            "Specification-Vendor" to "Pascalpex", // Gale - branding changes // Leaf // Deepslate
++            "Brand-Id" to "pascalpex:deepslate", // Gale - branding changes // Leaf // Deepslate
++            "Brand-Name" to "DeepslateMC", // Gale - branding changes // Leaf // Deepslate
+             "Build-Number" to (build ?: ""),
+             "Build-Time" to Instant.now().toString(),
+             "Git-Branch" to gitBranch, // Paper
 diff --git a/src/main/java/com/destroystokyo/paper/Metrics.java b/src/main/java/com/destroystokyo/paper/Metrics.java
 index fe50cc484ebfe4d3ab8795c222b2abd45fe64310..464718bfef4128fa125c1990a81f9238c6e22bb8 100644
 --- a/src/main/java/com/destroystokyo/paper/Metrics.java
@@ -57,10 +68,10 @@ index fe50cc484ebfe4d3ab8795c222b2abd45fe64310..464718bfef4128fa125c1990a81f9238
                  metrics.addCustomChart(new Metrics.DrilldownPie("java_version", () -> {
                      Map<String, Map<String, Integer>> map = new HashMap<>(2); // Gale - metrics - reduce HashMap capacity
 diff --git a/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java b/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java
-index 77ee490b58f60cfea946cca4e335882dd324bd47..a6ee595288882714fd71dc61f0bbf8870eca56a5 100644
+index 2d655cfddb6e7d6528b928c9270960bc0c6148f9..2d743778c99e5b78ed72fcfa655c91bde5ce2c68 100644
 --- a/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java
 +++ b/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java
-@@ -23,12 +23,12 @@ import java.util.stream.StreamSupport;
+@@ -25,12 +25,12 @@ import org.galemc.gale.version.AbstractPaperVersionFetcher;
  public class PaperVersionFetcher extends AbstractPaperVersionFetcher {
  
      public PaperVersionFetcher() {
@@ -88,6 +99,40 @@ index b5f3f213da8a40d5184098af017c8e2669c3e58c..c7b748d2d3d34b5b69a45074496982a3
                  .variable(LineReader.HISTORY_FILE, java.nio.file.Paths.get(".console_history"))
                  .completer(new ConsoleCommandCompleter(this.server))
                  .option(LineReader.Option.COMPLETE_IN_WORD, true);
+diff --git a/src/main/java/io/papermc/paper/ServerBuildInfoImpl.java b/src/main/java/io/papermc/paper/ServerBuildInfoImpl.java
+index 9d003c2ae45a057c0274a34fe5012cf17d1a2681..05a5b964241971725efce6f7ea37138530091422 100644
+--- a/src/main/java/io/papermc/paper/ServerBuildInfoImpl.java
++++ b/src/main/java/io/papermc/paper/ServerBuildInfoImpl.java
+@@ -34,6 +34,7 @@ public record ServerBuildInfoImpl(
+     private static final String BRAND_GALE_NAME = "Gale"; // Gale - branding changes
+     private static final String BRAND_PURPUR_NAME = "Purpur"; // Purpur
+     private static final String BRAND_LEAF_NAME = "Leaf"; // Leaf
++    private static final String BRAND_DEEPSLATE_NAME = "DeepslateMC"; // Deepslate
+ 
+     private static final String BUILD_DEV = "DEV";
+ 
+@@ -45,9 +46,9 @@ public record ServerBuildInfoImpl(
+         this(
+             getManifestAttribute(manifest, ATTRIBUTE_BRAND_ID)
+                 .map(Key::key)
+-                .orElse(BRAND_LEAF_ID), // Gale - branding changes // Leaf
++                .orElse(BRAND_DEEPSLATE_ID), // Gale - branding changes // Leaf // Deepslate
+             getManifestAttribute(manifest, ATTRIBUTE_BRAND_NAME)
+-                .orElse(BRAND_LEAF_NAME), // Gale - branding changes // Leaf
++                .orElse(BRAND_DEEPSLATE_NAME), // Gale - branding changes // Leaf // Deepslate
+             SharedConstants.getCurrentVersion().getId(),
+             SharedConstants.getCurrentVersion().getName(),
+             getManifestAttribute(manifest, ATTRIBUTE_BUILD_NUMBER)
+@@ -67,7 +68,8 @@ public record ServerBuildInfoImpl(
+         return brandId.equals(this.brandId)
+                 || brandId.equals(BRAND_PAPER_ID)
+                 || brandId.equals(BRAND_GALE_ID)
+-                || brandId.equals(BRAND_PURPUR_ID); // Gale - branding changes // Leaf
++                || brandId.equals(BRAND_PURPUR_ID)
++                || brandId.equals(BRAND_LEAF_ID); // Gale - branding changes // Leaf // Deepslate
+     }
+ 
+     @Override
 diff --git a/src/main/java/net/minecraft/CrashReport.java b/src/main/java/net/minecraft/CrashReport.java
 index d8ebcd1c94ce0f78e9d16c603a79a492263990fd..4c61fc4a50957ad31309093468dcda1c2cadb860 100644
 --- a/src/main/java/net/minecraft/CrashReport.java
@@ -124,10 +169,10 @@ index e68ecaf8d60517fe6398338702a7a7968d67d32b..c6d8ddb43a37f58b8d8f35e91a818add
          /* CraftBukkit start - Replace everything
          OptionParser optionparser = new OptionParser();
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 10e3eb23c00b2af646f198f789129814beb656b1..d2f5a363d13a42d420c6f8e9071dc57181844a02 100644
+index c7f44250b1801c581420f93d357d64f615949691..8f2d183caed3928dacef4215a5bb8c833648aabd 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
-@@ -953,7 +953,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -952,7 +952,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
              We do not want people to report thread issues to Paper,
              but we do want people to report thread issues to Gale.
               */
@@ -136,13 +181,13 @@ index 10e3eb23c00b2af646f198f789129814beb656b1..d2f5a363d13a42d420c6f8e9071dc571
              // Gale end - branding changes
              while (this.getRunningThread().isAlive()) {
                  this.getRunningThread().stop();
-@@ -1882,7 +1882,13 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -1893,7 +1893,13 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
  
      @DontObfuscate
      public String getServerModName() {
--        return org.dreeam.leaf.config.modules.misc.ServerBrand.serverModName; // Paper // Gale - branding changes // Leaf - Configurable server mod name
+-        return org.dreeam.leaf.config.modules.misc.ServerBrand.serverModName; // Paper // Leaf - Configurable server mod name
 +        // Deepslate start
-+        final String leafModName = org.dreeam.leaf.config.modules.misc.ServerBrand.serverModName; // Paper // Gale - branding changes // Leaf - Configurable server mod name
++        final String leafModName = org.dreeam.leaf.config.modules.misc.ServerBrand.serverModName; // Paper // Leaf - Configurable server mod name
 +        return switch (leafModName) {
 +            case "Leaf" -> "DeepslateMC";
 +            default -> leafModName;
@@ -195,19 +240,6 @@ index f6e3b745fc417354380d4a969f83aee430bad785..fe7e284dcc6cd50b790868e62ae7e3ac
      }
  
      private static CompoundTag readOversizedChunk(RegionFile regionfile, ChunkPos chunkCoordinate) throws IOException {
-diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index e585295d7c4c09131dc34b332f48ae3f601c9408..6417175ccb7925d939f3b4c340c542d9d5a6cf83 100644
---- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-+++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -275,7 +275,7 @@ import su.plo.matter.Globals;
- // Leaf end - Matter
- 
- public final class CraftServer implements Server {
--    private final String serverName = "Leaf"; // Paper // Gale - branding changes // Leaf
-+    private final String serverName = "DeepslateMC"; // Paper // Gale - branding changes // Leaf // Deepslate
-     private final String serverVersion;
-     private final String bukkitVersion = Versioning.getBukkitVersion();
-     private final Logger logger = Logger.getLogger("Minecraft");
 diff --git a/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java b/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java
 index 4ee1c3461d21feab3a54e76a7c2ab80b6ea2ab38..47c0f4aa3bf05f589b7aef3762b825b865db9846 100644
 --- a/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java
@@ -222,10 +254,10 @@ index 4ee1c3461d21feab3a54e76a7c2ab80b6ea2ab38..47c0f4aa3bf05f589b7aef3762b825b8
                  // (async tasks must live with race-conditions if they attempt to cancel between these few lines of code)
              }
 diff --git a/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java b/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
-index 44153969844ac521cc082c9bdb3bd02e100f2b7e..16259b538c1fa39e7bf57b7e47d0b8b4ce650ec5 100644
+index 1a60d80553d9f242cb56fa044db241611d973de1..c1c258572a2bc44044b19bd16fd57e3684d5723b 100644
 --- a/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
 +++ b/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
-@@ -505,7 +505,7 @@ public final class CraftMagicNumbers implements UnsafeValues {
+@@ -509,7 +509,7 @@ public final class CraftMagicNumbers implements UnsafeValues {
  
      @Override
      public com.destroystokyo.paper.util.VersionFetcher getVersionFetcher() {
@@ -270,7 +302,7 @@ index e220f5601f6b92b7b280ce8ebe64117d30192b0e..18cf0f8dbd7e76f4660933826c9fff96
      }
  }
 diff --git a/src/main/java/org/purpurmc/purpur/PurpurConfig.java b/src/main/java/org/purpurmc/purpur/PurpurConfig.java
-index e49f813b4ccb698d9d50c8c827d789d2a5274acf..a9ec7230847dca5f2458de502a7a0b59e4f9fe2e 100644
+index fef833511a749593d4ecf4ec82f940855ace1598..96f124ced92a7d8835d7180ce69073d4cd319d00 100644
 --- a/src/main/java/org/purpurmc/purpur/PurpurConfig.java
 +++ b/src/main/java/org/purpurmc/purpur/PurpurConfig.java
 @@ -239,7 +239,7 @@ public class PurpurConfig {

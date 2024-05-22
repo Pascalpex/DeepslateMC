@@ -5,10 +5,10 @@ Subject: [PATCH] Buildworld command
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index bdf8dc00f5200da080940aa53ab89143cee992ab..975514abaa47b43b1dc9ed120bad08953243354e 100644
+index c756967c9659ddf76ff82687cfb05fc4638ae56f..2d06d53e927cf0bb3d4f37c60e49abd765328662 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-@@ -262,6 +262,8 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+@@ -261,6 +261,8 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
          MinecraftServer.getServer().server.getCommandMap().register("dc", "Deepslate", new DiscordCommand("dc"));
          MinecraftServer.getServer().server.getCommandMap().register("cc", "Deepslate", new ClearchatCommand("cc"));
          MinecraftServer.getServer().server.getCommandMap().register("clearchat", "Deepslate", new ClearchatCommand("clearchat"));
@@ -130,10 +130,10 @@ index 0000000000000000000000000000000000000000..8b1b1a727a3b30176b05d31cbbaec177
 +    }
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index fd159ad8e0421d32eb4725cced56d6ba6539daf2..0f4343e74cd9e3e281320ccf14c3b955394f513a 100644
+index 42d92f89bd416b781a3cba58c83657c2b2a5cc83..fc893f3702aa6eaa07e188cbfa76c063f4d00b22 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -1117,6 +1117,8 @@ public final class CraftServer implements Server {
+@@ -1098,6 +1098,8 @@ public final class CraftServer implements Server {
          MinecraftServer.getServer().server.getCommandMap().register("dc", "Deepslate", new DiscordCommand("dc"));
          MinecraftServer.getServer().server.getCommandMap().register("cc", "Deepslate", new ClearchatCommand("cc"));
          MinecraftServer.getServer().server.getCommandMap().register("clearchat", "Deepslate", new ClearchatCommand("clearchat"));
