@@ -115,10 +115,10 @@ index c11d3597dbc49a1f6d75a55f427c55fc55d68a29..74f9bccd6bbf8fb8baedf1f91c709593
                          if (args[0].equalsIgnoreCase("version")) {
 diff --git a/src/main/java/net/pascalpex/deepslatemc/util/TablistUtil.java b/src/main/java/net/pascalpex/deepslatemc/util/TablistUtil.java
 new file mode 100644
-index 0000000000000000000000000000000000000000..a6cb993878a7de8dab4addab7dff6b0dfa9e8c13
+index 0000000000000000000000000000000000000000..6263eb8b7b751deace9b8c58a9d4280a93eab0b3
 --- /dev/null
 +++ b/src/main/java/net/pascalpex/deepslatemc/util/TablistUtil.java
-@@ -0,0 +1,55 @@
+@@ -0,0 +1,56 @@
 +package net.pascalpex.deepslatemc.util;
 +
 +import net.pascalpex.deepslatemc.Config;
@@ -143,6 +143,7 @@ index 0000000000000000000000000000000000000000..a6cb993878a7de8dab4addab7dff6b0d
 +        if(!Config.getTablistEnabled()) {
 +            header = null;
 +            footer = null;
++            initiated = true;
 +            for (Player player : Bukkit.getOnlinePlayers()) {
 +                setTablist(player);
 +            }
