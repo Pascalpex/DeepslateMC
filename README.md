@@ -7,7 +7,7 @@
 </div>
 
 ## Information
-This fork aims to add useful little functionalities to replace plugins that many servers use, like spawn commands, colored signs or the ability to clear the chat.
+This fork aims to add useful little functionalities to replace plugins that many servers use, like spawn commands, tablist decoration, a bossbar or the ability to clear the chat.
 <br>
 All messages are customizable in a separate file. The default ones are in English and you can find translated ones [here](https://pascalpex.de/files/deepslate/translations/).
 <br>

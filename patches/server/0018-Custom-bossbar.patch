@@ -1,0 +1,167 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Pascalpex <pascalpex@gmail.com>
+Date: Wed, 22 May 2024 20:58:41 +0200
+Subject: [PATCH] Custom bossbar
+
+
+diff --git a/src/main/java/net/minecraft/server/commands/ReloadCommand.java b/src/main/java/net/minecraft/server/commands/ReloadCommand.java
+index 68d318c71632b853d51649083b3445b3e7a1cc2e..59c6ba08817fea827988f4add74b4d0545f181a0 100644
+--- a/src/main/java/net/minecraft/server/commands/ReloadCommand.java
++++ b/src/main/java/net/minecraft/server/commands/ReloadCommand.java
+@@ -11,6 +11,7 @@ import net.minecraft.network.chat.Component;
+ import net.minecraft.server.MinecraftServer;
+ import net.minecraft.server.packs.repository.PackRepository;
+ import net.minecraft.world.level.storage.WorldData;
++import net.pascalpex.deepslatemc.util.BossbarUtil;
+ import net.pascalpex.deepslatemc.util.TablistUtil;
+ import org.slf4j.Logger;
+ 
+@@ -53,6 +54,7 @@ public class ReloadCommand {
+         Collection<String> collection1 = ReloadCommand.discoverNewPacks(resourcepackrepository, savedata, collection);
+         minecraftserver.reloadResources(collection1, io.papermc.paper.event.server.ServerResourcesReloadedEvent.Cause.PLUGIN); // Paper - Add ServerResourcesReloadedEvent
+         TablistUtil.reloadTablist();
++        BossbarUtil.reloadBossbar();
+     }
+     // CraftBukkit end
+ 
+diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
+index 30d490c496961c6d239cece96c9cb9641b2b099f..b3ac19ff521564bec347e5fc17add66daa9ccd36 100644
+--- a/src/main/java/net/minecraft/server/players/PlayerList.java
++++ b/src/main/java/net/minecraft/server/players/PlayerList.java
+@@ -108,6 +108,7 @@ import net.minecraft.world.scores.PlayerTeam;
+ import net.pascalpex.deepslatemc.Config;
+ import net.pascalpex.deepslatemc.MessagesFile;
+ import net.pascalpex.deepslatemc.commands.SpawnCommand;
++import net.pascalpex.deepslatemc.util.BossbarUtil;
+ import net.pascalpex.deepslatemc.util.TablistUtil;
+ import org.galemc.gale.configuration.GaleGlobalConfiguration;
+ import org.slf4j.Logger;
+@@ -376,6 +377,11 @@ public abstract class PlayerList {
+             TablistUtil.setTablist(bukkitPlayer);
+         }
+         // Deepslate end
++        // Deepslate start - Bossbar
++        if (Config.getBossbarEnabled()) {
++            BossbarUtil.setBossbar(bukkitPlayer);
++        }
++        // Deepslate end
+         this.cserver.getPluginManager().callEvent(playerJoinEvent);
+ 
+         if (!player.connection.isAcceptingMessages()) {
+diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
+index 23765d710b135dec16a52fd10b7b9cc8f298779c..21593cf6dc3880c2386c17b48192588dde3cf33b 100644
+--- a/src/main/java/net/pascalpex/deepslatemc/Config.java
++++ b/src/main/java/net/pascalpex/deepslatemc/Config.java
+@@ -1,5 +1,7 @@
+ package net.pascalpex.deepslatemc;
+ 
++import net.kyori.adventure.bossbar.BossBar;
++import net.pascalpex.deepslatemc.util.BossbarUtil;
+ import org.bukkit.Bukkit;
+ import org.bukkit.Location;
+ import org.bukkit.World;
+@@ -79,6 +81,13 @@ public class Config {
+                 lines.add("&6default text");
+                 config.set("playerlistHover" + ".lines", lines);
+             }
++            if (!config.contains("bossbar")) {
++                config.set("bossbar" + ".enabled", false);
++                config.set("bossbar" + ".color", BossBar.Color.WHITE.name());
++                config.set("bossbar" + ".progress", 1.0f);
++                config.set("bossbar" + ".style", BossBar.Overlay.PROGRESS.name());
++                config.set("bossbar" + ".text", "&6Custom Bossbar");
++            }
+             save();
+         } catch (IOException | InvalidConfigurationException e) {
+             e.printStackTrace();
+@@ -170,5 +179,20 @@ public class Config {
+     public static List<String> getPlayerlistHoverLines() {
+         return (List<String>) config.getList("playerlistHover" + ".lines");
+     }
++    public static boolean getBossbarEnabled() {
++        return config.getBoolean("bossbar" + ".enabled");
++    }
++    public static String getBossbarColor() {
++        return config.getString("bossbar" + ".color");
++    }
++    public static String getBossbarText() {
++        return config.getString("bossbar" + ".text");
++    }
++    public static String getBossbarStyle() {
++        return config.getString("bossbar" + ".style");
++    }
++    public static float getBossbarProgress() {
++        return (float) config.getDouble("bossbar" + ".progress");
++    }
+ 
+ }
+diff --git a/src/main/java/net/pascalpex/deepslatemc/commands/DeepslateCommand.java b/src/main/java/net/pascalpex/deepslatemc/commands/DeepslateCommand.java
+index 74f9bccd6bbf8fb8baedf1f91c70959365cf61b8..b4f13f00a0a3524606cdd0441ea82de0eb415de0 100644
+--- a/src/main/java/net/pascalpex/deepslatemc/commands/DeepslateCommand.java
++++ b/src/main/java/net/pascalpex/deepslatemc/commands/DeepslateCommand.java
+@@ -2,6 +2,7 @@ package net.pascalpex.deepslatemc.commands;
+ 
+ import net.pascalpex.deepslatemc.Config;
+ import net.pascalpex.deepslatemc.MessagesFile;
++import net.pascalpex.deepslatemc.util.BossbarUtil;
+ import net.pascalpex.deepslatemc.util.TablistUtil;
+ import org.bukkit.ChatColor;
+ import org.bukkit.Location;
+@@ -47,6 +48,7 @@ public class DeepslateCommand extends Command {
+                             MessagesFile.load();
+                             Config.load();
+                             TablistUtil.reloadTablist();
++                            BossbarUtil.reloadBossbar();
+                             player.sendMessage(prefix + MessagesFile.getConfigReloaded());
+                         } else {
+                             if (args[0].equalsIgnoreCase("version")) {
+@@ -72,6 +74,7 @@ public class DeepslateCommand extends Command {
+                         MessagesFile.load();
+                         Config.load();
+                         TablistUtil.reloadTablist();
++                        BossbarUtil.reloadBossbar();
+                         sender.sendMessage(prefix + MessagesFile.getConfigReloaded());
+                     } else {
+                         if (args[0].equalsIgnoreCase("version")) {
+diff --git a/src/main/java/net/pascalpex/deepslatemc/util/BossbarUtil.java b/src/main/java/net/pascalpex/deepslatemc/util/BossbarUtil.java
+new file mode 100644
+index 0000000000000000000000000000000000000000..a1bde03bae932db066e7f84d2288b8816a60644f
+--- /dev/null
++++ b/src/main/java/net/pascalpex/deepslatemc/util/BossbarUtil.java
+@@ -0,0 +1,36 @@
++package net.pascalpex.deepslatemc.util;
++
++import net.kyori.adventure.bossbar.BossBar;
++import net.kyori.adventure.text.Component;
++import net.pascalpex.deepslatemc.Config;
++import org.bukkit.Bukkit;
++import org.bukkit.entity.Player;
++
++public class BossbarUtil {
++
++    private static BossBar bossbar;
++
++    public static void setBossbar(Player player) {
++        if (bossbar == null) {
++            reloadBossbar();
++            return;
++        }
++        player.hideBossBar(bossbar);
++        player.showBossBar(bossbar);
++    }
++
++    public static void reloadBossbar() {
++        if (bossbar != null) {
++            for (Player player : Bukkit.getOnlinePlayers()) {
++                player.hideBossBar(bossbar);
++            }
++        }
++        if (Config.getBossbarEnabled()) {
++            bossbar = BossBar.bossBar(Component.text(Config.getBossbarText().replace("&", "§")).asComponent(), Config.getBossbarProgress(), BossBar.Color.valueOf(Config.getBossbarColor()), BossBar.Overlay.valueOf(Config.getBossbarStyle()));
++            for (Player player : Bukkit.getOnlinePlayers()) {
++                player.showBossBar(bossbar);
++            }
++        }
++    }
++
++}

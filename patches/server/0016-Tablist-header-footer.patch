@@ -4,8 +4,28 @@ Date: Mon, 25 Dec 2023 15:56:49 +0100
 Subject: [PATCH] Tablist header footer
 
 
+diff --git a/src/main/java/net/minecraft/server/commands/ReloadCommand.java b/src/main/java/net/minecraft/server/commands/ReloadCommand.java
+index c020c86194723a5c89816f91e0b7c5eeaf132b7e..68d318c71632b853d51649083b3445b3e7a1cc2e 100644
+--- a/src/main/java/net/minecraft/server/commands/ReloadCommand.java
++++ b/src/main/java/net/minecraft/server/commands/ReloadCommand.java
+@@ -11,6 +11,7 @@ import net.minecraft.network.chat.Component;
+ import net.minecraft.server.MinecraftServer;
+ import net.minecraft.server.packs.repository.PackRepository;
+ import net.minecraft.world.level.storage.WorldData;
++import net.pascalpex.deepslatemc.util.TablistUtil;
+ import org.slf4j.Logger;
+ 
+ public class ReloadCommand {
+@@ -51,6 +52,7 @@ public class ReloadCommand {
+         Collection<String> collection = resourcepackrepository.getSelectedIds();
+         Collection<String> collection1 = ReloadCommand.discoverNewPacks(resourcepackrepository, savedata, collection);
+         minecraftserver.reloadResources(collection1, io.papermc.paper.event.server.ServerResourcesReloadedEvent.Cause.PLUGIN); // Paper - Add ServerResourcesReloadedEvent
++        TablistUtil.reloadTablist();
+     }
+     // CraftBukkit end
+ 
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index c0359539ed5f4406935f6d1703e0bba2c7ff3916..7219cfeead196670a50f17886684be32a4cceb40 100644
+index 228fab0775710d048814039d10979cee16e6e5ea..30d490c496961c6d239cece96c9cb9641b2b099f 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
 @@ -108,6 +108,7 @@ import net.minecraft.world.scores.PlayerTeam;
@@ -66,7 +86,7 @@ index 94e629c3d977e8f15cc5a3912feeed97ea02c839..cc38e0b87f4b78666372345140bc36d1
  
  }
 diff --git a/src/main/java/net/pascalpex/deepslatemc/commands/DeepslateCommand.java b/src/main/java/net/pascalpex/deepslatemc/commands/DeepslateCommand.java
-index c11d3597dbc49a1f6d75a55f427c55fc55d68a29..952422775b768a43bb95c62e33475edb96c492ee 100644
+index c11d3597dbc49a1f6d75a55f427c55fc55d68a29..74f9bccd6bbf8fb8baedf1f91c70959365cf61b8 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/commands/DeepslateCommand.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/commands/DeepslateCommand.java
 @@ -2,6 +2,7 @@ package net.pascalpex.deepslatemc.commands;
@@ -77,22 +97,28 @@ index c11d3597dbc49a1f6d75a55f427c55fc55d68a29..952422775b768a43bb95c62e33475edb
  import org.bukkit.ChatColor;
  import org.bukkit.Location;
  import org.bukkit.command.Command;
-@@ -45,6 +46,9 @@ public class DeepslateCommand extends Command {
+@@ -45,6 +46,7 @@ public class DeepslateCommand extends Command {
                          if (args[0].equalsIgnoreCase("reload")) {
                              MessagesFile.load();
                              Config.load();
-+                            if (Config.getTablistEnabled()) {
-+                                TablistUtil.reloadTablist();
-+                            }
++                            TablistUtil.reloadTablist();
                              player.sendMessage(prefix + MessagesFile.getConfigReloaded());
                          } else {
                              if (args[0].equalsIgnoreCase("version")) {
+@@ -69,6 +71,7 @@ public class DeepslateCommand extends Command {
+                     if (args[0].equalsIgnoreCase("reload")) {
+                         MessagesFile.load();
+                         Config.load();
++                        TablistUtil.reloadTablist();
+                         sender.sendMessage(prefix + MessagesFile.getConfigReloaded());
+                     } else {
+                         if (args[0].equalsIgnoreCase("version")) {
 diff --git a/src/main/java/net/pascalpex/deepslatemc/util/TablistUtil.java b/src/main/java/net/pascalpex/deepslatemc/util/TablistUtil.java
 new file mode 100644
-index 0000000000000000000000000000000000000000..906708e425ee1ae110f350d951b1e9463684b1aa
+index 0000000000000000000000000000000000000000..a6cb993878a7de8dab4addab7dff6b0dfa9e8c13
 --- /dev/null
 +++ b/src/main/java/net/pascalpex/deepslatemc/util/TablistUtil.java
-@@ -0,0 +1,46 @@
+@@ -0,0 +1,55 @@
 +package net.pascalpex.deepslatemc.util;
 +
 +import net.pascalpex.deepslatemc.Config;
@@ -114,6 +140,15 @@ index 0000000000000000000000000000000000000000..906708e425ee1ae110f350d951b1e946
 +    }
 +
 +    public static void reloadTablist() {
++        if(!Config.getTablistEnabled()) {
++            header = null;
++            footer = null;
++            for (Player player : Bukkit.getOnlinePlayers()) {
++                setTablist(player);
++            }
++            return;
++        }
++
 +        header = "";
 +        footer = "";
 +        for (String s : Config.getHeader()) {
