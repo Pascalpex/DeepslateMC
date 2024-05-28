@@ -147,7 +147,7 @@ index d8ebcd1c94ce0f78e9d16c603a79a492263990fd..4c61fc4a50957ad31309093468dcda1c
  
      public String getTitle() {
 diff --git a/src/main/java/net/minecraft/server/Main.java b/src/main/java/net/minecraft/server/Main.java
-index e68ecaf8d60517fe6398338702a7a7968d67d32b..c6d8ddb43a37f58b8d8f35e91a818addd5f4c62d 100644
+index 207f8f864f0cf5874f8cad9bd15fa5e9ffa3fc12..8fc6f31f3dec3ee328e4f818dfc67eaf56d1e748 100644
 --- a/src/main/java/net/minecraft/server/Main.java
 +++ b/src/main/java/net/minecraft/server/Main.java
 @@ -77,6 +77,17 @@ public class Main {
@@ -169,10 +169,10 @@ index e68ecaf8d60517fe6398338702a7a7968d67d32b..c6d8ddb43a37f58b8d8f35e91a818add
          /* CraftBukkit start - Replace everything
          OptionParser optionparser = new OptionParser();
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index c7f44250b1801c581420f93d357d64f615949691..8f2d183caed3928dacef4215a5bb8c833648aabd 100644
+index 8ca3f0e06f163d9ae2910c9fb2475af70b39b943..dc45cf9a5d26c1e2863b797c91463da3a7589ba3 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
-@@ -952,7 +952,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -949,7 +949,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
              We do not want people to report thread issues to Paper,
              but we do want people to report thread issues to Gale.
               */
@@ -181,7 +181,7 @@ index c7f44250b1801c581420f93d357d64f615949691..8f2d183caed3928dacef4215a5bb8c83
              // Gale end - branding changes
              while (this.getRunningThread().isAlive()) {
                  this.getRunningThread().stop();
-@@ -1893,7 +1893,13 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -1890,7 +1890,13 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
  
      @DontObfuscate
      public String getServerModName() {
@@ -228,10 +228,10 @@ index 8f951e3b6241d040b28d3c8b8e7d7f96ab4d2b8d..22f558436cf63644e65936dbaad8976e
                      servergui.runFinalizers();
                  }
 diff --git a/src/main/java/net/minecraft/world/level/chunk/storage/RegionFileStorage.java b/src/main/java/net/minecraft/world/level/chunk/storage/RegionFileStorage.java
-index f6e3b745fc417354380d4a969f83aee430bad785..fe7e284dcc6cd50b790868e62ae7e3acb4409248 100644
+index 1090b7e36e3c1c105bc36135b82751c651f237d4..7f15fd2e7720e5d99d26f4512814aa10e3e83d61 100644
 --- a/src/main/java/net/minecraft/world/level/chunk/storage/RegionFileStorage.java
 +++ b/src/main/java/net/minecraft/world/level/chunk/storage/RegionFileStorage.java
-@@ -155,7 +155,7 @@ public class RegionFileStorage implements AutoCloseable {
+@@ -157,7 +157,7 @@ public class RegionFileStorage implements AutoCloseable {
  
      // Paper start
      private static void printOversizedLog(String msg, Path file, int x, int z) {
@@ -254,10 +254,10 @@ index 4ee1c3461d21feab3a54e76a7c2ab80b6ea2ab38..47c0f4aa3bf05f589b7aef3762b825b8
                  // (async tasks must live with race-conditions if they attempt to cancel between these few lines of code)
              }
 diff --git a/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java b/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
-index 1a60d80553d9f242cb56fa044db241611d973de1..c1c258572a2bc44044b19bd16fd57e3684d5723b 100644
+index eb2f35890adb0a593ebae7fb24606fdcced6c3fa..24c0cbf29fadc66ab4625f91a4db10cdfbf74199 100644
 --- a/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
 +++ b/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
-@@ -509,7 +509,7 @@ public final class CraftMagicNumbers implements UnsafeValues {
+@@ -500,7 +500,7 @@ public final class CraftMagicNumbers implements UnsafeValues {
  
      @Override
      public com.destroystokyo.paper.util.VersionFetcher getVersionFetcher() {
