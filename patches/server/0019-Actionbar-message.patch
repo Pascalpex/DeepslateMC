@@ -45,10 +45,10 @@ index 41aa3354312f2ad5ff9f263251e78887740c7d98..1deed9c70e37fc84e4f4507d7b3ebbea
  
          this.setPvpAllowed(dedicatedserverproperties.pvp);
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index b3ac19ff521564bec347e5fc17add66daa9ccd36..81584aa339447d3223340a10f53651275c5fdcc3 100644
+index d730e36606d29aa2f8844a99777475b162100e76..61851795a219f4ffe6f374f4498c9e89c838612e 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
-@@ -108,6 +108,7 @@ import net.minecraft.world.scores.PlayerTeam;
+@@ -109,6 +109,7 @@ import net.minecraft.world.scores.PlayerTeam;
  import net.pascalpex.deepslatemc.Config;
  import net.pascalpex.deepslatemc.MessagesFile;
  import net.pascalpex.deepslatemc.commands.SpawnCommand;
@@ -56,7 +56,7 @@ index b3ac19ff521564bec347e5fc17add66daa9ccd36..81584aa339447d3223340a10f5365127
  import net.pascalpex.deepslatemc.util.BossbarUtil;
  import net.pascalpex.deepslatemc.util.TablistUtil;
  import org.galemc.gale.configuration.GaleGlobalConfiguration;
-@@ -382,6 +383,11 @@ public abstract class PlayerList {
+@@ -375,6 +376,11 @@ public abstract class PlayerList {
              BossbarUtil.setBossbar(bukkitPlayer);
          }
          // Deepslate end
