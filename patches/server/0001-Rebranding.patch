@@ -5,7 +5,7 @@ Subject: [PATCH] Rebranding
 
 
 diff --git a/build.gradle.kts b/build.gradle.kts
-index d5d3b8b48528082fc0967ad1398cc972dc0eb127..529dc6e986ea0ac8f5e63640d2d82aed2918ef68 100644
+index 92f376ee6e876c6d023fbac2815c8079d49b45fa..a6e05843ee68e13e080fd72d3975d77458c8f46f 100644
 --- a/build.gradle.kts
 +++ b/build.gradle.kts
 @@ -13,7 +13,7 @@ configurations.named(log4jPlugins.compileClasspathConfigurationName) {
@@ -169,10 +169,10 @@ index 207f8f864f0cf5874f8cad9bd15fa5e9ffa3fc12..8fc6f31f3dec3ee328e4f818dfc67eaf
          /* CraftBukkit start - Replace everything
          OptionParser optionparser = new OptionParser();
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 8ca3f0e06f163d9ae2910c9fb2475af70b39b943..dc45cf9a5d26c1e2863b797c91463da3a7589ba3 100644
+index b6ad776a0a1bc9f7bd25fa665633a75ac500544c..96e5547300fb3c00607028f21fc0ea74e1e7b368 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
-@@ -949,7 +949,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -951,7 +951,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
              We do not want people to report thread issues to Paper,
              but we do want people to report thread issues to Gale.
               */
@@ -181,7 +181,7 @@ index 8ca3f0e06f163d9ae2910c9fb2475af70b39b943..dc45cf9a5d26c1e2863b797c91463da3
              // Gale end - branding changes
              while (this.getRunningThread().isAlive()) {
                  this.getRunningThread().stop();
-@@ -1890,7 +1890,13 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -1906,7 +1906,13 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
  
      @DontObfuscate
      public String getServerModName() {
@@ -254,10 +254,10 @@ index 4ee1c3461d21feab3a54e76a7c2ab80b6ea2ab38..47c0f4aa3bf05f589b7aef3762b825b8
                  // (async tasks must live with race-conditions if they attempt to cancel between these few lines of code)
              }
 diff --git a/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java b/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
-index bbcd357791c648036c614401c0fd94ad51a047f7..390ec83d0e0d0768e90423db8cfbab33bf4b6b33 100644
+index c8dc6333cddbf25c8211be6d24ce39f5ee64b70a..8f1c870d6f49870e70bc2168c6ec69c93752698c 100644
 --- a/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
 +++ b/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
-@@ -501,7 +501,7 @@ public final class CraftMagicNumbers implements UnsafeValues {
+@@ -502,7 +502,7 @@ public final class CraftMagicNumbers implements UnsafeValues {
  
      @Override
      public com.destroystokyo.paper.util.VersionFetcher getVersionFetcher() {
@@ -302,10 +302,10 @@ index e220f5601f6b92b7b280ce8ebe64117d30192b0e..18cf0f8dbd7e76f4660933826c9fff96
      }
  }
 diff --git a/src/main/java/org/purpurmc/purpur/PurpurConfig.java b/src/main/java/org/purpurmc/purpur/PurpurConfig.java
-index fef833511a749593d4ecf4ec82f940855ace1598..96f124ced92a7d8835d7180ce69073d4cd319d00 100644
+index cfdab5174f5ac523cde457c0cee5a172bb53e0e0..21a1956fe74481449cc8eb1341c247b051ff4fc5 100644
 --- a/src/main/java/org/purpurmc/purpur/PurpurConfig.java
 +++ b/src/main/java/org/purpurmc/purpur/PurpurConfig.java
-@@ -239,7 +239,7 @@ public class PurpurConfig {
+@@ -237,7 +237,7 @@ public class PurpurConfig {
          deathMessageOnlyBroadcastToAffectedPlayer = getBoolean("settings.broadcasts.death.only-broadcast-to-affected-player", deathMessageOnlyBroadcastToAffectedPlayer);
      }
  

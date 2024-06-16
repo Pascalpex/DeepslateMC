@@ -5,7 +5,7 @@ Subject: [PATCH] Configurable help command
 
 
 diff --git a/src/main/java/net/minecraft/commands/Commands.java b/src/main/java/net/minecraft/commands/Commands.java
-index b2e516dda9c3d35a4aa130b84b34656897a59a78..fa33f9f8b1a08806a2567bc5c1e5a0a7bbafa439 100644
+index fab7aa5a7af1177f4ae9a342da7ded53777604aa..71fc4f042865316b4b03c2857ad2be754acff971 100644
 --- a/src/main/java/net/minecraft/commands/Commands.java
 +++ b/src/main/java/net/minecraft/commands/Commands.java
 @@ -184,7 +184,7 @@ public class Commands {
@@ -95,10 +95,10 @@ index 0000000000000000000000000000000000000000..18ff82e04111931e1d878abbf340d272
 +
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 8f7794b51e8a98d33691a007f9fa4f1a28aface0..31cef00260a35e0efeff71d21f4ce0cbd0168bcf 100644
+index 600e6f6781411d1d713c420a667c0f0bdb8f1c4d..9d0943879692ca76920cbaf1909d247ed8c3b5a2 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -1101,6 +1101,7 @@ public final class CraftServer implements Server {
+@@ -1124,6 +1124,7 @@ public final class CraftServer implements Server {
          MinecraftServer.getServer().server.getCommandMap().register("setbuildworld", "Deepslate", new BuildworldCommand("setbuildworld"));
          MinecraftServer.getServer().server.getCommandMap().register("buildworld", "Deepslate", new BuildworldCommand("buildworld"));
          MinecraftServer.getServer().server.getCommandMap().register("maintenance", "Deepslate", new MaintenanceMode("maintenance"));
