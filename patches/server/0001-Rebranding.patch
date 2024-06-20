@@ -5,7 +5,7 @@ Subject: [PATCH] Rebranding
 
 
 diff --git a/build.gradle.kts b/build.gradle.kts
-index 92f376ee6e876c6d023fbac2815c8079d49b45fa..a6e05843ee68e13e080fd72d3975d77458c8f46f 100644
+index c548248b611400d022bbea8689122d9f5ef44a90..f916419e69abe8b7f6f6a0f422c2ddc373ae4bc6 100644
 --- a/build.gradle.kts
 +++ b/build.gradle.kts
 @@ -13,7 +13,7 @@ configurations.named(log4jPlugins.compileClasspathConfigurationName) {
@@ -17,7 +17,7 @@ index 92f376ee6e876c6d023fbac2815c8079d49b45fa..a6e05843ee68e13e080fd72d3975d774
  
      implementation("com.electronwill.night-config:toml:3.6.7") // Leaf - Night config // Dreeam TODO: Bump to 3.7.1
  
-@@ -116,14 +116,14 @@ tasks.jar {
+@@ -112,14 +112,14 @@ tasks.jar {
          val gitBranch = git("rev-parse", "--abbrev-ref", "HEAD").getText().trim() // Paper
          attributes(
              "Main-Class" to "org.bukkit.craftbukkit.Main",
@@ -38,10 +38,10 @@ index 92f376ee6e876c6d023fbac2815c8079d49b45fa..a6e05843ee68e13e080fd72d3975d774
              "Build-Time" to Instant.now().toString(),
              "Git-Branch" to gitBranch, // Paper
 diff --git a/src/main/java/com/destroystokyo/paper/Metrics.java b/src/main/java/com/destroystokyo/paper/Metrics.java
-index fe50cc484ebfe4d3ab8795c222b2abd45fe64310..464718bfef4128fa125c1990a81f9238c6e22bb8 100644
+index e277a5b889ed3e8afd82707eaa2487386d2d4be7..fcf2a40714be46726ff2bf3904c5c9fd9f80e036 100644
 --- a/src/main/java/com/destroystokyo/paper/Metrics.java
 +++ b/src/main/java/com/destroystokyo/paper/Metrics.java
-@@ -593,7 +593,7 @@ public class Metrics {
+@@ -588,7 +588,7 @@ public class Metrics {
              boolean logFailedRequests = config.getBoolean("logFailedRequests", false);
              // Only start Metrics, if it's enabled in the config
              if (config.getBoolean("enabled", true)) {
@@ -50,7 +50,7 @@ index fe50cc484ebfe4d3ab8795c222b2abd45fe64310..464718bfef4128fa125c1990a81f9238
  
                  metrics.addCustomChart(new Metrics.SimplePie("minecraft_version", () -> {
                      String minecraftVersion = Bukkit.getVersion();
-@@ -603,15 +603,7 @@ public class Metrics {
+@@ -598,15 +598,7 @@ public class Metrics {
  
                  metrics.addCustomChart(new Metrics.SingleLineChart("players", () -> Bukkit.getOnlinePlayers().size()));
                  metrics.addCustomChart(new Metrics.SimplePie("online_mode", () -> Bukkit.getOnlineMode() ? "online" : "offline"));
@@ -68,7 +68,7 @@ index fe50cc484ebfe4d3ab8795c222b2abd45fe64310..464718bfef4128fa125c1990a81f9238
                  metrics.addCustomChart(new Metrics.DrilldownPie("java_version", () -> {
                      Map<String, Map<String, Integer>> map = new HashMap<>(2); // Gale - metrics - reduce HashMap capacity
 diff --git a/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java b/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java
-index 2d655cfddb6e7d6528b928c9270960bc0c6148f9..2d743778c99e5b78ed72fcfa655c91bde5ce2c68 100644
+index 09faae238a8a708cd0f915e66b428991439b948e..e0dd72eb3863288a0b2024dd4d8d74233218a0d8 100644
 --- a/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java
 +++ b/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java
 @@ -25,12 +25,12 @@ import org.galemc.gale.version.AbstractPaperVersionFetcher;
@@ -134,7 +134,7 @@ index 9d003c2ae45a057c0274a34fe5012cf17d1a2681..05a5b964241971725efce6f7ea371385
  
      @Override
 diff --git a/src/main/java/net/minecraft/CrashReport.java b/src/main/java/net/minecraft/CrashReport.java
-index d8ebcd1c94ce0f78e9d16c603a79a492263990fd..4c61fc4a50957ad31309093468dcda1c2cadb860 100644
+index 2cc73be2fe60f0431377ee13384da49f004f0f68..833e2652fcb4584eb57e87528b0f1e32e22a25df 100644
 --- a/src/main/java/net/minecraft/CrashReport.java
 +++ b/src/main/java/net/minecraft/CrashReport.java
 @@ -37,7 +37,7 @@ public class CrashReport {
@@ -147,7 +147,7 @@ index d8ebcd1c94ce0f78e9d16c603a79a492263990fd..4c61fc4a50957ad31309093468dcda1c
  
      public String getTitle() {
 diff --git a/src/main/java/net/minecraft/server/Main.java b/src/main/java/net/minecraft/server/Main.java
-index 207f8f864f0cf5874f8cad9bd15fa5e9ffa3fc12..8fc6f31f3dec3ee328e4f818dfc67eaf56d1e748 100644
+index 54c7af7b197971614aa3f949c0248315483ea72a..4e101df70ffe4f4c3b95cc12d5fc0cdddd9a22ab 100644
 --- a/src/main/java/net/minecraft/server/Main.java
 +++ b/src/main/java/net/minecraft/server/Main.java
 @@ -77,6 +77,17 @@ public class Main {
@@ -169,19 +169,10 @@ index 207f8f864f0cf5874f8cad9bd15fa5e9ffa3fc12..8fc6f31f3dec3ee328e4f818dfc67eaf
          /* CraftBukkit start - Replace everything
          OptionParser optionparser = new OptionParser();
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index b6ad776a0a1bc9f7bd25fa665633a75ac500544c..96e5547300fb3c00607028f21fc0ea74e1e7b368 100644
+index b101c72bbc9843b5f2d059039957b260fc79fae2..0dc9c7dfad7660f014d45115dc97827d7c98a1ee 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
-@@ -951,7 +951,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
-             We do not want people to report thread issues to Paper,
-             but we do want people to report thread issues to Gale.
-              */
--            MinecraftServer.LOGGER.info("Stopping main thread (Ignore any thread death message you see! - DO NOT REPORT THREAD DEATH TO PAPER - If you think this is a Leaf bug, please report it at https://github.com/Winds-Studio/Leaf/issues )"); // Leaf
-+            MinecraftServer.LOGGER.info("Stopping main thread (Ignore any thread death message you see! - DO NOT REPORT THREAD DEATH TO PAPER - If you think this is a DeepslateMC bug, please report it at https://github.com/Pascalpex/DeepslateMC/issues )"); // Leaf // Deepslate
-             // Gale end - branding changes
-             while (this.getRunningThread().isAlive()) {
-                 this.getRunningThread().stop();
-@@ -1906,7 +1906,13 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -1754,7 +1754,13 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
  
      @DontObfuscate
      public String getServerModName() {
@@ -197,41 +188,54 @@ index b6ad776a0a1bc9f7bd25fa665633a75ac500544c..96e5547300fb3c00607028f21fc0ea74
  
      public SystemReport fillSystemReport(SystemReport details) {
 diff --git a/src/main/java/net/minecraft/server/gui/MinecraftServerGui.java b/src/main/java/net/minecraft/server/gui/MinecraftServerGui.java
-index 8f951e3b6241d040b28d3c8b8e7d7f96ab4d2b8d..22f558436cf63644e65936dbaad8976e7304231c 100644
+index 061cfad20b8355f013f52e9045f479387ffe818f..6c0ab502f2da7de5e4b39188e1d4b24ae7460c9b 100644
 --- a/src/main/java/net/minecraft/server/gui/MinecraftServerGui.java
 +++ b/src/main/java/net/minecraft/server/gui/MinecraftServerGui.java
-@@ -56,7 +56,7 @@ public class MinecraftServerGui extends JComponent {
+@@ -51,7 +51,7 @@ public class MinecraftServerGui extends JComponent {
              ;
          }
  
--        final JFrame jframe = new JFrame(org.dreeam.leaf.config.modules.misc.ServerBrand.serverGUIName); // Purpur // Leaf - Configurable server GUI name
+-        final JFrame jframe = new JFrame(org.dreeam.leaf.config.modules.misc.ServerBrand.serverGUIName); // Leaf - Configurable server GUI name
 +        final JFrame jframe = new JFrame(org.dreeam.leaf.config.modules.misc.ServerBrand.serverGUIName.equalsIgnoreCase("Leaf Console") ? "DeepslateMC Minecraft server" : org.dreeam.leaf.config.modules.misc.ServerBrand.serverGUIName); // Purpur // Leaf - Configurable server GUI name // Deepslate
          final MinecraftServerGui servergui = new MinecraftServerGui(server);
  
          jframe.setDefaultCloseOperation(2);
-@@ -64,7 +64,7 @@ public class MinecraftServerGui extends JComponent {
+@@ -59,7 +59,7 @@ public class MinecraftServerGui extends JComponent {
          jframe.pack();
          jframe.setLocationRelativeTo((Component) null);
          jframe.setVisible(true);
--        jframe.setName(org.dreeam.leaf.config.modules.misc.ServerBrand.serverGUIName); // Paper - Improve ServerGUI // Purpur // Leaf - Configurable server GUI name
+-        jframe.setName(org.dreeam.leaf.config.modules.misc.ServerBrand.serverGUIName); // Paper - Improve ServerGUI // Leaf - Configurable server GUI name
 +        jframe.setName(org.dreeam.leaf.config.modules.misc.ServerBrand.serverGUIName.equalsIgnoreCase("Leaf Console") ? "DeepslateMC Minecraft server" : org.dreeam.leaf.config.modules.misc.ServerBrand.serverGUIName); // Paper - Improve ServerGUI // Purpur // Leaf - Configurable server Gui name // Deepslate
  
          // Paper start - Improve ServerGUI
          try {
-@@ -76,7 +76,7 @@ public class MinecraftServerGui extends JComponent {
+@@ -71,7 +71,7 @@ public class MinecraftServerGui extends JComponent {
          jframe.addWindowListener(new WindowAdapter() {
              public void windowClosing(WindowEvent windowevent) {
                  if (!servergui.isClosing.getAndSet(true)) {
--                    jframe.setTitle(org.dreeam.leaf.config.modules.misc.ServerBrand.serverGUIName + " - shutting down!"); // Purpur // Leaf - Configurable server GUI name
+-                    jframe.setTitle(org.dreeam.leaf.config.modules.misc.ServerBrand.serverGUIName + " - shutting down!"); // Leaf - Configurable server GUI name
 +                    jframe.setTitle((org.dreeam.leaf.config.modules.misc.ServerBrand.serverGUIName.equalsIgnoreCase("Leaf Console") ? "DeepslateMC Minecraft server" : org.dreeam.leaf.config.modules.misc.ServerBrand.serverGUIName) + " - shutting down!"); // Purpur // Leaf - Configurable server GUI name
                      server.halt(true);
                      servergui.runFinalizers();
                  }
+diff --git a/src/main/java/net/minecraft/world/damagesource/DamageSource.java b/src/main/java/net/minecraft/world/damagesource/DamageSource.java
+index 062c1d0212462835955e614f7c3670bfa4203047..9c5388550991c09b10d8e400dc0e0594f0c7d7b4 100644
+--- a/src/main/java/net/minecraft/world/damagesource/DamageSource.java
++++ b/src/main/java/net/minecraft/world/damagesource/DamageSource.java
+@@ -67,7 +67,7 @@ public class DamageSource {
+ 
+     public DamageSource customEventDamager(Entity entity) {
+         if (this.directEntity != null) {
+-            throw new IllegalStateException("Cannot set custom event damager when direct entity is already set (report a bug to Paper, if you think this is a Leaf bug, please report it at https://github.com/Winds-Studio/Leaf/issues )"); // Gale - branding changes // Leaf
++            throw new IllegalStateException("Cannot set custom event damager when direct entity is already set (report a bug to Paper, if you think this is a DeepslateMC bug, please report it at https://github.com/Pascalpex/DeepslateMC/issues )"); // Gale - branding changes // Leaf // Deepslate
+         }
+         DamageSource damageSource = this.cloneInstance();
+         damageSource.customEventDamager = entity;
 diff --git a/src/main/java/net/minecraft/world/level/chunk/storage/RegionFileStorage.java b/src/main/java/net/minecraft/world/level/chunk/storage/RegionFileStorage.java
-index 1090b7e36e3c1c105bc36135b82751c651f237d4..7f15fd2e7720e5d99d26f4512814aa10e3e83d61 100644
+index 0615fd82b71efb9a397de01615050e6d906c2844..14f3c6f5301cd8f4f3fc263771477161a1b4e19c 100644
 --- a/src/main/java/net/minecraft/world/level/chunk/storage/RegionFileStorage.java
 +++ b/src/main/java/net/minecraft/world/level/chunk/storage/RegionFileStorage.java
-@@ -157,7 +157,7 @@ public class RegionFileStorage implements AutoCloseable {
+@@ -146,7 +146,7 @@ public class RegionFileStorage implements AutoCloseable, ca.spottedleaf.moonrise
  
      // Paper start
      private static void printOversizedLog(String msg, Path file, int x, int z) {
@@ -241,10 +245,10 @@ index 1090b7e36e3c1c105bc36135b82751c651f237d4..7f15fd2e7720e5d99d26f4512814aa10
  
      private static CompoundTag readOversizedChunk(RegionFile regionfile, ChunkPos chunkCoordinate) throws IOException {
 diff --git a/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java b/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java
-index 4ee1c3461d21feab3a54e76a7c2ab80b6ea2ab38..47c0f4aa3bf05f589b7aef3762b825b865db9846 100644
+index d5c2d3b196993e658622f5dffb484fb0000e2c90..0993522059195d397f04e6f8e0863f6c3aa3c520 100644
 --- a/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java
 +++ b/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java
-@@ -502,7 +502,7 @@ public class CraftScheduler implements BukkitScheduler {
+@@ -501,7 +501,7 @@ public class CraftScheduler implements BukkitScheduler {
                  this.parsePending();
              } else {
                  // this.debugTail = this.debugTail.setNext(new CraftAsyncDebugger(currentTick + CraftScheduler.RECENT_TICKS, task.getOwner(), task.getTaskClass())); // Paper
@@ -254,7 +258,7 @@ index 4ee1c3461d21feab3a54e76a7c2ab80b6ea2ab38..47c0f4aa3bf05f589b7aef3762b825b8
                  // (async tasks must live with race-conditions if they attempt to cancel between these few lines of code)
              }
 diff --git a/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java b/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
-index c8dc6333cddbf25c8211be6d24ce39f5ee64b70a..8f1c870d6f49870e70bc2168c6ec69c93752698c 100644
+index f5d0c46f9c481ea734afe05be4d35816ae5dae73..ecb0759fa0932267db3f5d12cf52c1938e3fb05f 100644
 --- a/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
 +++ b/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
 @@ -502,7 +502,7 @@ public final class CraftMagicNumbers implements UnsafeValues {
@@ -302,23 +306,25 @@ index e220f5601f6b92b7b280ce8ebe64117d30192b0e..18cf0f8dbd7e76f4660933826c9fff96
      }
  }
 diff --git a/src/main/java/org/purpurmc/purpur/PurpurConfig.java b/src/main/java/org/purpurmc/purpur/PurpurConfig.java
-index cfdab5174f5ac523cde457c0cee5a172bb53e0e0..21a1956fe74481449cc8eb1341c247b051ff4fc5 100644
+index f06fed3ae5631d46a953617cfdd766a02e628515..83f63d944809e6faebef8880f596ccf2136d7b50 100644
 --- a/src/main/java/org/purpurmc/purpur/PurpurConfig.java
 +++ b/src/main/java/org/purpurmc/purpur/PurpurConfig.java
-@@ -237,7 +237,7 @@ public class PurpurConfig {
-         deathMessageOnlyBroadcastToAffectedPlayer = getBoolean("settings.broadcasts.death.only-broadcast-to-affected-player", deathMessageOnlyBroadcastToAffectedPlayer);
+@@ -174,4 +174,10 @@ public class PurpurConfig {
+         }
+         return builder.build();
      }
- 
--    public static String serverModName = "Purpur";
-+    public static String serverModName = "DeepslateMC"; // Deepslate
-     private static void serverModName() {
-         serverModName = getString("settings.server-mod-name", serverModName);
-     }
++
++    public static String serverModName = io.papermc.paper.ServerBuildInfo.buildInfo().brandName();
++    private static void serverModName() {
++        serverModName = getString("settings.server-mod-name", serverModName);
++    }
++
+ }
 diff --git a/src/main/java/org/spigotmc/WatchdogThread.java b/src/main/java/org/spigotmc/WatchdogThread.java
-index 2adbd6472e78bb7f417dcae4fab90fd924486529..751880ea530d236ffb556dbce09c467d85bfa061 100644
+index 0c97f7dd896a07b7a79c47757728dcd564a6eb47..db606d54fdc2db1bfad167b9543876846b39f36e 100644
 --- a/src/main/java/org/spigotmc/WatchdogThread.java
 +++ b/src/main/java/org/spigotmc/WatchdogThread.java
-@@ -160,15 +160,15 @@ public final class WatchdogThread extends io.papermc.paper.util.TickThread // Pa
+@@ -85,15 +85,15 @@ public class WatchdogThread extends Thread
                  We do not want people to report thread issues to Paper,
                  but we do want people to report thread issues to Gale.
                   */
@@ -337,10 +343,10 @@ index 2adbd6472e78bb7f417dcae4fab90fd924486529..751880ea530d236ffb556dbce09c467d
                  //
                  if ( net.minecraft.world.level.Level.lastPhysicsProblem != null )
                  {
-@@ -195,13 +195,13 @@ public final class WatchdogThread extends io.papermc.paper.util.TickThread // Pa
+@@ -120,13 +120,13 @@ public class WatchdogThread extends Thread
                      We do not want people to report thread issues to Paper,
                      but we do want people to report thread issues to Gale.
-                      */
+                     */
 -                    log.log(Level.SEVERE, "--- DO NOT REPORT THIS TO PAPER - If you think this is a Leaf bug, please report it at https://github.com/Winds-Studio/Leaf/issues - THIS IS NOT A PAPER BUG OR CRASH - " + Bukkit.getServer().getVersion() + " ---"); // Leaf
 +                    log.log(Level.SEVERE, "--- DO NOT REPORT THIS TO PAPER - If you think this is a DeepslateMC bug, please report it at https://github.com/Pascalpex/DeepslateMC/issues - THIS IS NOT A PAPER BUG OR CRASH - " + Bukkit.getServer().getVersion() + " ---"); // Leaf // Deepslate
                      // Gale end - branding changes
@@ -350,10 +356,10 @@ index 2adbd6472e78bb7f417dcae4fab90fd924486529..751880ea530d236ffb556dbce09c467d
                  log.log( Level.SEVERE, "------------------------------" );
 -                log.log( Level.SEVERE, "Server thread dump (Look for plugins here before reporting to Leaf!):" ); // Paper // Gale - branding changes // Leaf
 +                log.log( Level.SEVERE, "Server thread dump (Look for plugins here before reporting to DeepslateMC!):" ); // Paper // Gale - branding changes // Leaf // Deepslate
-                 io.papermc.paper.chunk.system.scheduling.ChunkTaskScheduler.dumpAllChunkLoadInfo(isLongTimeout); // Paper - rewrite chunk system
-                 this.dumpTickingInfo(); // Paper - log detailed tick information
+                 ca.spottedleaf.moonrise.patches.chunk_system.scheduling.ChunkTaskScheduler.dumpAllChunkLoadInfo(isLongTimeout); // Paper - rewrite chunk system
                  WatchdogThread.dumpThread( ManagementFactory.getThreadMXBean().getThreadInfo( MinecraftServer.getServer().serverThread.getId(), Integer.MAX_VALUE ), log );
-@@ -222,7 +222,7 @@ public final class WatchdogThread extends io.papermc.paper.util.TickThread // Pa
+                 log.log( Level.SEVERE, "------------------------------" );
+@@ -146,7 +146,7 @@ public class WatchdogThread extends Thread
                      We do not want people to report thread issues to Paper,
                      but we do want people to report thread issues to Gale.
                       */

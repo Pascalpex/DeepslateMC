@@ -5,18 +5,18 @@ Subject: [PATCH] Deepslate command
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 18554ce89a6de5dc6a8116e27f7210c013469c21..b1e26ed8dd8a819efe4c3408a4cf6bb185244a71 100644
+index d128f6bdb2234e3b1c94990020b3389418701b8b..61e08b7cf99cd06df2402f39042ee02409f815e0 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-@@ -52,6 +52,7 @@ import net.minecraft.world.level.GameRules;
+@@ -55,6 +55,7 @@ import net.minecraft.world.level.GameRules;
  import net.minecraft.world.level.GameType;
  import net.minecraft.world.level.block.entity.SkullBlockEntity;
  import net.minecraft.world.level.storage.LevelStorageSource;
 +import net.pascalpex.deepslatemc.commands.*;
  import org.galemc.gale.command.GaleCommands;
- import org.galemc.gale.configuration.GaleGlobalConfiguration;
  import org.slf4j.Logger;
-@@ -254,6 +255,10 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+ 
+@@ -246,6 +247,10 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
          } catch (Throwable ignored) {}
          // Gale start - Pufferfish - SIMD support
  
@@ -155,7 +155,7 @@ index 0000000000000000000000000000000000000000..c11d3597dbc49a1f6d75a55f427c55fc
 +
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 80bb1c1b49d80cc8d98ddb3c2c29a0e597b797e8..4494b4c512152a54be9df4ffb81a695adb6c8045 100644
+index acfa0d307a1f6bdbbcc0b911704651655109833a..95b03b59451abb7fd4d192b038d50af1741e0348 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -114,6 +114,7 @@ import net.minecraft.world.level.storage.PlayerDataStorage;
@@ -166,7 +166,7 @@ index 80bb1c1b49d80cc8d98ddb3c2c29a0e597b797e8..4494b4c512152a54be9df4ffb81a695a
  import org.bukkit.BanList;
  import org.bukkit.Bukkit;
  import org.bukkit.ChatColor;
-@@ -1113,6 +1114,11 @@ public final class CraftServer implements Server {
+@@ -1097,6 +1098,11 @@ public final class CraftServer implements Server {
          org.spigotmc.SpigotConfig.registerCommands(); // Spigot
          io.papermc.paper.command.PaperCommands.registerCommands(this.console); // Paper
          org.purpurmc.purpur.PurpurConfig.registerCommands(); // Purpur
@@ -177,4 +177,4 @@ index 80bb1c1b49d80cc8d98ddb3c2c29a0e597b797e8..4494b4c512152a54be9df4ffb81a695a
 +
          this.overrideAllCommandBlockCommands = this.commandsConfiguration.getStringList("command-block-overrides").contains("*");
          this.ignoreVanillaPermissions = this.commandsConfiguration.getBoolean("ignore-vanilla-permissions");
-         org.leavesmc.leaves.protocol.core.LeavesProtocolManager.handleServerReload(); // Leaves - protocol
+ 
