@@ -169,10 +169,10 @@ index 54c7af7b197971614aa3f949c0248315483ea72a..4e101df70ffe4f4c3b95cc12d5fc0cdd
          /* CraftBukkit start - Replace everything
          OptionParser optionparser = new OptionParser();
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index b101c72bbc9843b5f2d059039957b260fc79fae2..0dc9c7dfad7660f014d45115dc97827d7c98a1ee 100644
+index c84417a2cc4c96a8828154f14b1307e614df88f9..4c10b6b04ce4d83ce7f07b91b2ec7b833b1df033 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
-@@ -1754,7 +1754,13 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -1750,7 +1750,13 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
  
      @DontObfuscate
      public String getServerModName() {
@@ -306,10 +306,10 @@ index e220f5601f6b92b7b280ce8ebe64117d30192b0e..18cf0f8dbd7e76f4660933826c9fff96
      }
  }
 diff --git a/src/main/java/org/purpurmc/purpur/PurpurConfig.java b/src/main/java/org/purpurmc/purpur/PurpurConfig.java
-index f06fed3ae5631d46a953617cfdd766a02e628515..83f63d944809e6faebef8880f596ccf2136d7b50 100644
+index c2f81cbb3082accbc9c8e1fc5eece4d43df4c1b9..ca33c8ae43f4bbf2c31fa4759ee898862378020d 100644
 --- a/src/main/java/org/purpurmc/purpur/PurpurConfig.java
 +++ b/src/main/java/org/purpurmc/purpur/PurpurConfig.java
-@@ -174,4 +174,10 @@ public class PurpurConfig {
+@@ -173,4 +173,10 @@ public class PurpurConfig {
          }
          return builder.build();
      }
