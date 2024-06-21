@@ -5,7 +5,7 @@ Subject: [PATCH] Configurable move messages
 
 
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index 96db8bf0d5c3524a0e010dcdf098dba19f160f95..83908ef210cb856c8f8b85c2e9dee8cc237810d6 100644
+index dee7d17ed0b8b920e6135460c5c20cb178ea54a6..7df8f4dfafa255372c24c5d92040904ebc79ccfb 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 @@ -195,6 +195,7 @@ import net.minecraft.world.phys.Vec3;
@@ -21,7 +21,7 @@ index 96db8bf0d5c3524a0e010dcdf098dba19f160f95..83908ef210cb856c8f8b85c2e9dee8cc
                                              toX, toY, toZ, toYaw, toPitch, true);
                                          if (!event.isAllowed()) {
 -                                            if (!org.dreeam.leaf.config.modules.gameplay.DisableMovedWronglyThreshold.enabled && event.getLogWarning()) // Leaves - disable can
-+                                            if (Config.getMovedQuickly() &&  !org.dreeam.leaf.config.modules.gameplay.DisableMovedWronglyThreshold.enabled && event.getLogWarning()) // Leaves - disable can // Deepslate
++                                            if (Config.getMovedQuickly() && !org.dreeam.leaf.config.modules.gameplay.DisableMovedWronglyThreshold.enabled && event.getLogWarning()) // Leaves - disable can // Deepslate
                                                  ServerGamePacketListenerImpl.LOGGER.warn("{} moved too quickly! {},{},{}", new Object[]{this.player.getName().getString(), d6, d7, d8});
                                              this.teleport(this.player.getX(), this.player.getY(), this.player.getZ(), this.player.getYRot(), this.player.getXRot());
                                              return;

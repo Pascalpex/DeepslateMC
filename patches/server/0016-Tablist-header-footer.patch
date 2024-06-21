@@ -25,10 +25,10 @@ index c020c86194723a5c89816f91e0b7c5eeaf132b7e..68d318c71632b853d51649083b3445b3
      // CraftBukkit end
  
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index a5ea097fd25ee17f94bf24fe46d58fa0477891ec..13dfdda3c08571fbd6d51312277ae98deff1c31f 100644
+index e986b1c6c23c09cbf1b43c3453638f1eaa7f79fa..1a9816bf919ec7cb630424691dcab7b3d1d28fb9 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
-@@ -106,6 +106,7 @@ import net.minecraft.world.scores.PlayerTeam;
+@@ -107,6 +107,7 @@ import net.minecraft.world.scores.PlayerTeam;
  import net.pascalpex.deepslatemc.Config;
  import net.pascalpex.deepslatemc.MessagesFile;
  import net.pascalpex.deepslatemc.commands.SpawnCommand;
@@ -36,8 +36,8 @@ index a5ea097fd25ee17f94bf24fe46d58fa0477891ec..13dfdda3c08571fbd6d51312277ae98d
  import org.galemc.gale.configuration.GaleGlobalConfiguration;
  import org.slf4j.Logger;
  
-@@ -360,7 +361,11 @@ public abstract class PlayerList {
-         PlayerJoinEvent playerJoinEvent = new PlayerJoinEvent(bukkitPlayer, io.papermc.paper.adventure.PaperAdventure.asAdventure(ichatmutablecomponent)); // Paper - Adventure
+@@ -361,7 +362,11 @@ public abstract class PlayerList {
+         PlayerJoinEvent playerJoinEvent = new PlayerJoinEvent(bukkitPlayer, getJoinMsg(io.papermc.paper.adventure.PaperAdventure.asAdventure(ichatmutablecomponent), bukkitPlayer)); // Paper - Adventure // Leaf - Configurable connection message - join message
  
          SpawnCommand.playerJoin(bukkitPlayer); // Deepslate - Spawn functions
 -

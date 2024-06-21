@@ -25,7 +25,7 @@ index 59c6ba08817fea827988f4add74b4d0545f181a0..f74e7f2a40d3545b73193901445c11e8
      // CraftBukkit end
  
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 8938c6f728ffa105b368013bd1da95c9aaf52173..fbb7cc92508c47950921700c9f87a64f23b88dec 100644
+index 72812eeab349164a1bc66bdce4008b269784bb1c..43f00c976c0f9cf0470a1867fe6f5f99ce778110 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 @@ -62,6 +62,7 @@ import net.minecraft.world.level.block.entity.SkullBlockEntity;
@@ -45,10 +45,10 @@ index 8938c6f728ffa105b368013bd1da95c9aaf52173..fbb7cc92508c47950921700c9f87a64f
  
          this.setPvpAllowed(dedicatedserverproperties.pvp);
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index f7faf7c65e88eba0457bfaa223815da489cd7e6d..c065f5c60547c69b59637e8cb1cc64befdb522d5 100644
+index a95378548d5bed4f8722b74a7ed31198919687e2..119443560e7ebbd97987451190d788aac93d3d4e 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
-@@ -106,6 +106,7 @@ import net.minecraft.world.scores.PlayerTeam;
+@@ -107,6 +107,7 @@ import net.minecraft.world.scores.PlayerTeam;
  import net.pascalpex.deepslatemc.Config;
  import net.pascalpex.deepslatemc.MessagesFile;
  import net.pascalpex.deepslatemc.commands.SpawnCommand;
@@ -56,7 +56,7 @@ index f7faf7c65e88eba0457bfaa223815da489cd7e6d..c065f5c60547c69b59637e8cb1cc64be
  import net.pascalpex.deepslatemc.util.BossbarUtil;
  import net.pascalpex.deepslatemc.util.TablistUtil;
  import org.galemc.gale.configuration.GaleGlobalConfiguration;
-@@ -372,6 +373,11 @@ public abstract class PlayerList {
+@@ -373,6 +374,11 @@ public abstract class PlayerList {
              BossbarUtil.setBossbar(bukkitPlayer);
          }
          // Deepslate end

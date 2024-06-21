@@ -5,7 +5,7 @@ Subject: [PATCH] Rebranding
 
 
 diff --git a/build.gradle.kts b/build.gradle.kts
-index 989cf44a97e046ff5204184a5ae42504814aebd8..78e3391a3614c4a60eddda0fc61e9b96ac9b6c90 100644
+index d0e1f73ef1b543c3ad32874dbda0aedf47f51b91..ba75ffde40d50a58c78a6afbc3bfb59aeb8b6e2e 100644
 --- a/build.gradle.kts
 +++ b/build.gradle.kts
 @@ -13,7 +13,7 @@ configurations.named(log4jPlugins.compileClasspathConfigurationName) {
@@ -17,7 +17,7 @@ index 989cf44a97e046ff5204184a5ae42504814aebd8..78e3391a3614c4a60eddda0fc61e9b96
  
      implementation("com.electronwill.night-config:toml:3.6.7") // Leaf - Night config // Dreeam TODO: Bump to 3.7.1
  
-@@ -112,14 +112,14 @@ tasks.jar {
+@@ -116,14 +116,14 @@ tasks.jar {
          val gitBranch = git("rev-parse", "--abbrev-ref", "HEAD").getText().trim() // Paper
          attributes(
              "Main-Class" to "org.bukkit.craftbukkit.Main",

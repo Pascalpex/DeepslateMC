@@ -5,7 +5,7 @@ Subject: [PATCH] Spawn functions
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 6419aa35af0724691158fc8caf328284023106bd..e21b79ade4af08e8b3d4615bdc5ea0092483f463 100644
+index 12249d6330dc0577458e7c9addba59abf1b43e7b..d06d71e4cdfd7b3b204fd193b1568cdc566ee717 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 @@ -274,6 +274,9 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
@@ -19,10 +19,10 @@ index 6419aa35af0724691158fc8caf328284023106bd..e21b79ade4af08e8b3d4615bdc5ea009
  
          this.setPvpAllowed(dedicatedserverproperties.pvp);
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index 37b9d7145b97d1b4483f8dcda328d39467c894c1..a5ea097fd25ee17f94bf24fe46d58fa0477891ec 100644
+index f14be25b52929fb4d3a5f71c8c7fbed2d5c2a8f2..e986b1c6c23c09cbf1b43c3453638f1eaa7f79fa 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
-@@ -105,6 +105,7 @@ import net.minecraft.world.scores.Objective;
+@@ -106,6 +106,7 @@ import net.minecraft.world.scores.Objective;
  import net.minecraft.world.scores.PlayerTeam;
  import net.pascalpex.deepslatemc.Config;
  import net.pascalpex.deepslatemc.MessagesFile;
@@ -30,10 +30,10 @@ index 37b9d7145b97d1b4483f8dcda328d39467c894c1..a5ea097fd25ee17f94bf24fe46d58fa0
  import org.galemc.gale.configuration.GaleGlobalConfiguration;
  import org.slf4j.Logger;
  
-@@ -357,6 +358,9 @@ public abstract class PlayerList {
+@@ -358,6 +359,9 @@ public abstract class PlayerList {
          player.containerMenu.transferTo(player.containerMenu, bukkitPlayer);
  
-         PlayerJoinEvent playerJoinEvent = new PlayerJoinEvent(bukkitPlayer, io.papermc.paper.adventure.PaperAdventure.asAdventure(ichatmutablecomponent)); // Paper - Adventure
+         PlayerJoinEvent playerJoinEvent = new PlayerJoinEvent(bukkitPlayer, getJoinMsg(io.papermc.paper.adventure.PaperAdventure.asAdventure(ichatmutablecomponent), bukkitPlayer)); // Paper - Adventure // Leaf - Configurable connection message - join message
 +
 +        SpawnCommand.playerJoin(bukkitPlayer); // Deepslate - Spawn functions
 +
@@ -196,7 +196,7 @@ index 0000000000000000000000000000000000000000..24e67e218432ea852a285b13d56b48e4
 +
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index e44c5b1510cb755d58d00982560414fd9b3f9172..47b2fedf736b92727b89addf00a3c28ebdb7a446 100644
+index 2a9c7cf73aa6d7c91e82fb9e3474dc73b53dc2fc..05e97b3363e69db7ef4fb09b1e85001d5b00240a 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -1124,6 +1124,9 @@ public final class CraftServer implements Server {
