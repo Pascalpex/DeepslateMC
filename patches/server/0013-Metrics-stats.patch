@@ -5,10 +5,10 @@ Subject: [PATCH] Metrics stats
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 42d31ab978af8586f86e1c819bb45a3018c03124..e7f1b7dbe5bcb659a899428e32c98100067adc0b 100644
+index 454913fa3c6775bb34c7fcace0e706ca3be3e8a3..8938c6f728ffa105b368013bd1da95c9aaf52173 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-@@ -14,6 +14,7 @@ import java.nio.file.Path;
+@@ -18,6 +18,7 @@ import java.util.Collections;
  import java.util.List;
  import java.util.Locale;
  import java.util.Optional;
@@ -16,15 +16,15 @@ index 42d31ab978af8586f86e1c819bb45a3018c03124..e7f1b7dbe5bcb659a899428e32c98100
  import java.util.function.BooleanSupplier;
  import javax.annotation.Nullable;
  
-@@ -55,6 +56,7 @@ import net.minecraft.world.level.GameRules;
+@@ -59,6 +60,7 @@ import net.minecraft.world.level.GameRules;
  import net.minecraft.world.level.GameType;
  import net.minecraft.world.level.block.entity.SkullBlockEntity;
  import net.minecraft.world.level.storage.LevelStorageSource;
 +import net.pascalpex.deepslatemc.Config;
  import net.pascalpex.deepslatemc.commands.*;
  import org.galemc.gale.command.GaleCommands;
- import org.slf4j.Logger;
-@@ -238,6 +240,12 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+ import org.galemc.gale.configuration.GaleGlobalConfiguration;
+@@ -246,6 +248,12 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
          io.papermc.paper.command.PaperCommands.registerCommands(this); // Paper - setup /paper command
          GaleCommands.registerCommands(this); // Gale - Gale commands - register commands
          com.destroystokyo.paper.Metrics.PaperMetrics.startMetrics(); // Paper - start metrics
@@ -34,9 +34,9 @@ index 42d31ab978af8586f86e1c819bb45a3018c03124..e7f1b7dbe5bcb659a899428e32c98100
 +            metrics.startSending();
 +        }
 +        // Deepslate end
-         com.destroystokyo.paper.VersionHistoryManager.INSTANCE.getClass(); // Paper - load version history now
- 
-         // Gale start - Pufferfish - SIMD support
+         // Purpur start
+         try {
+             org.purpurmc.purpur.PurpurConfig.init((java.io.File) options.valueOf("purpur-settings"));
 diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
 index b42ac2fb0bfca93aff0549c1409a27524af42501..907357b7cb92aabc5c1835f593246fef289c0483 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/Config.java

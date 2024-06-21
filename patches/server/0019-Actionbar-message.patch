@@ -25,18 +25,18 @@ index 59c6ba08817fea827988f4add74b4d0545f181a0..f74e7f2a40d3545b73193901445c11e8
      // CraftBukkit end
  
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index e7f1b7dbe5bcb659a899428e32c98100067adc0b..8515ff8ce15c47cd99b647da602d5a6a0b7ae790 100644
+index 8938c6f728ffa105b368013bd1da95c9aaf52173..fbb7cc92508c47950921700c9f87a64f23b88dec 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-@@ -58,6 +58,7 @@ import net.minecraft.world.level.block.entity.SkullBlockEntity;
+@@ -62,6 +62,7 @@ import net.minecraft.world.level.block.entity.SkullBlockEntity;
  import net.minecraft.world.level.storage.LevelStorageSource;
  import net.pascalpex.deepslatemc.Config;
  import net.pascalpex.deepslatemc.commands.*;
 +import net.pascalpex.deepslatemc.util.ActionbarUtil;
  import org.galemc.gale.command.GaleCommands;
+ import org.galemc.gale.configuration.GaleGlobalConfiguration;
  import org.slf4j.Logger;
- 
-@@ -269,6 +270,7 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+@@ -286,6 +287,7 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
          MinecraftServer.getServer().server.getCommandMap().register("spawn", "Deepslate", new SpawnCommand("spawn"));
          MinecraftServer.getServer().server.getCommandMap().register("lobby", "Deepslate", new SpawnCommand("lobby"));
          MinecraftServer.getServer().server.getCommandMap().register("autosmelt", "Deepslate", new AutosmeltCommand("autosmelt"));
@@ -45,10 +45,10 @@ index e7f1b7dbe5bcb659a899428e32c98100067adc0b..8515ff8ce15c47cd99b647da602d5a6a
  
          this.setPvpAllowed(dedicatedserverproperties.pvp);
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index aa444c41b73e7d0605eab55a2372eb39c8bf8f66..2f6cc2f1064e358a557df4c3345a28beb5a1e55b 100644
+index f7faf7c65e88eba0457bfaa223815da489cd7e6d..c065f5c60547c69b59637e8cb1cc64befdb522d5 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
-@@ -105,6 +105,7 @@ import net.minecraft.world.scores.PlayerTeam;
+@@ -106,6 +106,7 @@ import net.minecraft.world.scores.PlayerTeam;
  import net.pascalpex.deepslatemc.Config;
  import net.pascalpex.deepslatemc.MessagesFile;
  import net.pascalpex.deepslatemc.commands.SpawnCommand;
@@ -56,7 +56,7 @@ index aa444c41b73e7d0605eab55a2372eb39c8bf8f66..2f6cc2f1064e358a557df4c3345a28be
  import net.pascalpex.deepslatemc.util.BossbarUtil;
  import net.pascalpex.deepslatemc.util.TablistUtil;
  import org.galemc.gale.configuration.GaleGlobalConfiguration;
-@@ -367,6 +368,11 @@ public abstract class PlayerList {
+@@ -372,6 +373,11 @@ public abstract class PlayerList {
              BossbarUtil.setBossbar(bukkitPlayer);
          }
          // Deepslate end
