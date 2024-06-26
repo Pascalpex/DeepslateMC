@@ -19,10 +19,10 @@ index 12249d6330dc0577458e7c9addba59abf1b43e7b..d06d71e4cdfd7b3b204fd193b1568cdc
  
          this.setPvpAllowed(dedicatedserverproperties.pvp);
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index f14be25b52929fb4d3a5f71c8c7fbed2d5c2a8f2..e986b1c6c23c09cbf1b43c3453638f1eaa7f79fa 100644
+index bdccc80cffd032dcdda36a77e9cb00e64091f9a7..fe919bc197a0fc369eecdf48adfc968b3185c68c 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
-@@ -106,6 +106,7 @@ import net.minecraft.world.scores.Objective;
+@@ -107,6 +107,7 @@ import net.minecraft.world.scores.Objective;
  import net.minecraft.world.scores.PlayerTeam;
  import net.pascalpex.deepslatemc.Config;
  import net.pascalpex.deepslatemc.MessagesFile;
@@ -30,7 +30,7 @@ index f14be25b52929fb4d3a5f71c8c7fbed2d5c2a8f2..e986b1c6c23c09cbf1b43c3453638f1e
  import org.galemc.gale.configuration.GaleGlobalConfiguration;
  import org.slf4j.Logger;
  
-@@ -358,6 +359,9 @@ public abstract class PlayerList {
+@@ -366,6 +367,9 @@ public abstract class PlayerList {
          player.containerMenu.transferTo(player.containerMenu, bukkitPlayer);
  
          PlayerJoinEvent playerJoinEvent = new PlayerJoinEvent(bukkitPlayer, getJoinMsg(io.papermc.paper.adventure.PaperAdventure.asAdventure(ichatmutablecomponent), bukkitPlayer)); // Paper - Adventure // Leaf - Configurable connection message - join message

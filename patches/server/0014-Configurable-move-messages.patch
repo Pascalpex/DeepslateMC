@@ -5,7 +5,7 @@ Subject: [PATCH] Configurable move messages
 
 
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index dee7d17ed0b8b920e6135460c5c20cb178ea54a6..7df8f4dfafa255372c24c5d92040904ebc79ccfb 100644
+index b362ebbf164c46764c7b918b24cbe1721afc078f..258f23ada4053f6a5905b9e8d92a0cb87df07c15 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 @@ -195,6 +195,7 @@ import net.minecraft.world.phys.Vec3;
@@ -16,7 +16,7 @@ index dee7d17ed0b8b920e6135460c5c20cb178ea54a6..7df8f4dfafa255372c24c5d92040904e
  import org.bukkit.craftbukkit.util.permissions.CraftDefaultPermissions;
  import org.apache.commons.lang3.StringUtils;
  import org.galemc.gale.configuration.GaleGlobalConfiguration;
-@@ -1448,7 +1449,7 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
+@@ -1443,7 +1444,7 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
                                          io.papermc.paper.event.player.PlayerFailMoveEvent event = fireFailMove(io.papermc.paper.event.player.PlayerFailMoveEvent.FailReason.MOVED_TOO_QUICKLY,
                                              toX, toY, toZ, toYaw, toPitch, true);
                                          if (!event.isAllowed()) {
@@ -25,7 +25,7 @@ index dee7d17ed0b8b920e6135460c5c20cb178ea54a6..7df8f4dfafa255372c24c5d92040904e
                                                  ServerGamePacketListenerImpl.LOGGER.warn("{} moved too quickly! {},{},{}", new Object[]{this.player.getName().getString(), d6, d7, d8});
                                              this.teleport(this.player.getX(), this.player.getY(), this.player.getZ(), this.player.getYRot(), this.player.getXRot());
                                              return;
-@@ -1523,7 +1524,7 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
+@@ -1518,7 +1519,7 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
                                      toX, toY, toZ, toYaw, toPitch, true);
                                  if (!event.isAllowed()) {
                                      movedWrongly = true;

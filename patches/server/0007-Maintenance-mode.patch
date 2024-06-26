@@ -17,10 +17,10 @@ index a7ef50db093f8ebcc13ec7f08af371bf93535ea3..07985960af368c5b6ef83e77c2117348
  
          this.setPvpAllowed(dedicatedserverproperties.pvp);
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index 180b50c9c23c6934d3e99500a25635df32f7169c..f14be25b52929fb4d3a5f71c8c7fbed2d5c2a8f2 100644
+index 0a0146c0898ace3048c965200b4a08c9db4b7b69..bdccc80cffd032dcdda36a77e9cb00e64091f9a7 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
-@@ -104,6 +104,8 @@ import net.minecraft.world.phys.Vec3;
+@@ -105,6 +105,8 @@ import net.minecraft.world.phys.Vec3;
  import net.minecraft.world.scores.DisplaySlot;
  import net.minecraft.world.scores.Objective;
  import net.minecraft.world.scores.PlayerTeam;
@@ -29,7 +29,7 @@ index 180b50c9c23c6934d3e99500a25635df32f7169c..f14be25b52929fb4d3a5f71c8c7fbed2
  import org.galemc.gale.configuration.GaleGlobalConfiguration;
  import org.slf4j.Logger;
  
-@@ -745,6 +747,15 @@ public abstract class PlayerList {
+@@ -753,6 +755,15 @@ public abstract class PlayerList {
          Player player = entity.getBukkitEntity();
          PlayerLoginEvent event = new PlayerLoginEvent(player, loginlistener.connection.hostname, ((java.net.InetSocketAddress) socketaddress).getAddress(), ((java.net.InetSocketAddress) loginlistener.connection.channel.remoteAddress()).getAddress());
  
