@@ -154,7 +154,7 @@ index aa25fd3ee043003f359b2c67a6d0f6700a0ef893..74fc9d76a26e3ac606eb3022b91492d4
  
      public String getTitle() {
 diff --git a/src/main/java/net/minecraft/server/Main.java b/src/main/java/net/minecraft/server/Main.java
-index 7320c4bf3215b47700f6fad40866e4da94e9eab1..6d59270fee851f03b6632e4f7ccf10ca68cfd510 100644
+index 207f8f864f0cf5874f8cad9bd15fa5e9ffa3fc12..8fc6f31f3dec3ee328e4f818dfc67eaf56d1e748 100644
 --- a/src/main/java/net/minecraft/server/Main.java
 +++ b/src/main/java/net/minecraft/server/Main.java
 @@ -77,6 +77,17 @@ public class Main {
@@ -176,10 +176,10 @@ index 7320c4bf3215b47700f6fad40866e4da94e9eab1..6d59270fee851f03b6632e4f7ccf10ca
          /* CraftBukkit start - Replace everything
          OptionParser optionparser = new OptionParser();
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index ef14203da6f9d0f5cad4335c98095522209023cd..9ffedc7825a7c2f1d22afef7b4007cc4ba00b85f 100644
+index 2cf519e48ded94a23579120d65169f09a2889f8a..2a164db2df230281e41a826c0539f35273d68608 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
-@@ -960,7 +960,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -1022,7 +1022,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
              We do not want people to report thread issues to Paper,
              but we do want people to report thread issues to Gale.
              */
@@ -188,7 +188,7 @@ index ef14203da6f9d0f5cad4335c98095522209023cd..9ffedc7825a7c2f1d22afef7b4007cc4
              // Gale end - branding changes
              while (this.getRunningThread().isAlive()) {
                  this.getRunningThread().stop();
-@@ -1859,7 +1859,13 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -1922,7 +1922,13 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
  
      @DontObfuscate
      public String getServerModName() {
