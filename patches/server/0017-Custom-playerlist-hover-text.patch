@@ -5,7 +5,7 @@ Subject: [PATCH] Custom playerlist hover text
 
 
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 2a164db2df230281e41a826c0539f35273d68608..92221fd2b4039828ebd409dc1b459cd637f338c1 100644
+index 40290fad21e89b09704fe32dcea6da4210175d52..f6043bedc680dd34c0e0174fc64c73c97e0f236e 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
 @@ -139,6 +139,7 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemp
@@ -16,7 +16,7 @@ index 2a164db2df230281e41a826c0539f35273d68608..92221fd2b4039828ebd409dc1b459cd6
  import org.galemc.gale.configuration.GaleConfigurations;
  import org.slf4j.Logger;
  
-@@ -1702,6 +1703,18 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -1705,6 +1706,18 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
          List<ServerPlayer> list = this.playerList.getPlayers();
          int i = this.getMaxPlayers();
  

@@ -21,7 +21,7 @@ jobs:
     - name: Generate Paperclip Jar
       run: ./gradlew createMojmapPaperclipJar
     - name: Upload Paperclip
-      uses: actions/upload-artifact@v4.3.3
+      uses: actions/upload-artifact@v4.3.4
       with:
         name: DeepslateMC
         path: build/libs/deepslateMC-paperclip-1.21-R0.1-SNAPSHOT-mojmap.jar
