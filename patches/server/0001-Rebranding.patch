@@ -176,19 +176,10 @@ index b929842514a97ca993ead608d355a4af2a32bf1f..9fd449c312f998df0e8fe3303b961932
          /* CraftBukkit start - Replace everything
          OptionParser optionparser = new OptionParser();
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index a6f1365bb72e9598ed2101b60d8774d236fd48e1..40290fad21e89b09704fe32dcea6da4210175d52 100644
+index 084651b2c911ce207fffd2a2c4ba788301376ebc..4a873ab2925e39aa268ab1a1fb6ac56e75ab7f9f 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
-@@ -1023,7 +1023,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
-             We do not want people to report thread issues to Paper,
-             but we do want people to report thread issues to Gale.
-             */
--            MinecraftServer.LOGGER.info("Stopping main thread (Ignore any thread death message you see! - DO NOT REPORT THREAD DEATH TO PAPER - If you think this is a Leaf bug, please report it at https://github.com/Winds-Studio/Leaf/issues)"); // Leaf
-+            MinecraftServer.LOGGER.info("Stopping main thread (Ignore any thread death message you see! - DO NOT REPORT THREAD DEATH TO PAPER - If you think this is a DeepslateMC bug, please report it at https://github.com/Pascalpex/DeepslateMC/issues)"); // Leaf // Deepslate
-             // Gale end - branding changes
-             while (this.getRunningThread().isAlive()) {
-                 this.getRunningThread().stop();
-@@ -1926,7 +1926,13 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -1923,7 +1923,13 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
  
      @DontObfuscate
      public String getServerModName() {
@@ -248,10 +239,10 @@ index 91a5be2eaedb0fa94580de60a9625f94ae724235..833b57c80c754df57c8f938766303f04
          DamageSource damageSource = this.cloneInstance();
          damageSource.customEventDamager = entity;
 diff --git a/src/main/java/net/minecraft/world/level/chunk/storage/RegionFileStorage.java b/src/main/java/net/minecraft/world/level/chunk/storage/RegionFileStorage.java
-index e8f0f0e2b3afd305afb6cf4d41f4fc31bf2bc68d..7507a9d983524850f56d07d1f4d8f70ac860cf53 100644
+index 54f7aa95cfbcf39bb86ad1b4eb0f9ff2f8526030..f8fa3b20ab80f50822d13eb565bd0b83ea71dc91 100644
 --- a/src/main/java/net/minecraft/world/level/chunk/storage/RegionFileStorage.java
 +++ b/src/main/java/net/minecraft/world/level/chunk/storage/RegionFileStorage.java
-@@ -151,7 +151,7 @@ public class RegionFileStorage implements AutoCloseable, ca.spottedleaf.moonrise
+@@ -182,7 +182,7 @@ public class RegionFileStorage implements AutoCloseable, ca.spottedleaf.moonrise
          We do not want people to report thread issues to Paper,
          but we do want people to report thread issues to Gale.
          */
@@ -322,10 +313,10 @@ index e220f5601f6b92b7b280ce8ebe64117d30192b0e..526cd19815b23dbfd91c6f786ea35bd7
      }
  }
 diff --git a/src/main/java/org/spigotmc/WatchdogThread.java b/src/main/java/org/spigotmc/WatchdogThread.java
-index 2dc38d0e7d1ee41f8112a292bce3e427003c823b..079b74b677ba9020c7f0662f39688a0d4e87c663 100644
+index dfdbf7654db34487f7db2e568006642291b1c132..eaac63594f5d108f8ec12d4547c971e7b5ede0f5 100644
 --- a/src/main/java/org/spigotmc/WatchdogThread.java
 +++ b/src/main/java/org/spigotmc/WatchdogThread.java
-@@ -160,15 +160,15 @@ public class WatchdogThread extends Thread
+@@ -160,15 +160,15 @@ public class WatchdogThread extends io.papermc.paper.util.TickThread // Paper -
                  We do not want people to report thread issues to Paper,
                  but we do want people to report thread issues to Gale.
                   */
@@ -344,7 +335,7 @@ index 2dc38d0e7d1ee41f8112a292bce3e427003c823b..079b74b677ba9020c7f0662f39688a0d
                  //
                  if ( net.minecraft.world.level.Level.lastPhysicsProblem != null )
                  {
-@@ -195,13 +195,13 @@ public class WatchdogThread extends Thread
+@@ -195,13 +195,13 @@ public class WatchdogThread extends io.papermc.paper.util.TickThread // Paper -
                      We do not want people to report thread issues to Paper,
                      but we do want people to report thread issues to Gale.
                      */
@@ -360,7 +351,7 @@ index 2dc38d0e7d1ee41f8112a292bce3e427003c823b..079b74b677ba9020c7f0662f39688a0d
                  ca.spottedleaf.moonrise.patches.chunk_system.scheduling.ChunkTaskScheduler.dumpAllChunkLoadInfo(MinecraftServer.getServer(), isLongTimeout); // Paper - rewrite chunk system
                  this.dumpTickingInfo(); // Paper - log detailed tick information
                  WatchdogThread.dumpThread( ManagementFactory.getThreadMXBean().getThreadInfo( MinecraftServer.getServer().serverThread.getId(), Integer.MAX_VALUE ), log );
-@@ -222,7 +222,7 @@ public class WatchdogThread extends Thread
+@@ -222,7 +222,7 @@ public class WatchdogThread extends io.papermc.paper.util.TickThread // Paper -
                      We do not want people to report thread issues to Paper,
                      but we do want people to report thread issues to Gale.
                       */
