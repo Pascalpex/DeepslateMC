@@ -5,7 +5,7 @@ Subject: [PATCH] Metrics stats
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 454913fa3c6775bb34c7fcace0e706ca3be3e8a3..8938c6f728ffa105b368013bd1da95c9aaf52173 100644
+index 0f23fabdb2675f38a85b35c1aee4ae327c99f852..dadb0ca3a9c4d2fc66b61bea8aef136b903aed26 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 @@ -18,6 +18,7 @@ import java.util.Collections;
@@ -62,16 +62,17 @@ index b42ac2fb0bfca93aff0549c1409a27524af42501..907357b7cb92aabc5c1835f593246fef
  }
 diff --git a/src/main/java/net/pascalpex/deepslatemc/util/Metrics.java b/src/main/java/net/pascalpex/deepslatemc/util/Metrics.java
 new file mode 100644
-index 0000000000000000000000000000000000000000..72fff84c97d23e9bb11d048e33f25a689d583b24
+index 0000000000000000000000000000000000000000..bd22d7d8de5a847c2a79a0681b8819738b9c04aa
 --- /dev/null
 +++ b/src/main/java/net/pascalpex/deepslatemc/util/Metrics.java
-@@ -0,0 +1,44 @@
+@@ -0,0 +1,45 @@
 +package net.pascalpex.deepslatemc.util;
 +
 +import org.bukkit.Bukkit;
 +
 +import java.io.IOException;
 +import java.net.URL;
++import java.util.Optional;
 +import java.util.Timer;
 +import java.util.TimerTask;
 +import java.util.UUID;
@@ -99,7 +100,7 @@ index 0000000000000000000000000000000000000000..72fff84c97d23e9bb11d048e33f25a68
 +            int players = Bukkit.getOnlinePlayers().size();
 +            String minecraftVersion = Bukkit.getVersion();
 +            minecraftVersion = minecraftVersion.substring(minecraftVersion.indexOf("MC: ") + 4, minecraftVersion.length() - 1);
-+            String deepslateVersion = this.getClass().getPackage().getImplementationVersion().replace('"', ' ').replace(" ", "");
++            String deepslateVersion = Optional.ofNullable(this.getClass().getPackage().getImplementationVersion()).orElse("Unknown").replace('"', ' ').replace(" ", "");
 +            String urlString = "https://pascalpex.de/metrics/deepslate/submit.php?uuid=" + uuid.toString() + "&players=" + players + "&mc=" + minecraftVersion + "&deepslate=" + deepslateVersion;
 +            try {
 +                URL url = new URL(urlString);
