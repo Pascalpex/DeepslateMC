@@ -5,7 +5,7 @@ Subject: [PATCH] Deepslate command
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 5cafa643d2338b8904ad320c520205e9dc3e29cc..f8fdc8d38a4ff1e7bf5c5cc2481de9679061157b 100644
+index af820999e45aba5f62b9a89bf3753ea0556647f8..2aa1fee856fc4033f8fd42d58debcee83c29bed7 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 @@ -59,6 +59,7 @@ import net.minecraft.world.level.GameRules;
@@ -16,7 +16,7 @@ index 5cafa643d2338b8904ad320c520205e9dc3e29cc..f8fdc8d38a4ff1e7bf5c5cc2481de967
  import org.galemc.gale.command.GaleCommands;
  import org.galemc.gale.configuration.GaleGlobalConfiguration;
  import org.slf4j.Logger;
-@@ -263,6 +264,10 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+@@ -265,6 +266,10 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
          } catch (Throwable ignored) {}
          // Gale start - Pufferfish - SIMD support
  
@@ -155,7 +155,7 @@ index 0000000000000000000000000000000000000000..c11d3597dbc49a1f6d75a55f427c55fc
 +
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 85e7442e2ff74fd7884e4e6e74c5637be729b9b8..ed82d64462583008c012023255f99a4c4ef8be6b 100644
+index 203b8a1c06aa9bfa0a54fcbf1c90dea0134af16e..53d308f46792253d47ad9e1094ddc34cac5b1536 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -114,6 +114,7 @@ import net.minecraft.world.level.storage.PlayerDataStorage;
@@ -166,9 +166,9 @@ index 85e7442e2ff74fd7884e4e6e74c5637be729b9b8..ed82d64462583008c012023255f99a4c
  import org.bukkit.BanList;
  import org.bukkit.Bukkit;
  import org.bukkit.ChatColor;
-@@ -1119,6 +1120,11 @@ public final class CraftServer implements Server {
-         org.spigotmc.SpigotConfig.registerCommands(); // Spigot
+@@ -1122,6 +1123,11 @@ public final class CraftServer implements Server {
          io.papermc.paper.command.PaperCommands.registerCommands(this.console); // Paper
+         this.spark.registerCommandBeforePlugins(this); // Paper - spark
          org.purpurmc.purpur.PurpurConfig.registerCommands(); // Purpur
 +
 +        // Deepslate start

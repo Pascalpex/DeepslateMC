@@ -5,7 +5,7 @@ Subject: [PATCH] Rebranding
 
 
 diff --git a/build.gradle.kts b/build.gradle.kts
-index 6b72333bd753fcbc7fc244bedddbb31a2d20f594..637aecc66a4c9e0c5d960da7dda02bbbffe0b578 100644
+index 6e1c71f4073dc4b43787a3f6599453d9db7bf8bb..a8cec256e565940640498a1a7e9b6ab790fe8d31 100644
 --- a/build.gradle.kts
 +++ b/build.gradle.kts
 @@ -13,7 +13,7 @@ configurations.named(log4jPlugins.compileClasspathConfigurationName) {
@@ -17,7 +17,7 @@ index 6b72333bd753fcbc7fc244bedddbb31a2d20f594..637aecc66a4c9e0c5d960da7dda02bbb
  
      // Leaf start - Leaf Config
      implementation("com.github.thatsmusic99:ConfigurationMaster-API:v2.0.0-rc.2") {
-@@ -118,14 +118,14 @@ tasks.jar {
+@@ -122,14 +122,14 @@ tasks.jar {
          val gitBranch = git("rev-parse", "--abbrev-ref", "HEAD").getText().trim() // Paper
          attributes(
              "Main-Class" to "org.bukkit.craftbukkit.Main",
@@ -38,7 +38,7 @@ index 6b72333bd753fcbc7fc244bedddbb31a2d20f594..637aecc66a4c9e0c5d960da7dda02bbb
              "Build-Time" to Instant.now().toString(),
              "Git-Branch" to gitBranch, // Paper
 diff --git a/src/main/java/com/destroystokyo/paper/Metrics.java b/src/main/java/com/destroystokyo/paper/Metrics.java
-index 6c5c0cc59ff9901b22288f3cd62228c1e52794c5..94f6c147cc9b2144063bd862c2e1f50dfee826f8 100644
+index 6c5c0cc59ff9901b22288f3cd62228c1e52794c5..ad566b0b9c5a28da2ccc211a5f4728459c9edef0 100644
 --- a/src/main/java/com/destroystokyo/paper/Metrics.java
 +++ b/src/main/java/com/destroystokyo/paper/Metrics.java
 @@ -593,7 +593,7 @@ public class Metrics {
@@ -50,20 +50,23 @@ index 6c5c0cc59ff9901b22288f3cd62228c1e52794c5..94f6c147cc9b2144063bd862c2e1f50d
  
                  metrics.addCustomChart(new Metrics.SimplePie("minecraft_version", () -> {
                      String minecraftVersion = Bukkit.getVersion();
-@@ -603,15 +603,7 @@ public class Metrics {
+@@ -603,15 +603,15 @@ public class Metrics {
  
                  metrics.addCustomChart(new Metrics.SingleLineChart("players", () -> Bukkit.getOnlinePlayers().size()));
                  metrics.addCustomChart(new Metrics.SimplePie("online_mode", () -> Bukkit.getOnlineMode() ? "online" : "offline"));
 -                final String leafVersion; // Gale - branding changes - metrics // Leaf
--                final String implVersion = org.bukkit.craftbukkit.Main.class.getPackage().getImplementationVersion();
--                if (implVersion != null) {
--                    final String buildOrHash = implVersion.substring(implVersion.lastIndexOf('-') + 1);
++                final String deepslateVersion; // Gale - branding changes - metrics // Leaf // Deepslate
+                 final String implVersion = org.bukkit.craftbukkit.Main.class.getPackage().getImplementationVersion();
+                 if (implVersion != null) {
+                     final String buildOrHash = implVersion.substring(implVersion.lastIndexOf('-') + 1);
 -                    leafVersion = "git-Leaf-%s-%s".formatted(Bukkit.getServer().getMinecraftVersion(), buildOrHash); // Gale - branding changes - metrics // Leaf
--                } else {
++                    deepslateVersion = "git-DeepslateMC-%s-%s".formatted(Bukkit.getServer().getMinecraftVersion(), buildOrHash); // Gale - branding changes - metrics // Leaf // Deepslate
+                 } else {
 -                    leafVersion = "unknown"; // Gale - branding changes - metrics // Leaf
--                }
++                    deepslateVersion = "unknown"; // Gale - branding changes - metrics // Leaf // Deepslate
+                 }
 -                metrics.addCustomChart(new Metrics.SimplePie("leaf_version", () -> leafVersion)); // Gale - branding changes - metrics // Leaf
-+                metrics.addCustomChart(new Metrics.SimplePie("deepslatemc_version", () -> (org.bukkit.craftbukkit.Main.class.getPackage().getImplementationVersion() != null) ? org.bukkit.craftbukkit.Main.class.getPackage().getImplementationVersion() : "unknown")); // Gale - branding changes - metrics // Leaf // Deepslate
++                metrics.addCustomChart(new Metrics.SimplePie("deepslatemc_version", () -> deepslateVersion)); // Gale - branding changes - metrics // Leaf // Deepslate
  
                  metrics.addCustomChart(new Metrics.DrilldownPie("java_version", () -> {
                      Map<String, Map<String, Integer>> map = new HashMap<>(2); // Gale - metrics - reduce HashMap capacity
@@ -176,10 +179,10 @@ index b929842514a97ca993ead608d355a4af2a32bf1f..9fd449c312f998df0e8fe3303b961932
          /* CraftBukkit start - Replace everything
          OptionParser optionparser = new OptionParser();
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 8d68a765621d37bd3e1f140a17e3f53bf294cfe7..33378d02f52d9117f1be09b56e789b6f677de104 100644
+index 75a927ac8c56a2e48ae26ae36916326d17793293..d8869f25b2215c85587bf8e89e96e32e624d008a 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
-@@ -1922,7 +1922,13 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -1928,7 +1928,13 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
  
      @DontObfuscate
      public String getServerModName() {

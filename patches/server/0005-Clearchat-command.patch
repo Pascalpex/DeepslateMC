@@ -5,10 +5,10 @@ Subject: [PATCH] Clearchat command
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 5d0f576ee725187e96ade44f9f7400687a9ec1b2..36ba303c48e7697ff777a180173edd7550ac8fcd 100644
+index c1f4c708e539847fd74543a0aae195bd3ed4e362..298e6d455733528bf01eae570dbb9550d4471d85 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-@@ -268,6 +268,8 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+@@ -270,6 +270,8 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
          MinecraftServer.getServer().server.getCommandMap().register("deepslate", "Deepslate", new DeepslateCommand("deepslate"));
          MinecraftServer.getServer().server.getCommandMap().register("discord", "Deepslate", new DiscordCommand("discord"));
          MinecraftServer.getServer().server.getCommandMap().register("dc", "Deepslate", new DiscordCommand("dc"));
@@ -87,10 +87,10 @@ index 0000000000000000000000000000000000000000..8fbb23119c33b11fe341701abfa9c345
 +    }
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index f2626afdcafa27f88c2545dbd7ad92286f47ed29..413b4d6546af9f00382df6d99a640135504daa5d 100644
+index 662ee449e413a514197b906122411debe9624b8b..95307a3a85b62858ff3fa8bb2f09c672e01ea68e 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -1125,6 +1125,8 @@ public final class CraftServer implements Server {
+@@ -1128,6 +1128,8 @@ public final class CraftServer implements Server {
          MinecraftServer.getServer().server.getCommandMap().register("deepslate", "Deepslate", new DeepslateCommand("deepslate"));
          MinecraftServer.getServer().server.getCommandMap().register("discord", "Deepslate", new DiscordCommand("discord"));
          MinecraftServer.getServer().server.getCommandMap().register("dc", "Deepslate", new DiscordCommand("dc"));

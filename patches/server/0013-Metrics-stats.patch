@@ -5,7 +5,7 @@ Subject: [PATCH] Metrics stats
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 0f23fabdb2675f38a85b35c1aee4ae327c99f852..dadb0ca3a9c4d2fc66b61bea8aef136b903aed26 100644
+index 3f31c3741444150cacd8bd12a19bd90a635d6893..18510bbddfbf9aa34b7dc6c30e43e70133fbce33 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 @@ -18,6 +18,7 @@ import java.util.Collections;
@@ -24,9 +24,9 @@ index 0f23fabdb2675f38a85b35c1aee4ae327c99f852..dadb0ca3a9c4d2fc66b61bea8aef136b
  import net.pascalpex.deepslatemc.commands.*;
  import org.galemc.gale.command.GaleCommands;
  import org.galemc.gale.configuration.GaleGlobalConfiguration;
-@@ -246,6 +248,12 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
-         io.papermc.paper.command.PaperCommands.registerCommands(this); // Paper - setup /paper command
+@@ -248,6 +250,12 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
          GaleCommands.registerCommands(this); // Gale - Gale commands - register commands
+         this.server.spark.registerCommandBeforePlugins(this.server); // Paper - spark
          com.destroystokyo.paper.Metrics.PaperMetrics.startMetrics(); // Paper - start metrics
 +        // Deepslate start - Metrics stats
 +        if(Config.getMetricsEnabled()) {

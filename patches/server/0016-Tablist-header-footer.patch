@@ -25,10 +25,10 @@ index c020c86194723a5c89816f91e0b7c5eeaf132b7e..68d318c71632b853d51649083b3445b3
      // CraftBukkit end
  
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index fe919bc197a0fc369eecdf48adfc968b3185c68c..f3fc05c2806fa40502893a18ced489af5a2ed478 100644
+index 1332272c8d50209d1f9ef9244e88da38e04b9267..d4daa78eba2eaa2cea0d1130f8d75b33dd58fe76 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
-@@ -108,6 +108,7 @@ import net.minecraft.world.scores.PlayerTeam;
+@@ -107,6 +107,7 @@ import net.minecraft.world.scores.PlayerTeam;
  import net.pascalpex.deepslatemc.Config;
  import net.pascalpex.deepslatemc.MessagesFile;
  import net.pascalpex.deepslatemc.commands.SpawnCommand;
@@ -36,7 +36,7 @@ index fe919bc197a0fc369eecdf48adfc968b3185c68c..f3fc05c2806fa40502893a18ced489af
  import org.galemc.gale.configuration.GaleGlobalConfiguration;
  import org.slf4j.Logger;
  
-@@ -369,7 +370,11 @@ public abstract class PlayerList {
+@@ -368,7 +369,11 @@ public abstract class PlayerList {
          PlayerJoinEvent playerJoinEvent = new PlayerJoinEvent(bukkitPlayer, getJoinMsg(io.papermc.paper.adventure.PaperAdventure.asAdventure(ichatmutablecomponent), bukkitPlayer)); // Paper - Adventure // Leaf - Configurable connection message - join message
  
          SpawnCommand.playerJoin(bukkitPlayer); // Deepslate - Spawn functions
