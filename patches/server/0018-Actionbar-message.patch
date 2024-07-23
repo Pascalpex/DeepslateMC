@@ -25,18 +25,18 @@ index 59c6ba08817fea827988f4add74b4d0545f181a0..f74e7f2a40d3545b73193901445c11e8
      // CraftBukkit end
  
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 18510bbddfbf9aa34b7dc6c30e43e70133fbce33..d242d466b1aa6c6b5d0a0bb39dc1aec8762025f9 100644
+index 3f31c3741444150cacd8bd12a19bd90a635d6893..a3400dc4da33f1c1cb2546713efaa37feccd0c55 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-@@ -62,6 +62,7 @@ import net.minecraft.world.level.block.entity.SkullBlockEntity;
+@@ -60,6 +60,7 @@ import net.minecraft.world.level.GameType;
+ import net.minecraft.world.level.block.entity.SkullBlockEntity;
  import net.minecraft.world.level.storage.LevelStorageSource;
- import net.pascalpex.deepslatemc.Config;
  import net.pascalpex.deepslatemc.commands.*;
 +import net.pascalpex.deepslatemc.util.ActionbarUtil;
  import org.galemc.gale.command.GaleCommands;
  import org.galemc.gale.configuration.GaleGlobalConfiguration;
  import org.slf4j.Logger;
-@@ -288,6 +289,7 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+@@ -280,6 +281,7 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
          MinecraftServer.getServer().server.getCommandMap().register("spawn", "Deepslate", new SpawnCommand("spawn"));
          MinecraftServer.getServer().server.getCommandMap().register("lobby", "Deepslate", new SpawnCommand("lobby"));
          MinecraftServer.getServer().server.getCommandMap().register("autosmelt", "Deepslate", new AutosmeltCommand("autosmelt"));
@@ -69,10 +69,10 @@ index 090d383b698641a8efca722339d0ee69443f1bdc..246057bbc4e0344d9e81d04e05690ff0
  
          if (!player.connection.isAcceptingMessages()) {
 diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
-index 21593cf6dc3880c2386c17b48192588dde3cf33b..ba1302586e99f28d3f6d41b40d56ce10e610066a 100644
+index 8ce11487efd3c00d7876f955b8280bf9b219fe65..daf3e28f9b9acebe26eeffdde483838bdee572ef 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/Config.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/Config.java
-@@ -88,6 +88,10 @@ public class Config {
+@@ -85,6 +85,10 @@ public class Config {
                  config.set("bossbar" + ".style", BossBar.Overlay.PROGRESS.name());
                  config.set("bossbar" + ".text", "&6Custom Bossbar");
              }
@@ -83,7 +83,7 @@ index 21593cf6dc3880c2386c17b48192588dde3cf33b..ba1302586e99f28d3f6d41b40d56ce10
              save();
          } catch (IOException | InvalidConfigurationException e) {
              e.printStackTrace();
-@@ -194,5 +198,11 @@ public class Config {
+@@ -188,5 +192,11 @@ public class Config {
      public static float getBossbarProgress() {
          return (float) config.getDouble("bossbar" + ".progress");
      }

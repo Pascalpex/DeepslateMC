@@ -35,12 +35,12 @@ index c41987b5995e27c9b1f8bb2e8af341315c6f338c..62bec65a609997c027411498c650d886
                                  ServerGamePacketListenerImpl.LOGGER.warn("{} moved wrongly!, ({})", this.player.getName().getString(), d11); // Purpur
                                  } // Paper
 diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
-index 907357b7cb92aabc5c1835f593246fef289c0483..2ac86918a792cafc877efd3ab4d8f8d5c10e91b7 100644
+index b42ac2fb0bfca93aff0549c1409a27524af42501..d4b1b3099ea2bade572ad4f88405f8b72f4cf8ce 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/Config.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/Config.java
-@@ -54,6 +54,10 @@ public class Config {
-             if (!config.contains("metrics")) {
-                 config.set("metrics", true);
+@@ -51,6 +51,10 @@ public class Config {
+                 worldsList.add("FantasyWorld");
+                 config.set("autoSmelt" + ".enabledWorlds", worldsList);
              }
 +            if (!config.contains("messages")) {
 +                config.set("messages" + ".movedWrongly", true);
@@ -49,9 +49,9 @@ index 907357b7cb92aabc5c1835f593246fef289c0483..2ac86918a792cafc877efd3ab4d8f8d5
              save();
          } catch (IOException | InvalidConfigurationException e) {
              e.printStackTrace();
-@@ -121,5 +125,11 @@ public class Config {
-     public static boolean getMetricsEnabled() {
-         return config.getBoolean("metrics");
+@@ -115,5 +119,11 @@ public class Config {
+     public static List<String> getAutoSmeltWorlds() {
+         return (List<String>) config.getList("autoSmelt" + ".enabledWorlds");
      }
 +    public static boolean getMovedQuickly() {
 +        return config.getBoolean("messages" + ".movedQuickly");

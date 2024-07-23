@@ -50,10 +50,10 @@ index 1332272c8d50209d1f9ef9244e88da38e04b9267..d4daa78eba2eaa2cea0d1130f8d75b33
  
          if (!player.connection.isAcceptingMessages()) {
 diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
-index 94e629c3d977e8f15cc5a3912feeed97ea02c839..cc38e0b87f4b78666372345140bc36d146f10c30 100644
+index 4ce6ff3634efebd2395528a3b6858d04a4448edd..8680e8e298922636cc98f6537a011788e9550169 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/Config.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/Config.java
-@@ -61,6 +61,17 @@ public class Config {
+@@ -58,6 +58,17 @@ public class Config {
              if (!config.contains("f3name")) {
                  config.set("f3name", "&eDeepslateMC");
              }
@@ -71,7 +71,7 @@ index 94e629c3d977e8f15cc5a3912feeed97ea02c839..cc38e0b87f4b78666372345140bc36d1
              save();
          } catch (IOException | InvalidConfigurationException e) {
              e.printStackTrace();
-@@ -137,5 +148,14 @@ public class Config {
+@@ -131,5 +142,14 @@ public class Config {
      public static String getF3name() {
          return config.getString("f3name").replace("&", "§");
      }

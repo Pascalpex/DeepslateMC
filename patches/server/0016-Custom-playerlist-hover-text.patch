@@ -36,10 +36,10 @@ index d8869f25b2215c85587bf8e89e96e32e624d008a..e6d58757cc4013264ec964ad5eb37e88
              return new ServerStatus.Players(i, list.size(), List.of());
          } else {
 diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
-index cc38e0b87f4b78666372345140bc36d146f10c30..23765d710b135dec16a52fd10b7b9cc8f298779c 100644
+index 8680e8e298922636cc98f6537a011788e9550169..04a9c3a0592c933300c5587ab06312e0dd42f29e 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/Config.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/Config.java
-@@ -72,6 +72,13 @@ public class Config {
+@@ -69,6 +69,13 @@ public class Config {
                  config.set("tablist" + ".header", headerList);
                  config.set("tablist" + ".footer", footerList);
              }
@@ -53,7 +53,7 @@ index cc38e0b87f4b78666372345140bc36d146f10c30..23765d710b135dec16a52fd10b7b9cc8
              save();
          } catch (IOException | InvalidConfigurationException e) {
              e.printStackTrace();
-@@ -157,5 +164,11 @@ public class Config {
+@@ -151,5 +158,11 @@ public class Config {
      public static List<String> getFooter() {
          return (List<String>) config.getList("tablist" + ".footer");
      }

@@ -49,7 +49,7 @@ index d4daa78eba2eaa2cea0d1130f8d75b33dd58fe76..090d383b698641a8efca722339d0ee69
  
          if (!player.connection.isAcceptingMessages()) {
 diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
-index 23765d710b135dec16a52fd10b7b9cc8f298779c..21593cf6dc3880c2386c17b48192588dde3cf33b 100644
+index 04a9c3a0592c933300c5587ab06312e0dd42f29e..8ce11487efd3c00d7876f955b8280bf9b219fe65 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/Config.java
 +++ b/src/main/java/net/pascalpex/deepslatemc/Config.java
 @@ -1,5 +1,7 @@
@@ -60,7 +60,7 @@ index 23765d710b135dec16a52fd10b7b9cc8f298779c..21593cf6dc3880c2386c17b48192588d
  import org.bukkit.Bukkit;
  import org.bukkit.Location;
  import org.bukkit.World;
-@@ -79,6 +81,13 @@ public class Config {
+@@ -76,6 +78,13 @@ public class Config {
                  lines.add("&6default text");
                  config.set("playerlistHover" + ".lines", lines);
              }
@@ -74,7 +74,7 @@ index 23765d710b135dec16a52fd10b7b9cc8f298779c..21593cf6dc3880c2386c17b48192588d
              save();
          } catch (IOException | InvalidConfigurationException e) {
              e.printStackTrace();
-@@ -170,5 +179,20 @@ public class Config {
+@@ -164,5 +173,20 @@ public class Config {
      public static List<String> getPlayerlistHoverLines() {
          return (List<String>) config.getList("playerlistHover" + ".lines");
      }
