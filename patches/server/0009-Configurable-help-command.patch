@@ -5,10 +5,10 @@ Subject: [PATCH] Configurable help command
 
 
 diff --git a/src/main/java/net/minecraft/commands/Commands.java b/src/main/java/net/minecraft/commands/Commands.java
-index 5fac602e55b1f05381637acf5eec63e271dcf6cb..d025a4a731598f568f2358ee96ddaa2b8499f5e1 100644
+index cc77edf3bcc87c48891044caf050692bbc7aadc3..41ce99d3efdf03205be52795259fad6d18d8676e 100644
 --- a/src/main/java/net/minecraft/commands/Commands.java
 +++ b/src/main/java/net/minecraft/commands/Commands.java
-@@ -183,7 +183,7 @@ public class Commands {
+@@ -182,7 +182,7 @@ public class Commands {
          GameModeCommand.register(this.dispatcher);
          GameRuleCommand.register(this.dispatcher);
          GiveCommand.register(this.dispatcher, commandRegistryAccess);

@@ -157,7 +157,7 @@ index aa25fd3ee043003f359b2c67a6d0f6700a0ef893..74fc9d76a26e3ac606eb3022b91492d4
  
      public String getTitle() {
 diff --git a/src/main/java/net/minecraft/server/Main.java b/src/main/java/net/minecraft/server/Main.java
-index b929842514a97ca993ead608d355a4af2a32bf1f..9fd449c312f998df0e8fe3303b9619324257d74d 100644
+index 94e6f298b12f86f923bb58b88caec6f3c3b37aa6..f84de5c2be4b0133d41dfc280dd517ee223bfef4 100644
 --- a/src/main/java/net/minecraft/server/Main.java
 +++ b/src/main/java/net/minecraft/server/Main.java
 @@ -77,6 +77,17 @@ public class Main {
@@ -175,14 +175,14 @@ index b929842514a97ca993ead608d355a4af2a32bf1f..9fd449c312f998df0e8fe3303b961932
 +                "                     | |                                             \n" +
 +                "                     |_|                                             \u001B[0m\u001B[1;31m\u001B[0m\u001B[1;31m\u001B[0m\u001B[0m\n");
 +        // DeepslateMC end
+         io.papermc.paper.util.LogManagerShutdownThread.hook(); // Paper
          SharedConstants.tryDetectVersion();
          /* CraftBukkit start - Replace everything
-         OptionParser optionparser = new OptionParser();
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 75a927ac8c56a2e48ae26ae36916326d17793293..d8869f25b2215c85587bf8e89e96e32e624d008a 100644
+index 7308c3ae41397338092ab3f7f95baca6b2a515c3..91efd9b36bfad53040bb2d45341394b47fd48b60 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
-@@ -1928,7 +1928,13 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -1929,7 +1929,13 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
  
      @DontObfuscate
      public String getServerModName() {
