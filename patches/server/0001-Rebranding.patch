@@ -71,7 +71,7 @@ index 6c5c0cc59ff9901b22288f3cd62228c1e52794c5..ad566b0b9c5a28da2ccc211a5f472845
                  metrics.addCustomChart(new Metrics.DrilldownPie("java_version", () -> {
                      Map<String, Map<String, Integer>> map = new HashMap<>(2); // Gale - metrics - reduce HashMap capacity
 diff --git a/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java b/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java
-index 6fca13221ef3e0bbcad2ebbe74d6aadf8ed2c539..03f0260ec2dad394f2efd2440283722cb6ff06c9 100644
+index 6fca13221ef3e0bbcad2ebbe74d6aadf8ed2c539..7cef9aa89eeacdae1ad5a7e0a169c49969369bab 100644
 --- a/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java
 +++ b/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java
 @@ -25,12 +25,12 @@ import org.galemc.gale.version.AbstractPaperVersionFetcher;
@@ -79,7 +79,7 @@ index 6fca13221ef3e0bbcad2ebbe74d6aadf8ed2c539..03f0260ec2dad394f2efd2440283722c
  
      public PaperVersionFetcher() {
 -        super("master", "https://papermc.io/downloads/paper", "Paper", "PaperMC", "PaperMC", "Paper");
-+        super("ver/1.21", "https://pascalpex.de/deepslate/", "DeepslateMC", "Pascalpex", "Pascalpex", "DeepslateMC"); // Deepslate
++        super("ver/1.21.1", "https://pascalpex.de/deepslate/", "DeepslateMC", "Pascalpex", "Pascalpex", "DeepslateMC"); // Deepslate
      }
  
      @Override
@@ -268,20 +268,20 @@ index e1ff5511d4694c13249443da0f127456d53e5543..127598a186ab7c9921d9c91e1ace0011
                  // (async tasks must live with race-conditions if they attempt to cancel between these few lines of code)
              }
 diff --git a/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java b/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
-index 024dc051986ebb9d83f4bf9b020b586f6219f6b0..b2f2decec7fafae077b90f020a81a479bdbfead2 100644
+index 55433c8956e5e10cb156c8a8b572e80b3b0c14ee..86fe75d9dc5b4e77833a2bd240803c20ee36ee12 100644
 --- a/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
 +++ b/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
 @@ -485,7 +485,7 @@ public final class CraftMagicNumbers implements UnsafeValues {
  
      @Override
      public com.destroystokyo.paper.util.VersionFetcher getVersionFetcher() {
--        return new org.galemc.gale.version.GaleVersionFetcher(); // Gale - branding changes - version fetcher
-+        return new com.destroystokyo.paper.PaperVersionFetcher(); // Gale - branding changes - version fetcher // Deepslate
+-        return new org.dreeam.leaf.version.LeafVersionFetcher(); // Gale - branding changes - version fetcher // Leaf
++        return new com.destroystokyo.paper.PaperVersionFetcher(); // Gale - branding changes - version fetcher // Leaf // Deepslate
      }
  
      @Override
 diff --git a/src/main/java/org/bukkit/craftbukkit/util/Versioning.java b/src/main/java/org/bukkit/craftbukkit/util/Versioning.java
-index e220f5601f6b92b7b280ce8ebe64117d30192b0e..526cd19815b23dbfd91c6f786ea35bd769b2ceed 100644
+index e220f5601f6b92b7b280ce8ebe64117d30192b0e..bee2f93b8c497670504439346e9d9054eae399cb 100644
 --- a/src/main/java/org/bukkit/craftbukkit/util/Versioning.java
 +++ b/src/main/java/org/bukkit/craftbukkit/util/Versioning.java
 @@ -1,29 +1,7 @@
@@ -312,7 +312,7 @@ index e220f5601f6b92b7b280ce8ebe64117d30192b0e..526cd19815b23dbfd91c6f786ea35bd7
 -        }
 -
 -        return result;
-+        return "1.21-R0.1-SNAPSHOT"; // Deepslate - Hardcode version
++        return "1.21.1-R0.1-SNAPSHOT"; // Deepslate - Hardcode version
      }
  }
 diff --git a/src/main/java/org/spigotmc/WatchdogThread.java b/src/main/java/org/spigotmc/WatchdogThread.java
