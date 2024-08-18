@@ -103,18 +103,18 @@ index b5f3f213da8a40d5184098af017c8e2669c3e58c..c7b748d2d3d34b5b69a45074496982a3
                  .completer(new ConsoleCommandCompleter(this.server))
                  .option(LineReader.Option.COMPLETE_IN_WORD, true);
 diff --git a/src/main/java/io/papermc/paper/ServerBuildInfoImpl.java b/src/main/java/io/papermc/paper/ServerBuildInfoImpl.java
-index 9d003c2ae45a057c0274a34fe5012cf17d1a2681..05a5b964241971725efce6f7ea37138530091422 100644
+index 34f7f74b374d319d0d578e498db7663dd58b8458..76f4883082feb2ea2e4daaf481654d599d7ca314 100644
 --- a/src/main/java/io/papermc/paper/ServerBuildInfoImpl.java
 +++ b/src/main/java/io/papermc/paper/ServerBuildInfoImpl.java
-@@ -34,6 +34,7 @@ public record ServerBuildInfoImpl(
-     private static final String BRAND_GALE_NAME = "Gale"; // Gale - branding changes
+@@ -35,6 +35,7 @@ public record ServerBuildInfoImpl(
+     private static final String BRAND_PUFFERFISH_NAME = "Pufferfish"; // Leaf
      private static final String BRAND_PURPUR_NAME = "Purpur"; // Purpur
      private static final String BRAND_LEAF_NAME = "Leaf"; // Leaf
 +    private static final String BRAND_DEEPSLATE_NAME = "DeepslateMC"; // Deepslate
  
      private static final String BUILD_DEV = "DEV";
  
-@@ -45,9 +46,9 @@ public record ServerBuildInfoImpl(
+@@ -46,9 +47,9 @@ public record ServerBuildInfoImpl(
          this(
              getManifestAttribute(manifest, ATTRIBUTE_BRAND_ID)
                  .map(Key::key)
@@ -126,13 +126,13 @@ index 9d003c2ae45a057c0274a34fe5012cf17d1a2681..05a5b964241971725efce6f7ea371385
              SharedConstants.getCurrentVersion().getId(),
              SharedConstants.getCurrentVersion().getName(),
              getManifestAttribute(manifest, ATTRIBUTE_BUILD_NUMBER)
-@@ -67,7 +68,8 @@ public record ServerBuildInfoImpl(
-         return brandId.equals(this.brandId)
+@@ -69,7 +70,8 @@ public record ServerBuildInfoImpl(
                  || brandId.equals(BRAND_PAPER_ID)
-                 || brandId.equals(BRAND_GALE_ID)
--                || brandId.equals(BRAND_PURPUR_ID); // Gale - branding changes // Leaf
-+                || brandId.equals(BRAND_PURPUR_ID)
-+                || brandId.equals(BRAND_LEAF_ID); // Gale - branding changes // Leaf // Deepslate
+                 || brandId.equals(BRAND_GALE_ID) // Gale - branding changes // Leaf
+                 || brandId.equals(BRAND_PUFFERFISH_ID) // Leaf
+-                || brandId.equals(BRAND_PURPUR_ID); // Leaf
++                || brandId.equals(BRAND_PURPUR_ID) // Leaf
++                || brandId.equals(BRAND_LEAF_ID); // Deepslate
      }
  
      @Override
