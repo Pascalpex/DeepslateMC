@@ -56,7 +56,7 @@ paperweight {
     decompileRepo.set(paperMavenPublicUrl)
 
     useStandardUpstream("leaf") {
-        url.set(github("Pascalpex", "i-want-upstream"))
+        url.set(github("Winds-Studio", "Leaf"))
         ref.set(providers.gradleProperty("leafRef"))
 
         withStandardPatcher {
