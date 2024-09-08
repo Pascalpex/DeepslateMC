@@ -5,7 +5,7 @@ Subject: [PATCH] Rebranding
 
 
 diff --git a/build.gradle.kts b/build.gradle.kts
-index 6e1c71f4073dc4b43787a3f6599453d9db7bf8bb..a8cec256e565940640498a1a7e9b6ab790fe8d31 100644
+index b702bc9c215fadb7f85faa8f81526f8521373778..bbf8b8bbf72082cbbe2377832e4086980b7aaa9e 100644
 --- a/build.gradle.kts
 +++ b/build.gradle.kts
 @@ -13,7 +13,7 @@ configurations.named(log4jPlugins.compileClasspathConfigurationName) {
@@ -90,10 +90,10 @@ index 6fca13221ef3e0bbcad2ebbe74d6aadf8ed2c539..7cef9aa89eeacdae1ad5a7e0a169c499
  
      @Override
 diff --git a/src/main/java/com/destroystokyo/paper/console/PaperConsole.java b/src/main/java/com/destroystokyo/paper/console/PaperConsole.java
-index b5f3f213da8a40d5184098af017c8e2669c3e58c..c7b748d2d3d34b5b69a45074496982a3900e0c5b 100644
+index 9869bec65f4d0fbd5ed5aff896a8956e7ea2747f..ded8e75b82ecc1e1aa986c72a8bfdc7f08eea49c 100644
 --- a/src/main/java/com/destroystokyo/paper/console/PaperConsole.java
 +++ b/src/main/java/com/destroystokyo/paper/console/PaperConsole.java
-@@ -17,7 +17,7 @@ public final class PaperConsole extends SimpleTerminalConsole {
+@@ -20,7 +20,7 @@ public final class PaperConsole extends SimpleTerminalConsole {
      @Override
      protected LineReader buildReader(LineReaderBuilder builder) {
          builder
@@ -179,7 +179,7 @@ index 94e6f298b12f86f923bb58b88caec6f3c3b37aa6..f84de5c2be4b0133d41dfc280dd517ee
          SharedConstants.tryDetectVersion();
          /* CraftBukkit start - Replace everything
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 7308c3ae41397338092ab3f7f95baca6b2a515c3..91efd9b36bfad53040bb2d45341394b47fd48b60 100644
+index 0255d5a23e2f5a1a67af3ff1588b608521e4c133..c1b5c85c1d91a3ceaad0512250cbfcd1a0000f22 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
 @@ -1929,7 +1929,13 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
@@ -268,10 +268,10 @@ index e1ff5511d4694c13249443da0f127456d53e5543..127598a186ab7c9921d9c91e1ace0011
                  // (async tasks must live with race-conditions if they attempt to cancel between these few lines of code)
              }
 diff --git a/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java b/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
-index 55433c8956e5e10cb156c8a8b572e80b3b0c14ee..86fe75d9dc5b4e77833a2bd240803c20ee36ee12 100644
+index 3ecdc98b20888422b5f566e1bfe1c8cef6ea8a54..f74ea200572a63a09ce03e428c96b7a9f8922c5f 100644
 --- a/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
 +++ b/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
-@@ -485,7 +485,7 @@ public final class CraftMagicNumbers implements UnsafeValues {
+@@ -481,7 +481,7 @@ public final class CraftMagicNumbers implements UnsafeValues {
  
      @Override
      public com.destroystokyo.paper.util.VersionFetcher getVersionFetcher() {
