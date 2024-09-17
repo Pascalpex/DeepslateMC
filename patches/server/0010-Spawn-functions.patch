@@ -19,7 +19,7 @@ index 4d87c04d0e3f6ba767ebc9ff1f9b50c6bd1c7c57..8c2ef4aad4f2fe1616666e1157d70edf
  
          this.setPvpAllowed(dedicatedserverproperties.pvp);
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index bd17835c05e7c46f88a49d300a8d42d1ccf23424..cf1ac4f4edfbca8af1235717c558fdebb7bddc5e 100644
+index 1284e1eb47fd0bacba3e95c13c317a196a183146..53bb14dbc0c4257a2b588c10279932da9d843518 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
 @@ -105,6 +105,7 @@ import net.minecraft.world.scores.Objective;
@@ -30,7 +30,7 @@ index bd17835c05e7c46f88a49d300a8d42d1ccf23424..cf1ac4f4edfbca8af1235717c558fdeb
  import org.galemc.gale.configuration.GaleGlobalConfiguration;
  import org.slf4j.Logger;
  
-@@ -364,6 +365,9 @@ public abstract class PlayerList {
+@@ -465,6 +466,9 @@ public abstract class PlayerList {
          player.containerMenu.transferTo(player.containerMenu, bukkitPlayer);
  
          PlayerJoinEvent playerJoinEvent = new PlayerJoinEvent(bukkitPlayer, getJoinMsg(io.papermc.paper.adventure.PaperAdventure.asAdventure(ichatmutablecomponent), bukkitPlayer)); // Paper - Adventure // Leaf - Configurable connection message - join message
@@ -196,10 +196,10 @@ index 0000000000000000000000000000000000000000..24e67e218432ea852a285b13d56b48e4
 +
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index f6a60c0b4977a2552ffa5cc92cb6d1b057e8df40..aeab23fdc28d28e2706df055532de495c863e0cd 100644
+index e2f6d9f279759bd4dd09e12c57ce5169b73904d1..ed21e6c6054ffd673b497e79b168575492c0e346 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -1134,6 +1134,9 @@ public final class CraftServer implements Server {
+@@ -1136,6 +1136,9 @@ public final class CraftServer implements Server {
          MinecraftServer.getServer().server.getCommandMap().register("buildworld", "Deepslate", new BuildworldCommand("buildworld"));
          MinecraftServer.getServer().server.getCommandMap().register("maintenance", "Deepslate", new MaintenanceMode("maintenance"));
          MinecraftServer.getServer().server.getCommandMap().register("help", "Deepslate", new HelpCommand("help"));

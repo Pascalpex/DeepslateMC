@@ -17,7 +17,7 @@ index 8c2ef4aad4f2fe1616666e1157d70edfa5a4dedc..3f31c3741444150cacd8bd12a19bd90a
  
          this.setPvpAllowed(dedicatedserverproperties.pvp);
 diff --git a/src/main/java/net/minecraft/server/level/ServerPlayerGameMode.java b/src/main/java/net/minecraft/server/level/ServerPlayerGameMode.java
-index 7c06b284a6cc74c0b31f8921706c7796dcc4e402..319f2bf1abcd39a0bf456c956a41394d52bba673 100644
+index 28731f0c5b0ba63fa8d5ce3ee580bf314a844f92..d399f2274f70673e29c577b539d7190314eca09b 100644
 --- a/src/main/java/net/minecraft/server/level/ServerPlayerGameMode.java
 +++ b/src/main/java/net/minecraft/server/level/ServerPlayerGameMode.java
 @@ -29,6 +29,9 @@ import net.minecraft.world.level.block.state.BlockState;
@@ -242,10 +242,10 @@ index 0000000000000000000000000000000000000000..b89d430274e0c71a63e33c57f3b08248
 +
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index aeab23fdc28d28e2706df055532de495c863e0cd..e369d5952d455f52e2bd85929735077ddc2e6252 100644
+index ed21e6c6054ffd673b497e79b168575492c0e346..3472de0170daba8950d124b570acefe82e1c63fe 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -1137,6 +1137,7 @@ public final class CraftServer implements Server {
+@@ -1139,6 +1139,7 @@ public final class CraftServer implements Server {
          MinecraftServer.getServer().server.getCommandMap().register("setspawn", "Deepslate", new SpawnCommand("setspawn"));
          MinecraftServer.getServer().server.getCommandMap().register("spawn", "Deepslate", new SpawnCommand("spawn"));
          MinecraftServer.getServer().server.getCommandMap().register("lobby", "Deepslate", new SpawnCommand("lobby"));
