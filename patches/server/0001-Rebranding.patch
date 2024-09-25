@@ -5,7 +5,7 @@ Subject: [PATCH] Rebranding
 
 
 diff --git a/build.gradle.kts b/build.gradle.kts
-index b702bc9c215fadb7f85faa8f81526f8521373778..bbf8b8bbf72082cbbe2377832e4086980b7aaa9e 100644
+index 57f309dc5259a4ca935c12c99e835734cf2480c7..c54efef6aba48f2fb14d12d18603741e96a5d949 100644
 --- a/build.gradle.kts
 +++ b/build.gradle.kts
 @@ -13,7 +13,7 @@ configurations.named(log4jPlugins.compileClasspathConfigurationName) {
@@ -179,10 +179,10 @@ index 94e6f298b12f86f923bb58b88caec6f3c3b37aa6..f84de5c2be4b0133d41dfc280dd517ee
          SharedConstants.tryDetectVersion();
          /* CraftBukkit start - Replace everything
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 0255d5a23e2f5a1a67af3ff1588b608521e4c133..c1b5c85c1d91a3ceaad0512250cbfcd1a0000f22 100644
+index cfcc4ab30a03e04f7e4aa0970fbde99910c4d2d2..97bcf6358702c315a337d96d3bf374c471811e78 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
-@@ -1929,7 +1929,13 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -1938,7 +1938,13 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
  
      @DontObfuscate
      public String getServerModName() {
@@ -268,7 +268,7 @@ index e1ff5511d4694c13249443da0f127456d53e5543..127598a186ab7c9921d9c91e1ace0011
                  // (async tasks must live with race-conditions if they attempt to cancel between these few lines of code)
              }
 diff --git a/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java b/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
-index 3ecdc98b20888422b5f566e1bfe1c8cef6ea8a54..f74ea200572a63a09ce03e428c96b7a9f8922c5f 100644
+index 3786f6944b0b025c33749c301c2d11b33311a02a..71a99df5a04068c69914762cc3e590914601fa46 100644
 --- a/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
 +++ b/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
 @@ -481,7 +481,7 @@ public final class CraftMagicNumbers implements UnsafeValues {
