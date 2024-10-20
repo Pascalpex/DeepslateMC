@@ -5,10 +5,10 @@ Subject: [PATCH] Configurable help command
 
 
 diff --git a/src/main/java/net/minecraft/commands/Commands.java b/src/main/java/net/minecraft/commands/Commands.java
-index 9ee5d24f89b38603446849206dd4ffdbc73702ad..72b9be1def070da71aea1677e97fd55563cc2071 100644
+index e3f9c0348ba3fef918cd26a34a1b6c7a0c947ee1..acf02d7cfbcf5649e9af937940b5c74fce661f6f 100644
 --- a/src/main/java/net/minecraft/commands/Commands.java
 +++ b/src/main/java/net/minecraft/commands/Commands.java
-@@ -182,7 +182,7 @@ public class Commands {
+@@ -183,7 +183,7 @@ public class Commands {
          GameModeCommand.register(this.dispatcher);
          GameRuleCommand.register(this.dispatcher);
          GiveCommand.register(this.dispatcher, commandRegistryAccess);
@@ -18,7 +18,7 @@ index 9ee5d24f89b38603446849206dd4ffdbc73702ad..72b9be1def070da71aea1677e97fd555
          KickCommand.register(this.dispatcher);
          KillCommand.register(this.dispatcher);
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index c339ac59f3d111390168d573aaa819b70f9a389c..4d87c04d0e3f6ba767ebc9ff1f9b50c6bd1c7c57 100644
+index ea7df14c806c653786f8c13df613a8090b711940..9d44b3654b64159df3d4090ea95a670542c473ec 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 @@ -275,6 +275,7 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface

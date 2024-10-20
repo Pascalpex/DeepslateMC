@@ -5,10 +5,10 @@ Subject: [PATCH] Toggleable op command
 
 
 diff --git a/src/main/java/net/minecraft/commands/Commands.java b/src/main/java/net/minecraft/commands/Commands.java
-index db92fd5215620f824b732a972122802d0741339a..cc77edf3bcc87c48891044caf050692bbc7aadc3 100644
+index ba8df422432b4b20d8e0251bf4768a16efa4fe7e..e3f9c0348ba3fef918cd26a34a1b6c7a0c947ee1 100644
 --- a/src/main/java/net/minecraft/commands/Commands.java
 +++ b/src/main/java/net/minecraft/commands/Commands.java
-@@ -242,7 +242,9 @@ public class Commands {
+@@ -243,7 +243,9 @@ public class Commands {
              BanListCommands.register(this.dispatcher);
              BanPlayerCommands.register(this.dispatcher);
              DeOpCommands.register(this.dispatcher);
@@ -18,7 +18,7 @@ index db92fd5215620f824b732a972122802d0741339a..cc77edf3bcc87c48891044caf050692b
 +            }
              PardonCommand.register(this.dispatcher);
              PardonIpCommand.register(this.dispatcher);
-             SaveAllCommand.register(this.dispatcher);
+             PerfCommand.register(this.dispatcher);
 diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
 index 97119bdc69d79216241bf1cf0c0b2ae5b230134b..8e3c0ae0486535a940f517bbcef23572d4cef724 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/Config.java

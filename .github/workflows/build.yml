@@ -4,11 +4,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4.2.0
+    - uses: actions/checkout@v4.2.1
     - name: Set up JDK 21
       uses: actions/setup-java@v4.4.0
       with:
-        java-version: 21.0.4
+        java-version: 21.0.5
         distribution: 'temurin'
     - name: Configure Git
       run: |
@@ -21,7 +21,7 @@ jobs:
     - name: Generate Paperclip Jar
       run: ./gradlew createMojmapPaperclipJar
     - name: Upload Paperclip
-      uses: actions/upload-artifact@v4.4.0
+      uses: actions/upload-artifact@v4.4.3
       with:
         name: DeepslateMC
         path: build/libs/deepslateMC-paperclip-1.21.1-R0.1-SNAPSHOT-mojmap.jar
