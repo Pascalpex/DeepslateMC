@@ -5,7 +5,7 @@ Subject: [PATCH] Rebranding
 
 
 diff --git a/build.gradle.kts b/build.gradle.kts
-index 57f309dc5259a4ca935c12c99e835734cf2480c7..c54efef6aba48f2fb14d12d18603741e96a5d949 100644
+index d7a72ae0f8bb0fadf304da62e6a3ca7cd03770fa..cef4b7e4646cbbe62b52908de1e3b120e67adc3e 100644
 --- a/build.gradle.kts
 +++ b/build.gradle.kts
 @@ -13,7 +13,7 @@ configurations.named(log4jPlugins.compileClasspathConfigurationName) {
@@ -17,7 +17,7 @@ index 57f309dc5259a4ca935c12c99e835734cf2480c7..c54efef6aba48f2fb14d12d18603741e
  
      // Leaf start - Leaf Config
      implementation("com.github.thatsmusic99:ConfigurationMaster-API:v2.0.0-rc.2") {
-@@ -122,14 +122,14 @@ tasks.jar {
+@@ -123,14 +123,14 @@ tasks.jar {
          val gitBranch = git("rev-parse", "--abbrev-ref", "HEAD").getText().trim() // Paper
          attributes(
              "Main-Class" to "org.bukkit.craftbukkit.Main",
@@ -179,7 +179,7 @@ index 94e6f298b12f86f923bb58b88caec6f3c3b37aa6..f84de5c2be4b0133d41dfc280dd517ee
          SharedConstants.tryDetectVersion();
          /* CraftBukkit start - Replace everything
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 37c377761b45eefab39164a7e714e585a02a4447..077d51f223a9cec236ef845fccbf14e75126ad60 100644
+index 09e55f62b4cea5b058e04356252f4f56957646b8..3fbf280ba482762dc576271f221580b4683095fd 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
 @@ -1947,7 +1947,13 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
@@ -268,10 +268,10 @@ index e1ff5511d4694c13249443da0f127456d53e5543..127598a186ab7c9921d9c91e1ace0011
                  // (async tasks must live with race-conditions if they attempt to cancel between these few lines of code)
              }
 diff --git a/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java b/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
-index 3786f6944b0b025c33749c301c2d11b33311a02a..71a99df5a04068c69914762cc3e590914601fa46 100644
+index 7d53a86c5aa5a1eeeb26dbc56e5f104729806d20..289ad384d361e7b22f17417580549b8fe89ab55a 100644
 --- a/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
 +++ b/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
-@@ -481,7 +481,7 @@ public final class CraftMagicNumbers implements UnsafeValues {
+@@ -487,7 +487,7 @@ public final class CraftMagicNumbers implements UnsafeValues {
  
      @Override
      public com.destroystokyo.paper.util.VersionFetcher getVersionFetcher() {

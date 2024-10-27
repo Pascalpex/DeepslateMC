@@ -5,7 +5,7 @@ Subject: [PATCH] Maintenance mode
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 50be44dc08c5dcb84bf37a869fd490002e396af5..c339ac59f3d111390168d573aaa819b70f9a389c 100644
+index 82d4b3de6829c2d59d93a07e9b0d7be91933cd46..ea7df14c806c653786f8c13df613a8090b711940 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 @@ -274,6 +274,7 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
@@ -17,7 +17,7 @@ index 50be44dc08c5dcb84bf37a869fd490002e396af5..c339ac59f3d111390168d573aaa819b7
  
          this.setPvpAllowed(dedicatedserverproperties.pvp);
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index dac5967088d29297612536f7da8ab9658624e2ed..1284e1eb47fd0bacba3e95c13c317a196a183146 100644
+index 27015c62e1c45d36e58ae1323417739836632933..9caca1baa6859c70d85821ee01d42732f517bc48 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
 @@ -103,6 +103,8 @@ import net.minecraft.world.phys.Vec3;
@@ -160,10 +160,10 @@ index 0000000000000000000000000000000000000000..213d709d0c0ff430420f6ee885f5ea6e
 +    }
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index b12edf179302ce32fbe367c62301ffc2bc8bec4b..e8b30d59bf66c351ae1880ccc22c83a6b5167abd 100644
+index 72255b417f7e36b5915742a8adc7094feb77715e..7cdec3cb1ef60e60dbdd226fe9b37e9c3d86645a 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -1134,6 +1134,7 @@ public final class CraftServer implements Server {
+@@ -1136,6 +1136,7 @@ public final class CraftServer implements Server {
          MinecraftServer.getServer().server.getCommandMap().register("clearchat", "Deepslate", new ClearchatCommand("clearchat"));
          MinecraftServer.getServer().server.getCommandMap().register("setbuildworld", "Deepslate", new BuildworldCommand("setbuildworld"));
          MinecraftServer.getServer().server.getCommandMap().register("buildworld", "Deepslate", new BuildworldCommand("buildworld"));
