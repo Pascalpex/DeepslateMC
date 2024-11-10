@@ -5,7 +5,7 @@ Subject: [PATCH] Rebranding
 
 
 diff --git a/build.gradle.kts b/build.gradle.kts
-index d7a72ae0f8bb0fadf304da62e6a3ca7cd03770fa..cef4b7e4646cbbe62b52908de1e3b120e67adc3e 100644
+index e392f3fdc9b87c34f068743fff7ea486b19fa393..968ed23b89117c6839302e1ae36e80d74965aa16 100644
 --- a/build.gradle.kts
 +++ b/build.gradle.kts
 @@ -13,7 +13,7 @@ configurations.named(log4jPlugins.compileClasspathConfigurationName) {
@@ -179,10 +179,10 @@ index 94e6f298b12f86f923bb58b88caec6f3c3b37aa6..f84de5c2be4b0133d41dfc280dd517ee
          SharedConstants.tryDetectVersion();
          /* CraftBukkit start - Replace everything
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 09e55f62b4cea5b058e04356252f4f56957646b8..3fbf280ba482762dc576271f221580b4683095fd 100644
+index 279289e0c3dc65fed0ee4b2f5b0ef077ab433d5e..4470447757506569baaf74d8b77997484962050e 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
-@@ -1947,7 +1947,13 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -1953,7 +1953,13 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
  
      @DontObfuscate
      public String getServerModName() {
