@@ -5,18 +5,18 @@ Subject: [PATCH] Configurable move messages
 
 
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index adfb515461fbf5c49f603fc5ecd6053f2e0d3371..cc672c4b1017a0e3e25f9214cbbc2f4dd0fb3820 100644
+index e0962547709d6951cc98da94f028bd4d5b7b25dd..7400859dcf3d9094c839fd52ceedb007a8ea98cc 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-@@ -195,6 +195,7 @@ import net.minecraft.world.phys.Vec3;
+@@ -193,6 +193,7 @@ import net.minecraft.world.phys.Vec3;
  import net.minecraft.world.phys.shapes.BooleanOp;
  import net.minecraft.world.phys.shapes.Shapes;
  import net.minecraft.world.phys.shapes.VoxelShape;
 +import net.pascalpex.deepslatemc.Config;
- import org.bukkit.craftbukkit.util.permissions.CraftDefaultPermissions;
- import org.apache.commons.lang3.StringUtils;
- import org.galemc.gale.configuration.GaleGlobalConfiguration;
-@@ -1478,7 +1479,7 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
+ import org.slf4j.Logger;
+ 
+ // CraftBukkit start
+@@ -1473,7 +1474,7 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
                                          io.papermc.paper.event.player.PlayerFailMoveEvent event = fireFailMove(io.papermc.paper.event.player.PlayerFailMoveEvent.FailReason.MOVED_TOO_QUICKLY,
                                              toX, toY, toZ, toYaw, toPitch, true);
                                          if (!event.isAllowed()) {
@@ -25,7 +25,7 @@ index adfb515461fbf5c49f603fc5ecd6053f2e0d3371..cc672c4b1017a0e3e25f9214cbbc2f4d
                                                  ServerGamePacketListenerImpl.LOGGER.warn("{} moved too quickly! {},{},{}", new Object[]{this.player.getName().getString(), d6, d7, d8});
                                              this.teleport(this.player.getX(), this.player.getY(), this.player.getZ(), this.player.getYRot(), this.player.getXRot());
                                              return;
-@@ -1554,7 +1555,7 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
+@@ -1549,7 +1550,7 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
                                      toX, toY, toZ, toYaw, toPitch, true);
                                  if (!event.isAllowed()) {
                                      movedWrongly = true;

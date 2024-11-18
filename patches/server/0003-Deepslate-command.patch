@@ -5,18 +5,18 @@ Subject: [PATCH] Deepslate command
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index f7489e3f606e564c757f395201230f883ed91355..11c5c4512780b73b21a1b747232154ff7dd69583 100644
+index 86462d3eff74f373820ccdbb162978d1d4a6d9d6..2703cf26c16bcf547dd810cb7a35753c1e140854 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-@@ -59,6 +59,7 @@ import net.minecraft.world.level.GameRules;
+@@ -57,6 +57,7 @@ import net.minecraft.world.level.GameRules;
  import net.minecraft.world.level.GameType;
  import net.minecraft.world.level.block.entity.SkullBlockEntity;
  import net.minecraft.world.level.storage.LevelStorageSource;
 +import net.pascalpex.deepslatemc.commands.*;
- import org.galemc.gale.command.GaleCommands;
- import org.galemc.gale.configuration.GaleGlobalConfiguration;
  import org.slf4j.Logger;
-@@ -265,6 +266,10 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+ 
+ // CraftBukkit start
+@@ -261,6 +262,10 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
          } catch (Throwable ignored) {}
          // Gale start - Pufferfish - SIMD support
  
@@ -155,10 +155,10 @@ index 0000000000000000000000000000000000000000..c11d3597dbc49a1f6d75a55f427c55fc
 +
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 748501ec2ecbabd695b7ebf5d5650cb96fbfb5cd..5dbee97b7eae2cba36778848fb631a4ac5c3bd69 100644
+index c7d806f7e2ddef2226be1efbe794f0da4c331615..2f60d6126e29e6c405e292a050b2ee095427470a 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -114,6 +114,7 @@ import net.minecraft.world.level.storage.PlayerDataStorage;
+@@ -111,6 +111,7 @@ import net.minecraft.world.level.storage.PlayerDataStorage;
  import net.minecraft.world.level.storage.PrimaryLevelData;
  import net.minecraft.world.level.validation.ContentValidationException;
  import net.minecraft.world.phys.Vec3;
@@ -166,7 +166,7 @@ index 748501ec2ecbabd695b7ebf5d5650cb96fbfb5cd..5dbee97b7eae2cba36778848fb631a4a
  import org.bukkit.BanList;
  import org.bukkit.Bukkit;
  import org.bukkit.ChatColor;
-@@ -1126,6 +1127,11 @@ public final class CraftServer implements Server {
+@@ -1123,6 +1124,11 @@ public final class CraftServer implements Server {
          io.papermc.paper.command.PaperCommands.registerCommands(this.console); // Paper
          this.spark.registerCommandBeforePlugins(this); // Paper - spark
          org.purpurmc.purpur.PurpurConfig.registerCommands(); // Purpur

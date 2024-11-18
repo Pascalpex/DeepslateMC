@@ -71,11 +71,11 @@ index 6c5c0cc59ff9901b22288f3cd62228c1e52794c5..ad566b0b9c5a28da2ccc211a5f472845
                  metrics.addCustomChart(new Metrics.DrilldownPie("java_version", () -> {
                      Map<String, Map<String, Integer>> map = new HashMap<>(2); // Gale - metrics - reduce HashMap capacity
 diff --git a/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java b/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java
-index 6fca13221ef3e0bbcad2ebbe74d6aadf8ed2c539..7cef9aa89eeacdae1ad5a7e0a169c49969369bab 100644
+index 07317899d4e28b55592c8035686c81ea198c1675..04636c8a81c4956ee1481dc0549efcec5e423d5c 100644
 --- a/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java
 +++ b/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java
-@@ -25,12 +25,12 @@ import org.galemc.gale.version.AbstractPaperVersionFetcher;
- public class PaperVersionFetcher extends AbstractPaperVersionFetcher {
+@@ -39,12 +39,12 @@ import static net.kyori.adventure.text.format.TextColor.color;
+ public class PaperVersionFetcher extends org.galemc.gale.version.AbstractPaperVersionFetcher {
  
      public PaperVersionFetcher() {
 -        super("master", "https://papermc.io/downloads/paper", "Paper", "PaperMC", "PaperMC", "Paper");
@@ -179,10 +179,10 @@ index 94e6f298b12f86f923bb58b88caec6f3c3b37aa6..f84de5c2be4b0133d41dfc280dd517ee
          SharedConstants.tryDetectVersion();
          /* CraftBukkit start - Replace everything
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 279289e0c3dc65fed0ee4b2f5b0ef077ab433d5e..4470447757506569baaf74d8b77997484962050e 100644
+index 6b9b3d366343a0bef76036b2b150691787f93db6..90241493ed89b17c2861f04a1801ed7174caa143 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
-@@ -1953,7 +1953,13 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -1952,7 +1952,13 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
  
      @DontObfuscate
      public String getServerModName() {

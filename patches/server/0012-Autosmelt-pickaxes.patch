@@ -5,10 +5,10 @@ Subject: [PATCH] Autosmelt pickaxes
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 435afb2ad890559ca61d9da3bccc913a3224379c..6934e03f734351b21d0122453d828f11aed293f8 100644
+index 1136bdab69dc26bcc171d5a29de804113d9e288b..131b00853d05eb9a1008557786363433dc0fa857 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-@@ -279,6 +279,7 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+@@ -275,6 +275,7 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
          MinecraftServer.getServer().server.getCommandMap().register("setspawn", "Deepslate", new SpawnCommand("setspawn"));
          MinecraftServer.getServer().server.getCommandMap().register("spawn", "Deepslate", new SpawnCommand("spawn"));
          MinecraftServer.getServer().server.getCommandMap().register("lobby", "Deepslate", new SpawnCommand("lobby"));
@@ -242,10 +242,10 @@ index 0000000000000000000000000000000000000000..b89d430274e0c71a63e33c57f3b08248
 +
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index e33c76be3d701689dd9a6f5f6d5b7f1fabeb56be..64a193ab3439942f2977672791c03bf718ae4a35 100644
+index b9d12e952ec017618afb5d4fd6528d64fcd0ec5d..36c994ec16da91fcf64de685afd8f484931c3677 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -1141,6 +1141,7 @@ public final class CraftServer implements Server {
+@@ -1138,6 +1138,7 @@ public final class CraftServer implements Server {
          MinecraftServer.getServer().server.getCommandMap().register("setspawn", "Deepslate", new SpawnCommand("setspawn"));
          MinecraftServer.getServer().server.getCommandMap().register("spawn", "Deepslate", new SpawnCommand("spawn"));
          MinecraftServer.getServer().server.getCommandMap().register("lobby", "Deepslate", new SpawnCommand("lobby"));

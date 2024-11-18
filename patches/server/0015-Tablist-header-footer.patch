@@ -25,30 +25,29 @@ index c020c86194723a5c89816f91e0b7c5eeaf132b7e..68d318c71632b853d51649083b3445b3
      // CraftBukkit end
  
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index 53bb14dbc0c4257a2b588c10279932da9d843518..64dfa976f5cd78722f20e3255a0fb00bd9ad3193 100644
+index 81f8c2793065c864e2597349c8dfe24a6b89fcf1..e3072f97e3160e0e79505d6057322b4f0e2e4539 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
-@@ -106,6 +106,7 @@ import net.minecraft.world.scores.PlayerTeam;
+@@ -104,6 +104,7 @@ import net.minecraft.world.scores.PlayerTeam;
  import net.pascalpex.deepslatemc.Config;
  import net.pascalpex.deepslatemc.MessagesFile;
  import net.pascalpex.deepslatemc.commands.SpawnCommand;
 +import net.pascalpex.deepslatemc.util.TablistUtil;
- import org.galemc.gale.configuration.GaleGlobalConfiguration;
  import org.slf4j.Logger;
  
-@@ -468,7 +469,11 @@ public abstract class PlayerList {
+ // CraftBukkit start
+@@ -465,6 +466,11 @@ public abstract class PlayerList {
          PlayerJoinEvent playerJoinEvent = new PlayerJoinEvent(bukkitPlayer, getJoinMsg(io.papermc.paper.adventure.PaperAdventure.asAdventure(ichatmutablecomponent), bukkitPlayer)); // Paper - Adventure // Leaf - Configurable connection message - join message
  
          SpawnCommand.playerJoin(bukkitPlayer); // Deepslate - Spawn functions
--
 +        // Deepslate start - Tablist
 +        if (Config.getTablistEnabled()) {
 +            TablistUtil.setTablist(bukkitPlayer);
 +        }
 +        // Deepslate end
+ 
          this.cserver.getPluginManager().callEvent(playerJoinEvent);
  
-         if (!player.connection.isAcceptingMessages()) {
 diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
 index 4ce6ff3634efebd2395528a3b6858d04a4448edd..8680e8e298922636cc98f6537a011788e9550169 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/Config.java
