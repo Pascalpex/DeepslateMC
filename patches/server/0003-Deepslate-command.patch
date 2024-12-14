@@ -5,7 +5,7 @@ Subject: [PATCH] Deepslate command
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 86462d3eff74f373820ccdbb162978d1d4a6d9d6..2703cf26c16bcf547dd810cb7a35753c1e140854 100644
+index 5a88fd8997d2703a1318df441a2789a7b1ab229c..a0d5e43d1dab7ab7e9c88a5ab6b032eecd4a5f88 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 @@ -57,6 +57,7 @@ import net.minecraft.world.level.GameRules;
@@ -18,7 +18,7 @@ index 86462d3eff74f373820ccdbb162978d1d4a6d9d6..2703cf26c16bcf547dd810cb7a35753c
  // CraftBukkit start
 @@ -261,6 +262,10 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
          } catch (Throwable ignored) {}
-         // Gale start - Pufferfish - SIMD support
+         // Gale end - Pufferfish - SIMD support
  
 +        // Deepslate start
 +        MinecraftServer.getServer().server.getCommandMap().register("deepslate", "Deepslate", new DeepslateCommand("deepslate"));

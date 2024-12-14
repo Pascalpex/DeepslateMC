@@ -5,7 +5,7 @@ Subject: [PATCH] Rebranding
 
 
 diff --git a/build.gradle.kts b/build.gradle.kts
-index e392f3fdc9b87c34f068743fff7ea486b19fa393..968ed23b89117c6839302e1ae36e80d74965aa16 100644
+index 572af93c43a66e6ae17b4aee219a87c5168e3dfa..a86d1796f3ca68ed0a759160b63f3b053d8692f8 100644
 --- a/build.gradle.kts
 +++ b/build.gradle.kts
 @@ -13,7 +13,7 @@ configurations.named(log4jPlugins.compileClasspathConfigurationName) {
@@ -17,7 +17,7 @@ index e392f3fdc9b87c34f068743fff7ea486b19fa393..968ed23b89117c6839302e1ae36e80d7
  
      // Leaf start - Leaf Config
      implementation("com.github.thatsmusic99:ConfigurationMaster-API:v2.0.0-rc.2") {
-@@ -123,14 +123,14 @@ tasks.jar {
+@@ -124,14 +124,14 @@ tasks.jar {
          val gitBranch = git("rev-parse", "--abbrev-ref", "HEAD").getText().trim() // Paper
          attributes(
              "Main-Class" to "org.bukkit.craftbukkit.Main",
