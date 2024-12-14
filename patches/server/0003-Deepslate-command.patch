@@ -5,10 +5,10 @@ Subject: [PATCH] Deepslate command
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 5a88fd8997d2703a1318df441a2789a7b1ab229c..a0d5e43d1dab7ab7e9c88a5ab6b032eecd4a5f88 100644
+index bff1b99b142bfa980f94794bb4b3d06c197062cd..8fe00eaaacdc4912241cb203a66cb9887e6529e6 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-@@ -57,6 +57,7 @@ import net.minecraft.world.level.GameRules;
+@@ -56,6 +56,7 @@ import net.minecraft.world.level.GameRules;
  import net.minecraft.world.level.GameType;
  import net.minecraft.world.level.block.entity.SkullBlockEntity;
  import net.minecraft.world.level.storage.LevelStorageSource;
@@ -16,7 +16,7 @@ index 5a88fd8997d2703a1318df441a2789a7b1ab229c..a0d5e43d1dab7ab7e9c88a5ab6b032ee
  import org.slf4j.Logger;
  
  // CraftBukkit start
-@@ -261,6 +262,10 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+@@ -259,6 +260,10 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
          } catch (Throwable ignored) {}
          // Gale end - Pufferfish - SIMD support
  
@@ -155,7 +155,7 @@ index 0000000000000000000000000000000000000000..c11d3597dbc49a1f6d75a55f427c55fc
 +
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index c7d806f7e2ddef2226be1efbe794f0da4c331615..2f60d6126e29e6c405e292a050b2ee095427470a 100644
+index 6aacd5254ecd4078459a51a2857ffb7caa111261..7d4d3beab1024e3590f5b9b38954b1978930b2ea 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -111,6 +111,7 @@ import net.minecraft.world.level.storage.PlayerDataStorage;
@@ -166,7 +166,7 @@ index c7d806f7e2ddef2226be1efbe794f0da4c331615..2f60d6126e29e6c405e292a050b2ee09
  import org.bukkit.BanList;
  import org.bukkit.Bukkit;
  import org.bukkit.ChatColor;
-@@ -1123,6 +1124,11 @@ public final class CraftServer implements Server {
+@@ -1138,6 +1139,11 @@ public final class CraftServer implements Server {
          io.papermc.paper.command.PaperCommands.registerCommands(this.console); // Paper
          this.spark.registerCommandBeforePlugins(this); // Paper - spark
          org.purpurmc.purpur.PurpurConfig.registerCommands(); // Purpur

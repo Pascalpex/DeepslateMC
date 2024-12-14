@@ -5,10 +5,10 @@ Subject: [PATCH] Autosmelt pickaxes
 
 
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 1136bdab69dc26bcc171d5a29de804113d9e288b..131b00853d05eb9a1008557786363433dc0fa857 100644
+index 8795e8de7ff521811dff1c5e0cf4c296ca8c5cec..a1bde06d0791db973037b6002a7f6a4b8953c425 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-@@ -275,6 +275,7 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+@@ -273,6 +273,7 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
          MinecraftServer.getServer().server.getCommandMap().register("setspawn", "Deepslate", new SpawnCommand("setspawn"));
          MinecraftServer.getServer().server.getCommandMap().register("spawn", "Deepslate", new SpawnCommand("spawn"));
          MinecraftServer.getServer().server.getCommandMap().register("lobby", "Deepslate", new SpawnCommand("lobby"));
@@ -17,10 +17,10 @@ index 1136bdab69dc26bcc171d5a29de804113d9e288b..131b00853d05eb9a1008557786363433
  
          this.setPvpAllowed(dedicatedserverproperties.pvp);
 diff --git a/src/main/java/net/minecraft/server/level/ServerPlayerGameMode.java b/src/main/java/net/minecraft/server/level/ServerPlayerGameMode.java
-index 28731f0c5b0ba63fa8d5ce3ee580bf314a844f92..d399f2274f70673e29c577b539d7190314eca09b 100644
+index 88eb3774f688bcff383efa7f113bd0b1b97d8a11..fa9b9d81ef8465f98f5897dce1126e620b52f856 100644
 --- a/src/main/java/net/minecraft/server/level/ServerPlayerGameMode.java
 +++ b/src/main/java/net/minecraft/server/level/ServerPlayerGameMode.java
-@@ -29,6 +29,9 @@ import net.minecraft.world.level.block.state.BlockState;
+@@ -27,6 +27,9 @@ import net.minecraft.world.level.block.state.BlockState;
  import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
  import net.minecraft.world.phys.BlockHitResult;
  import net.minecraft.world.phys.Vec3;
@@ -30,7 +30,7 @@ index 28731f0c5b0ba63fa8d5ce3ee580bf314a844f92..d399f2274f70673e29c577b539d71903
  import org.slf4j.Logger;
  
  // CraftBukkit start
-@@ -367,6 +370,59 @@ public class ServerPlayerGameMode {
+@@ -365,6 +368,59 @@ public class ServerPlayerGameMode {
  
              event = new BlockBreakEvent(bblock, this.player.getBukkitEntity());
  
@@ -242,10 +242,10 @@ index 0000000000000000000000000000000000000000..b89d430274e0c71a63e33c57f3b08248
 +
 +}
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index b9d12e952ec017618afb5d4fd6528d64fcd0ec5d..36c994ec16da91fcf64de685afd8f484931c3677 100644
+index 591bcc7b036178c981b8a0df0ebdfe44dca72f31..6561440354557accfeb159c16e88a96074bb9956 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -1138,6 +1138,7 @@ public final class CraftServer implements Server {
+@@ -1153,6 +1153,7 @@ public final class CraftServer implements Server {
          MinecraftServer.getServer().server.getCommandMap().register("setspawn", "Deepslate", new SpawnCommand("setspawn"));
          MinecraftServer.getServer().server.getCommandMap().register("spawn", "Deepslate", new SpawnCommand("spawn"));
          MinecraftServer.getServer().server.getCommandMap().register("lobby", "Deepslate", new SpawnCommand("lobby"));

@@ -25,10 +25,10 @@ index 68d318c71632b853d51649083b3445b3e7a1cc2e..59c6ba08817fea827988f4add74b4d05
      // CraftBukkit end
  
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index e3072f97e3160e0e79505d6057322b4f0e2e4539..408878884cd577b83dfe8d91a8c7a7be27e9da75 100644
+index 0f51f1df69f56901c0b8c146c93b285441da1cb2..c0a1802d64d58f9ab0ab9c06621ced8583240c1d 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
-@@ -104,6 +104,7 @@ import net.minecraft.world.scores.PlayerTeam;
+@@ -105,6 +105,7 @@ import net.minecraft.world.scores.PlayerTeam;
  import net.pascalpex.deepslatemc.Config;
  import net.pascalpex.deepslatemc.MessagesFile;
  import net.pascalpex.deepslatemc.commands.SpawnCommand;
@@ -36,7 +36,7 @@ index e3072f97e3160e0e79505d6057322b4f0e2e4539..408878884cd577b83dfe8d91a8c7a7be
  import net.pascalpex.deepslatemc.util.TablistUtil;
  import org.slf4j.Logger;
  
-@@ -471,6 +472,11 @@ public abstract class PlayerList {
+@@ -475,6 +476,11 @@ public abstract class PlayerList {
              TablistUtil.setTablist(bukkitPlayer);
          }
          // Deepslate end

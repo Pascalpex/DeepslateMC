@@ -5,10 +5,10 @@ Subject: [PATCH] Custom playerlist hover text
 
 
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 90241493ed89b17c2861f04a1801ed7174caa143..6a3005557f2a8a94ce88269039ddd85e4ef3ebd3 100644
+index c185f7f3b41d27164bc4e0538eb8482a3359b8a1..25537fa5b2f1907f38bbc27fc2b9239e5795eff8 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
-@@ -139,6 +139,7 @@ import net.minecraft.world.level.levelgen.WorldOptions;
+@@ -144,6 +144,7 @@ import net.minecraft.world.level.levelgen.WorldOptions;
  import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
  import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplateManager;
  import net.minecraft.world.level.storage.WorldData;
@@ -16,8 +16,8 @@ index 90241493ed89b17c2861f04a1801ed7174caa143..6a3005557f2a8a94ce88269039ddd85e
  import org.slf4j.Logger;
  
  // CraftBukkit start
-@@ -1731,6 +1732,18 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
-         List<ServerPlayer> list = this.playerList.realPlayers; // Leaves - skip
+@@ -1782,6 +1783,18 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+         List<ServerPlayer> list = this.playerList.realPlayers; // Leaves - only real player
          int i = this.getMaxPlayers();
  
 +        // Deepslate start - Custom playerlist hover text

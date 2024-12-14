@@ -5,11 +5,11 @@ Subject: [PATCH] Rebranding
 
 
 diff --git a/build.gradle.kts b/build.gradle.kts
-index 572af93c43a66e6ae17b4aee219a87c5168e3dfa..a86d1796f3ca68ed0a759160b63f3b053d8692f8 100644
+index a42eb55c2f26a0048ea688655c5bb1dfed6d5adf..87f833e4a97aedfec510904594278856a8186921 100644
 --- a/build.gradle.kts
 +++ b/build.gradle.kts
-@@ -13,7 +13,7 @@ configurations.named(log4jPlugins.compileClasspathConfigurationName) {
- val alsoShade: Configuration by configurations.creating
+@@ -25,7 +25,7 @@ abstract class MockitoAgentProvider : CommandLineArgumentProvider {
+ // Paper end - configure mockito agent that is needed in newer java versions
  
  dependencies {
 -    implementation(project(":leaf-api")) // Gale start - project setup - Depend on own API // Leaf
@@ -17,7 +17,7 @@ index 572af93c43a66e6ae17b4aee219a87c5168e3dfa..a86d1796f3ca68ed0a759160b63f3b05
  
      // Leaf start - Leaf Config
      implementation("com.github.thatsmusic99:ConfigurationMaster-API:v2.0.0-rc.2") {
-@@ -124,14 +124,14 @@ tasks.jar {
+@@ -139,14 +139,14 @@ tasks.jar {
          val gitBranch = git("rev-parse", "--abbrev-ref", "HEAD").getText().trim() // Paper
          attributes(
              "Main-Class" to "org.bukkit.craftbukkit.Main",
@@ -38,7 +38,7 @@ index 572af93c43a66e6ae17b4aee219a87c5168e3dfa..a86d1796f3ca68ed0a759160b63f3b05
              "Build-Time" to Instant.now().toString(),
              "Git-Branch" to gitBranch, // Paper
 diff --git a/src/main/java/com/destroystokyo/paper/Metrics.java b/src/main/java/com/destroystokyo/paper/Metrics.java
-index 6c5c0cc59ff9901b22288f3cd62228c1e52794c5..ad566b0b9c5a28da2ccc211a5f4728459c9edef0 100644
+index 6d8634caade010a31a8e1c59684e9bb0e5546380..f957b85aac3cb7ed277ac53f2cae2d5f70beccd1 100644
 --- a/src/main/java/com/destroystokyo/paper/Metrics.java
 +++ b/src/main/java/com/destroystokyo/paper/Metrics.java
 @@ -593,7 +593,7 @@ public class Metrics {
@@ -71,15 +71,27 @@ index 6c5c0cc59ff9901b22288f3cd62228c1e52794c5..ad566b0b9c5a28da2ccc211a5f472845
                  metrics.addCustomChart(new Metrics.DrilldownPie("java_version", () -> {
                      Map<String, Map<String, Integer>> map = new HashMap<>(2); // Gale - metrics - reduce HashMap capacity
 diff --git a/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java b/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java
-index 07317899d4e28b55592c8035686c81ea198c1675..04636c8a81c4956ee1481dc0549efcec5e423d5c 100644
+index 2beea17d87464683faaefa835206f2654df9bde0..129a0de81db937e0b5b1665cd8e90bf77822c1f6 100644
 --- a/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java
 +++ b/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java
-@@ -39,12 +39,12 @@ import static net.kyori.adventure.text.format.TextColor.color;
- public class PaperVersionFetcher extends org.galemc.gale.version.AbstractPaperVersionFetcher {
+@@ -40,18 +40,18 @@ public class PaperVersionFetcher extends org.galemc.gale.version.AbstractPaperVe
  
      public PaperVersionFetcher() {
--        super("master", "https://papermc.io/downloads/paper", "Paper", "PaperMC", "PaperMC", "Paper");
-+        super("ver/1.21.1", "https://pascalpex.de/deepslate/", "DeepslateMC", "Pascalpex", "Pascalpex", "DeepslateMC"); // Deepslate
+         super(
+-            "master",
+-            "https://papermc.io/downloads/paper",
+-            "PaperMC",
+-            "Paper",
+-            "PaperMC",
+-            "Paper"
+-        );
++            "ver/1.21.3",
++            "https://pascalpex.de/deepslate/",
++            "DeepslateMC",
++            "Pascalpex",
++            "Pascalpex",
++            "DeepslateMC"
++        ); // Deepslate - Rebranding
      }
  
      @Override
@@ -103,12 +115,12 @@ index 9869bec65f4d0fbd5ed5aff896a8956e7ea2747f..ded8e75b82ecc1e1aa986c72a8bfdc7f
                  .completer(new ConsoleCommandCompleter(this.server))
                  .option(LineReader.Option.COMPLETE_IN_WORD, true);
 diff --git a/src/main/java/io/papermc/paper/ServerBuildInfoImpl.java b/src/main/java/io/papermc/paper/ServerBuildInfoImpl.java
-index 34f7f74b374d319d0d578e498db7663dd58b8458..76f4883082feb2ea2e4daaf481654d599d7ca314 100644
+index 298574c83ed88c307b07ca163a97b2f43784401c..f9f101d5c222d7e05ee792e54189b2ae8f70d6c5 100644
 --- a/src/main/java/io/papermc/paper/ServerBuildInfoImpl.java
 +++ b/src/main/java/io/papermc/paper/ServerBuildInfoImpl.java
 @@ -35,6 +35,7 @@ public record ServerBuildInfoImpl(
-     private static final String BRAND_PUFFERFISH_NAME = "Pufferfish"; // Leaf
      private static final String BRAND_PURPUR_NAME = "Purpur"; // Purpur
+     private static final String BRAND_PUFFERFISH_NAME = "Pufferfish"; // Leaf
      private static final String BRAND_LEAF_NAME = "Leaf"; // Leaf
 +    private static final String BRAND_DEEPSLATE_NAME = "DeepslateMC"; // Deepslate
  
@@ -157,7 +169,7 @@ index aa25fd3ee043003f359b2c67a6d0f6700a0ef893..74fc9d76a26e3ac606eb3022b91492d4
  
      public String getTitle() {
 diff --git a/src/main/java/net/minecraft/server/Main.java b/src/main/java/net/minecraft/server/Main.java
-index 94e6f298b12f86f923bb58b88caec6f3c3b37aa6..f84de5c2be4b0133d41dfc280dd517ee223bfef4 100644
+index e0c2e52801421845c74da938b20692a68d838cdf..885a4d4415b8e1e8fb92ad1135644e5b5a858527 100644
 --- a/src/main/java/net/minecraft/server/Main.java
 +++ b/src/main/java/net/minecraft/server/Main.java
 @@ -77,6 +77,17 @@ public class Main {
@@ -179,10 +191,10 @@ index 94e6f298b12f86f923bb58b88caec6f3c3b37aa6..f84de5c2be4b0133d41dfc280dd517ee
          SharedConstants.tryDetectVersion();
          /* CraftBukkit start - Replace everything
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 6b9b3d366343a0bef76036b2b150691787f93db6..90241493ed89b17c2861f04a1801ed7174caa143 100644
+index 59d5b758471fc00b09ecf84dc1757f543866d480..c185f7f3b41d27164bc4e0538eb8482a3359b8a1 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
-@@ -1952,7 +1952,13 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -2006,7 +2006,13 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
  
      @DontObfuscate
      public String getServerModName() {
@@ -242,10 +254,10 @@ index 91a5be2eaedb0fa94580de60a9625f94ae724235..833b57c80c754df57c8f938766303f04
          DamageSource damageSource = this.cloneInstance();
          damageSource.customEventDamager = entity;
 diff --git a/src/main/java/net/minecraft/world/level/chunk/storage/RegionFileStorage.java b/src/main/java/net/minecraft/world/level/chunk/storage/RegionFileStorage.java
-index 7c4b81e97562bb158478c70dae082526413cd534..dbc436be565caa63f42a9a8f56cebe4f91b0e81e 100644
+index 6721adad3d227acba8daba80b0b7e1df3bc0b046..b76c2be6146117e1d041e32b2d0c20497f97b904 100644
 --- a/src/main/java/net/minecraft/world/level/chunk/storage/RegionFileStorage.java
 +++ b/src/main/java/net/minecraft/world/level/chunk/storage/RegionFileStorage.java
-@@ -186,7 +186,7 @@ public class RegionFileStorage implements AutoCloseable, ca.spottedleaf.moonrise
+@@ -298,7 +298,7 @@ public class RegionFileStorage implements AutoCloseable, ca.spottedleaf.moonrise
          We do not want people to report thread issues to Paper,
          but we do want people to report thread issues to Gale.
          */
@@ -255,24 +267,24 @@ index 7c4b81e97562bb158478c70dae082526413cd534..dbc436be565caa63f42a9a8f56cebe4f
      }
  
 diff --git a/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java b/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java
-index e1ff5511d4694c13249443da0f127456d53e5543..127598a186ab7c9921d9c91e1ace0011610222a9 100644
+index bbeb271fb19091897e99970198a8a110a4aa0858..ad5bc4b7a184d295c2f037e8dc325671ffd63a79 100644
 --- a/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java
 +++ b/src/main/java/org/bukkit/craftbukkit/scheduler/CraftScheduler.java
 @@ -491,7 +491,7 @@ public class CraftScheduler implements BukkitScheduler {
                  this.parsePending();
              } else {
-                 // this.debugTail = this.debugTail.setNext(new CraftAsyncDebugger(currentTick + CraftScheduler.RECENT_TICKS, task.getOwner(), task.getTaskClass())); // Paper
+                 // this.debugTail = this.debugTail.setNext(new CraftAsyncDebugger(this.currentTick + CraftScheduler.RECENT_TICKS, task.getOwner(), task.getTaskClass())); // Paper
 -                task.getOwner().getLogger().log(Level.SEVERE, "Unexpected Async Task in the Sync Scheduler. Report this to Leaf"); // Paper // Gale - branding changes // Leaf
 +                task.getOwner().getLogger().log(Level.SEVERE, "Unexpected Async Task in the Sync Scheduler. Report this to DeepslateMC"); // Paper // Gale - branding changes // Leaf // Deepslate
                  // We don't need to parse pending
                  // (async tasks must live with race-conditions if they attempt to cancel between these few lines of code)
              }
 diff --git a/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java b/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
-index 7d53a86c5aa5a1eeeb26dbc56e5f104729806d20..289ad384d361e7b22f17417580549b8fe89ab55a 100644
+index 6f9aecffd821e041f8edc8b8af419b2617c297fc..19e77ee24a927670f6cbe4a1874e0dab2f2297e4 100644
 --- a/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
 +++ b/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
-@@ -487,7 +487,7 @@ public final class CraftMagicNumbers implements UnsafeValues {
- 
+@@ -505,7 +505,7 @@ public final class CraftMagicNumbers implements UnsafeValues {
+     // Paper start
      @Override
      public com.destroystokyo.paper.util.VersionFetcher getVersionFetcher() {
 -        return new org.dreeam.leaf.version.LeafVersionFetcher(); // Gale - branding changes - version fetcher // Leaf
@@ -281,7 +293,7 @@ index 7d53a86c5aa5a1eeeb26dbc56e5f104729806d20..289ad384d361e7b22f17417580549b8f
  
      @Override
 diff --git a/src/main/java/org/bukkit/craftbukkit/util/Versioning.java b/src/main/java/org/bukkit/craftbukkit/util/Versioning.java
-index e220f5601f6b92b7b280ce8ebe64117d30192b0e..bee2f93b8c497670504439346e9d9054eae399cb 100644
+index e220f5601f6b92b7b280ce8ebe64117d30192b0e..efcffa7966fb1b8a34e65cf2ea5a8d9f729be689 100644
 --- a/src/main/java/org/bukkit/craftbukkit/util/Versioning.java
 +++ b/src/main/java/org/bukkit/craftbukkit/util/Versioning.java
 @@ -1,29 +1,7 @@
@@ -312,7 +324,7 @@ index e220f5601f6b92b7b280ce8ebe64117d30192b0e..bee2f93b8c497670504439346e9d9054
 -        }
 -
 -        return result;
-+        return "1.21.1-R0.1-SNAPSHOT"; // Deepslate - Hardcode version
++        return "1.21.3-R0.1-SNAPSHOT"; // Deepslate - Hardcode version
      }
  }
 diff --git a/src/main/java/org/spigotmc/WatchdogThread.java b/src/main/java/org/spigotmc/WatchdogThread.java

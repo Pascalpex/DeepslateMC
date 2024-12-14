@@ -5,19 +5,19 @@ Subject: [PATCH] Config and messages file
 
 
 diff --git a/src/main/java/net/minecraft/commands/Commands.java b/src/main/java/net/minecraft/commands/Commands.java
-index 64d22c2be510ad759bcd6fe192d1ea8cf6bc9a6f..ba8df422432b4b20d8e0251bf4768a16efa4fe7e 100644
+index 2df889e29a915dfc3554385f1de1f14464f4c67f..2b1df1074507791e9e531519dbc52e46d4678a2a 100644
 --- a/src/main/java/net/minecraft/commands/Commands.java
 +++ b/src/main/java/net/minecraft/commands/Commands.java
-@@ -132,6 +132,8 @@ import net.minecraft.server.level.ServerPlayer;
- import net.minecraft.tags.TagKey;
- import net.minecraft.util.profiling.jfr.JvmProfiler;
+@@ -135,6 +135,8 @@ import net.minecraft.util.profiling.jfr.JvmProfiler;
+ import net.minecraft.world.flag.FeatureFlagSet;
+ import net.minecraft.world.flag.FeatureFlags;
  import net.minecraft.world.level.GameRules;
 +import net.pascalpex.deepslatemc.Config;
 +import net.pascalpex.deepslatemc.MessagesFile;
  import org.slf4j.Logger;
  
  // CraftBukkit start
-@@ -155,6 +157,10 @@ public class Commands {
+@@ -158,6 +160,10 @@ public class Commands {
  
      public Commands(Commands.CommandSelection environment, CommandBuildContext commandRegistryAccess) {
          // Paper
