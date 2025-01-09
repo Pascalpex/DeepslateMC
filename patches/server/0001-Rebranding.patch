@@ -5,7 +5,7 @@ Subject: [PATCH] Rebranding
 
 
 diff --git a/build.gradle.kts b/build.gradle.kts
-index a42eb55c2f26a0048ea688655c5bb1dfed6d5adf..87f833e4a97aedfec510904594278856a8186921 100644
+index e83f011f8f2b37a7c8b04284b5510a131b1b7259..23d87c1f782ba79e9fbf92692020177c2c35643b 100644
 --- a/build.gradle.kts
 +++ b/build.gradle.kts
 @@ -25,7 +25,7 @@ abstract class MockitoAgentProvider : CommandLineArgumentProvider {
@@ -71,26 +71,24 @@ index 6d8634caade010a31a8e1c59684e9bb0e5546380..f957b85aac3cb7ed277ac53f2cae2d5f
                  metrics.addCustomChart(new Metrics.DrilldownPie("java_version", () -> {
                      Map<String, Map<String, Integer>> map = new HashMap<>(2); // Gale - metrics - reduce HashMap capacity
 diff --git a/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java b/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java
-index 2beea17d87464683faaefa835206f2654df9bde0..129a0de81db937e0b5b1665cd8e90bf77822c1f6 100644
+index c066586ce43b3ae5c64d52a3a93c8c8ee883b499..591a09077a8d766378dd9fd1750c54fe650b1fb1 100644
 --- a/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java
 +++ b/src/main/java/com/destroystokyo/paper/PaperVersionFetcher.java
-@@ -40,18 +40,18 @@ public class PaperVersionFetcher extends org.galemc.gale.version.AbstractPaperVe
- 
+@@ -41,17 +41,17 @@ public class PaperVersionFetcher extends org.galemc.gale.version.AbstractPaperVe
      public PaperVersionFetcher() {
          super(
--            "master",
+             "ver/1.21.3", // Leaf
 -            "https://papermc.io/downloads/paper",
 -            "PaperMC",
 -            "Paper",
 -            "PaperMC",
--            "Paper"
+-            "Paper-archive" // Leaf
 -        );
-+            "ver/1.21.3",
 +            "https://pascalpex.de/deepslate/",
++            "Pascalpex",
 +            "DeepslateMC",
 +            "Pascalpex",
-+            "Pascalpex",
-+            "DeepslateMC"
++            "DeepslateMC" // Leaf
 +        ); // Deepslate - Rebranding
      }
  
