@@ -17,7 +17,7 @@ index 1eeff372c65f9cba04b8140f8ee269d7d7dd8d0f..61a5b41c1ed95d180159c3d7e4d1d5cb
  
          this.setPvpAllowed(dedicatedserverproperties.pvp);
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index c6d57c6016b8e410bceddf19827ec43eb2a06229..1c41e3f523516afd704520a40e7e817855b2752c 100644
+index c6d57c6016b8e410bceddf19827ec43eb2a06229..188788926bbc03cf4e024af9c93f6d9b628041f1 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
 @@ -102,6 +102,8 @@ import net.minecraft.world.phys.Vec3;
@@ -29,10 +29,10 @@ index c6d57c6016b8e410bceddf19827ec43eb2a06229..1c41e3f523516afd704520a40e7e8178
  import org.slf4j.Logger;
  
  // CraftBukkit start
-@@ -858,6 +860,15 @@ public abstract class PlayerList {
-         Player player = entity.getBukkitEntity();
-         PlayerLoginEvent event = new PlayerLoginEvent(player, loginlistener.connection.hostname, ((java.net.InetSocketAddress) socketaddress).getAddress(), ((java.net.InetSocketAddress) loginlistener.connection.channel.remoteAddress()).getAddress());
+@@ -891,6 +893,14 @@ public abstract class PlayerList {
+         }
  
+         this.cserver.getPluginManager().callEvent(event);
 +        // Deepslate start - Maintenance mode
 +        if(Config.getMaintenanceMode()) {
 +            if(!player.hasPermission("deepslate.maintenancebypass")) {
@@ -41,10 +41,9 @@ index c6d57c6016b8e410bceddf19827ec43eb2a06229..1c41e3f523516afd704520a40e7e8178
 +            }
 +        }
 +        // Deepslate end
-+
-         // Paper start - Fix MC-158900
-         UserBanListEntry gameprofilebanentry;
-         if (this.bans.isBanned(gameprofile) && (gameprofilebanentry = this.bans.get(gameprofile)) != null) {
+         if (event.getResult() != PlayerLoginEvent.Result.ALLOWED) {
+             loginlistener.disconnect(io.papermc.paper.adventure.PaperAdventure.asVanilla(event.kickMessage())); // Paper - Adventure
+             return null;
 diff --git a/src/main/java/net/pascalpex/deepslatemc/Config.java b/src/main/java/net/pascalpex/deepslatemc/Config.java
 index 14630aad16fe8ac38030674c52bc91d619e9abde..97119bdc69d79216241bf1cf0c0b2ae5b230134b 100644
 --- a/src/main/java/net/pascalpex/deepslatemc/Config.java
