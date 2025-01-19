@@ -1,0 +1,20 @@
+--- a/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
++++ b/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
+@@ -600,6 +_,17 @@
+             event.setUseItemInHand(Result.DENY);
+         }
+         // Paper end
++        // Deepslate start - Configurable knowledgebook click
++        if (de.pascalpex.deepslatemc.Config.getPreventKnowledgebookClick()) {
++            if (event.hasItem()) {
++                if (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) {
++                    if (event.getItem().getType() == Material.KNOWLEDGE_BOOK) {
++                        event.setCancelled(true);
++                    }
++                }
++            }
++        }
++        // Deepslate end
+         craftServer.getPluginManager().callEvent(event);
+ 
+         // Purpur start - Ridables
