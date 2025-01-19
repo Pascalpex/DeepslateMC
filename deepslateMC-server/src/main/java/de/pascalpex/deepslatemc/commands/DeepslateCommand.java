@@ -1,10 +1,10 @@
-package net.pascalpex.deepslatemc.commands;
+package de.pascalpex.deepslatemc.commands;
 
-import net.pascalpex.deepslatemc.Config;
-import net.pascalpex.deepslatemc.MessagesFile;
-import net.pascalpex.deepslatemc.util.ActionbarUtil;
-import net.pascalpex.deepslatemc.util.BossbarUtil;
-import net.pascalpex.deepslatemc.util.TablistUtil;
+import de.pascalpex.deepslatemc.Config;
+import de.pascalpex.deepslatemc.MessagesFile;
+import de.pascalpex.deepslatemc.util.ActionbarUtil;
+import de.pascalpex.deepslatemc.util.BossbarUtil;
+import de.pascalpex.deepslatemc.util.TablistUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.command.Command;

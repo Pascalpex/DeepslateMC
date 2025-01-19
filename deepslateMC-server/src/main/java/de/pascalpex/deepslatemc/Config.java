@@ -1,7 +1,6 @@
-package net.pascalpex.deepslatemc;
+package de.pascalpex.deepslatemc;
 
 import net.kyori.adventure.bossbar.BossBar;
-import net.pascalpex.deepslatemc.util.BossbarUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;

@@ -55,6 +55,7 @@ subprojects {
         mavenCentral()
         maven(paperMavenPublicUrl)
         maven("https://ci.pluginwiki.us/plugin/repository/everything/") // Required by Leaf config
+        maven("https://maven.nostal.ink/repository/maven-snapshots/") // Required by Leaf Quantumleaper
     }
 
     tasks.withType<AbstractArchiveTask>().configureEach {

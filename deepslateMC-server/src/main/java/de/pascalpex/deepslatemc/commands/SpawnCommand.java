@@ -1,7 +1,7 @@
-package net.pascalpex.deepslatemc.commands;
+package de.pascalpex.deepslatemc.commands;
 
-import net.pascalpex.deepslatemc.Config;
-import net.pascalpex.deepslatemc.MessagesFile;
+import de.pascalpex.deepslatemc.Config;
+import de.pascalpex.deepslatemc.MessagesFile;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;

@@ -1,7 +1,7 @@
-package net.pascalpex.deepslatemc.util;
+package de.pascalpex.deepslatemc.util;
 
 import net.kyori.adventure.text.Component;
-import net.pascalpex.deepslatemc.Config;
+import de.pascalpex.deepslatemc.Config;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import java.util.Timer;

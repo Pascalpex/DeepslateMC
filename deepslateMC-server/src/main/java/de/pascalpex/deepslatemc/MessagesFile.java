@@ -1,4 +1,4 @@
-package net.pascalpex.deepslatemc;
+package de.pascalpex.deepslatemc;
 
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
