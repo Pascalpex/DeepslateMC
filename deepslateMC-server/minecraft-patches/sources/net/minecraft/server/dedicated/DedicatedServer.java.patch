@@ -1,0 +1,33 @@
+--- a/net/minecraft/server/dedicated/DedicatedServer.java
++++ b/net/minecraft/server/dedicated/DedicatedServer.java
+@@ -19,6 +_,8 @@
+ import java.util.Locale;
+ import java.util.Optional;
+ import javax.annotation.Nullable;
++
++import de.pascalpex.deepslatemc.commands.*; // Deepslate - Registering all commands
+ import net.minecraft.DefaultUncaughtExceptionHandler;
+ import net.minecraft.DefaultUncaughtExceptionHandlerWithName;
+ import net.minecraft.SharedConstants;
+@@ -256,6 +_,21 @@
+             gg.pufferfish.pufferfish.simd.SIMDDetection.initialize();
+         } catch (Throwable ignored) {}
+         // Gale end - Pufferfish - SIMD support
++
++        // Deepslate start
++        MinecraftServer.getServer().server.getCommandMap().register("deepslate", "Deepslate", new DeepslateCommand("deepslate"));
++        MinecraftServer.getServer().server.getCommandMap().register("discord", "Deepslate", new DiscordCommand("discord"));
++        MinecraftServer.getServer().server.getCommandMap().register("dc", "Deepslate", new DiscordCommand("dc"));
++        MinecraftServer.getServer().server.getCommandMap().register("cc", "Deepslate", new ClearchatCommand("cc"));
++        MinecraftServer.getServer().server.getCommandMap().register("clearchat", "Deepslate", new ClearchatCommand("clearchat"));
++        MinecraftServer.getServer().server.getCommandMap().register("setbuildworld", "Deepslate", new BuildworldCommand("setbuildworld"));
++        MinecraftServer.getServer().server.getCommandMap().register("buildworld", "Deepslate", new BuildworldCommand("buildworld"));
++        MinecraftServer.getServer().server.getCommandMap().register("maintenance", "Deepslate", new MaintenanceMode("maintenance"));
++        MinecraftServer.getServer().server.getCommandMap().register("help", "Deepslate", new HelpCommand("help"));
++        MinecraftServer.getServer().server.getCommandMap().register("setspawn", "Deepslate", new SpawnCommand("setspawn"));
++        MinecraftServer.getServer().server.getCommandMap().register("spawn", "Deepslate", new SpawnCommand("spawn"));
++        MinecraftServer.getServer().server.getCommandMap().register("lobby", "Deepslate", new SpawnCommand("lobby"));
++        // Deepslate end
+ 
+         this.setPvpAllowed(properties.pvp);
+         this.setFlightAllowed(properties.allowFlight);

@@ -1,0 +1,11 @@
+--- a/net/minecraft/world/damagesource/DamageSource.java
++++ b/net/minecraft/world/damagesource/DamageSource.java
+@@ -89,7 +_,7 @@
+ 
+     public DamageSource customEventDamager(Entity entity) {
+         if (this.directEntity != null) {
+-            throw new IllegalStateException("Cannot set custom event damager when direct entity is already set (report a bug to Paper, if you think this is a Leaf bug, please report it at https://github.com/Winds-Studio/Leaf/issues)"); // Gale - branding changes // Leaf
++            throw new IllegalStateException("Cannot set custom event damager when direct entity is already set (report a bug to Paper, if you think this is a DeepslateMC bug, please report it at https://github.com/Pascalpex/DeepslateMC/issues )"); // Gale - branding changes // Leaf // Deepslate
+         }
+         DamageSource damageSource = this.cloneInstance();
+         damageSource.customEventDamager = entity;

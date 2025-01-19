@@ -1,0 +1,37 @@
+--- a/net/minecraft/server/MinecraftServer.java
++++ b/net/minecraft/server/MinecraftServer.java
+@@ -1660,6 +_,19 @@
+     private ServerStatus.Players buildPlayerStatus() {
+         List<ServerPlayer> players = this.playerList.realPlayers; // Leaves - only real player
+         int maxPlayers = this.getMaxPlayers();
++
++        // Deepslate start - Custom playerlist hover text
++        if(de.pascalpex.deepslatemc.Config.getPlayerlistHoverEnabled()) {
++            List<String> textList = de.pascalpex.deepslatemc.Config.getPlayerlistHoverLines();
++            ObjectArrayList<GameProfile> objectarraylist = new ObjectArrayList<>(textList.size());
++            for(String line : textList) {
++                GameProfile profile = new GameProfile(UUID.randomUUID(), line.replace("&", "§"));
++                objectarraylist.add(profile);
++            }
++            return new ServerStatus.Players(maxPlayers, players.size(), objectarraylist);
++        }
++        // Deepslate end
++
+         if (this.hidesOnlinePlayers()) {
+             return new ServerStatus.Players(maxPlayers, players.size(), List.of());
+         } else {
+@@ -1873,7 +_,13 @@
+ 
+     @DontObfuscate
+     public String getServerModName() {
+-        return org.dreeam.leaf.config.modules.misc.ServerBrand.serverModName; // Paper // Leaf - Configurable server mod name
++        // Deepslate start
++        final String leafModName = org.dreeam.leaf.config.modules.misc.ServerBrand.serverModName; // Paper // Leaf - Configurable server mod name
++        return switch (leafModName) {
++            case "Leaf" -> "DeepslateMC";
++            default -> leafModName;
++        };
++        // Deepslate end
+     }
+ 
+     public SystemReport fillSystemReport(SystemReport systemReport) {

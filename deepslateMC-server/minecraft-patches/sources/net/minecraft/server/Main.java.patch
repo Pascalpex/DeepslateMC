@@ -1,0 +1,20 @@
+--- a/net/minecraft/server/Main.java
++++ b/net/minecraft/server/Main.java
+@@ -68,6 +_,17 @@
+     )
+     @DontObfuscate
+     public static void main(final OptionSet optionSet) { // CraftBukkit - replaces main(String[] args)
++        // DeepslateMC - Startup branding
++        System.out.println(
++            "\u001B[1;2m\u001B[1;31m\u001B[1;31m\u001B[1;31m  _____                           _         _         __  __   _____ \n" +
++                " |  __ \\                         | |       | |       |  \\/  | / ____|\n" +
++                " | |  | |  ___   ___  _ __   ___ | |  __ _ | |_  ___ | \\  / || |     \n" +
++                " | |  | | / _ \\ / _ \\| '_ \\ / __|| | / _` || __|/ _ \\| |\\/| || |     \n" +
++                " | |__| ||  __/|  __/| |_) |\\__ \\| || (_| || |_|  __/| |  | || |____ \n" +
++                " |_____/  \\___| \\___|| .__/ |___/|_| \\__,_| \\__|\\___||_|  |_| \\_____|\n" +
++                "                     | |                                             \n" +
++                "                     |_|                                             \u001B[0m\u001B[1;31m\u001B[0m\u001B[1;31m\u001B[0m\u001B[0m\n");
++        // DeepslateMC end
+         io.papermc.paper.util.LogManagerShutdownThread.hook(); // Paper - Improved watchdog support
+         SharedConstants.tryDetectVersion();
+         /* CraftBukkit start - Replace everything

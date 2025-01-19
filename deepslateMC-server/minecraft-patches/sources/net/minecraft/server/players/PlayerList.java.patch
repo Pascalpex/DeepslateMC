@@ -1,0 +1,37 @@
+--- a/net/minecraft/server/players/PlayerList.java
++++ b/net/minecraft/server/players/PlayerList.java
+@@ -441,6 +_,19 @@
+         player.containerMenu.transferTo(player.containerMenu, bukkitPlayer);
+ 
+         org.bukkit.event.player.PlayerJoinEvent playerJoinEvent = new org.bukkit.event.player.PlayerJoinEvent(bukkitPlayer, getJoinMsg(mutableComponent, bukkitPlayer)); // Paper - Adventure
++
++        de.pascalpex.deepslatemc.commands.SpawnCommand.playerJoin(bukkitPlayer); // Deepslate - Spawn functions
++        // Deepslate start - Tablist
++        if (de.pascalpex.deepslatemc.Config.getTablistEnabled()) {
++            de.pascalpex.deepslatemc.util.TablistUtil.setTablist(bukkitPlayer);
++        }
++        // Deepslate end
++        // Deepslate start - Bossbar
++        if (de.pascalpex.deepslatemc.Config.getBossbarEnabled()) {
++            de.pascalpex.deepslatemc.util.BossbarUtil.setBossbar(bukkitPlayer);
++        }
++        // Deepslate end
++
+         this.cserver.getPluginManager().callEvent(playerJoinEvent);
+ 
+         if (!player.connection.isAcceptingMessages()) {
+@@ -846,6 +_,14 @@
+             }
+         }
+         this.cserver.getPluginManager().callEvent(event);
++        // Deepslate start - Maintenance mode
++        if(de.pascalpex.deepslatemc.Config.getMaintenanceMode()) {
++            if(!player.hasPermission("deepslate.maintenancebypass")) {
++                String prefix = de.pascalpex.deepslatemc.MessagesFile.getPrefix();
++                event.disallow(org.bukkit.event.player.PlayerLoginEvent.Result.KICK_OTHER, net.kyori.adventure.text.Component.text(prefix).appendSpace().append(net.kyori.adventure.text.Component.text(de.pascalpex.deepslatemc.MessagesFile.getMaintenanceKick())));
++            }
++        }
++        // Deepslate end
+         if (event.getResult() != org.bukkit.event.player.PlayerLoginEvent.Result.ALLOWED) {
+             loginlistener.disconnect(io.papermc.paper.adventure.PaperAdventure.asVanilla(event.kickMessage())); // Paper - Adventure
+             return null;
