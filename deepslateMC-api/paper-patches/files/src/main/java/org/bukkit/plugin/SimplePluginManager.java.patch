@@ -1,0 +1,22 @@
+--- a/src/main/java/org/bukkit/plugin/SimplePluginManager.java
++++ b/src/main/java/org/bukkit/plugin/SimplePluginManager.java
+@@ -647,6 +_,19 @@
+         HandlerList handlers = event.getHandlers();
+         RegisteredListener[] listeners = handlers.getRegisteredListeners();
+ 
++        // Gale start - JettPack - skip events without listeners
++        if (listeners.length == 0) {
++            return;
++        }
++        // Gale end - JettPack - skip events without listeners
++
++        // Paper - replace callEvent by merging to below method
++        if (event.isAsynchronous() && server.isPrimaryThread()) {
++            throw new IllegalStateException(event.getEventName() + " may only be triggered asynchronously.");
++        } else if (!event.isAsynchronous() && !server.isPrimaryThread() && !server.isStopping() ) {
++            throw new IllegalStateException(event.getEventName() + " may only be triggered synchronously.");
++        }
++
+         for (RegisteredListener registration : listeners) {
+             if (!registration.getPlugin().isEnabled()) {
+                 continue;

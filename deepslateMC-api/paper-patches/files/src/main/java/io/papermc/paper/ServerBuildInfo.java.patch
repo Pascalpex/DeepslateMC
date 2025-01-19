@@ -1,0 +1,16 @@
+--- a/src/main/java/io/papermc/paper/ServerBuildInfo.java
++++ b/src/main/java/io/papermc/paper/ServerBuildInfo.java
+@@ -44,6 +_,13 @@
+     Key BRAND_LEAF_ID = Key.key("winds-studio", "leaf");
+     // Leaf end
+ 
++    // Deepslate start
++    /**
++     * The brand id for Gale.
++     */
++    Key BRAND_DEEPSLATE_ID = Key.key("pascalpex", "deepslate");
++    // Deepslate end
++
+     /**
+      * Gets the {@code ServerBuildInfo}.
+      *
