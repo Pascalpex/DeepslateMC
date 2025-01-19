@@ -25,6 +25,11 @@ paperweight {
             patchesDir = file("deepslateMC-api/paper-patches")
             outputDir = file("paper-api")
         }
+        patchRepo("galeApi") {
+            upstreamPath = "gale-api"
+            patchesDir = file("deepslateMC-api/gale-patches")
+            outputDir = file("gale-api")
+        }
         patchDir("leafApi") {
             upstreamPath = "leaf-api"
             excludes = listOf("build.gradle.kts", "build.gradle.kts.patch", "paper-patches")
