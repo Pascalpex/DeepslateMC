@@ -2,11 +2,13 @@ package de.pascalpex.deepslatemc.commands;
 
 import de.pascalpex.deepslatemc.Config;
 import de.pascalpex.deepslatemc.MessagesFile;
+import net.kyori.adventure.text.Component;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
@@ -20,10 +22,9 @@ public class AutosmeltCommand extends Command {
     }
 
     @Override
-    public boolean execute(CommandSender sender, String label, String[] args) {
+    public boolean execute(@NotNull CommandSender sender, @NotNull String label, String @NotNull [] args) {
         String prefix = MessagesFile.getPrefix() + " ";
-        if (sender instanceof Player) {
-            Player player = (Player) sender;
+        if (sender instanceof Player player) {
             if(label.equalsIgnoreCase("autosmelt")) {
                 if(player.hasPermission("deepslate.autosmelt")) {
                     if (Config.getAutoSmeltWorlds().contains(player.getWorld().getName())) {
@@ -32,9 +33,9 @@ public class AutosmeltCommand extends Command {
                                 if (!player.getItemInHand().getItemMeta().hasLore()) {
                                     ItemStack item = player.getItemInHand();
                                     ItemMeta meta = item.getItemMeta();
-                                    ArrayList<String> lore = new ArrayList<>();
-                                    lore.add("Auto Smelt");
-                                    meta.setLore(lore);
+                                    ArrayList<Component> lore = new ArrayList<>();
+                                    lore.add(Component.text("Auto Smelt"));
+                                    meta.lore(lore);
                                     item.setItemMeta(meta);
                                     player.getInventory().setItemInHand(item);
                                     player.sendMessage(prefix + MessagesFile.getAutoSmeltEnchanted());

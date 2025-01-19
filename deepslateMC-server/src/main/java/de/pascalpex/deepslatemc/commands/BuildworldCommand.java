@@ -7,6 +7,7 @@ import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 public class BuildworldCommand extends Command {
 
@@ -18,10 +19,9 @@ public class BuildworldCommand extends Command {
     }
 
     @Override
-    public boolean execute(CommandSender sender, String label, String[] args) {
+    public boolean execute(@NotNull CommandSender sender, @NotNull String label, String @NotNull [] args) {
         String prefix = MessagesFile.getPrefix() + " ";
-        if (sender instanceof Player) {
-            Player player = (Player) sender;
+        if (sender instanceof Player player) {
             if(label.equalsIgnoreCase("setbuildworld")) {
                 if(player.hasPermission("deepslate.setbuildworld")) {
                     World world = player.getLocation().getWorld();

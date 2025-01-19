@@ -13,10 +13,6 @@ public class ActionbarUtil {
     private static final Timer timer = new Timer();
     private static TimerTask task;
 
-    public static void sendNow(Player player) {
-        player.sendActionBar(Component.text(title));
-    }
-
     public static void reloadActionbar() {
         if (task != null) {
             task.cancel();

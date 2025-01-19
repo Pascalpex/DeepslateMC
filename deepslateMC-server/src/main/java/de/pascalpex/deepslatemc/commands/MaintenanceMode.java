@@ -5,6 +5,7 @@ import de.pascalpex.deepslatemc.MessagesFile;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 public class MaintenanceMode extends Command {
     public MaintenanceMode(String name) {
@@ -14,10 +15,9 @@ public class MaintenanceMode extends Command {
         setPermission("deepslate.maintenance");
     }
 
-    public boolean execute(CommandSender sender, String label, String[] args) {
+    public boolean execute(@NotNull CommandSender sender, @NotNull String label, String @NotNull [] args) {
         String prefix = MessagesFile.getPrefix() + " ";
-        if (sender instanceof Player) {
-            Player player = (Player)sender;
+        if (sender instanceof Player player) {
             if (label.equalsIgnoreCase("maintenance") && player.hasPermission("deepslate.maintenance")) {
                 if (Config.getMaintenanceMode()) {
                     player.sendMessage(prefix + MessagesFile.getMaintenanceOff());

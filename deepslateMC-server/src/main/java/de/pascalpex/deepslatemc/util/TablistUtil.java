@@ -32,13 +32,13 @@ public class TablistUtil {
         header = "";
         footer = "";
         for (String s : Config.getHeader()) {
-            if (!header.equals("")) {
+            if (!header.isEmpty()) {
                 header += "\n";
             }
             header += s;
         }
         for (String s : Config.getFooter()) {
-            if (!footer.equals("")) {
+            if (!footer.isEmpty()) {
                 footer += "\n";
             }
             footer += s;

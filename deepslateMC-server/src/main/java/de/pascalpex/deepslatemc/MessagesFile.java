@@ -66,7 +66,7 @@ public class MessagesFile {
                 config.set("maintenanceOff", "&aYou turned off the maintenance mode");
             }
             if (!config.contains("helpMessage")) {
-                List<String> message = new ArrayList<String>();
+                List<String> message = new ArrayList<>();
                 message.add("&2&l--Help page--");
                 message.add("&6You can find the most important commands at");
                 message.add("&9&l/warp &9&lInfo&r&6. If you have more");
@@ -165,14 +165,14 @@ public class MessagesFile {
     }
     public static String getHelpMessage() {
         List<String> messages = (List<String>) config.getList("helpMessage");
-        String message = "";
+        StringBuilder message = new StringBuilder();
         for(int i = 0; i < messages.size(); i++) {
-            message = message + messages.get(i).replace("&", "§");
+            message.append(messages.get(i).replace("&", "§"));
             if(i < messages.size() - 1) {
-                message = message + "\n§r";
+                message.append("\n§r");
             }
         }
-        return message;
+        return message.toString();
     }
     public static String getSpawnSet() {
         String prefix = config.getString("spawnSet");

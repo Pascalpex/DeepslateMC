@@ -10,6 +10,7 @@ import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
 import java.util.List;
@@ -25,7 +26,7 @@ public class DeepslateCommand extends Command {
     }
 
     @Override
-    public List<String> tabComplete(CommandSender sender, String alias, String[] args, Location location) throws IllegalArgumentException {
+    public @NotNull List<String> tabComplete(@NotNull CommandSender sender, @NotNull String alias, String[] args, Location location) throws IllegalArgumentException {
         if (args.length == 1) {
             return Stream.of("reload", "version")
                 .filter(arg -> arg.startsWith(args[0].toLowerCase()))
@@ -35,11 +36,10 @@ public class DeepslateCommand extends Command {
     }
 
     @Override
-    public boolean execute(CommandSender sender, String commandLabel, String[] args) {
+    public boolean execute(@NotNull CommandSender sender, String commandLabel, String @NotNull [] args) {
         if (commandLabel.equalsIgnoreCase("deepslate")) {
             String prefix = MessagesFile.getPrefix() + " ";
-            if (sender instanceof Player) {
-                Player player = (Player) sender;
+            if (sender instanceof Player player) {
                 if (player.hasPermission("deepslate.command")) {
                     if (args.length == 0) {
                         player.sendMessage(prefix + MessagesFile.getWrongSyntax().replace("%usage%", "/deepslate [reload | version]"));

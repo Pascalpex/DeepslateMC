@@ -4,6 +4,7 @@ import de.pascalpex.deepslatemc.Config;
 import de.pascalpex.deepslatemc.MessagesFile;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.jetbrains.annotations.NotNull;
 
 public class DiscordCommand extends Command {
 
@@ -14,7 +15,7 @@ public class DiscordCommand extends Command {
     }
 
     @Override
-    public boolean execute(CommandSender sender, String commandLabel, String[] args) {
+    public boolean execute(@NotNull CommandSender sender, String commandLabel, String @NotNull [] args) {
         String prefix = MessagesFile.getPrefix() + " ";
         if (commandLabel.equalsIgnoreCase("dc") || commandLabel.equalsIgnoreCase("discord")) {
             String link = Config.getDiscordLink();

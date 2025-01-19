@@ -4,6 +4,7 @@ import de.pascalpex.deepslatemc.MessagesFile;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.jetbrains.annotations.NotNull;
 
 public class ClearchatCommand extends Command {
     public ClearchatCommand(String name) {
@@ -14,7 +15,7 @@ public class ClearchatCommand extends Command {
     }
 
     @Override
-    public boolean execute(CommandSender sender, String commandLabel, String[] args) {
+    public boolean execute(@NotNull CommandSender sender, String commandLabel, String @NotNull [] args) {
         String prefix = MessagesFile.getPrefix() + " ";
         if (commandLabel.equalsIgnoreCase("cc") || commandLabel.equalsIgnoreCase("clearchat")) {
             if(sender.hasPermission("deepslate.clearchat")) {
