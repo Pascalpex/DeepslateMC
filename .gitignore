@@ -45,8 +45,14 @@ out/
 # other stuff
 run/
 
-deepslateMC-server
-deepslateMC-api
-paper-api-generator
+deepslateMC-api/build.gradle.kts
+deepslateMC-server/build.gradle.kts
+deepslateMC-server/src/minecraft
+leaf-api
+leaf-server
+gale-api
+gale-server
+paper-api
+paper-server
 
 !gradle/wrapper/gradle-wrapper.jar

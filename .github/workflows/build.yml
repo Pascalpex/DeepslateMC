@@ -17,11 +17,11 @@ jobs:
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
     - name: Apply patches
-      run: ./gradlew applyPatches
+      run: ./gradlew applyAllPatches
     - name: Generate Paperclip Jar
       run: ./gradlew createMojmapPaperclipJar
     - name: Upload Paperclip
       uses: actions/upload-artifact@v4.6.0
       with:
         name: DeepslateMC
-        path: build/libs/deepslateMC-paperclip-1.21.3-R0.1-SNAPSHOT-mojmap.jar
+        path: build/libs/deepslateMC-paperclip-1.21.4-R0.1-SNAPSHOT-mojmap.jar
