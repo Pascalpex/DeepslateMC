@@ -1,0 +1,27 @@
+--- a/leaf-api/build.gradle.kts
++++ b/leaf-api/build.gradle.kts
+@@ -117,20 +117,24 @@ sourceSets {
+             // Gale start - project setup
+             srcDir(file("../paper-api/src/main/java"))
+             srcDir(file("../gale-api/src/main/java")) // Leaf - project setup
++            srcDir(file("../leaf-api/src/main/java")) // Deepslate - project setup
+         }
+         resources {
+             srcDir(file("../paper-api/src/main/resources"))
+             srcDir(file("../gale-api/src/main/resources")) // Leaf - project setup
++            srcDir(file("../leaf-api/src/main/resources")) // Deepslate - project setup
+         }
+     }
+     test {
+         java {
+             srcDir(file("../paper-api/src/test/java"))
+             srcDir(file("../gale-api/src/test/java")) // Leaf - project setup
++            srcDir(file("../leaf-api/src/test/java")) // Deepslate - project setup
+         }
+         resources {
+             srcDir(file("../paper-api/src/test/resources"))
+             srcDir(file("../gale-api/src/test/resources")) // Leaf - project setup
++            srcDir(file("../leaf-api/src/test/resources")) // Deepslate - project setup
+             // Gale end - project setup
+         }
+     }

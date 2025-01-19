@@ -1,0 +1,86 @@
+--- a/leaf-server/build.gradle.kts
++++ b/leaf-server/build.gradle.kts
+@@ -54,7 +54,36 @@ paperweight {
+         }
+     }
+ 
+-    activeFork = leaf
++    // Deepslate start - project setup
++    val deepslateMC = forks.register("deepslateMC") {
++        forks = leaf
++        upstream.patchRepo("paperServer") {
++            upstreamRepo = leaf.patchedRepo("paperServer")
++            patchesDir = rootDirectory.dir("deepslateMC-server/paper-patches")
++            outputDir = rootDirectory.dir("paper-server")
++        }
++        upstream.patchRepo("galeServer") {
++            upstreamRepo = leaf.patchedRepo("galeServer")
++            patchesDir = rootDirectory.dir("deepslateMC-server/gale-patches")
++            outputDir = rootDirectory.dir("gale-server")
++        }
++        upstream.patchDir("leafServer") {
++            upstreamPath = "leaf-server"
++            excludes = setOf(
++                "src/minecraft",
++                "gale-patches",
++                "paper-patches",
++                "minecraft-patches",
++                "build.gradle.kts",
++                "build.gradle.kts.patch"
++            )
++            patchesDir = rootDirectory.dir("deepslateMC-server/leaf-patches")
++            outputDir = rootDirectory.dir("leaf-server")
++        }
++    }
++
++    activeFork = deepslateMC
++    // Deepslate end - project setup
+     // Leaf end - project setup
+     // Gale end - project setup
+ 
+@@ -146,12 +175,16 @@ sourceSets {
+         resources { srcDir("../paper-server/src/main/resources") }
+         java { srcDir("../gale-server/src/main/java") } // Leaf - project setup
+         resources { srcDir("../gale-server/src/main/resources") } // Leaf - project setup
++        java { srcDir("../leaf-server/src/main/java") } // Deepslate - project setup
++        resources { srcDir("../leaf-server/src/main/resources") } // Deepslate - project setup
+     }
+     test {
+         java { srcDir("../paper-server/src/test/java") }
+         resources { srcDir("../paper-server/src/test/resources") }
+         java { srcDir("../gale-server/src/test/java") } // Leaf - project setup
+         resources { srcDir("../gale-server/src/test/resources") } // Leaf - project setup
++        java { srcDir("../leaf-server/src/test/java") } // Deepslate - project setup
++        resources { srcDir("../leaf-server/src/test/resources") } // Deepslate - project setup
+     }
+ }
+ 
+@@ -176,7 +209,7 @@ abstract class MockitoAgentProvider : CommandLineArgumentProvider {
+ }
+ 
+ dependencies {
+-    implementation(project(":leaf-api")) // Gale - project setup - Depend on own API // Leaf - project setup
++    implementation(project(":deepslateMC-api")) // Gale - project setup - Depend on own API // Leaf - project setup // Deepslate - project setup
+ 
+     // Leaf start - Libraries
+     implementation("com.github.thatsmusic99:ConfigurationMaster-API:v2.0.0-rc.2") { // Leaf Config
+@@ -278,14 +311,14 @@ tasks.jar {
+         val gitBranch = git.exec(providers, "rev-parse", "--abbrev-ref", "HEAD").get().trim()
+         attributes(
+             "Main-Class" to "org.bukkit.craftbukkit.Main",
+-            "Implementation-Title" to "Leaf", // Gale - branding changes // Leaf - Rebrand
++            "Implementation-Title" to "DeepslateMC", // Gale - branding changes // Leaf - Rebrand // Deepslate - Rebrand
+             "Implementation-Version" to implementationVersion,
+             "Implementation-Vendor" to date,
+-            "Specification-Title" to "Leaf", // Gale - branding changes // Leaf - Rebrand
++            "Specification-Title" to "DeepslateMC", // Gale - branding changes // Leaf - Rebrand // Deepslate - Rebrand
+             "Specification-Version" to project.version,
+-            "Specification-Vendor" to "Winds Studio", // Gale - branding changes // Leaf - Rebrand
+-            "Brand-Id" to "winds-studio:leaf", // Gale - branding changes // Leaf - Rebrand
+-            "Brand-Name" to "Leaf", // Gale - branding changes // Leaf - Rebrand
++            "Specification-Vendor" to "Pascalpex", // Gale - branding changes // Leaf - Rebrand // Deepslate - Rebrand
++            "Brand-Id" to "pascalpex:deepslateMC", // Gale - branding changes // Leaf - Rebrand // Deepslate - Rebrand
++            "Brand-Name" to "DeepslateMC", // Gale - branding changes // Leaf - Rebrand // Deepslate - Rebrand
+             "Build-Number" to (build ?: ""),
+             "Build-Time" to buildTime.toString(),
+             "Git-Branch" to gitBranch,
