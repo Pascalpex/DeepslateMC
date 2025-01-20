@@ -27,7 +27,7 @@ public class DeepslateCommand extends Command {
 
     @Override
     public @NotNull List<String> tabComplete(@NotNull CommandSender sender, @NotNull String alias, String[] args, Location location) throws IllegalArgumentException {
-        if (args.length == 1) {
+        if (args.length == 1 && sender.hasPermission("deepslate.command")) {
             return Stream.of("reload", "version")
                 .filter(arg -> arg.startsWith(args[0].toLowerCase()))
                 .collect(Collectors.toList());
