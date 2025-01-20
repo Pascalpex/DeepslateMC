@@ -1,6 +1,6 @@
 --- a/leaf-api/build.gradle.kts
 +++ b/leaf-api/build.gradle.kts
-@@ -117,20 +117,24 @@ sourceSets {
+@@ -119,20 +119,24 @@ sourceSets {
              // Gale start - project setup
              srcDir(file("../paper-api/src/main/java"))
              srcDir(file("../gale-api/src/main/java")) // Leaf - project setup

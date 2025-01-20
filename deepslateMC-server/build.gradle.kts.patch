@@ -79,7 +79,7 @@
 -            "Brand-Id" to "winds-studio:leaf", // Gale - branding changes // Leaf - Rebrand
 -            "Brand-Name" to "Leaf", // Gale - branding changes // Leaf - Rebrand
 +            "Specification-Vendor" to "Pascalpex", // Gale - branding changes // Leaf - Rebrand // Deepslate - Rebrand
-+            "Brand-Id" to "pascalpex:deepslateMC", // Gale - branding changes // Leaf - Rebrand // Deepslate - Rebrand
++            "Brand-Id" to "pascalpex:deepslate", // Gale - branding changes // Leaf - Rebrand // Deepslate - Rebrand
 +            "Brand-Name" to "DeepslateMC", // Gale - branding changes // Leaf - Rebrand // Deepslate - Rebrand
              "Build-Number" to (build ?: ""),
              "Build-Time" to buildTime.toString(),
