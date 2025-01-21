@@ -4,8 +4,8 @@
                  this.parsePending();
              } else {
                  // this.debugTail = this.debugTail.setNext(new CraftAsyncDebugger(this.currentTick + CraftScheduler.RECENT_TICKS, task.getOwner(), task.getTaskClass())); // Paper
--                task.getOwner().getLogger().log(Level.SEVERE, "Unexpected Async Task in the Sync Scheduler. Report this to Leaf"); // Paper // Gale - branding changes // Leaf
-+                task.getOwner().getLogger().log(Level.SEVERE, "Unexpected Async Task in the Sync Scheduler. Report this to DeepslateMC"); // Paper // Gale - branding changes // Leaf // Deepslate
+-                task.getOwner().getLogger().log(Level.SEVERE, "Unexpected Async Task in the Sync Scheduler. Report this to Leaf"); // Paper // Gale - branding changes // Leaf - Rebrand
++                task.getOwner().getLogger().log(Level.SEVERE, "Unexpected Async Task in the Sync Scheduler. Report this to DeepslateMC"); // Paper // Gale - branding changes // Leaf - Rebrand // Deepslate
                  // We don't need to parse pending
                  // (async tasks must live with race-conditions if they attempt to cancel between these few lines of code)
              }

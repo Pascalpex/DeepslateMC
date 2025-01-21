@@ -8,7 +8,7 @@
  import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
  import java.awt.image.BufferedImage;
  import java.io.ByteArrayOutputStream;
-@@ -1139,6 +_,23 @@
+@@ -1139,6 +_,22 @@
          io.papermc.paper.command.PaperCommands.registerCommands(this.console); // Paper
          this.spark.registerCommandBeforePlugins(this); // Paper - spark
          org.purpurmc.purpur.PurpurConfig.registerCommands(); // Purpur - Purpur config files
@@ -26,7 +26,6 @@
 +        MinecraftServer.getServer().server.getCommandMap().register("setspawn", "Deepslate", new SpawnCommand("setspawn"));
 +        MinecraftServer.getServer().server.getCommandMap().register("spawn", "Deepslate", new SpawnCommand("spawn"));
 +        MinecraftServer.getServer().server.getCommandMap().register("lobby", "Deepslate", new SpawnCommand("lobby"));
-+        MinecraftServer.getServer().server.getCommandMap().register("autosmelt", "Deepslate", new AutosmeltCommand("autosmelt"));
 +        // Deepslate end
 +
          this.overrideAllCommandBlockCommands = this.commandsConfiguration.getStringList("command-block-overrides").contains("*");

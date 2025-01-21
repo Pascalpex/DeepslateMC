@@ -6,8 +6,8 @@
          int maxPlayers = this.getMaxPlayers();
 +
 +        // Deepslate start - Custom playerlist hover text
-+        if(de.pascalpex.deepslatemc.Config.getPlayerlistHoverEnabled()) {
-+            List<String> textList = de.pascalpex.deepslatemc.Config.getPlayerlistHoverLines();
++        if(de.pascalpex.deepslatemc.files.Config.getPlayerlistHoverEnabled()) {
++            List<String> textList = de.pascalpex.deepslatemc.files.Config.getPlayerlistHoverLines();
 +            ObjectArrayList<GameProfile> objectarraylist = new ObjectArrayList<>(textList.size());
 +            for(String line : textList) {
 +                GameProfile profile = new GameProfile(UUID.randomUUID(), line.replace("&", "§"));

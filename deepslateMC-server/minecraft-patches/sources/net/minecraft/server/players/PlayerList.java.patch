@@ -3,16 +3,16 @@
 @@ -441,6 +_,19 @@
          player.containerMenu.transferTo(player.containerMenu, bukkitPlayer);
  
-         org.bukkit.event.player.PlayerJoinEvent playerJoinEvent = new org.bukkit.event.player.PlayerJoinEvent(bukkitPlayer, getJoinMsg(mutableComponent, bukkitPlayer)); // Paper - Adventure
+         org.bukkit.event.player.PlayerJoinEvent playerJoinEvent = new org.bukkit.event.player.PlayerJoinEvent(bukkitPlayer, getJoinMsg(mutableComponent, bukkitPlayer)); // Paper - Adventure // Leaf - Configurable connection message - join message
 +
 +        de.pascalpex.deepslatemc.commands.SpawnCommand.playerJoin(bukkitPlayer); // Deepslate - Spawn functions
 +        // Deepslate start - Tablist
-+        if (de.pascalpex.deepslatemc.Config.getTablistEnabled()) {
++        if (de.pascalpex.deepslatemc.files.Config.getTablistEnabled()) {
 +            de.pascalpex.deepslatemc.util.TablistUtil.setTablist(bukkitPlayer);
 +        }
 +        // Deepslate end
 +        // Deepslate start - Bossbar
-+        if (de.pascalpex.deepslatemc.Config.getBossbarEnabled()) {
++        if (de.pascalpex.deepslatemc.files.Config.getBossbarEnabled()) {
 +            de.pascalpex.deepslatemc.util.BossbarUtil.setBossbar(bukkitPlayer);
 +        }
 +        // Deepslate end
@@ -25,10 +25,10 @@
          }
          this.cserver.getPluginManager().callEvent(event);
 +        // Deepslate start - Maintenance mode
-+        if(de.pascalpex.deepslatemc.Config.getMaintenanceMode()) {
++        if(de.pascalpex.deepslatemc.files.Config.getMaintenanceMode()) {
 +            if(!player.hasPermission("deepslate.maintenancebypass")) {
-+                String prefix = de.pascalpex.deepslatemc.MessagesFile.getPrefix();
-+                event.disallow(org.bukkit.event.player.PlayerLoginEvent.Result.KICK_OTHER, net.kyori.adventure.text.Component.text(prefix).appendSpace().append(net.kyori.adventure.text.Component.text(de.pascalpex.deepslatemc.MessagesFile.getMaintenanceKick())));
++                String prefix = de.pascalpex.deepslatemc.files.MessagesFile.getPrefix();
++                event.disallow(org.bukkit.event.player.PlayerLoginEvent.Result.KICK_OTHER, net.kyori.adventure.text.Component.text(prefix).appendSpace().append(net.kyori.adventure.text.Component.text(de.pascalpex.deepslatemc.files.MessagesFile.getMaintenanceKick())));
 +            }
 +        }
 +        // Deepslate end

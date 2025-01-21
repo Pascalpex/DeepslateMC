@@ -1,11 +1,11 @@
 --- a/net/minecraft/world/level/chunk/storage/RegionFileStorage.java
 +++ b/net/minecraft/world/level/chunk/storage/RegionFileStorage.java
-@@ -292,7 +_,7 @@
+@@ -294,7 +_,7 @@
          We do not want people to report thread issues to Paper,
          but we do want people to report thread issues to Gale.
          */
--        org.apache.logging.log4j.LogManager.getLogger().fatal(msg + " (" + file.toString().replaceAll(".+[\\\\/]", "") + " - " + x + "," + z + ") Go clean it up to remove this message. /minecraft:tp " + (x<<4)+" 128 "+(z<<4) + " - DO NOT REPORT THIS TO PAPER OR LEAF - You may ask for help on Discord, but do not file an issue. These error messages can not be removed. - If you think this is a Leaf bug, please report it at https://github.com/Winds-Studio/Leaf/issues)"); // Leaf
-+        org.apache.logging.log4j.LogManager.getLogger().fatal(msg + " (" + file.toString().replaceAll(".+[\\\\/]", "") + " - " + x + "," + z + ") Go clean it up to remove this message. /minecraft:tp " + (x<<4)+" 128 "+(z<<4) + " - DO NOT REPORT THIS TO PAPER, LEAF OR DEEPSLATEMC - You may ask for help on Discord, but do not file an issue. These error messages can not be removed. - If you think this is a DeepslateMC bug, please report it at https://github.com/Pascalpex/DeepslateMC/issues)"); // Leaf // Deepslate
+-        org.apache.logging.log4j.LogManager.getLogger().fatal(msg + " (" + file.toString().replaceAll(".+[\\\\/]", "") + " - " + x + "," + z + ") Go clean it up to remove this message. /minecraft:tp " + (x<<4)+" 128 "+(z<<4) + " - DO NOT REPORT THIS TO PAPER OR LEAF - You may ask for help on Discord, but do not file an issue. These error messages can not be removed. - If you think this is a Leaf bug, please report it at https://github.com/Winds-Studio/Leaf/issues)"); // Leaf - Rebrand
++        org.apache.logging.log4j.LogManager.getLogger().fatal(msg + " (" + file.toString().replaceAll(".+[\\\\/]", "") + " - " + x + "," + z + ") Go clean it up to remove this message. /minecraft:tp " + (x<<4)+" 128 "+(z<<4) + " - DO NOT REPORT THIS TO PAPER, LEAF OR DEEPSLATEMC - You may ask for help on Discord, but do not file an issue. These error messages can not be removed. - If you think this is a DeepslateMC bug, please report it at https://github.com/Pascalpex/DeepslateMC/issues)"); // Leaf - Rebrand // Deepslate
          // Gale end - branding changes
      }
  

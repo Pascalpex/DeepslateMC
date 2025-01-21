@@ -1,32 +1,32 @@
 --- a/src/main/java/io/papermc/paper/ServerBuildInfoImpl.java
 +++ b/src/main/java/io/papermc/paper/ServerBuildInfoImpl.java
-@@ -35,6 +_,7 @@
-     private static final String BRAND_PUFFERFISH_NAME = "Pufferfish"; // Leaf
-     private static final String BRAND_PURPUR_NAME = "Purpur"; // Leaf - Purpur - Rebrand
-     private static final String BRAND_LEAF_NAME = "Leaf"; // Leaf
+@@ -37,6 +_,7 @@
+     private static final String BRAND_PURPUR_NAME = "Purpur";
+     private static final String BRAND_LEAF_NAME = "Leaf";
+     // Leaf end - Rebrand & Fix Pufferfish and Purpur patches
 +    private static final String BRAND_DEEPSLATE_NAME = "DeepslateMC"; // Deepslate
  
      private static final String BUILD_DEV = "DEV";
  
-@@ -46,9 +_,9 @@
+@@ -48,9 +_,9 @@
          this(
              getManifestAttribute(manifest, ATTRIBUTE_BRAND_ID)
                  .map(Key::key)
--                .orElse(BRAND_LEAF_ID), // Gale - branding changes // Leaf
-+                .orElse(BRAND_DEEPSLATE_ID), // Gale - branding changes // Leaf // Deepslate
+-                .orElse(BRAND_LEAF_ID), // Gale - branding changes // Leaf - Rebrand
++                .orElse(BRAND_DEEPSLATE_ID), // Gale - branding changes // Leaf - Rebrand // Deepslate
              getManifestAttribute(manifest, ATTRIBUTE_BRAND_NAME)
--                .orElse(BRAND_LEAF_NAME), // Gale - branding changes // Leaf
-+                .orElse(BRAND_DEEPSLATE_NAME), // Gale - branding changes // Leaf // Deepslate
+-                .orElse(BRAND_LEAF_NAME), // Gale - branding changes // Leaf - Rebrand
++                .orElse(BRAND_DEEPSLATE_NAME), // Gale - branding changes // Leaf - Rebrand // Deepslate
              SharedConstants.getCurrentVersion().getId(),
              SharedConstants.getCurrentVersion().getName(),
              getManifestAttribute(manifest, ATTRIBUTE_BUILD_NUMBER)
-@@ -69,7 +_,8 @@
+@@ -72,7 +_,8 @@
              || brandId.equals(BRAND_PAPER_ID)
-                 || brandId.equals(BRAND_GALE_ID) // Gale - branding changes // Leaf
-                 || brandId.equals(BRAND_PUFFERFISH_ID) // Leaf
--                || brandId.equals(BRAND_PURPUR_ID); // Leaf
-+                || brandId.equals(BRAND_PURPUR_ID) // Leaf
-+                || brandId.equals(BRAND_LEAF_ID); // Deepslate
+             || brandId.equals(BRAND_GALE_ID) // Gale - branding changes
+             || brandId.equals(BRAND_PUFFERFISH_ID)
+-            || brandId.equals(BRAND_PURPUR_ID);
++            || brandId.equals(BRAND_PURPUR_ID)
++            || brandId.equals(BRAND_LEAF_ID); // Deepslate
+             // Leaf end - Rebrand & Fix Pufferfish and Purpur patches
      }
  
-     @Override

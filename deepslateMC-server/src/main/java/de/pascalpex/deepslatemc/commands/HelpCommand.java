@@ -1,6 +1,6 @@
 package de.pascalpex.deepslatemc.commands;
     
-import de.pascalpex.deepslatemc.MessagesFile;
+import de.pascalpex.deepslatemc.files.MessagesFile;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.NotNull;

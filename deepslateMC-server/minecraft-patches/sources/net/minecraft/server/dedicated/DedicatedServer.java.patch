@@ -9,7 +9,7 @@
  import net.minecraft.DefaultUncaughtExceptionHandler;
  import net.minecraft.DefaultUncaughtExceptionHandlerWithName;
  import net.minecraft.SharedConstants;
-@@ -256,6 +_,22 @@
+@@ -256,6 +_,21 @@
              gg.pufferfish.pufferfish.simd.SIMDDetection.initialize();
          } catch (Throwable ignored) {}
          // Gale end - Pufferfish - SIMD support
@@ -27,7 +27,6 @@
 +        MinecraftServer.getServer().server.getCommandMap().register("setspawn", "Deepslate", new SpawnCommand("setspawn"));
 +        MinecraftServer.getServer().server.getCommandMap().register("spawn", "Deepslate", new SpawnCommand("spawn"));
 +        MinecraftServer.getServer().server.getCommandMap().register("lobby", "Deepslate", new SpawnCommand("lobby"));
-+        MinecraftServer.getServer().server.getCommandMap().register("autosmelt", "Deepslate", new AutosmeltCommand("autosmelt"));
 +        // Deepslate end
  
          this.setPvpAllowed(properties.pvp);

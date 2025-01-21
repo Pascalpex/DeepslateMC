@@ -1,6 +1,6 @@
 package de.pascalpex.deepslatemc.util;
 
-import de.pascalpex.deepslatemc.Config;
+import de.pascalpex.deepslatemc.files.Config;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 

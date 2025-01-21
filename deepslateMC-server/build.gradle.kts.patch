@@ -63,8 +63,8 @@
 +    implementation(project(":deepslateMC-api")) // Gale - project setup - Depend on own API // Leaf - project setup // Deepslate - project setup
  
      // Leaf start - Libraries
-     implementation("com.github.thatsmusic99:ConfigurationMaster-API:v2.0.0-rc.2") { // Leaf Config
-@@ -278,14 +311,14 @@ tasks.jar {
+     implementation("com.github.thatsmusic99:ConfigurationMaster-API:v2.0.0-rc.2") { // Leaf config
+@@ -281,14 +314,14 @@ tasks.jar {
          val gitBranch = git.exec(providers, "rev-parse", "--abbrev-ref", "HEAD").get().trim()
          attributes(
              "Main-Class" to "org.bukkit.craftbukkit.Main",

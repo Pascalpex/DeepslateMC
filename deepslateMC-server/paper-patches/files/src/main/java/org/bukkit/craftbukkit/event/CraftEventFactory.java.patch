@@ -5,7 +5,7 @@
          }
          // Paper end
 +        // Deepslate start - Configurable knowledgebook click
-+        if (de.pascalpex.deepslatemc.Config.getPreventKnowledgebookClick()) {
++        if (de.pascalpex.deepslatemc.files.Config.getPreventKnowledgebookClick()) {
 +            if (event.hasItem()) {
 +                if (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) {
 +                    if (event.getItem().getType() == Material.KNOWLEDGE_BOOK) {

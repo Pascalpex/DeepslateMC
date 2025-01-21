@@ -5,7 +5,7 @@
  
      private void write(FriendlyByteBuf buffer) {
 -        buffer.writeUtf(this.brand);
-+        buffer.writeUtf(de.pascalpex.deepslatemc.Config.getF3name() + "§r"); // Deepslate configurable F3 menu name
++        buffer.writeUtf(de.pascalpex.deepslatemc.files.Config.getF3name() + "§r"); // Deepslate - configurable F3 menu name
      }
  
      @Override

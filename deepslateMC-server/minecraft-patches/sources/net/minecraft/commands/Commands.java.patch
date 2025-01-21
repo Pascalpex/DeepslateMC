@@ -5,8 +5,8 @@
  
      public Commands(Commands.CommandSelection selection, CommandBuildContext context) {
 +        // Deepslate start
-+        de.pascalpex.deepslatemc.Config.load();
-+        de.pascalpex.deepslatemc.MessagesFile.load();
++        de.pascalpex.deepslatemc.files.Config.load();
++        de.pascalpex.deepslatemc.files.MessagesFile.load();
 +        // Deepslate end
          AdvancementCommands.register(this.dispatcher);
          AttributeCommand.register(this.dispatcher, context);
@@ -25,7 +25,7 @@
              BanPlayerCommands.register(this.dispatcher);
              DeOpCommands.register(this.dispatcher);
 -            OpCommand.register(this.dispatcher);
-+            if (de.pascalpex.deepslatemc.Config.getOpActive()) { // Deepslate - Toggleable op command
++            if (de.pascalpex.deepslatemc.files.Config.getOpActive()) { // Deepslate - Toggleable op command
 +                OpCommand.register(this.dispatcher);
 +            }
              PardonCommand.register(this.dispatcher);

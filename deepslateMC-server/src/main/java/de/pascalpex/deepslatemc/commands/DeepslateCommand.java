@@ -1,7 +1,7 @@
 package de.pascalpex.deepslatemc.commands;
 
-import de.pascalpex.deepslatemc.Config;
-import de.pascalpex.deepslatemc.MessagesFile;
+import de.pascalpex.deepslatemc.files.Config;
+import de.pascalpex.deepslatemc.files.MessagesFile;
 import de.pascalpex.deepslatemc.util.ActionbarUtil;
 import de.pascalpex.deepslatemc.util.BossbarUtil;
 import de.pascalpex.deepslatemc.util.TablistUtil;

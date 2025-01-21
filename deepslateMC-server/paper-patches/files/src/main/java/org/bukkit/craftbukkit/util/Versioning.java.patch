@@ -14,7 +14,7 @@
      public static String getBukkitVersion() {
 -        String result = "Unknown-Version";
 -
--        InputStream stream = Bukkit.class.getClassLoader().getResourceAsStream("META-INF/maven/cn.dreeam.leaf/leaf-api/pom.properties"); // Gale - branding changes // Leaf
+-        InputStream stream = Bukkit.class.getClassLoader().getResourceAsStream("META-INF/maven/cn.dreeam.leaf/leaf-api/pom.properties"); // Gale - branding changes // Leaf - Rebrand
 -        Properties properties = new Properties();
 -
 -        if (stream != null) {

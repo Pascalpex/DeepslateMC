@@ -4,8 +4,8 @@
      // Paper start
      @Override
      public com.destroystokyo.paper.util.VersionFetcher getVersionFetcher() {
--        return new org.dreeam.leaf.version.LeafVersionFetcher(); // Gale - branding changes - version fetcher // Leaf
-+        return new de.pascalpex.deepslatemc.DeepslateVersionFetcher(); // Gale - branding changes - version fetcher // Leaf // Deepslate
+-        return new org.dreeam.leaf.version.LeafVersionFetcher(); // Gale - branding changes - version fetcher // Leaf - Rebrand
++        return new de.pascalpex.deepslatemc.DeepslateVersionFetcher(); // Gale - branding changes - version fetcher // Leaf - Rebrand // Deepslate
      }
  
      @Override

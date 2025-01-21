@@ -5,7 +5,7 @@
                                              toX, toY, toZ, toYaw, toPitch, true);
                                          if (!event.isAllowed()) {
 -                                            if (event.getLogWarning()) { // Leaves - disable can
-+                                            if (de.pascalpex.deepslatemc.Config.getMovedQuickly() && event.getLogWarning()) { // Leaves - disable can // Deepslate
++                                            if (de.pascalpex.deepslatemc.files.Config.getMovedQuickly() && event.getLogWarning()) { // Leaves - disable can // Deepslate
                                                  LOGGER.warn("{} moved too quickly! {},{},{}", this.player.getName().getString(), d3, d4, d5);
                                              }
                                              this.teleport(this.player.getX(), this.player.getY(), this.player.getZ(), this.player.getYRot(), this.player.getXRot());
@@ -14,7 +14,7 @@
                                  if (!event.isAllowed()) {
                                      movedWrongly = true;
 -                                    if (event.getLogWarning())
-+                                    if (de.pascalpex.deepslatemc.Config.getMovedWrongly() && event.getLogWarning()) // Deepslate
++                                    if (de.pascalpex.deepslatemc.files.Config.getMovedWrongly() && event.getLogWarning()) // Deepslate
                                      // Paper end
                                  LOGGER.warn("{} moved wrongly!, ({})", this.player.getName().getString(), verticalDelta); // Purpur - AFK API
                                  } // Paper

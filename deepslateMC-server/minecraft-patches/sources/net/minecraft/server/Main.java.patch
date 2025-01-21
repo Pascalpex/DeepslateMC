@@ -4,7 +4,7 @@
      )
      @DontObfuscate
      public static void main(final OptionSet optionSet) { // CraftBukkit - replaces main(String[] args)
-+        // DeepslateMC - Startup branding
++        // Deepslate start - Startup branding
 +        System.out.println(
 +            "\u001B[1;2m\u001B[1;31m\u001B[1;31m\u001B[1;31m  _____                           _         _         __  __   _____ \n" +
 +                " |  __ \\                         | |       | |       |  \\/  | / ____|\n" +
@@ -14,7 +14,7 @@
 +                " |_____/  \\___| \\___|| .__/ |___/|_| \\__,_| \\__|\\___||_|  |_| \\_____|\n" +
 +                "                     | |                                             \n" +
 +                "                     |_|                                             \u001B[0m\u001B[1;31m\u001B[0m\u001B[1;31m\u001B[0m\u001B[0m\n");
-+        // DeepslateMC end
++        // Deepslate end - Startup branding
          io.papermc.paper.util.LogManagerShutdownThread.hook(); // Paper - Improved watchdog support
          SharedConstants.tryDetectVersion();
          /* CraftBukkit start - Replace everything
