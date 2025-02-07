@@ -4,12 +4,12 @@
                                          io.papermc.paper.event.player.PlayerFailMoveEvent event = fireFailMove(io.papermc.paper.event.player.PlayerFailMoveEvent.FailReason.MOVED_TOO_QUICKLY,
                                              toX, toY, toZ, toYaw, toPitch, true);
                                          if (!event.isAllowed()) {
--                                            if (event.getLogWarning()) { // Leaves - disable can
-+                                            if (de.pascalpex.deepslatemc.files.Config.getMovedQuickly() && event.getLogWarning()) { // Leaves - disable can // Deepslate
+-                                            if (event.getLogWarning()) {
++                                            if (de.pascalpex.deepslatemc.files.Config.getMovedQuickly() && event.getLogWarning()) { // Deepslate
                                                  LOGGER.warn("{} moved too quickly! {},{},{}", this.player.getName().getString(), d3, d4, d5);
                                              }
                                              this.teleport(this.player.getX(), this.player.getY(), this.player.getZ(), this.player.getYRot(), this.player.getXRot());
-@@ -1529,7 +_,7 @@
+@@ -1528,7 +_,7 @@
                                      toX, toY, toZ, toYaw, toPitch, true);
                                  if (!event.isAllowed()) {
                                      movedWrongly = true;
