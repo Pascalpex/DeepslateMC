@@ -54,7 +54,7 @@ subprojects {
     repositories {
         mavenCentral()
         maven(paperMavenPublicUrl)
-        maven("https://ci.pluginwiki.us/plugin/repository/everything/") // Required by Leaf config
+        maven("https://repo.bsdevelopment.org/releases/") // Required by Leaf config
         maven("https://maven.nostal.ink/repository/maven-snapshots/") // Required by Leaf Quantumleaper
     }
 
