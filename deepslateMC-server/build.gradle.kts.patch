@@ -1,6 +1,6 @@
 --- a/leaf-server/build.gradle.kts
 +++ b/leaf-server/build.gradle.kts
-@@ -54,7 +54,36 @@ paperweight {
+@@ -54,7 +_,36 @@
          }
      }
  
@@ -38,7 +38,7 @@
      // Leaf end - project setup
      // Gale end - project setup
  
-@@ -146,12 +175,16 @@ sourceSets {
+@@ -146,12 +_,16 @@
          resources { srcDir("../paper-server/src/main/resources") }
          java { srcDir("../gale-server/src/main/java") } // Leaf - project setup
          resources { srcDir("../gale-server/src/main/resources") } // Leaf - project setup
@@ -55,7 +55,7 @@
      }
  }
  
-@@ -176,7 +209,7 @@ abstract class MockitoAgentProvider : CommandLineArgumentProvider {
+@@ -176,7 +_,7 @@
  }
  
  dependencies {
@@ -64,7 +64,7 @@
  
      // Leaf start - Libraries
      implementation("com.github.thatsmusic99:ConfigurationMaster-API:v2.0.0-rc.2") { // Leaf config
-@@ -281,14 +314,14 @@ tasks.jar {
+@@ -282,14 +_,14 @@
          val gitBranch = git.exec(providers, "rev-parse", "--abbrev-ref", "HEAD").get().trim()
          attributes(
              "Main-Class" to "org.bukkit.craftbukkit.Main",
