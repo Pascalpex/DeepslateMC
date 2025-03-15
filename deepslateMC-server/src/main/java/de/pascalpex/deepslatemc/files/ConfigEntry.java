@@ -31,6 +31,7 @@ enum ConfigEntry {
     BOSSBAR_STYLE("bossbar" + ".style", BossBar.Overlay.PROGRESS.name()),
     BOSSBAR_TEXT("bossbar" + ".text", "&6Custom Bossbar"),
     ACTIONBAR_ENABLED("actionbar" + ".enabled", false),
+    MINIMESSAGE_MOTD("miniMessageMotdSupport", false),
     ACTIONBAR_TEXT("actionbar" + ".text", "&6Custom Actionbar");
 
     final String key;

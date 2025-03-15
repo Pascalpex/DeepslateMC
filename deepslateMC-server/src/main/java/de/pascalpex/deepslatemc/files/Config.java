@@ -148,5 +148,8 @@ public class Config {
     public static String getActionbarText() {
         return config.getString(ACTIONBAR_TEXT.key);
     }
+    public static boolean getMinimessageMotd() {
+        return config.getBoolean(MINIMESSAGE_MOTD.key);
+    }
 
 }

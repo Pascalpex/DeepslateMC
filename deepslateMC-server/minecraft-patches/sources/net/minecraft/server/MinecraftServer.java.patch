@@ -35,3 +35,23 @@
      }
  
      public SystemReport fillSystemReport(SystemReport systemReport) {
+@@ -2038,7 +_,18 @@
+ 
+     public void setMotd(String motd) {
+         // Paper start - Adventure
+-        this.motd = net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer.legacySection().deserializeOr(motd, net.kyori.adventure.text.Component.empty());
++        // Deepslate start - MiniMessage MOTD
++        if(de.pascalpex.deepslatemc.files.Config.getMinimessageMotd()) {
++            try {
++                this.motd = net.kyori.adventure.text.minimessage.MiniMessage.miniMessage().deserializeOr(motd, net.kyori.adventure.text.Component.empty());
++            } catch (net.kyori.adventure.text.minimessage.internal.parser.ParsingExceptionImpl e) {
++                org.bukkit.Bukkit.getLogger().warning("You have enabled DeepslateMC's miniMessageMotdSupport but your motd contains legacy color codes. Will fallback to legacy colors.");
++                this.motd = net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer.legacySection().deserializeOr(motd, net.kyori.adventure.text.Component.empty());
++            }
++        } else {
++            this.motd = net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer.legacySection().deserializeOr(motd, net.kyori.adventure.text.Component.empty());
++        }
++        // Deepslate end - MiniMessage MOTD
+     }
+ 
+     public net.kyori.adventure.text.Component motd() {
