@@ -1,6 +1,6 @@
 --- a/net/minecraft/server/MinecraftServer.java
 +++ b/net/minecraft/server/MinecraftServer.java
-@@ -1654,6 +_,19 @@
+@@ -1667,6 +_,19 @@
      private ServerStatus.Players buildPlayerStatus() {
          List<ServerPlayer> players = this.playerList.realPlayers; // Leaves - only real player
          int maxPlayers = this.getMaxPlayers();
@@ -20,7 +20,7 @@
          if (this.hidesOnlinePlayers()) {
              return new ServerStatus.Players(maxPlayers, players.size(), List.of());
          } else {
-@@ -1867,7 +_,13 @@
+@@ -1924,7 +_,13 @@
  
      @DontObfuscate
      public String getServerModName() {
@@ -35,7 +35,7 @@
      }
  
      public SystemReport fillSystemReport(SystemReport systemReport) {
-@@ -2038,7 +_,18 @@
+@@ -2095,7 +_,18 @@
  
      public void setMotd(String motd) {
          // Paper start - Adventure

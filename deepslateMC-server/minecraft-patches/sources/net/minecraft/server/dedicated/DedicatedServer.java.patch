@@ -1,6 +1,6 @@
 --- a/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/net/minecraft/server/dedicated/DedicatedServer.java
-@@ -238,6 +_,7 @@
+@@ -239,6 +_,7 @@
          io.papermc.paper.command.PaperCommands.registerCommands(this); // Paper - setup /paper command
          org.galemc.gale.command.GaleCommands.registerCommands(this); // Gale - Gale commands - register commands
          org.dreeam.leaf.command.LeafCommands.registerCommands(this); // Leaf - Leaf commands
