@@ -1,6 +1,6 @@
 --- a/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
 +++ b/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
-@@ -601,6 +_,17 @@
+@@ -600,6 +_,17 @@
              event.setUseItemInHand(Result.DENY);
          }
          // Paper end
