@@ -50,8 +50,6 @@ deepslateMC-server/build.gradle.kts
 deepslateMC-server/src/minecraft
 leaf-api
 leaf-server
-gale-api
-gale-server
 paper-api
 paper-server
 

@@ -28,6 +28,6 @@
 -        }
 -
 -        return result;
-+        return "1.21.4-R0.1-SNAPSHOT"; // Deepslate - Hardcode version
++        return "1.21.5-R0.1-SNAPSHOT"; // Deepslate - Hardcode version
      }
  }

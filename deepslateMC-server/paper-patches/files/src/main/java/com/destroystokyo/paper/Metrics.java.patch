@@ -1,31 +1,31 @@
 --- a/src/main/java/com/destroystokyo/paper/Metrics.java
 +++ b/src/main/java/com/destroystokyo/paper/Metrics.java
-@@ -592,7 +_,7 @@
+@@ -593,7 +_,7 @@
              boolean logFailedRequests = config.getBoolean("logFailedRequests", false);
              // Only start Metrics, if it's enabled in the config
              if (config.getBoolean("enabled", true)) {
--                Metrics metrics = new Metrics("Leaf", serverUUID, logFailedRequests, Bukkit.getLogger()); // Gale - branding changes - metrics // Leaf - Rebrand
-+                Metrics metrics = new Metrics("DeepslateMC", serverUUID, logFailedRequests, Bukkit.getLogger()); // Gale - branding changes - metrics // Leaf - Rebrand // Deepslate
+-                Metrics metrics = new Metrics("Gale", serverUUID, logFailedRequests, Bukkit.getLogger()); // Gale - branding changes - metrics
++                Metrics metrics = new Metrics("DeepslateMC", serverUUID, logFailedRequests, Bukkit.getLogger()); // Gale - branding changes - metrics // Deepslate
  
                  metrics.addCustomChart(new Metrics.SimplePie("minecraft_version", () -> {
                      String minecraftVersion = Bukkit.getVersion();
-@@ -602,15 +_,15 @@
+@@ -603,15 +_,15 @@
  
                  metrics.addCustomChart(new Metrics.SingleLineChart("players", () -> Bukkit.getOnlinePlayers().size()));
                  metrics.addCustomChart(new Metrics.SimplePie("online_mode", () -> Bukkit.getOnlineMode() ? "online" : "offline"));
--                final String leafVersion; // Gale - branding changes - metrics // Leaf - Rebrand
-+                final String deepslateVersion; // Gale - branding changes - metrics // Leaf - Rebrand // Deepslate
+-                final String galeVersion; // Gale - branding changes - metrics
++                final String deepslateVersion; // Gale - branding changes - metrics // Deepslate
                  final String implVersion = org.bukkit.craftbukkit.Main.class.getPackage().getImplementationVersion();
                  if (implVersion != null) {
                      final String buildOrHash = implVersion.substring(implVersion.lastIndexOf('-') + 1);
--                    leafVersion = "git-Leaf-%s-%s".formatted(Bukkit.getServer().getMinecraftVersion(), buildOrHash); // Gale - branding changes - metrics // Leaf - Rebrand
-+                    deepslateVersion = "git-DeepslateMC-%s-%s".formatted(Bukkit.getServer().getMinecraftVersion(), buildOrHash); // Gale - branding changes - metrics // Leaf - Rebrand // Deepslate
+-                    galeVersion = "git-Gale-%s-%s".formatted(Bukkit.getServer().getMinecraftVersion(), buildOrHash); // Gale - branding changes - metrics
++                    deepslateVersion = "git-DeepslateMC-%s-%s".formatted(Bukkit.getServer().getMinecraftVersion(), buildOrHash); // Gale - branding changes - metrics // Deepslate
                  } else {
--                    leafVersion = "unknown"; // Gale - branding changes - metrics // Leaf - Rebrand
-+                    deepslateVersion = "unknown"; // Gale - branding changes - metrics // Leaf - Rebrand // Deepslate
+-                    galeVersion = "unknown"; // Gale - branding changes - metrics
++                    deepslateVersion = "unknown"; // Gale - branding changes - metrics // Deepslate
                  }
--                metrics.addCustomChart(new Metrics.SimplePie("leaf_version", () -> leafVersion)); // Gale - branding changes - metrics // Leaf - Rebrand
-+                metrics.addCustomChart(new Metrics.SimplePie("deepslatemc_version", () -> deepslateVersion)); // Gale - branding changes - metrics // Leaf - Rebrand // Deepslate
+-                metrics.addCustomChart(new Metrics.SimplePie("gale_version", () -> galeVersion)); // Gale - branding changes - metrics
++                metrics.addCustomChart(new Metrics.SimplePie("deepslatemc_version", () -> deepslateVersion)); // Gale - branding changes - metrics // Deepslate
  
                  metrics.addCustomChart(new Metrics.DrilldownPie("java_version", () -> {
                      Map<String, Map<String, Integer>> map = new HashMap<>(2); // Gale - metrics - reduce HashMap capacity

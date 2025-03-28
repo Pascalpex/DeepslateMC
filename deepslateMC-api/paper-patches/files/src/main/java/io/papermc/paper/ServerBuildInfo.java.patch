@@ -1,6 +1,6 @@
 --- a/src/main/java/io/papermc/paper/ServerBuildInfo.java
 +++ b/src/main/java/io/papermc/paper/ServerBuildInfo.java
-@@ -44,6 +_,13 @@
+@@ -34,6 +_,13 @@
      Key BRAND_LEAF_ID = Key.key("winds-studio", "leaf");
      // Leaf end - Rebrand
  
