@@ -1,9 +1,9 @@
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -1098,6 +_,7 @@
-         org.spigotmc.SpigotConfig.registerCommands(); // Spigot
+@@ -1115,6 +_,7 @@
          io.papermc.paper.command.PaperCommands.registerCommands(this.console); // Paper
          this.spark.registerCommandBeforePlugins(this); // Paper - spark
+         org.purpurmc.purpur.PurpurConfig.registerCommands(); // Purpur - Purpur config files
 +        de.pascalpex.deepslatemc.commands.DeepslateCmdRegisterer.registerCommands(this.console); // Deepslate - register commands
          this.overrideAllCommandBlockCommands = this.commandsConfiguration.getStringList("command-block-overrides").contains("*");
          this.ignoreVanillaPermissions = this.commandsConfiguration.getBoolean("ignore-vanilla-permissions");

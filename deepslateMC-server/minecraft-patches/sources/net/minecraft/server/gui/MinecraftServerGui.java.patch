@@ -1,29 +1,29 @@
 --- a/net/minecraft/server/gui/MinecraftServerGui.java
 +++ b/net/minecraft/server/gui/MinecraftServerGui.java
-@@ -46,7 +_,7 @@
+@@ -51,7 +_,7 @@
          } catch (Exception var3) {
          }
  
--        final JFrame jFrame = new JFrame(org.dreeam.leaf.config.modules.misc.ServerBrand.serverGUIName); // Leaf - Configurable server GUI name
-+        final JFrame jFrame = new JFrame(org.dreeam.leaf.config.modules.misc.ServerBrand.serverGUIName.equalsIgnoreCase("Leaf Console") ? "DeepslateMC Minecraft server" : org.dreeam.leaf.config.modules.misc.ServerBrand.serverGUIName); // Leaf - Configurable server GUI name // Deepslate
+-        final JFrame jFrame = new JFrame(org.dreeam.leaf.config.modules.misc.ServerBrand.serverGUIName); // Purpur - Improve GUI // Leaf - Configurable server GUI name
++        final JFrame jFrame = new JFrame(org.dreeam.leaf.config.modules.misc.ServerBrand.serverGUIName.equalsIgnoreCase("Leaf Console") ? "DeepslateMC Minecraft server" : org.dreeam.leaf.config.modules.misc.ServerBrand.serverGUIName); // Purpur - Improve GUI // Leaf - Configurable server GUI name // Deepslate
          final MinecraftServerGui minecraftServerGui = new MinecraftServerGui(server);
          jFrame.setDefaultCloseOperation(2);
          jFrame.add(minecraftServerGui);
-@@ -54,7 +_,7 @@
+@@ -59,7 +_,7 @@
          jFrame.setLocationRelativeTo(null);
          jFrame.setVisible(true);
          // Paper start - Improve ServerGUI
--        jFrame.setName(org.dreeam.leaf.config.modules.misc.ServerBrand.serverGUIName); // Leaf - Configurable server GUI name
-+        jFrame.setName(org.dreeam.leaf.config.modules.misc.ServerBrand.serverGUIName.equalsIgnoreCase("Leaf Console") ? "DeepslateMC Minecraft server" : org.dreeam.leaf.config.modules.misc.ServerBrand.serverGUIName); // Leaf - Configurable server GUI name // Deepslate
+-        jFrame.setName(org.dreeam.leaf.config.modules.misc.ServerBrand.serverGUIName); // Purpur - Improve GUI // Leaf - Configurable server GUI name
++        jFrame.setName(org.dreeam.leaf.config.modules.misc.ServerBrand.serverGUIName.equalsIgnoreCase("Leaf Console") ? "DeepslateMC Minecraft server" : org.dreeam.leaf.config.modules.misc.ServerBrand.serverGUIName); // Purpur - Improve GUI // Leaf - Configurable server GUI name // Deepslate
          try {
              jFrame.setIconImage(javax.imageio.ImageIO.read(java.util.Objects.requireNonNull(MinecraftServerGui.class.getClassLoader().getResourceAsStream("logo.png"))));
          } catch (java.io.IOException ignore) {
-@@ -64,7 +_,7 @@
+@@ -69,7 +_,7 @@
              @Override
              public void windowClosing(WindowEvent event) {
                  if (!minecraftServerGui.isClosing.getAndSet(true)) {
--                    jFrame.setTitle(org.dreeam.leaf.config.modules.misc.ServerBrand.serverGUIName + " - shutting down!"); // Leaf - Configurable server GUI name
-+                    jFrame.setTitle((org.dreeam.leaf.config.modules.misc.ServerBrand.serverGUIName.equalsIgnoreCase("Leaf Console") ? "DeepslateMC Minecraft server" : org.dreeam.leaf.config.modules.misc.ServerBrand.serverGUIName) + " - shutting down!"); // Leaf - Configurable server GUI name // Deepslate
+-                    jFrame.setTitle(org.dreeam.leaf.config.modules.misc.ServerBrand.serverGUIName + " - shutting down!"); // Purpur - Improve GUI // Leaf - Configurable server GUI name
++                    jFrame.setTitle((org.dreeam.leaf.config.modules.misc.ServerBrand.serverGUIName.equalsIgnoreCase("Leaf Console") ? "DeepslateMC Minecraft server" : org.dreeam.leaf.config.modules.misc.ServerBrand.serverGUIName) + " - shutting down!"); // Purpur - Improve GUI // Leaf - Configurable server GUI name // Deepslate
                      server.halt(true);
                      minecraftServerGui.runFinalizers();
                  }
