@@ -1,6 +1,17 @@
 --- a/leaf-server/build.gradle.kts
 +++ b/leaf-server/build.gradle.kts
-@@ -39,7 +_,30 @@
+@@ -17,8 +_,8 @@
+ 
+ dependencies {
+     mache("io.papermc:mache:1.21.5+build.1")
+-    paperclip("io.papermc:paperclip:3.0.3") // Temp fix until maven repo renew the SSL
+-    //paperclip("cn.dreeam:quantumleaper:1.0.0-SNAPSHOT") // Leaf - project setup - Use own paperclip fork
++    //paperclip("io.papermc:paperclip:3.0.3") // Temp fix until maven repo renew the SSL
++    paperclip("cn.dreeam:quantumleaper:1.0.0-SNAPSHOT") // Leaf - project setup - Use own paperclip fork
+     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+ }
+ 
+@@ -40,7 +_,30 @@
          }
      }
  
@@ -32,7 +43,7 @@
      // Leaf end - project setup
  
      spigot {
-@@ -128,10 +_,14 @@
+@@ -129,10 +_,14 @@
      main {
          java { srcDir("../paper-server/src/main/java") }
          resources { srcDir("../paper-server/src/main/resources") }
@@ -47,7 +58,7 @@
      }
  }
  
-@@ -160,7 +_,7 @@
+@@ -161,7 +_,7 @@
  }
  
  dependencies {
@@ -56,7 +67,7 @@
  
      // Leaf start - Libraries
      implementation("com.github.thatsmusic99:ConfigurationMaster-API:v2.0.0-rc.3") { // Leaf config
-@@ -270,14 +_,14 @@
+@@ -271,14 +_,14 @@
          val gitBranch = git.exec(providers, "rev-parse", "--abbrev-ref", "HEAD").get().trim()
          attributes(
              "Main-Class" to "org.bukkit.craftbukkit.Main",

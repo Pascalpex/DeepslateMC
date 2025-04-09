@@ -5,7 +5,7 @@
              // Only start Metrics, if it's enabled in the config
              if (config.getBoolean("enabled", true)) {
 -                Metrics metrics = new Metrics("Leaf", serverUUID, logFailedRequests, Bukkit.getLogger()); // Gale - branding changes - metrics // Leaf - metrics
-+                Metrics metrics = new Metrics("DeepslateMC", serverUUID, logFailedRequests, Bukkit.getLogger()); // Gale - branding changes - metrics // Deepslate
++                Metrics metrics = new Metrics("DeepslateMC", serverUUID, logFailedRequests, Bukkit.getLogger()); // Gale - branding changes - metrics // Leaf - metrics // Deepslate
  
                  metrics.addCustomChart(new Metrics.SimplePie("minecraft_version", () -> {
                      String minecraftVersion = Bukkit.getVersion();
@@ -14,18 +14,18 @@
                  metrics.addCustomChart(new Metrics.SingleLineChart("players", () -> Bukkit.getOnlinePlayers().size()));
                  metrics.addCustomChart(new Metrics.SimplePie("online_mode", () -> Bukkit.getOnlineMode() ? "online" : "offline"));
 -                final String leafVersion; // Gale - branding changes - metrics // Leaf - metrics
-+                final String deepslateVersion; // Gale - branding changes - metrics // Deepslate
++                final String deepslateVersion; // Gale - branding changes - metrics // Leaf - metrics // Deepslate
                  final String implVersion = org.bukkit.craftbukkit.Main.class.getPackage().getImplementationVersion();
                  if (implVersion != null) {
                      final String buildOrHash = implVersion.substring(implVersion.lastIndexOf('-') + 1);
 -                    leafVersion = "git-Leaf-%s-%s".formatted(Bukkit.getServer().getMinecraftVersion(), buildOrHash); // Gale - branding changes - metrics // Leaf - metrics
-+                    deepslateVersion = "git-DeepslateMC-%s-%s".formatted(Bukkit.getServer().getMinecraftVersion(), buildOrHash); // Gale - branding changes - metrics // Deepslate
++                    deepslateVersion = "git-DeepslateMC-%s-%s".formatted(Bukkit.getServer().getMinecraftVersion(), buildOrHash); // Gale - branding changes - metrics // Leaf - metrics // Deepslate
                  } else {
 -                    leafVersion = "unknown"; // Gale - branding changes - metrics // Leaf - metrics
-+                    deepslateVersion = "unknown"; // Gale - branding changes - metrics // Deepslate
++                    deepslateVersion = "unknown"; // Gale - branding changes - metrics // Leaf - metrics // Deepslate
                  }
 -                metrics.addCustomChart(new Metrics.SimplePie("leaf_version", () -> leafVersion)); // Gale - branding changes - metrics // Leaf - metrics
-+                metrics.addCustomChart(new Metrics.SimplePie("deepslatemc_version", () -> deepslateVersion)); // Gale - branding changes - metrics // Deepslate
++                metrics.addCustomChart(new Metrics.SimplePie("deepslatemc_version", () -> deepslateVersion)); // Gale - branding changes - metrics // Leaf - metrics // Deepslate
  
                  metrics.addCustomChart(new Metrics.DrilldownPie("java_version", () -> {
                      Map<String, Map<String, Integer>> map = new HashMap<>(2); // Gale - metrics - reduce HashMap capacity
