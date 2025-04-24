@@ -1,10 +1,11 @@
 package de.pascalpex.deepslatemc.commands;
 
 import de.pascalpex.deepslatemc.files.Config;
+import de.pascalpex.deepslatemc.files.MessagesEntry;
 import de.pascalpex.deepslatemc.files.MessagesFile;
+import net.kyori.adventure.text.Component;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 public class MaintenanceMode extends Command {
@@ -16,27 +17,17 @@ public class MaintenanceMode extends Command {
     }
 
     public boolean execute(@NotNull CommandSender sender, @NotNull String label, String @NotNull [] args) {
-        String prefix = MessagesFile.getPrefix() + " ";
-        if (sender instanceof Player player) {
-            if (label.equalsIgnoreCase("maintenance") && player.hasPermission("deepslate.maintenance")) {
+        Component prefix = MessagesFile.getMessage(MessagesEntry.PREFIX).appendSpace();
+            if (label.equalsIgnoreCase("maintenance") && sender.hasPermission("deepslate.maintenance")) {
                 if (Config.getMaintenanceMode()) {
-                    player.sendMessage(prefix + MessagesFile.getMaintenanceOff());
+                    sender.sendMessage(prefix.append(MessagesFile.getMessage(MessagesEntry.MAINTENANCE_OFF)));
                 } else {
-                    player.sendMessage(prefix + MessagesFile.getMaintenanceOn());
+                    sender.sendMessage(prefix.append(MessagesFile.getMessage(MessagesEntry.MAINTENANCE_ON)));
                 }
                 Config.toggleMaintenanceMode();
             } else {
-                player.sendMessage(prefix + MessagesFile.getNoPermissions());
+                sender.sendMessage(prefix.append(MessagesFile.getMessage(MessagesEntry.NO_PERMISSIONS)));
             }
-        }
-        else if (label.equalsIgnoreCase("maintenance")) {
-            if (Config.getMaintenanceMode()) {
-                sender.sendMessage(prefix + MessagesFile.getMaintenanceOff());
-            } else {
-                sender.sendMessage(prefix + MessagesFile.getMaintenanceOn());
-            }
-            Config.toggleMaintenanceMode();
-        }
 
         return true;
     }

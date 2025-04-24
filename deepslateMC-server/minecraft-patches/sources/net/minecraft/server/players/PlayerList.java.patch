@@ -20,15 +20,16 @@
          this.cserver.getPluginManager().callEvent(playerJoinEvent);
  
          if (!player.connection.isAcceptingMessages()) {
-@@ -849,6 +_,14 @@
+@@ -849,6 +_,15 @@
              }
          }
          this.cserver.getPluginManager().callEvent(event);
 +        // Deepslate start - Maintenance mode
 +        if(de.pascalpex.deepslatemc.files.Config.getMaintenanceMode()) {
 +            if(!player.hasPermission("deepslate.maintenancebypass")) {
-+                String prefix = de.pascalpex.deepslatemc.files.MessagesFile.getPrefix();
-+                event.disallow(org.bukkit.event.player.PlayerLoginEvent.Result.KICK_OTHER, net.kyori.adventure.text.Component.text(prefix).appendSpace().append(net.kyori.adventure.text.Component.text(de.pascalpex.deepslatemc.files.MessagesFile.getMaintenanceKick())));
++                net.kyori.adventure.text.Component prefix = de.pascalpex.deepslatemc.files.MessagesFile.getMessage(de.pascalpex.deepslatemc.files.MessagesEntry.PREFIX);
++                net.kyori.adventure.text.Component kickMessage = de.pascalpex.deepslatemc.files.MessagesFile.getMessage(de.pascalpex.deepslatemc.files.MessagesEntry.MAINTENANCE_KICK);
++                event.disallow(org.bukkit.event.player.PlayerLoginEvent.Result.KICK_OTHER, prefix.appendSpace().append(kickMessage));
 +            }
 +        }
 +        // Deepslate end

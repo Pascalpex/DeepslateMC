@@ -1,6 +1,9 @@
 package de.pascalpex.deepslatemc.commands;
     
+import de.pascalpex.deepslatemc.files.MessagesEntry;
 import de.pascalpex.deepslatemc.files.MessagesFile;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.TextReplacementConfig;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -16,15 +19,16 @@ public class ClearchatCommand extends Command {
 
     @Override
     public boolean execute(@NotNull CommandSender sender, String commandLabel, String @NotNull [] args) {
-        String prefix = MessagesFile.getPrefix() + " ";
+        Component prefix = MessagesFile.getMessage(MessagesEntry.PREFIX).appendSpace();
         if (commandLabel.equalsIgnoreCase("cc") || commandLabel.equalsIgnoreCase("clearchat")) {
             if(sender.hasPermission("deepslate.clearchat")) {
                 for (int x = 0; x < 150; x++){
-                    Bukkit.broadcastMessage("");
+                    Bukkit.broadcast(Component.empty());
                 }
-                Bukkit.broadcastMessage(prefix + MessagesFile.getClearedChat().replace("%clearer%", sender.getName()));
+                Component clearMessage = MessagesFile.getMessage(MessagesEntry.CLEARED_CHAT).replaceText(TextReplacementConfig.builder().match("%clearer%").replacement(sender.getName()).build());
+                Bukkit.broadcast(prefix.append(clearMessage));
             } else {
-                sender.sendMessage(prefix + MessagesFile.getNoPermissions());
+                sender.sendMessage(prefix.append(MessagesFile.getMessage(MessagesEntry.NO_PERMISSIONS)));
             }
         }
         return true;

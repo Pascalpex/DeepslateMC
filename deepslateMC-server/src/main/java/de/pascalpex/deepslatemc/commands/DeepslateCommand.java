@@ -1,15 +1,16 @@
 package de.pascalpex.deepslatemc.commands;
 
 import de.pascalpex.deepslatemc.files.Config;
+import de.pascalpex.deepslatemc.files.MessagesEntry;
 import de.pascalpex.deepslatemc.files.MessagesFile;
 import de.pascalpex.deepslatemc.util.ActionbarUtil;
 import de.pascalpex.deepslatemc.util.BossbarUtil;
 import de.pascalpex.deepslatemc.util.TablistUtil;
-import org.bukkit.ChatColor;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
@@ -38,38 +39,10 @@ public class DeepslateCommand extends Command {
     @Override
     public boolean execute(@NotNull CommandSender sender, String commandLabel, String @NotNull [] args) {
         if (commandLabel.equalsIgnoreCase("deepslate")) {
-            String prefix = MessagesFile.getPrefix() + " ";
-            if (sender instanceof Player player) {
-                if (player.hasPermission("deepslate.command")) {
-                    if (args.length == 0) {
-                        player.sendMessage(prefix + MessagesFile.getWrongSyntax().replace("%usage%", "/deepslate [reload | version]"));
-                    }
-                    if (args.length == 1) {
-                        if (args[0].equalsIgnoreCase("reload")) {
-                            MessagesFile.load();
-                            Config.load();
-                            TablistUtil.reloadTablist();
-                            BossbarUtil.reloadBossbar();
-                            ActionbarUtil.reloadActionbar();
-                            player.sendMessage(prefix + MessagesFile.getConfigReloaded());
-                        } else {
-                            if (args[0].equalsIgnoreCase("version")) {
-                                String deepslateVersion = this.getClass().getPackage().getImplementationVersion().replace('"', ' ').replace(" ", "");
-                                player.sendMessage(prefix + ChatColor.GOLD + "This server is running DeepslateMC from Pascalpex: " + deepslateVersion);
-                            } else {
-                                player.sendMessage(prefix + MessagesFile.getWrongSyntax().replace("%usage%", "/deepslate [reload | version]"));
-                            }
-                        }
-                    }
-                    if (args.length >= 2) {
-                        player.sendMessage(prefix + MessagesFile.getWrongSyntax().replace("%usage%", "/deepslate [reload | version]"));
-                    }
-                } else {
-                    player.sendMessage(prefix + ChatColor.GOLD + "This server is running DeepslateMC from Pascalpex");
-                }
-            } else {
+            Component prefix = MessagesFile.getMessage(MessagesEntry.PREFIX).appendSpace();
+            if (sender.hasPermission("deepslate.command")) {
                 if (args.length == 0) {
-                    sender.sendMessage(prefix + MessagesFile.getWrongSyntax().replace("%usage%", "/deepslate [reload | version]"));
+                    sender.sendMessage(prefix.append(MessagesFile.getMessage(MessagesEntry.WRONG_SYNTAX)));
                 }
                 if (args.length == 1) {
                     if (args[0].equalsIgnoreCase("reload")) {
@@ -78,19 +51,22 @@ public class DeepslateCommand extends Command {
                         TablistUtil.reloadTablist();
                         BossbarUtil.reloadBossbar();
                         ActionbarUtil.reloadActionbar();
-                        sender.sendMessage(prefix + MessagesFile.getConfigReloaded());
+                        prefix = MessagesFile.getMessage(MessagesEntry.PREFIX).appendSpace();
+                        sender.sendMessage(prefix.append(MessagesFile.getMessage(MessagesEntry.CONFIG_RELOADED)));
                     } else {
                         if (args[0].equalsIgnoreCase("version")) {
                             String deepslateVersion = this.getClass().getPackage().getImplementationVersion().replace('"', ' ').replace(" ", "");
-                            sender.sendMessage(prefix + ChatColor.GOLD + "This server is running DeepslateMC from Pascalpex: " + deepslateVersion);
+                            sender.sendMessage(prefix.append(Component.text("This server is running DeepslateMC from Pascalpex: " + deepslateVersion).color(NamedTextColor.GOLD)));
                         } else {
-                            sender.sendMessage(prefix + MessagesFile.getWrongSyntax().replace("%usage%", "/deepslate [reload | version]"));
+                            sender.sendMessage(prefix.append(MessagesFile.getMessage(MessagesEntry.WRONG_SYNTAX)));
                         }
                     }
                 }
                 if (args.length >= 2) {
-                    sender.sendMessage(prefix + MessagesFile.getWrongSyntax().replace("%usage%", "/deepslate [reload | version]"));
+                    sender.sendMessage(prefix.append(MessagesFile.getMessage(MessagesEntry.WRONG_SYNTAX)));
                 }
+            } else {
+                sender.sendMessage(prefix.append(Component.text("This server is running DeepslateMC from Pascalpex").color(NamedTextColor.GOLD)));
             }
         }
         return true;

@@ -1,5 +1,6 @@
 package de.pascalpex.deepslatemc.commands;
     
+import de.pascalpex.deepslatemc.files.MessagesEntry;
 import de.pascalpex.deepslatemc.files.MessagesFile;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -16,7 +17,7 @@ public class HelpCommand extends Command {
     @Override
     public boolean execute(@NotNull CommandSender sender, String label, String @NotNull [] args) {
         if (label.equalsIgnoreCase("help")) {
-            sender.sendMessage(MessagesFile.getHelpMessage());
+            sender.sendMessage(MessagesFile.getMessage(MessagesEntry.HELP_MESSAGE));
         }
         return true;
     }

@@ -1,7 +1,14 @@
 package de.pascalpex.deepslatemc.files;
 
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.JoinConfiguration;
+import net.kyori.adventure.text.TextComponent;
+import net.kyori.adventure.text.minimessage.MiniMessage;
+import net.kyori.adventure.text.serializer.ComponentDecoder;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -19,6 +26,10 @@ public class MessagesFile {
     public static FileConfiguration config = YamlConfiguration.loadConfiguration(configFile);
 
     private static final Logger LOGGER = LogManager.getLogger(MessagesFile.class.getSimpleName());
+    private static final MiniMessage miniMessage = MiniMessage.miniMessage();
+    private static final LegacyComponentSerializer legacySerializer = LegacyComponentSerializer.legacyAmpersand();
+
+    private static final String COMMAND_USAGE = "/deepslate [reload | version]";
 
     public static void load() {
         try {
@@ -52,80 +63,40 @@ public class MessagesFile {
         }
     }
 
-    public static String getPrefix() {
-        String prefix = config.getString(PREFIX.key);
-        return prefix.replace("&", "§");
+    public static Component getMessage(MessagesEntry key) {
+        return switch (key) {
+            case HELP_MESSAGE -> getHelpMessage();
+            case DISCORD_MESSAGE -> getDiscordMessage();
+            case WRONG_SYNTAX -> getWrongSyntaxMessage();
+            default -> processColors(config.getString(key.key));
+        };
     }
-    public static String getWrongSyntax() {
-        String prefix = config.getString(WRONG_SYNTAX.key);
-        return prefix.replace("&", "§");
+
+    private static Component processColors(String message) {
+        ComponentDecoder<String, ?> decoder = Config.getMinimessageMessages() ? miniMessage : legacySerializer;
+        return decoder.deserialize(message);
     }
-    public static String getConfigReloaded() {
-        String prefix = config.getString(CONFIG_RELOADED.key);
-        return prefix.replace("&", "§");
+
+    private static Component getDiscordMessage() {
+        String message = config.getString(DISCORD_MESSAGE.key);
+        message = message.replace("%link%", Config.getDiscordLink());
+        return processColors(message);
     }
-    public static String getOnlyForPlayers() {
-        String prefix = config.getString(ONLY_FOR_PLAYERS.key);
-        return prefix.replace("&", "§");
+
+    private static Component getWrongSyntaxMessage() {
+        String message = config.getString(WRONG_SYNTAX.key);
+        message = message.replace("%usage%", COMMAND_USAGE);
+        return processColors(message);
     }
-    public static String getDiscordMessage() {
-        String prefix = config.getString(DISCORD_MESSAGE.key);
-        return prefix.replace("&", "§");
+
+    private static Component getHelpMessage() {
+        List<String> messages = config.getList(HELP_MESSAGE.key).stream().map(Object::toString).toList();
+        List<Component> components = messages.stream()
+            .map(MessagesFile::processColors)
+            .toList();
+
+        return Component.join(JoinConfiguration.separator(Component.newline()), components);
     }
-    public static String getNoPermissions() {
-        String prefix = config.getString(NO_PERMISSIONS.key);
-        return prefix.replace("&", "§");
-    }
-    public static String getClearedChat() {
-        String prefix = config.getString(CLEARED_CHAT.key);
-        return prefix.replace("&", "§");
-    }
-    public static String getBuildworldSet() {
-        String prefix = config.getString(BUILDWORLD_SET.key);
-        return prefix.replace("&", "§");
-    }
-    public static String getBuildworldWelcome() {
-        String prefix = config.getString(BUILDWORLD_WELCOME.key);
-        return prefix.replace("&", "§");
-    }
-    public static String getBuildworldNotSet() {
-        String prefix = config.getString(BUILDWORLD_NOT_SET.key);
-        return prefix.replace("&", "§");
-    }
-    public static String getMaintenanceKick() {
-        String prefix = config.getString(MAINTENANCE_KICK.key);
-        return prefix.replace("&", "§");
-    }
-    public static String getMaintenanceOn() {
-        String prefix = config.getString(MAINTENANCE_ON.key);
-        return prefix.replace("&", "§");
-    }
-    public static String getMaintenanceOff() {
-        String prefix = config.getString(MAINTENANCE_OFF.key);
-        return prefix.replace("&", "§");
-    }
-    public static String getHelpMessage() {
-        List<String> messages = (List<String>) config.getList(HELP_MESSAGE.key);
-        StringBuilder message = new StringBuilder();
-        for(int i = 0; i < messages.size(); i++) {
-            message.append(messages.get(i).replace("&", "§"));
-            if(i < messages.size() - 1) {
-                message.append("\n§r");
-            }
-        }
-        return message.toString();
-    }
-    public static String getSpawnSet() {
-        String prefix = config.getString(SPAWN_SET.key);
-        return prefix.replace("&", "§");
-    }
-    public static String getSpawnNotSet() {
-        String prefix = config.getString(SPAWN_NOT_SET.key);
-        return prefix.replace("&", "§");
-    }
-    public static String getSpawnTeleport() {
-        String prefix = config.getString(SPAWN_TELEPORTED.key);
-        return prefix.replace("&", "§");
-    }
+
 
 }
