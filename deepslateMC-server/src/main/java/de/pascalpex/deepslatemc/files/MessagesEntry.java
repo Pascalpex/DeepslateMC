@@ -2,7 +2,7 @@ package de.pascalpex.deepslatemc.files;
 
 import java.util.List;
 
-enum MessagesEntry {
+public enum MessagesEntry {
     PREFIX("prefix", "&0[&8DeepslateMC&0]"),
     WRONG_SYNTAX("wrongSyntax", "&cWrong usage, use: &b%usage%"),
     CONFIG_RELOADED("configReloaded", "&aConfig got reloaded successfully"),

@@ -1,7 +1,8 @@
 package de.pascalpex.deepslatemc.commands;
     
-import de.pascalpex.deepslatemc.files.Config;
+import de.pascalpex.deepslatemc.files.MessagesEntry;
 import de.pascalpex.deepslatemc.files.MessagesFile;
+import net.kyori.adventure.text.Component;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.NotNull;
@@ -16,10 +17,9 @@ public class DiscordCommand extends Command {
 
     @Override
     public boolean execute(@NotNull CommandSender sender, String commandLabel, String @NotNull [] args) {
-        String prefix = MessagesFile.getPrefix() + " ";
+        Component prefix = MessagesFile.getMessage(MessagesEntry.PREFIX).appendSpace();
         if (commandLabel.equalsIgnoreCase("dc") || commandLabel.equalsIgnoreCase("discord")) {
-            String link = Config.getDiscordLink();
-            sender.sendMessage(prefix + MessagesFile.getDiscordMessage().replace("%link%", link));
+            sender.sendMessage(prefix.append(MessagesFile.getMessage(MessagesEntry.DISCORD_MESSAGE)));
         }
         return true;
     }

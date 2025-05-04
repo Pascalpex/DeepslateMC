@@ -1,7 +1,9 @@
 package de.pascalpex.deepslatemc.commands;
 
 import de.pascalpex.deepslatemc.files.Config;
+import de.pascalpex.deepslatemc.files.MessagesEntry;
 import de.pascalpex.deepslatemc.files.MessagesFile;
+import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -29,30 +31,30 @@ public class SpawnCommand extends Command {
 
     @Override
     public boolean execute(@NotNull CommandSender sender, @NotNull String label, String @NotNull [] args) {
-        String prefix = MessagesFile.getPrefix() + " ";
+        Component prefix = MessagesFile.getMessage(MessagesEntry.PREFIX).appendSpace();
         if (sender instanceof Player player) {
             if (label.equalsIgnoreCase("setspawn")) {
                 if (player.hasPermission("deepslate.setspawn")) {
                     Config.setSpawn(player.getLocation());
-                    player.sendMessage(prefix + MessagesFile.getSpawnSet());
+                    player.sendMessage(prefix.append(MessagesFile.getMessage(MessagesEntry.SPAWN_SET)));
                 } else {
-                    player.sendMessage(prefix + MessagesFile.getNoPermissions());
+                    player.sendMessage(prefix.append(MessagesFile.getMessage(MessagesEntry.NO_PERMISSIONS)));
                 }
             }
             if (label.equalsIgnoreCase("lobby") || label.equalsIgnoreCase("spawn")) {
                 if (player.hasPermission("deepslate.spawn")) {
                     try {
                         player.teleport(Config.getSpawn());
-                        player.sendMessage(prefix + MessagesFile.getSpawnTeleport());
-                    } catch (Exception e) {
-                        player.sendMessage(prefix + MessagesFile.getSpawnNotSet());
+                        player.sendMessage(prefix.append(MessagesFile.getMessage(MessagesEntry.SPAWN_TELEPORTED)));
+                    } catch (IllegalArgumentException e) {
+                        player.sendMessage(prefix.append(MessagesFile.getMessage(MessagesEntry.SPAWN_NOT_SET)));
                     }
                 } else {
-                    player.sendMessage(prefix + MessagesFile.getNoPermissions());
+                    player.sendMessage(prefix.append(MessagesFile.getMessage(MessagesEntry.NO_PERMISSIONS)));
                 }
             }
         } else {
-            sender.sendMessage(prefix + MessagesFile.getOnlyForPlayers());
+            sender.sendMessage(prefix.append(MessagesFile.getMessage(MessagesEntry.ONLY_FOR_PLAYERS)));
         }
         return true;
     }

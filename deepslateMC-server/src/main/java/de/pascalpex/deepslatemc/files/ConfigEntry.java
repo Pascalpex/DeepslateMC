@@ -32,7 +32,8 @@ enum ConfigEntry {
     BOSSBAR_TEXT("bossbar" + ".text", "&6Custom Bossbar"),
     ACTIONBAR_ENABLED("actionbar" + ".enabled", false),
     MINIMESSAGE_MOTD("miniMessageMotdSupport", false),
-    ACTIONBAR_TEXT("actionbar" + ".text", "&6Custom Actionbar");
+    ACTIONBAR_TEXT("actionbar" + ".text", "&6Custom Actionbar"),
+    MINIMESSAGE_MESSAGES("miniMessageMessages", false);
 
     final String key;
     final Object defaultValue;

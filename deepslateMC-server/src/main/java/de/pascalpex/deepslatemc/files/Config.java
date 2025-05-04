@@ -18,8 +18,8 @@ import static de.pascalpex.deepslatemc.files.ConfigEntry.*;
 
 public class Config {
 
-    public static File configFile = new File("deepslate", "deepslate.yml");
-    public static FileConfiguration config = YamlConfiguration.loadConfiguration(configFile);
+    public static final File configFile = new File("deepslate", "deepslate.yml");
+    public static final FileConfiguration config = YamlConfiguration.loadConfiguration(configFile);
 
     private static final Logger LOGGER = LogManager.getLogger(Config.class.getSimpleName());
 
@@ -116,16 +116,16 @@ public class Config {
         return config.getBoolean(TABLIST_ENABLED.key);
     }
     public static List<String> getHeader() {
-        return (List<String>) config.getList(TABLIST_HEADER.key);
+        return config.getList(TABLIST_HEADER.key).stream().map(Object::toString).toList();
     }
     public static List<String> getFooter() {
-        return (List<String>) config.getList(TABLIST_FOOTER.key);
+        return config.getList(TABLIST_FOOTER.key).stream().map(Object::toString).toList();
     }
     public static boolean getPlayerlistHoverEnabled() {
         return config.getBoolean(PLAYERLIST_HOVER_ENABLED.key);
     }
     public static List<String> getPlayerlistHoverLines() {
-        return (List<String>) config.getList(PLAYERLIST_HOVER_LINES.key);
+        return config.getList(PLAYERLIST_HOVER_LINES.key).stream().map(Object::toString).toList();
     }
     public static boolean getBossbarEnabled() {
         return config.getBoolean(BOSSBAR_ENABLED.key);
@@ -150,6 +150,9 @@ public class Config {
     }
     public static boolean getMinimessageMotd() {
         return config.getBoolean(MINIMESSAGE_MOTD.key);
+    }
+    public static boolean getMinimessageMessages() {
+        return config.getBoolean(MINIMESSAGE_MESSAGES.key);
     }
 
 }
