@@ -18,8 +18,8 @@ import static de.pascalpex.deepslatemc.files.ConfigEntry.*;
 
 public class Config {
 
-    public static File configFile = new File("deepslate", "deepslate.yml");
-    public static FileConfiguration config = YamlConfiguration.loadConfiguration(configFile);
+    public static final File configFile = new File("deepslate", "deepslate.yml");
+    public static final FileConfiguration config = YamlConfiguration.loadConfiguration(configFile);
 
     private static final Logger LOGGER = LogManager.getLogger(Config.class.getSimpleName());
 

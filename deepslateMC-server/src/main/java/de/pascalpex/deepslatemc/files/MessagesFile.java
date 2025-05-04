@@ -2,13 +2,11 @@ package de.pascalpex.deepslatemc.files;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.JoinConfiguration;
-import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.serializer.ComponentDecoder;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.bukkit.Bukkit;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -22,8 +20,8 @@ import static de.pascalpex.deepslatemc.files.MessagesEntry.*;
 
 public class MessagesFile {
 
-    public static File configFile = new File("deepslate", "messages.yml");
-    public static FileConfiguration config = YamlConfiguration.loadConfiguration(configFile);
+    public static final File configFile = new File("deepslate", "messages.yml");
+    public static final FileConfiguration config = YamlConfiguration.loadConfiguration(configFile);
 
     private static final Logger LOGGER = LogManager.getLogger(MessagesFile.class.getSimpleName());
     private static final MiniMessage miniMessage = MiniMessage.miniMessage();
