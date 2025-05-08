@@ -20,7 +20,7 @@
          this.cserver.getPluginManager().callEvent(playerJoinEvent);
  
          if (!player.connection.isAcceptingMessages()) {
-@@ -856,6 +_,15 @@
+@@ -857,6 +_,15 @@
              }
          }
          this.cserver.getPluginManager().callEvent(event);
@@ -36,13 +36,3 @@
          if (event.getResult() != org.bukkit.event.player.PlayerLoginEvent.Result.ALLOWED) {
              loginlistener.disconnect(io.papermc.paper.adventure.PaperAdventure.asVanilla(event.kickMessage())); // Paper - Adventure
              return null;
-@@ -903,7 +_,8 @@
-         // Leaf start - SparklyPaper - parallel world ticking mod (make configurable)
-         if (org.dreeam.leaf.config.modules.async.SparklyPaperParallelWorldTicking.enabled) {
-             // SparklyPaper - parallel world ticking (additional concurrency issues logs)
--            System.out.println("respawning player - current player container is " + player.containerMenu + " but their inventory is " + player.inventoryMenu);
-+            if (org.dreeam.leaf.config.modules.async.SparklyPaperParallelWorldTicking.logContainerCreationStacktraces) // Deepslate - Only log player respawns if container logs are on
-+                System.out.println("respawning player - current player container is " + player.containerMenu + " but their inventory is " + player.inventoryMenu);
-             if (location != null) // Leaf - THIS CAN BE NULL; see PlayerList::respawn(ServerPlayer, boolean, Entity.RemovalReason, PlayerRespawnEvent.RespawnReason)
-                 ca.spottedleaf.moonrise.common.util.TickThread.ensureOnlyTickThread("Cannot respawn player off-main, from world " + player.serverLevel().getWorld().getName() + " to world " + location.getWorld().getName());
-             else
