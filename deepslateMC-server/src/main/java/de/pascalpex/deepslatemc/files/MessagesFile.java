@@ -2,6 +2,7 @@ package de.pascalpex.deepslatemc.files;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.JoinConfiguration;
+import net.kyori.adventure.text.event.ClickEvent;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.serializer.ComponentDecoder;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
@@ -78,7 +79,7 @@ public class MessagesFile {
     private static Component getDiscordMessage() {
         String message = config.getString(DISCORD_MESSAGE.key);
         message = message.replace("%link%", Config.getDiscordLink());
-        return processColors(message);
+        return processColors(message).clickEvent(ClickEvent.openUrl(Config.getDiscordLink()));
     }
 
     private static Component getWrongSyntaxMessage() {
