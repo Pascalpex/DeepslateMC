@@ -30,18 +30,10 @@ index 7e4cfe12312e0e36a6a19210cd76858a6eaf8abd..3d265212bc47250254f279b0f51e18a7
              if (gameModeForPlayer == GameType.CREATIVE) {
                  this.player.resetCurrentImpulseContext();
 diff --git a/net/minecraft/server/players/PlayerList.java b/net/minecraft/server/players/PlayerList.java
-index 5edc92163eb13a21ba056a898a228df676afe942..8c1f72d6bd9a3aac88de5a4a650d3e04291b28a0 100644
+index 5edc92163eb13a21ba056a898a228df676afe942..253b43fe3089999380dd985a5be8ac8a801d28a1 100644
 --- a/net/minecraft/server/players/PlayerList.java
 +++ b/net/minecraft/server/players/PlayerList.java
-@@ -99,6 +99,7 @@ import net.minecraft.world.scores.DisplaySlot;
- import net.minecraft.world.scores.Objective;
- import net.minecraft.world.scores.PlayerTeam;
- import net.minecraft.world.scores.Team;
-+import org.bukkit.Bukkit;
- import org.slf4j.Logger;
- 
- public abstract class PlayerList {
-@@ -485,6 +486,25 @@ public abstract class PlayerList {
+@@ -485,6 +485,25 @@ public abstract class PlayerList {
          // CraftBukkit start - sendAll above replaced with this loop
          ClientboundPlayerInfoUpdatePacket packet = ClientboundPlayerInfoUpdatePacket.createPlayerInitializing(List.of(player)); // Paper - Add Listing API for Player
  
@@ -67,7 +59,7 @@ index 5edc92163eb13a21ba056a898a228df676afe942..8c1f72d6bd9a3aac88de5a4a650d3e04
          final List<ServerPlayer> onlinePlayers = Lists.newArrayListWithExpectedSize(this.players.size() - 1); // Paper - Use single player info update packet on join
          for (int i = 0; i < this.players.size(); ++i) {
              ServerPlayer entityplayer1 = (ServerPlayer) this.players.get(i);
-@@ -493,7 +513,13 @@ public abstract class PlayerList {
+@@ -493,7 +512,13 @@ public abstract class PlayerList {
                  // Paper start - Add Listing API for Player
                  if (entityplayer1.getBukkitEntity().isListed(bukkitPlayer)) {
                  // Paper end - Add Listing API for Player
@@ -82,7 +74,7 @@ index 5edc92163eb13a21ba056a898a228df676afe942..8c1f72d6bd9a3aac88de5a4a650d3e04
                  // Paper start - Add Listing API for Player
                  } else {
                      entityplayer1.connection.send(ClientboundPlayerInfoUpdatePacket.createSinglePlayerInitializing(player, false));
-@@ -515,7 +541,27 @@ public abstract class PlayerList {
+@@ -515,7 +540,27 @@ public abstract class PlayerList {
          }
          // Paper start - Use single player info update packet on join
          if (!onlinePlayers.isEmpty()) {
