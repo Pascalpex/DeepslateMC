@@ -154,5 +154,8 @@ public class Config {
     public static boolean getMinimessageMessages() {
         return config.getBoolean(MINIMESSAGE_MESSAGES.key);
     }
+    public static boolean getSendSpectatorModePackets() {
+        return config.getBoolean(SPECTATOR_MODE_PACKETS.key);
+    }
 
 }
