@@ -33,7 +33,8 @@ enum ConfigEntry {
     ACTIONBAR_ENABLED("actionbar" + ".enabled", false),
     MINIMESSAGE_MOTD("miniMessageMotdSupport", false),
     ACTIONBAR_TEXT("actionbar" + ".text", "&6Custom Actionbar"),
-    MINIMESSAGE_MESSAGES("miniMessageMessages", false);
+    MINIMESSAGE_MESSAGES("miniMessageMessages", false),
+    SPECTATOR_MODE_PACKETS("sendSpectatorModePackets", true);
 
     final String key;
     final Object defaultValue;
