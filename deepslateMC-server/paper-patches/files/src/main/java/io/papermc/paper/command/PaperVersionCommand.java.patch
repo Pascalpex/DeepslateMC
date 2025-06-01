@@ -4,8 +4,8 @@
      private static final Component FAILED_TO_FETCH = Component.text("Could not fetch version information!", NamedTextColor.RED);
      private static final Component FETCHING = Component.text("Checking version, please wait...", NamedTextColor.WHITE, TextDecoration.ITALIC);
  
--    private final VersionFetcher versionFetcher = new PaperVersionFetcher();
-+    private final VersionFetcher versionFetcher = new de.pascalpex.deepslatemc.DeepslateVersionFetcher();
+-    public static final VersionFetcher versionFetcher = new org.dreeam.leaf.version.LeafVersionFetcher(); // Leaf - Rebrand
++    public static final VersionFetcher versionFetcher = new de.pascalpex.deepslatemc.DeepslateVersionFetcher(); // Leaf - Rebrand // Deepslate
      private CompletableFuture<ComputedVersion> computedVersion = CompletableFuture.completedFuture(new ComputedVersion(Component.empty(), -1)); // Precompute-- someday move that stuff out of bukkit
  
      public static LiteralCommandNode<CommandSourceStack> create() {
