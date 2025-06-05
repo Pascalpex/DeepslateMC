@@ -33,7 +33,7 @@
 -                logger.log(Level.SEVERE, "Server thread dump (Look for plugins here before reporting to Leaf!):"); // Paper // Gale - branding changes // Leaf - Rebrand
 +                logger.log(Level.SEVERE, "Server thread dump (Look for plugins here before reporting to DeepslateMC!):"); // Paper // Gale - branding changes // Leaf - Rebrand // Deepslate
                  FeatureHooks.dumpAllChunkLoadInfo(MinecraftServer.getServer(), isLongTimeout); // Paper - log detailed tick information
-                 WatchdogThread.dumpThread(ManagementFactory.getThreadMXBean().getThreadInfo(MinecraftServer.getServer().serverThread.getId(), Integer.MAX_VALUE), logger);
+                 WatchdogThread.dumpThread(ManagementFactory.getThreadMXBean().getThreadInfo(MinecraftServer.getServer().serverThread.threadId(), Integer.MAX_VALUE), logger);
                  logger.log(Level.SEVERE, "------------------------------");
 @@ -137,7 +_,7 @@
                      We do not want people to report thread issues to Paper,

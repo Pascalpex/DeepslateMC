@@ -1,8 +1,8 @@
 --- a/net/minecraft/server/MinecraftServer.java
 +++ b/net/minecraft/server/MinecraftServer.java
-@@ -1658,6 +_,19 @@
+@@ -1677,6 +_,19 @@
      private ServerStatus.Players buildPlayerStatus() {
-         List<ServerPlayer> players = this.playerList.getPlayers();
+         List<ServerPlayer> players = this.playerList.realPlayers; // Leaves - only real player
          int maxPlayers = this.getMaxPlayers();
 +
 +        // Deepslate start - Custom playerlist hover text
@@ -20,7 +20,7 @@
          if (this.hidesOnlinePlayers()) {
              return new ServerStatus.Players(maxPlayers, players.size(), List.of());
          } else {
-@@ -2046,7 +_,18 @@
+@@ -2111,7 +_,18 @@
  
      public void setMotd(String motd) {
          // Paper start - Adventure

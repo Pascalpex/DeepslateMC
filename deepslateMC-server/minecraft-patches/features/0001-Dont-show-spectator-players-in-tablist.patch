@@ -30,10 +30,10 @@ index f7a05fd098ef7b303254cd410414d50d68225395..3d34861ef5611bd304a30608c69341b9
              if (gameModeForPlayer == GameType.CREATIVE) {
                  this.player.resetCurrentImpulseContext();
 diff --git a/net/minecraft/server/players/PlayerList.java b/net/minecraft/server/players/PlayerList.java
-index ae5a3f5c6e683749c67a98da7a5c578ffa2f6453..3637719799bedb31818bd6131623541519b36384 100644
+index 2a6669754868662b7252de6056e2177b76c80e45..a14890376fce2557bcf8a91d49741d5fb38918bf 100644
 --- a/net/minecraft/server/players/PlayerList.java
 +++ b/net/minecraft/server/players/PlayerList.java
-@@ -383,6 +383,25 @@ public abstract class PlayerList {
+@@ -489,6 +489,25 @@ public abstract class PlayerList {
          // CraftBukkit start - sendAll above replaced with this loop
          ClientboundPlayerInfoUpdatePacket packet = ClientboundPlayerInfoUpdatePacket.createPlayerInitializing(List.of(player)); // Paper - Add Listing API for Player
  
@@ -59,7 +59,7 @@ index ae5a3f5c6e683749c67a98da7a5c578ffa2f6453..3637719799bedb31818bd61316235415
          final List<ServerPlayer> onlinePlayers = Lists.newArrayListWithExpectedSize(this.players.size() - 1); // Paper - Use single player info update packet on join
          for (int i = 0; i < this.players.size(); ++i) {
              ServerPlayer entityplayer1 = (ServerPlayer) this.players.get(i);
-@@ -391,7 +410,13 @@ public abstract class PlayerList {
+@@ -497,7 +516,13 @@ public abstract class PlayerList {
                  // Paper start - Add Listing API for Player
                  if (entityplayer1.getBukkitEntity().isListed(bukkitPlayer)) {
                  // Paper end - Add Listing API for Player
@@ -74,7 +74,7 @@ index ae5a3f5c6e683749c67a98da7a5c578ffa2f6453..3637719799bedb31818bd61316235415
                  // Paper start - Add Listing API for Player
                  } else {
                      entityplayer1.connection.send(ClientboundPlayerInfoUpdatePacket.createSinglePlayerInitializing(player, false));
-@@ -407,7 +432,27 @@ public abstract class PlayerList {
+@@ -519,7 +544,27 @@ public abstract class PlayerList {
          }
          // Paper start - Use single player info update packet on join
          if (!onlinePlayers.isEmpty()) {

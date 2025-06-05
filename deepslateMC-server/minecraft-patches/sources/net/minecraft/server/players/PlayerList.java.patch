@@ -1,6 +1,6 @@
 --- a/net/minecraft/server/players/PlayerList.java
 +++ b/net/minecraft/server/players/PlayerList.java
-@@ -351,6 +_,19 @@
+@@ -455,6 +_,19 @@
          player.containerMenu.transferTo(player.containerMenu, bukkitPlayer);
  
          org.bukkit.event.player.PlayerJoinEvent playerJoinEvent = new org.bukkit.event.player.PlayerJoinEvent(bukkitPlayer, getJoinMsg(mutableComponent, bukkitPlayer)); // Paper - Adventure // Leaf - Configurable connection message - join message
@@ -20,7 +20,7 @@
          this.cserver.getPluginManager().callEvent(playerJoinEvent);
  
          if (!player.connection.isAcceptingMessages()) {
-@@ -704,6 +_,15 @@
+@@ -856,6 +_,15 @@
              }
          }
          this.cserver.getPluginManager().callEvent(event);
