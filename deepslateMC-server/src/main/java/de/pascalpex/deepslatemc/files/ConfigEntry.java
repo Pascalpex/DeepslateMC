@@ -34,7 +34,8 @@ enum ConfigEntry {
     MINIMESSAGE_MOTD("miniMessageMotdSupport", false),
     ACTIONBAR_TEXT("actionbar" + ".text", "&6Custom Actionbar"),
     MINIMESSAGE_MESSAGES("miniMessageMessages", false),
-    SPECTATOR_MODE_PACKETS("sendSpectatorModePackets", true);
+    SPECTATOR_MODE_PACKETS("sendSpectatorModePackets", true),
+    SERVER_LINKS("serverLinks", "");
 
     final String key;
     final Object defaultValue;

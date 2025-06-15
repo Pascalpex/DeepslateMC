@@ -12,7 +12,9 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static de.pascalpex.deepslatemc.files.ConfigEntry.*;
 
@@ -41,6 +43,10 @@ public class Config {
                     continue;
                 }
                 if(!config.contains(configEntry.key)) {
+                    if(configEntry == SERVER_LINKS) {
+                        config.set(SERVER_LINKS.key + ".<gold>My first link", "");
+                        continue;
+                    }
                     config.set(configEntry.key, configEntry.defaultValue);
                 }
             }
@@ -156,6 +162,11 @@ public class Config {
     }
     public static boolean getSendSpectatorModePackets() {
         return config.getBoolean(SPECTATOR_MODE_PACKETS.key);
+    }
+    public static Map<String, String> getServerLinks() {
+        Map<String, String> serverLinks = new HashMap<>();
+        config.getConfigurationSection(SERVER_LINKS.key).getKeys(false).forEach(key -> serverLinks.put(key, config.getString(SERVER_LINKS.key + "." + key)));
+        return serverLinks;
     }
 
 }

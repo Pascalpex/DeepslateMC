@@ -1,12 +1,13 @@
 --- a/net/minecraft/server/commands/ReloadCommand.java
 +++ b/net/minecraft/server/commands/ReloadCommand.java
-@@ -44,6 +_,9 @@
+@@ -44,6 +_,10 @@
          Collection<String> selectedIds = packRepository.getSelectedIds();
          Collection<String> collection = discoverNewPacks(packRepository, worldData, selectedIds);
          server.reloadResources(collection, io.papermc.paper.event.server.ServerResourcesReloadedEvent.Cause.PLUGIN); // Paper - Add ServerResourcesReloadedEvent
 +        de.pascalpex.deepslatemc.util.TablistUtil.reloadTablist(); // Deepslate - reload tablist
 +        de.pascalpex.deepslatemc.util.BossbarUtil.reloadBossbar(); // Deepslate - reload bossbar
 +        de.pascalpex.deepslatemc.util.ActionbarUtil.reloadActionbar(); // Deepslate - reload actionbar
++        de.pascalpex.deepslatemc.util.ServerLinkUtil.loadLinks(); // Deepslate - reload server links
      }
      // CraftBukkit end
  
