@@ -1,0 +1,13 @@
+--- a/net/minecraft/server/network/ServerConfigurationPacketListenerImpl.java
++++ b/net/minecraft/server/network/ServerConfigurationPacketListenerImpl.java
+@@ -83,6 +_,10 @@
+         // CraftBukkit start
+         org.bukkit.craftbukkit.CraftServerLinks wrapper = new org.bukkit.craftbukkit.CraftServerLinks(serverLinks);
+         org.bukkit.event.player.PlayerLinksSendEvent event = new org.bukkit.event.player.PlayerLinksSendEvent(this.player.getBukkitEntity(), wrapper);
++        // Deepslate start - server links
++        java.util.Map<net.kyori.adventure.text.Component, java.net.URI> deepslateLinks = de.pascalpex.deepslatemc.util.ServerLinkUtil.getLinks();
++        deepslateLinks.keySet().forEach(key -> wrapper.addLink(key, deepslateLinks.get(key)));
++        // Deepslate end - server links
+         this.cserver.getPluginManager().callEvent(event);
+         serverLinks = wrapper.getServerLinks();
+         // CraftBukkit end

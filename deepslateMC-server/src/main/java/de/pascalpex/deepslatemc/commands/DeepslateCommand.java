@@ -5,6 +5,7 @@ import de.pascalpex.deepslatemc.files.MessagesEntry;
 import de.pascalpex.deepslatemc.files.MessagesFile;
 import de.pascalpex.deepslatemc.util.ActionbarUtil;
 import de.pascalpex.deepslatemc.util.BossbarUtil;
+import de.pascalpex.deepslatemc.util.ServerLinkUtil;
 import de.pascalpex.deepslatemc.util.TablistUtil;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
@@ -51,6 +52,7 @@ public class DeepslateCommand extends Command {
                         TablistUtil.reloadTablist();
                         BossbarUtil.reloadBossbar();
                         ActionbarUtil.reloadActionbar();
+                        ServerLinkUtil.loadLinks();
                         prefix = MessagesFile.getMessage(MessagesEntry.PREFIX).appendSpace();
                         sender.sendMessage(prefix.append(MessagesFile.getMessage(MessagesEntry.CONFIG_RELOADED)));
                     } else {
