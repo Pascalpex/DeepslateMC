@@ -1,6 +1,6 @@
 --- a/src/main/java/org/spigotmc/WatchdogThread.java
 +++ b/src/main/java/org/spigotmc/WatchdogThread.java
-@@ -83,15 +_,15 @@
+@@ -82,15 +_,15 @@
                      We do not want people to report thread issues to Paper,
                      but we do want people to report thread issues to Gale.
                      */
@@ -19,7 +19,7 @@
  
                      if (net.minecraft.world.level.Level.lastPhysicsProblem != null) {
                          logger.log(Level.SEVERE, "------------------------------");
-@@ -116,13 +_,13 @@
+@@ -115,13 +_,13 @@
                      We do not want people to report thread issues to Paper,
                      but we do want people to report thread issues to Gale.
                      */
@@ -34,8 +34,8 @@
 +                logger.log(Level.SEVERE, "Server thread dump (Look for plugins here before reporting to DeepslateMC!):"); // Paper // Gale - branding changes // Leaf - Rebrand // Deepslate
                  FeatureHooks.dumpAllChunkLoadInfo(MinecraftServer.getServer(), isLongTimeout); // Paper - log detailed tick information
                  WatchdogThread.dumpThread(ManagementFactory.getThreadMXBean().getThreadInfo(MinecraftServer.getServer().serverThread.getId(), Integer.MAX_VALUE), logger);
-                 // Leaf start
-@@ -153,7 +_,7 @@
+                 logger.log(Level.SEVERE, "------------------------------");
+@@ -154,7 +_,7 @@
                      We do not want people to report thread issues to Paper,
                      but we do want people to report thread issues to Gale.
                      */
