@@ -1,6 +1,6 @@
 --- a/leaf-server/build.gradle.kts
 +++ b/leaf-server/build.gradle.kts
-@@ -43,7 +_,30 @@
+@@ -35,7 +_,30 @@
          }
      }
  
@@ -32,7 +32,7 @@
      // Leaf end - project setup
  
      spigot {
-@@ -133,10 +_,14 @@
+@@ -125,10 +_,14 @@
      main {
          java { srcDir("../paper-server/src/main/java") }
          resources { srcDir("../paper-server/src/main/resources") }
@@ -47,7 +47,7 @@
      }
  }
  
-@@ -165,7 +_,7 @@
+@@ -157,7 +_,7 @@
  }
  
  dependencies {
@@ -56,7 +56,7 @@
  
      // Leaf start - Libraries
      implementation("com.github.thatsmusic99:ConfigurationMaster-API:v2.0.0-rc.3") { // Leaf config
-@@ -280,14 +_,14 @@
+@@ -272,14 +_,14 @@
          val gitBranch = git.exec(providers, "rev-parse", "--abbrev-ref", "HEAD").get().trim()
          attributes(
              "Main-Class" to "org.bukkit.craftbukkit.Main",

@@ -5,21 +5,21 @@ Subject: [PATCH] Dont show spectator players in tablist
 
 
 diff --git a/net/minecraft/server/level/ServerPlayerGameMode.java b/net/minecraft/server/level/ServerPlayerGameMode.java
-index f7a05fd098ef7b303254cd410414d50d68225395..3d34861ef5611bd304a30608c69341b998e91bd1 100644
+index be5da5a81246b4f4abe19f7c0cf68990d6bdf5bd..38661e8aa55a795cb3fdd4f08e3251ca8a309b2b 100644
 --- a/net/minecraft/server/level/ServerPlayerGameMode.java
 +++ b/net/minecraft/server/level/ServerPlayerGameMode.java
 @@ -75,10 +75,16 @@ public class ServerPlayerGameMode {
              // CraftBukkit end
              this.setGameModeForPlayer(gameModeForPlayer, this.gameModeForPlayer); // Paper - Fix MC-259571
              this.player.onUpdateAbilities();
--            this.player
--                .server
+-            this.level
+-                .getServer()
 -                .getPlayerList()
 -                .broadcastAll(new ClientboundPlayerInfoUpdatePacket(ClientboundPlayerInfoUpdatePacket.Action.UPDATE_GAME_MODE, this.player), this.player); // CraftBukkit
 +            // Deepslate start - Don't send spectator mode packets to other players
 +            if(de.pascalpex.deepslatemc.files.Config.getSendSpectatorModePackets() || gameModeForPlayer != GameType.SPECTATOR) {
-+                this.player
-+                    .server
++                this.level
++                    .getServer()
 +                    .getPlayerList()
 +                    .broadcastAll(new ClientboundPlayerInfoUpdatePacket(ClientboundPlayerInfoUpdatePacket.Action.UPDATE_GAME_MODE, this.player), this.player); // CraftBukkit
 +            } else {
@@ -30,76 +30,76 @@ index f7a05fd098ef7b303254cd410414d50d68225395..3d34861ef5611bd304a30608c69341b9
              if (gameModeForPlayer == GameType.CREATIVE) {
                  this.player.resetCurrentImpulseContext();
 diff --git a/net/minecraft/server/players/PlayerList.java b/net/minecraft/server/players/PlayerList.java
-index 4b43231c9ca77129606bf99c066e5f3beda29d8f..7d4aeb1c0baec05ba17c53ce9a1a0e0b580418c7 100644
+index 4c42f4cb5e5ea21b28824467fae54255ffa868c9..a2757f5458243ce608a1c982bde5e5eb738d00f2 100644
 --- a/net/minecraft/server/players/PlayerList.java
 +++ b/net/minecraft/server/players/PlayerList.java
-@@ -490,6 +490,25 @@ public abstract class PlayerList {
-         // CraftBukkit start - sendAll above replaced with this loop
-         ClientboundPlayerInfoUpdatePacket packet = ClientboundPlayerInfoUpdatePacket.createPlayerInitializing(List.of(player)); // Paper - Add Listing API for Player
+@@ -491,6 +491,25 @@ public abstract class PlayerList {
+             // CraftBukkit start - sendAll above replaced with this loop
+             ClientboundPlayerInfoUpdatePacket packet = ClientboundPlayerInfoUpdatePacket.createPlayerInitializing(List.of(player)); // Paper - Add Listing API for Player
  
-+        // Deepslate start - Don't send spectator mode packets to other players
-+        ClientboundPlayerInfoUpdatePacket modifiedPacket = null;
-+        if (!de.pascalpex.deepslatemc.files.Config.getSendSpectatorModePackets()) {
-+            ClientboundPlayerInfoUpdatePacket.Entry entry = packet.entries().getFirst();
-+            ClientboundPlayerInfoUpdatePacket.Entry entryWithoutSpectator = new ClientboundPlayerInfoUpdatePacket.Entry(
-+                entry.profileId(),
-+                entry.profile(),
-+                entry.listed(),
-+                entry.latency(),
-+                entry.gameMode() == net.minecraft.world.level.GameType.SPECTATOR ? net.minecraft.world.level.GameType.SURVIVAL : entry.gameMode(),
-+                entry.displayName(),
-+                entry.showHat(),
-+                entry.listOrder(),
-+                entry.chatSession());
-+
-+            modifiedPacket = new ClientboundPlayerInfoUpdatePacket(packet.actions(), List.of(entryWithoutSpectator));
-+        }
-+        // Deepslate end - Don't send spectator mode packets to other players
-+
-         final List<ServerPlayer> onlinePlayers = Lists.newArrayListWithExpectedSize(this.players.size() - 1); // Paper - Use single player info update packet on join
-         for (int i = 0; i < this.players.size(); ++i) {
-             ServerPlayer entityplayer1 = (ServerPlayer) this.players.get(i);
-@@ -498,7 +517,13 @@ public abstract class PlayerList {
-                 // Paper start - Add Listing API for Player
-                 if (entityplayer1.getBukkitEntity().isListed(bukkitPlayer)) {
-                 // Paper end - Add Listing API for Player
--                entityplayer1.connection.send(packet);
-+                    // Deepslate start - Don't send spectator mode packets to other players
-+                    if (de.pascalpex.deepslatemc.files.Config.getSendSpectatorModePackets() || entityplayer1 == player) {
-+                        entityplayer1.connection.send(packet);
-+                    } else {
-+                        entityplayer1.connection.send(modifiedPacket);
-+                    }
-+                    // Deepslate end - Don't send spectator mode packets to other players
-                 // Paper start - Add Listing API for Player
-                 } else {
-                     entityplayer1.connection.send(ClientboundPlayerInfoUpdatePacket.createSinglePlayerInitializing(player, false));
-@@ -520,7 +545,27 @@ public abstract class PlayerList {
-         }
-         // Paper start - Use single player info update packet on join
-         if (!onlinePlayers.isEmpty()) {
--            player.connection.send(ClientboundPlayerInfoUpdatePacket.createPlayerInitializing(onlinePlayers, player)); // Paper - Add Listing API for Player
 +            // Deepslate start - Don't send spectator mode packets to other players
-+            ClientboundPlayerInfoUpdatePacket updatePacket = ClientboundPlayerInfoUpdatePacket.createPlayerInitializing(onlinePlayers, player);
++            ClientboundPlayerInfoUpdatePacket modifiedPacket = null;
 +            if (!de.pascalpex.deepslatemc.files.Config.getSendSpectatorModePackets()) {
-+                List<ClientboundPlayerInfoUpdatePacket.Entry> newEntries = new java.util.ArrayList<>();
-+                for (ClientboundPlayerInfoUpdatePacket.Entry entry : updatePacket.entries()) {
-+                    ClientboundPlayerInfoUpdatePacket.Entry newEntry = new ClientboundPlayerInfoUpdatePacket.Entry(
-+                        entry.profileId(),
-+                        entry.profile(),
-+                        entry.listed(),
-+                        entry.latency(),
-+                        entry.gameMode() == net.minecraft.world.level.GameType.SPECTATOR ? net.minecraft.world.level.GameType.SURVIVAL : entry.gameMode(),
-+                        entry.displayName(),
-+                        entry.showHat(),
-+                        entry.listOrder(),
-+                        entry.chatSession());
-+                    newEntries.add(newEntry);
-+                }
-+                updatePacket = new ClientboundPlayerInfoUpdatePacket(updatePacket.actions(), newEntries);
++                ClientboundPlayerInfoUpdatePacket.Entry entry = packet.entries().getFirst();
++                ClientboundPlayerInfoUpdatePacket.Entry entryWithoutSpectator = new ClientboundPlayerInfoUpdatePacket.Entry(
++                    entry.profileId(),
++                    entry.profile(),
++                    entry.listed(),
++                    entry.latency(),
++                    entry.gameMode() == net.minecraft.world.level.GameType.SPECTATOR ? net.minecraft.world.level.GameType.SURVIVAL : entry.gameMode(),
++                    entry.displayName(),
++                    entry.showHat(),
++                    entry.listOrder(),
++                    entry.chatSession());
++
++                modifiedPacket = new ClientboundPlayerInfoUpdatePacket(packet.actions(), List.of(entryWithoutSpectator));
 +            }
-+            player.connection.send(updatePacket); // Paper - Add Listing API for Player
 +            // Deepslate end - Don't send spectator mode packets to other players
-         }
-         // Paper end - Use single player info update packet on join
-         player.sentListPacket = true;
++
+             final List<ServerPlayer> onlinePlayers = Lists.newArrayListWithExpectedSize(this.players.size() - 1); // Paper - Use single player info update packet on join
+             for (int i = 0; i < this.players.size(); ++i) {
+                 ServerPlayer entityplayer1 = (ServerPlayer) this.players.get(i);
+@@ -499,7 +518,13 @@ public abstract class PlayerList {
+                     // Paper start - Add Listing API for Player
+                     if (entityplayer1.getBukkitEntity().isListed(bukkitPlayer)) {
+                         // Paper end - Add Listing API for Player
+-                        entityplayer1.connection.send(packet);
++                        // Deepslate start - Don't send spectator mode packets to other players
++                        if (de.pascalpex.deepslatemc.files.Config.getSendSpectatorModePackets() || entityplayer1 == player) {
++                            entityplayer1.connection.send(packet);
++                        } else {
++                            entityplayer1.connection.send(modifiedPacket);
++                        }
++                        // Deepslate end - Don't send spectator mode packets to other players
+                         // Paper start - Add Listing API for Player
+                     } else {
+                         entityplayer1.connection.send(ClientboundPlayerInfoUpdatePacket.createSinglePlayerInitializing(player, false));
+@@ -521,7 +546,27 @@ public abstract class PlayerList {
+             }
+             // Paper start - Use single player info update packet on join
+             if (!onlinePlayers.isEmpty()) {
+-                player.connection.send(ClientboundPlayerInfoUpdatePacket.createPlayerInitializing(onlinePlayers, player)); // Paper - Add Listing API for Player
++                // Deepslate start - Don't send spectator mode packets to other players
++                ClientboundPlayerInfoUpdatePacket updatePacket = ClientboundPlayerInfoUpdatePacket.createPlayerInitializing(onlinePlayers, player);
++                if (!de.pascalpex.deepslatemc.files.Config.getSendSpectatorModePackets()) {
++                    List<ClientboundPlayerInfoUpdatePacket.Entry> newEntries = new java.util.ArrayList<>();
++                    for (ClientboundPlayerInfoUpdatePacket.Entry entry : updatePacket.entries()) {
++                        ClientboundPlayerInfoUpdatePacket.Entry newEntry = new ClientboundPlayerInfoUpdatePacket.Entry(
++                            entry.profileId(),
++                            entry.profile(),
++                            entry.listed(),
++                            entry.latency(),
++                            entry.gameMode() == net.minecraft.world.level.GameType.SPECTATOR ? net.minecraft.world.level.GameType.SURVIVAL : entry.gameMode(),
++                            entry.displayName(),
++                            entry.showHat(),
++                            entry.listOrder(),
++                            entry.chatSession());
++                        newEntries.add(newEntry);
++                    }
++                    updatePacket = new ClientboundPlayerInfoUpdatePacket(updatePacket.actions(), newEntries);
++                }
++                player.connection.send(updatePacket); // Paper - Add Listing API for Player
++                // Deepslate end - Don't send spectator mode packets to other players
+             }
+             // Paper end - Use single player info update packet on join
+             player.sentListPacket = true;

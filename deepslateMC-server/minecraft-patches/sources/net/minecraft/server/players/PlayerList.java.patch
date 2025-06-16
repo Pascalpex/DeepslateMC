@@ -1,26 +1,26 @@
 --- a/net/minecraft/server/players/PlayerList.java
 +++ b/net/minecraft/server/players/PlayerList.java
-@@ -455,6 +_,19 @@
-         player.containerMenu.transferTo(player.containerMenu, bukkitPlayer);
+@@ -456,6 +_,19 @@
+             player.containerMenu.transferTo(player.containerMenu, bukkitPlayer);
  
          org.bukkit.event.player.PlayerJoinEvent playerJoinEvent = new org.bukkit.event.player.PlayerJoinEvent(bukkitPlayer, getJoinMsg(mutableComponent, bukkitPlayer)); // Paper - Adventure // Leaf - Configurable connection message - join message
 +
-+        de.pascalpex.deepslatemc.commands.SpawnCommand.playerJoin(bukkitPlayer); // Deepslate - Spawn functions
-+        // Deepslate start - Tablist
-+        if (de.pascalpex.deepslatemc.files.Config.getTablistEnabled()) {
-+            de.pascalpex.deepslatemc.util.TablistUtil.setTablist(bukkitPlayer);
-+        }
-+        // Deepslate end
-+        // Deepslate start - Bossbar
-+        if (de.pascalpex.deepslatemc.files.Config.getBossbarEnabled()) {
-+            de.pascalpex.deepslatemc.util.BossbarUtil.setBossbar(bukkitPlayer);
-+        }
-+        // Deepslate end
++            de.pascalpex.deepslatemc.commands.SpawnCommand.playerJoin(bukkitPlayer); // Deepslate - Spawn functions
++            // Deepslate start - Tablist
++            if (de.pascalpex.deepslatemc.files.Config.getTablistEnabled()) {
++                de.pascalpex.deepslatemc.util.TablistUtil.setTablist(bukkitPlayer);
++            }
++            // Deepslate end
++            // Deepslate start - Bossbar
++            if (de.pascalpex.deepslatemc.files.Config.getBossbarEnabled()) {
++                de.pascalpex.deepslatemc.util.BossbarUtil.setBossbar(bukkitPlayer);
++            }
++            // Deepslate end
 +
-         this.cserver.getPluginManager().callEvent(playerJoinEvent);
+             this.cserver.getPluginManager().callEvent(playerJoinEvent);
  
-         if (!player.connection.isAcceptingMessages()) {
-@@ -857,6 +_,15 @@
+             if (!player.connection.isAcceptingMessages()) {
+@@ -860,6 +_,15 @@
              }
          }
          this.cserver.getPluginManager().callEvent(event);

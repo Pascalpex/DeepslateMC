@@ -17,8 +17,8 @@
              getManifestAttribute(manifest, ATTRIBUTE_BRAND_NAME)
 -                .orElse(BRAND_LEAF_NAME), // Gale - branding changes // Leaf - Rebrand
 +                .orElse(BRAND_DEEPSLATE_NAME), // Gale - branding changes // Leaf - Rebrand // Deepslate
-             SharedConstants.getCurrentVersion().getId(),
-             SharedConstants.getCurrentVersion().getName(),
+             SharedConstants.getCurrentVersion().id(),
+             SharedConstants.getCurrentVersion().name(),
              getManifestAttribute(manifest, ATTRIBUTE_BUILD_NUMBER)
 @@ -72,7 +_,8 @@
              || brandId.equals(BRAND_PAPER_ID)
