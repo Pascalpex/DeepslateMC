@@ -1,5 +1,13 @@
 --- a/net/minecraft/server/MinecraftServer.java
 +++ b/net/minecraft/server/MinecraftServer.java
+@@ -1208,6 +_,7 @@
+             // Paper end
+             org.spigotmc.WatchdogThread.hasStarted = true; // Paper
+             org.dreeam.leaf.config.LeafConfig.regSparkExtraConfig(); // Leaf - Leaf config
++            de.pascalpex.deepslatemc.files.Config.addSparkEntry(); // Deepslate - add deepslate.yml to spark
+             Arrays.fill(this.recentTps, 20);
+             // Paper start - further improve server tick loop
+             long tickSection = Util.getNanos();
 @@ -1666,6 +_,19 @@
      private ServerStatus.Players buildPlayerStatus() {
          List<ServerPlayer> players = this.playerList.realPlayers; // Leaves - only real player

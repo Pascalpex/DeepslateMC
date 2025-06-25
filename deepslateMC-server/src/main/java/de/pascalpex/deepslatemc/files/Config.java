@@ -12,6 +12,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +25,7 @@ public class Config {
     public static final FileConfiguration config = YamlConfiguration.loadConfiguration(configFile);
 
     private static final Logger LOGGER = LogManager.getLogger(Config.class.getSimpleName());
+    private static final String SPARK_EXTRA_PROPERTY = "spark.serverconfigs.extra";
 
     public static void load() {
         try {
@@ -63,6 +65,19 @@ public class Config {
         } catch (IOException e) {
             LOGGER.error("Error saving DeepslateMC config", e);
         }
+    }
+
+    public static void addSparkEntry() {
+        List<String> additionalConfigs = new ArrayList<>(List.of(
+            configFile.getPath()
+        ));
+
+        String existingConfigs = System.getProperty(SPARK_EXTRA_PROPERTY);
+        if (existingConfigs != null) {
+            additionalConfigs.addAll(Arrays.asList(existingConfigs.split(",")));
+        }
+
+        System.setProperty(SPARK_EXTRA_PROPERTY, String.join(",", additionalConfigs));
     }
 
     public static boolean getOpActive() {
