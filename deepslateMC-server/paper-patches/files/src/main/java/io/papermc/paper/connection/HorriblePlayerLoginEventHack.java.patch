@@ -1,0 +1,38 @@
+--- a/src/main/java/io/papermc/paper/connection/HorriblePlayerLoginEventHack.java
++++ b/src/main/java/io/papermc/paper/connection/HorriblePlayerLoginEventHack.java
+@@ -43,12 +_,17 @@
+     }
+ 
+     public static @Nullable Component execute(final Connection connection, MinecraftServer server, GameProfile profile, PlayerList.LoginResult result) {
+-        if (PlayerLoginEvent.getHandlerList().getRegisteredListeners().length == 0) {
++        if (PlayerLoginEvent.getHandlerList().getRegisteredListeners().length == 0 && !de.pascalpex.deepslatemc.files.Config.getMaintenanceMode()) { // Deepslate - maintenance mode
+             return result.message();
+         }
+ 
+         if (!nagged) {
+             Set<String> plugins = new HashSet<>();
++            // Deepslate start - Maintenance mode
++            if(de.pascalpex.deepslatemc.files.Config.getMaintenanceMode()) {
++                plugins.add("DeepslateMC"); // TODO: Find better solution
++            }
++            // Deepslate end
+             for (final RegisteredListener listener : PlayerLoginEvent.getHandlerList().getRegisteredListeners()) {
+                 plugins.add(listener.getPlugin().getName());
+             }
+@@ -81,6 +_,16 @@
+         PlayerLoginEvent event = new PlayerLoginEvent(horribleBukkitPlayer, connection.hostname, ((java.net.InetSocketAddress) connection.getRemoteAddress()).getAddress(), ((java.net.InetSocketAddress) connection.channel.remoteAddress()).getAddress());
+         event.disallow(result.result(), PaperAdventure.asAdventure(result.message()));
+         event.callEvent();
++
++        // Deepslate start - Maintenance mode
++        if(de.pascalpex.deepslatemc.files.Config.getMaintenanceMode()) {
++            if(!horribleBukkitPlayer.hasPermission("deepslate.maintenancebypass")) {
++                net.kyori.adventure.text.Component prefix = de.pascalpex.deepslatemc.files.MessagesFile.getMessage(de.pascalpex.deepslatemc.files.MessagesEntry.PREFIX);
++                net.kyori.adventure.text.Component kickMessage = de.pascalpex.deepslatemc.files.MessagesFile.getMessage(de.pascalpex.deepslatemc.files.MessagesEntry.MAINTENANCE_KICK);
++                event.disallow(org.bukkit.event.player.PlayerLoginEvent.Result.KICK_OTHER, prefix.appendSpace().append(kickMessage));
++            }
++        }
++        // Deepslate end
+ 
+         Component finalResult;
+         if (event.getResult() == PlayerLoginEvent.Result.ALLOWED) {
