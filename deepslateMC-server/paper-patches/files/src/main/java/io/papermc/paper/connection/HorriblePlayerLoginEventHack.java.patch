@@ -19,7 +19,7 @@
              for (final RegisteredListener listener : PlayerLoginEvent.getHandlerList().getRegisteredListeners()) {
                  plugins.add(listener.getPlugin().getName());
              }
-@@ -81,6 +_,16 @@
+@@ -83,6 +_,16 @@
          PlayerLoginEvent event = new PlayerLoginEvent(horribleBukkitPlayer, connection.hostname, ((java.net.InetSocketAddress) connection.getRemoteAddress()).getAddress(), ((java.net.InetSocketAddress) connection.channel.remoteAddress()).getAddress());
          event.disallow(result.result(), PaperAdventure.asAdventure(result.message()));
          event.callEvent();
