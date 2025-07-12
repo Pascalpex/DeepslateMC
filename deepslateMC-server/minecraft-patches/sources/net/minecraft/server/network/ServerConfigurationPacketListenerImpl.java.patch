@@ -1,6 +1,6 @@
 --- a/net/minecraft/server/network/ServerConfigurationPacketListenerImpl.java
 +++ b/net/minecraft/server/network/ServerConfigurationPacketListenerImpl.java
-@@ -81,9 +_,13 @@
+@@ -93,9 +_,13 @@
          new io.papermc.paper.event.connection.configuration.PlayerConnectionInitialConfigureEvent(this.paperConnection).callEvent(); // Paper
          this.send(new ClientboundCustomPayloadPacket(new BrandPayload(this.server.getServerModName())));
          ServerLinks serverLinks = this.server.serverLinks();

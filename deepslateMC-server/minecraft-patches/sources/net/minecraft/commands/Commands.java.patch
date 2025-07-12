@@ -20,7 +20,7 @@
          ItemCommands.register(this.dispatcher, context);
          KickCommand.register(this.dispatcher);
          KillCommand.register(this.dispatcher);
-@@ -266,7 +_,9 @@
+@@ -272,7 +_,9 @@
              BanListCommands.register(this.dispatcher);
              BanPlayerCommands.register(this.dispatcher);
              DeOpCommands.register(this.dispatcher);
