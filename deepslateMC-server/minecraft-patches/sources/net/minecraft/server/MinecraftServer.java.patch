@@ -28,7 +28,7 @@
          if (this.hidesOnlinePlayers()) {
              return new ServerStatus.Players(maxPlayers, players.size(), List.of());
          } else {
-@@ -2080,7 +_,18 @@
+@@ -2086,7 +_,18 @@
  
      public void setMotd(String motd) {
          // Paper start - Adventure
