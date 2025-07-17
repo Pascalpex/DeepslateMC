@@ -24,4 +24,4 @@ jobs:
       uses: actions/upload-artifact@v4.6.2
       with:
         name: DeepslateMC
-        path: deepslateMC-server/build/libs/deepslateMC-paperclip-1.21.7-R0.1-SNAPSHOT-mojmap.jar
+        path: deepslateMC-server/build/libs/deepslateMC-paperclip-1.21.8-R0.1-SNAPSHOT-mojmap.jar

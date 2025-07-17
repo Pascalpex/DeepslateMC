@@ -57,19 +57,19 @@ subprojects {
         isPreserveFileTimestamps = false
         isReproducibleFileOrder = true
     }
-    tasks.withType<JavaCompile> {
+    tasks.withType<JavaCompile>().configureEach {
         options.encoding = Charsets.UTF_8.name()
         options.release = 21
         options.isFork = true
         options.forkOptions.memoryMaximumSize = "6g"
     }
-    tasks.withType<Javadoc> {
+    tasks.withType<Javadoc>().configureEach {
         options.encoding = Charsets.UTF_8.name()
     }
-    tasks.withType<ProcessResources> {
+    tasks.withType<ProcessResources>().configureEach {
         filteringCharset = Charsets.UTF_8.name()
     }
-    tasks.withType<Test> {
+    tasks.withType<Test>().configureEach {
         testLogging {
             showStackTraces = true
             exceptionFormat = TestExceptionFormat.FULL
