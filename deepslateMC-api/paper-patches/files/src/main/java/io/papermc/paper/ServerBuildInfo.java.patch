@@ -6,7 +6,7 @@
  
 +    // Deepslate start
 +    /**
-+     * The brand id for Gale.
++     * The brand id for DeepslateMC.
 +     */
 +    Key BRAND_DEEPSLATE_ID = Key.key("pascalpex", "deepslate");
 +    // Deepslate end

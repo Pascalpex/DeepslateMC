@@ -35,6 +35,7 @@ paperweight {
 }
 
 val paperMavenPublicUrl = "https://repo.papermc.io/repository/maven-public/"
+val leafMavenPublicUrl = "https://maven.leafmc.one/snapshots/"
 
 subprojects {
     apply(plugin = "java-library")
@@ -49,8 +50,7 @@ subprojects {
     repositories {
         mavenCentral()
         maven(paperMavenPublicUrl)
-        maven("https://repo.bsdevelopment.org/releases/") // Required by Leaf config
-        maven("https://maven.nostal.ink/repository/maven-snapshots/") // Required by Leaf Quantumleaper
+        maven(leafMavenPublicUrl)
     }
 
     tasks.withType<AbstractArchiveTask>().configureEach {
