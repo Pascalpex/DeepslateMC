@@ -19,7 +19,7 @@ enum ConfigEntry {
     KNOWLEDGE_BOOK_CLICK("preventKnowledgebookClick", false),
     MOVED_WRONGLY_MESSAGES("messages" + ".movedWrongly", true),
     MOVED_QUICKLY_MESSAGES("messages" + ".movedQuickly", true),
-    F3_NAME("f3name", "&eDeepslateMC"),
+    F3_NAME("f3name", "&b&lDeepslateMC"),
     TABLIST_ENABLED("tablist" + ".enabled", false),
     TABLIST_HEADER("tablist" + ".header", List.of("&4This is the", "&4default header")),
     TABLIST_FOOTER("tablist" + ".footer", List.of("&6This is the", "&6default footer")),
