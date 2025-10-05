@@ -7,7 +7,9 @@ import java.util.List;
 enum ConfigEntry {
     DISCORD_LINK("discordLink", "https://discord.gg/BGrhNnVczp"),
     BUILDWORLD("buildworld", null),
-    MAINTENANCE_MODE("maintenance", false),
+    MAINTENANCE_ENABLED("maintenance.enabled", false),
+    MOTD_MAINTENANCE("maintenance.motd", "&c&lServer ist in Wartung!\n&7Wir sind bald zurück."),
+    MOTD_NORMAL("motd.normal", "&a&lDeepSlateMC Netzwerk\n&bJoin the Adventure!"),
     OP_COMMAND_ACTIVE("opCommandActive", true),
     SPAWN_ON_JOIN("spawnOnJoin", false),
     SPAWN_WORLD("spawn" + ".world", null),

@@ -94,11 +94,17 @@ public class Config {
         save();
     }
     public static boolean getMaintenanceMode() {
-        return config.getBoolean(MAINTENANCE_MODE.key);
+        return config.getBoolean(MAINTENANCE_ENABLED.key);
     }
     public static void toggleMaintenanceMode() {
-        config.set(MAINTENANCE_MODE.key, !getMaintenanceMode());
+        config.set(MAINTENANCE_ENABLED.key, !getMaintenanceMode());
         save();
+    }
+    public static String getNormalMotd() {
+        return config.getString(MOTD_NORMAL.key);
+    }
+    public static String getMaintenanceMotd() {
+        return config.getString(MOTD_MAINTENANCE.key);
     }
     public static boolean getSpawnOnJoin() {
         return config.getBoolean(SPAWN_ON_JOIN.key);
