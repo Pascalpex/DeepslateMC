@@ -1,15 +1,14 @@
 package de.pascalpex.deepslatemc.files;
 
 import net.kyori.adventure.bossbar.BossBar;
-
 import java.util.List;
 
 enum ConfigEntry {
     DISCORD_LINK("discordLink", "https://discord.gg/BGrhNnVczp"),
     BUILDWORLD("buildworld", null),
     MAINTENANCE_ENABLED("maintenance.enabled", false),
-    MOTD_MAINTENANCE("maintenance.motd", "&c&lServer ist in Wartung!\n&7Wir sind bald zurück."),
-    MOTD_NORMAL("motd.normal", "&a&lDeepSlateMC Netzwerk\n&bJoin the Adventure!"),
+    MAINTENANCE_MOTD("maintenance.motd", List.of("&cThe server is currently under maintenance.", "&7We will be back soon!")),
+    MAINTENANCE_USE_CUSTOM_MOTD("maintenance.useCustomMotd", true),
     OP_COMMAND_ACTIVE("opCommandActive", true),
     SPAWN_ON_JOIN("spawnOnJoin", false),
     SPAWN_WORLD("spawn" + ".world", null),

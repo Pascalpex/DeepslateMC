@@ -100,11 +100,11 @@ public class Config {
         config.set(MAINTENANCE_ENABLED.key, !getMaintenanceMode());
         save();
     }
-    public static String getNormalMotd() {
-        return config.getString(MOTD_NORMAL.key);
+    public static List<String> getMaintenanceMotd() {
+        return config.getStringList(MAINTENANCE_MOTD.key);
     }
-    public static String getMaintenanceMotd() {
-        return config.getString(MOTD_MAINTENANCE.key);
+    public static boolean useCustomMaintenanceMotd() {
+        return config.getBoolean(MAINTENANCE_USE_CUSTOM_MOTD.key);
     }
     public static boolean getSpawnOnJoin() {
         return config.getBoolean(SPAWN_ON_JOIN.key);
@@ -189,5 +189,4 @@ public class Config {
         config.getConfigurationSection(SERVER_LINKS.key).getKeys(false).forEach(key -> serverLinks.put(key, config.getString(SERVER_LINKS.key + "." + key)));
         return serverLinks;
     }
-
 }
