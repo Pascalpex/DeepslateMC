@@ -3,7 +3,7 @@
 @@ -37,6 +_,7 @@
      private static final String BRAND_PURPUR_NAME = "Purpur";
      private static final String BRAND_LEAF_NAME = "Leaf";
-     // Leaf end - Rebrand & Fix Pufferfish and Purpur patches
+     // Leaf end - Rebrand
 +    private static final String BRAND_DEEPSLATE_NAME = "DeepslateMC"; // Deepslate
  
      private static final String BUILD_DEV = "DEV";
@@ -27,6 +27,6 @@
 -            || brandId.equals(BRAND_PURPUR_ID);
 +            || brandId.equals(BRAND_PURPUR_ID)
 +            || brandId.equals(BRAND_LEAF_ID); // Deepslate
-             // Leaf end - Rebrand & Fix Pufferfish and Purpur patches
+             // Leaf end - Rebrand
      }
  
