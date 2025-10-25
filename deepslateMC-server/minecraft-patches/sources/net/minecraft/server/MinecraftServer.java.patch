@@ -1,6 +1,6 @@
 --- a/net/minecraft/server/MinecraftServer.java
 +++ b/net/minecraft/server/MinecraftServer.java
-@@ -1207,6 +_,7 @@
+@@ -1206,6 +_,7 @@
              // Paper end
              org.spigotmc.WatchdogThread.hasStarted = true; // Paper
              org.dreeam.leaf.config.LeafConfig.regSparkExtraConfig(); // Leaf - Leaf config
@@ -8,7 +8,7 @@
              Arrays.fill(this.recentTps, 20);
              // Paper start - further improve server tick loop
              long tickSection = Util.getNanos();
-@@ -1665,6 +_,19 @@
+@@ -1664,6 +_,19 @@
      private ServerStatus.Players buildPlayerStatus() {
          List<ServerPlayer> players = this.playerList.realPlayers; // Leaves - only real player
          int maxPlayers = this.getMaxPlayers();
@@ -28,7 +28,7 @@
          if (this.hidesOnlinePlayers()) {
              return new ServerStatus.Players(maxPlayers, players.size(), List.of());
          } else {
-@@ -2099,7 +_,18 @@
+@@ -2096,7 +_,18 @@
  
      public void setMotd(String motd) {
          // Paper start - Adventure
