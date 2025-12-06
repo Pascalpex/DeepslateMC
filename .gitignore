@@ -48,8 +48,8 @@ run/
 deepslateMC-api/build.gradle.kts
 deepslateMC-server/build.gradle.kts
 deepslateMC-server/src/minecraft
-leaf-api
-leaf-server
+purpur-api
+purpur-server
 paper-api
 paper-server
 

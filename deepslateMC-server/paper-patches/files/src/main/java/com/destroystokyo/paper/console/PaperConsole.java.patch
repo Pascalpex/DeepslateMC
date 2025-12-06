@@ -4,8 +4,8 @@
      @Override
      protected LineReader buildReader(LineReaderBuilder builder) {
          builder
--                .appName("Leaf") // Gale - branding changes // Leaf - Rebrand
-+                .appName("DeepslateMC") // Gale - branding changes // Leaf - Rebrand // Deepslate
+-                .appName("Purpur") // Purpur - Rebrand
++                .appName("DeepslateMC") // Purpur - Rebrand // Deepslate
                  .variable(LineReader.HISTORY_FILE, java.nio.file.Paths.get(".console_history"))
                  .completer(new ConsoleCommandCompleter(this.server))
                  .option(LineReader.Option.COMPLETE_IN_WORD, true);

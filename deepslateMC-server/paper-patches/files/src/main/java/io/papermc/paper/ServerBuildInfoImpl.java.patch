@@ -1,32 +1,31 @@
 --- a/src/main/java/io/papermc/paper/ServerBuildInfoImpl.java
 +++ b/src/main/java/io/papermc/paper/ServerBuildInfoImpl.java
-@@ -37,6 +_,7 @@
-     private static final String BRAND_PURPUR_NAME = "Purpur";
-     private static final String BRAND_LEAF_NAME = "Leaf";
-     // Leaf end - Rebrand
+@@ -32,6 +_,7 @@
+ 
+     private static final String BRAND_PAPER_NAME = "Paper";
+     private static final String BRAND_PURPUR_NAME = "Purpur"; // Purpur - Rebrand
 +    private static final String BRAND_DEEPSLATE_NAME = "DeepslateMC"; // Deepslate
  
      private static final String BUILD_DEV = "DEV";
  
-@@ -48,9 +_,9 @@
+@@ -43,9 +_,9 @@
          this(
              getManifestAttribute(manifest, ATTRIBUTE_BRAND_ID)
                  .map(Key::key)
--                .orElse(BRAND_LEAF_ID), // Gale - branding changes // Leaf - Rebrand
-+                .orElse(BRAND_DEEPSLATE_ID), // Gale - branding changes // Leaf - Rebrand // Deepslate
+-                .orElse(BRAND_PURPUR_ID), // Purpur - Rebrand
++                .orElse(BRAND_DEEPSLATE_ID), // Purpur - Rebrand // Deepslate
              getManifestAttribute(manifest, ATTRIBUTE_BRAND_NAME)
--                .orElse(BRAND_LEAF_NAME), // Gale - branding changes // Leaf - Rebrand
-+                .orElse(BRAND_DEEPSLATE_NAME), // Gale - branding changes // Leaf - Rebrand // Deepslate
+-                .orElse(BRAND_PURPUR_NAME), // Purpur - Rebrand
++                .orElse(BRAND_DEEPSLATE_NAME), // Purpur - Rebrand // Deepslate
              SharedConstants.getCurrentVersion().id(),
              SharedConstants.getCurrentVersion().name(),
              getManifestAttribute(manifest, ATTRIBUTE_BUILD_NUMBER)
-@@ -72,7 +_,8 @@
-             || brandId.equals(BRAND_PAPER_ID)
-             || brandId.equals(BRAND_GALE_ID) // Gale - branding changes
-             || brandId.equals(BRAND_PUFFERFISH_ID)
--            || brandId.equals(BRAND_PURPUR_ID);
-+            || brandId.equals(BRAND_PURPUR_ID)
-+            || brandId.equals(BRAND_LEAF_ID); // Deepslate
-             // Leaf end - Rebrand
+@@ -62,7 +_,7 @@
+ 
+     @Override
+     public boolean isBrandCompatible(final @NotNull Key brandId) {
+-        return brandId.equals(this.brandId) || brandId.equals(BRAND_PAPER_ID); // Purpur - Fix pufferfish issues // Purpur - Rebrand
++        return brandId.equals(this.brandId) || brandId.equals(BRAND_PAPER_ID) || brandId.equals(BRAND_PURPUR_ID); // Purpur - Fix pufferfish issues // Purpur - Rebrand // Deepslate
      }
  
+     @Override

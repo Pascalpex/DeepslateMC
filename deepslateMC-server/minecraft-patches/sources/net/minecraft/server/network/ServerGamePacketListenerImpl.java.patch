@@ -1,20 +1,20 @@
 --- a/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-@@ -1562,7 +_,7 @@
+@@ -1565,7 +_,7 @@
                                              io.papermc.paper.event.player.PlayerFailMoveEvent event = fireFailMove(io.papermc.paper.event.player.PlayerFailMoveEvent.FailReason.MOVED_TOO_QUICKLY,
                                                      toX, toY, toZ, toYaw, toPitch, true);
                                              if (!event.isAllowed()) {
 -                                                if (event.getLogWarning()) {
 +                                                if (de.pascalpex.deepslatemc.files.Config.getMovedQuickly() && event.getLogWarning()) { // Deepslate
-                                                 LOGGER.warn("{} moved too quickly! {},{},{}", this.player.getName().getString(), d3, d4, d5);
+                                             LOGGER.warn("{} moved too quickly! {},{},{}", this.player.getPlainTextName(), d3, d4, d5);
                                                  }
                                                  this.teleport(
-@@ -1640,7 +_,7 @@
+@@ -1643,7 +_,7 @@
                                              toX, toY, toZ, toYaw, toPitch, true);
                                      if (!event.isAllowed()) {
                                          movedWrongly = true;
 -                                        if (event.getLogWarning())
 +                                        if (de.pascalpex.deepslatemc.files.Config.getMovedWrongly() && event.getLogWarning()) // Deepslate
                                       // Paper end
-                                     LOGGER.warn("{} moved wrongly!, ({})", this.player.getName().getString(), verticalDelta); // Purpur - AFK API
+                                     LOGGER.warn("{} moved wrongly!, ({})", this.player.getPlainTextName(), verticalDelta); // Purpur - AFK API
                                      } // Paper
