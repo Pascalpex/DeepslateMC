@@ -1,0 +1,4 @@
+name: DeepslateMC
+version: '1.21.8'
+main: de.pascalpex.deepslateMC.DeepslateMC
+api-version: '1.21'

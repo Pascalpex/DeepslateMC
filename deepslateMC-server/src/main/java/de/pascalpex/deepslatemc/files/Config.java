@@ -94,11 +94,17 @@ public class Config {
         save();
     }
     public static boolean getMaintenanceMode() {
-        return config.getBoolean(MAINTENANCE_MODE.key);
+        return config.getBoolean(MAINTENANCE_ENABLED.key);
     }
     public static void toggleMaintenanceMode() {
-        config.set(MAINTENANCE_MODE.key, !getMaintenanceMode());
+        config.set(MAINTENANCE_ENABLED.key, !getMaintenanceMode());
         save();
+    }
+    public static List<String> getMaintenanceMotd() {
+        return config.getStringList(MAINTENANCE_MOTD.key);
+    }
+    public static boolean useCustomMaintenanceMotd() {
+        return config.getBoolean(MAINTENANCE_USE_CUSTOM_MOTD.key);
     }
     public static boolean getSpawnOnJoin() {
         return config.getBoolean(SPAWN_ON_JOIN.key);
@@ -183,5 +189,4 @@ public class Config {
         config.getConfigurationSection(SERVER_LINKS.key).getKeys(false).forEach(key -> serverLinks.put(key, config.getString(SERVER_LINKS.key + "." + key)));
         return serverLinks;
     }
-
 }
