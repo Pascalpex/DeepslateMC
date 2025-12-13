@@ -28,7 +28,19 @@
          if (this.hidesOnlinePlayers()) {
              return new ServerStatus.Players(maxPlayers, players.size(), List.of());
          } else {
-@@ -2152,7 +_,18 @@
+@@ -2147,12 +_,29 @@
+ 
+     @Override
+     public String getMotd() {
+-        return net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer.legacySection().serialize(this.motd); // Paper - Adventure
++        // Deepslate start - MiniMessage MOTD
++        if(de.pascalpex.deepslatemc.files.Config.getMinimessageMotd()) {
++            return net.kyori.adventure.text.minimessage.MiniMessage.miniMessage().serialize(this.motd);
++        } else {
++            return net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer.legacySection().serialize(this.motd); // Paper - Adventure
++        }
++        // Deepslate end - MiniMessage MOTD
+     }
  
      public void setMotd(String motd) {
          // Paper start - Adventure
@@ -38,7 +50,7 @@
 +            try {
 +                this.motd = net.kyori.adventure.text.minimessage.MiniMessage.miniMessage().deserializeOr(motd, net.kyori.adventure.text.Component.empty());
 +            } catch (net.kyori.adventure.text.minimessage.internal.parser.ParsingExceptionImpl e) {
-+                org.bukkit.Bukkit.getLogger().warning("You have enabled DeepslateMC's miniMessageMotdSupport but your motd contains legacy color codes. Will fallback to legacy colors.");
++                LOGGER.error("You have enabled DeepslateMC's miniMessageMotdSupport but your motd contains legacy color codes. Will fallback to legacy colors.");
 +                this.motd = net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer.legacySection().deserializeOr(motd, net.kyori.adventure.text.Component.empty());
 +            }
 +        } else {
