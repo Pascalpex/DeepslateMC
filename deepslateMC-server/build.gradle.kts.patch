@@ -53,7 +53,7 @@
  dependencies {
 -    implementation(project(":purpur-api")) // Purpur
 +    implementation(project(":deepslateMC-api")) // Purpur // Deepslate - project setup
-     implementation("ca.spottedleaf:concurrentutil:0.0.7")
+     implementation("ca.spottedleaf:concurrentutil:0.0.8")
      implementation("org.jline:jline-terminal-ffm:3.27.1") // use ffm on java 22+
      implementation("org.jline:jline-terminal-jni:3.27.1") // fall back to jni on java 21
 @@ -229,14 +_,14 @@
