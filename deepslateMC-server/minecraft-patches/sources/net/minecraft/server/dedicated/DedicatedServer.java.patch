@@ -8,4 +8,4 @@
 +        de.pascalpex.deepslatemc.util.ActionbarUtil.reloadActionbar(); // Deepslate - load actionbar
          this.server.spark.registerCommandBeforePlugins(this.server); // Paper - spark
          com.destroystokyo.paper.Metrics.PaperMetrics.startMetrics(); // Paper - start metrics
-         // Purpur start - Purpur config files
+         /*// Purpur start - Purpur config files // Purpur start - Migrate Setting to reintroduce end void rings
