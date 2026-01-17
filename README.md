@@ -3,7 +3,6 @@
 
 # DeepslateMC
 ### A fork of [Leaf](https://github.com/Winds-Studio/Leaf) that adds neat functionalities
-### Well, actually it is temporarily a [Purpur](https://github.com/PurpurMC/Purpur) fork
 <br/>
 </div>
 

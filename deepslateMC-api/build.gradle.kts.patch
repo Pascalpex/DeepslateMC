@@ -1,24 +1,25 @@
---- a/purpur-api/build.gradle.kts
-+++ b/purpur-api/build.gradle.kts
-@@ -102,17 +_,21 @@
-         java {
+--- a/leaf-api/build.gradle.kts
++++ b/leaf-api/build.gradle.kts
+@@ -123,18 +_,22 @@
              srcDir(generatedDir)
+             // Leaf start - project setup
              srcDir(file("../paper-api/src/main/java"))
-+            srcDir(file("../purpur-api/src/main/java")) // Deepslate - project setup
++            srcDir(file("../leaf-api/src/main/java")) // Deepslate - project setup
          }
          resources {
              srcDir(file("../paper-api/src/main/resources"))
-+            srcDir(file("../purpur-api/src/main/resources")) // Deepslate - project setup
++            srcDir(file("../leaf-api/src/main/resources")) // Deepslate - project setup
          }
      }
      test {
          java {
              srcDir(file("../paper-api/src/test/java"))
-+            srcDir(file("../purpur-api/src/test/java")) // Deepslate - project setup
++            srcDir(file("../leaf-api/src/test/java")) // Deepslate - project setup
          }
          resources {
              srcDir(file("../paper-api/src/test/resources"))
-+            srcDir(file("../purpur-api/src/test/resources")) // Deepslate - project setup
+             // Leaf end - project setup
++            srcDir(file("../leaf-api/src/test/resources")) // Deepslate - project setup
          }
      }
  }

@@ -5,7 +5,7 @@ Subject: [PATCH] Dont show spectator players in tablist
 
 
 diff --git a/net/minecraft/server/level/ServerPlayerGameMode.java b/net/minecraft/server/level/ServerPlayerGameMode.java
-index 2e3b6da733387c95c0add1f7a42508023f0b74ff..f0abe276540d1ca7e6d43e9c365437a029a27870 100644
+index e9c58fc9bb16f8605410fe85971a7d4b1c3d3915..eb9294949ac9754e8512a06573b099dd41c8da5e 100644
 --- a/net/minecraft/server/level/ServerPlayerGameMode.java
 +++ b/net/minecraft/server/level/ServerPlayerGameMode.java
 @@ -84,10 +84,16 @@ public class ServerPlayerGameMode {
@@ -30,10 +30,10 @@ index 2e3b6da733387c95c0add1f7a42508023f0b74ff..f0abe276540d1ca7e6d43e9c365437a0
              if (gameModeForPlayer == GameType.CREATIVE) {
                  this.player.resetCurrentImpulseContext();
 diff --git a/net/minecraft/server/players/PlayerList.java b/net/minecraft/server/players/PlayerList.java
-index 34d8495507f1607af805ba17f7d17cb7a0e6dcc8..6767cdbda355bb861f2743fec34b2b833e638a35 100644
+index 932745d958cf24a65daf4cc1f6f794424ef80303..ff3544b2eacde973320fe5ae560a3e5da9c4df45 100644
 --- a/net/minecraft/server/players/PlayerList.java
 +++ b/net/minecraft/server/players/PlayerList.java
-@@ -268,6 +268,25 @@ public abstract class PlayerList {
+@@ -281,6 +281,25 @@ public abstract class PlayerList {
          // CraftBukkit start - sendAll above replaced with this loop
          ClientboundPlayerInfoUpdatePacket packet = ClientboundPlayerInfoUpdatePacket.createPlayerInitializing(List.of(player)); // Paper - Add Listing API for Player
  
@@ -59,7 +59,7 @@ index 34d8495507f1607af805ba17f7d17cb7a0e6dcc8..6767cdbda355bb861f2743fec34b2b83
          final List<ServerPlayer> onlinePlayers = Lists.newArrayListWithExpectedSize(this.players.size() - 1); // Paper - Use single player info update packet on join
          for (int i = 0; i < this.players.size(); ++i) {
              ServerPlayer entityplayer1 = (ServerPlayer) this.players.get(i);
-@@ -276,7 +295,13 @@ public abstract class PlayerList {
+@@ -289,7 +308,13 @@ public abstract class PlayerList {
                  // Paper start - Add Listing API for Player
                  if (entityplayer1.getBukkitEntity().isListed(bukkitPlayer)) {
                      // Paper end - Add Listing API for Player
@@ -74,7 +74,7 @@ index 34d8495507f1607af805ba17f7d17cb7a0e6dcc8..6767cdbda355bb861f2743fec34b2b83
                      // Paper start - Add Listing API for Player
                  } else {
                      entityplayer1.connection.send(ClientboundPlayerInfoUpdatePacket.createSinglePlayerInitializing(player, false));
-@@ -292,7 +317,27 @@ public abstract class PlayerList {
+@@ -305,7 +330,27 @@ public abstract class PlayerList {
          }
          // Paper start - Use single player info update packet on join
          if (!onlinePlayers.isEmpty()) {

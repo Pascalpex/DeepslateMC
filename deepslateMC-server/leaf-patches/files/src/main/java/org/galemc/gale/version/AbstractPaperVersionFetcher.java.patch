@@ -1,0 +1,11 @@
+--- a/src/main/java/org/galemc/gale/version/AbstractPaperVersionFetcher.java
++++ b/src/main/java/org/galemc/gale/version/AbstractPaperVersionFetcher.java
+@@ -93,7 +_,7 @@
+     @Override
+     public Component getVersionMessage() {
+         final Component updateMessage;
+-        if (BUILD_INFO.buildNumber().isEmpty() || BUILD_INFO.gitCommit().isEmpty()) { // Gale - branding changes - version fetcher
++        if (BUILD_INFO.buildNumber().isEmpty() && BUILD_INFO.gitCommit().isEmpty()) { // Gale - branding changes - version fetcher // Deepslate - do not require build number
+             updateMessage = text("You are running a development version without access to version information", color(0xFF5300));
+         } else {
+             updateMessage = getUpdateStatusMessage(this.gitHubOrganizationName + "/" + this.gitHubRepoName, this.downloadPage, this.apiUrl, this.userAgent, this.apiType); // Gale - branding changes - version fetcher

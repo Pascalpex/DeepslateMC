@@ -1,9 +1,9 @@
 --- a/src/main/java/io/papermc/paper/ServerBuildInfo.java
 +++ b/src/main/java/io/papermc/paper/ServerBuildInfo.java
-@@ -25,6 +_,14 @@
-      */
-     Key BRAND_PURPUR_ID = Key.key("purpurmc", "purpur");
-     // Purpur end
+@@ -41,6 +_,14 @@
+     Key BRAND_LEAF_ID = Key.key("winds-studio", "leaf");
+     // Leaf end - Rebrand
+ 
 +
 +    // Deepslate start
 +    /**

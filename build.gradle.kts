@@ -6,17 +6,17 @@ plugins {
 }
 
 paperweight {
-    upstreams.register("purpur") {
-        repo = github("PurpurMC", "Purpur")
-        ref = providers.gradleProperty("purpurRef")
+    upstreams.register("leaf") {
+        repo = github("Winds-Studio", "Leaf")
+        ref = providers.gradleProperty("leafRef")
 
         patchFile {
-            path = "purpur-server/build.gradle.kts"
+            path = "leaf-server/build.gradle.kts"
             outputFile = file("deepslateMC-server/build.gradle.kts")
             patchFile = file("deepslateMC-server/build.gradle.kts.patch")
         }
         patchFile {
-            path = "purpur-api/build.gradle.kts"
+            path = "leaf-api/build.gradle.kts"
             outputFile = file("deepslateMC-api/build.gradle.kts")
             patchFile = file("deepslateMC-api/build.gradle.kts.patch")
         }
@@ -25,16 +25,17 @@ paperweight {
             patchesDir = file("deepslateMC-api/paper-patches")
             outputDir = file("paper-api")
         }
-        patchDir("purpurApi") {
-            upstreamPath = "purpur-api"
+        patchDir("leafApi") {
+            upstreamPath = "leaf-api"
             excludes = listOf("build.gradle.kts", "build.gradle.kts.patch", "paper-patches")
-            patchesDir = file("deepslateMC-api/purpur-patches")
-            outputDir = file("purpur-api")
+            patchesDir = file("deepslateMC-api/leaf-patches")
+            outputDir = file("leaf-api")
         }
     }
 }
 
 val paperMavenPublicUrl = "https://repo.papermc.io/repository/maven-public/"
+val leafMavenPublicUrl = "https://maven.leafmc.one/snapshots/"
 
 subprojects {
     apply(plugin = "java-library")
@@ -49,6 +50,7 @@ subprojects {
     repositories {
         mavenCentral()
         maven(paperMavenPublicUrl)
+        maven(leafMavenPublicUrl)
     }
 
     tasks.withType<AbstractArchiveTask>().configureEach {

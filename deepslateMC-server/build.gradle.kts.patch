@@ -1,20 +1,20 @@
---- a/purpur-server/build.gradle.kts
-+++ b/purpur-server/build.gradle.kts
-@@ -32,7 +_,30 @@
-             outputDir = rootDirectory.dir("paper-server")
+--- a/leaf-server/build.gradle.kts
++++ b/leaf-server/build.gradle.kts
+@@ -33,7 +_,30 @@
          }
      }
--    activeFork = purpur
+ 
+-    activeFork = leaf
 +    // Deepslate start - project setup
 +    val deepslateMC = forks.register("deepslateMC") {
-+        forks = purpur
++        forks = leaf
 +        upstream.patchRepo("paperServer") {
-+            upstreamRepo = purpur.patchedRepo("paperServer")
++            upstreamRepo = leaf.patchedRepo("paperServer")
 +            patchesDir = rootDirectory.dir("deepslateMC-server/paper-patches")
 +            outputDir = rootDirectory.dir("paper-server")
 +        }
-+        upstream.patchDir("purpurServer") {
-+            upstreamPath = "purpur-server"
++        upstream.patchDir("leafServer") {
++            upstreamPath = "leaf-server"
 +            excludes = setOf(
 +                "src/minecraft",
 +                "paper-patches",
@@ -22,57 +22,57 @@
 +                "build.gradle.kts",
 +                "build.gradle.kts.patch"
 +            )
-+            patchesDir = rootDirectory.dir("deepslateMC-server/purpur-patches")
-+            outputDir = rootDirectory.dir("purpur-server")
++            patchesDir = rootDirectory.dir("deepslateMC-server/leaf-patches")
++            outputDir = rootDirectory.dir("leaf-server")
 +        }
 +    }
 +
 +    activeFork = deepslateMC
 +    // Deepslate end - project setup
-     // Purpur end - Rebrand
+     // Leaf end - project setup
  
      spigot {
-@@ -122,10 +_,14 @@
+@@ -124,10 +_,14 @@
      main {
          java { srcDir("../paper-server/src/main/java") }
          resources { srcDir("../paper-server/src/main/resources") }
-+        java { srcDir("../purpur-server/src/main/java") } // Deepslate - project setup
-+        resources { srcDir("../purpur-server/src/main/resources") } // Deepslate - project setup
++        java { srcDir("../leaf-server/src/main/java") } // Deepslate - project setup
++        resources { srcDir("../leaf-server/src/main/resources") } // Deepslate - project setup
      }
      test {
          java { srcDir("../paper-server/src/test/java") }
          resources { srcDir("../paper-server/src/test/resources") }
-+        java { srcDir("../purpur-server/src/test/java") } // Deepslate - project setup
-+        resources { srcDir("../purpur-server/src/test/resources") } // Deepslate - project setup
++        java { srcDir("../leaf-server/src/test/java") } // Deepslate - project setup
++        resources { srcDir("../leaf-server/src/test/resources") } // Deepslate - project setup
      }
  }
- val log4jPlugins = sourceSets.create("log4jPlugins") {
-@@ -154,7 +_,7 @@
+ 
+@@ -157,7 +_,7 @@
  }
  
  dependencies {
--    implementation(project(":purpur-api")) // Purpur
-+    implementation(project(":deepslateMC-api")) // Purpur // Deepslate - project setup
-     implementation("ca.spottedleaf:concurrentutil:0.0.8")
-     implementation("org.jline:jline-terminal-ffm:3.27.1") // use ffm on java 22+
-     implementation("org.jline:jline-terminal-jni:3.27.1") // fall back to jni on java 21
-@@ -229,14 +_,14 @@
+-    implementation(project(":leaf-api")) // Leaf - project setup
++    implementation(project(":deepslateMC-api")) // Leaf - project setup // Deepslate - project setup
+ 
+     // Leaf start - Libraries
+     implementation("com.github.thatsmusic99:ConfigurationMaster-API:v2.0.0-rc.3") { // Leaf config
+@@ -269,14 +_,14 @@
          val gitBranch = git.exec(providers, "rev-parse", "--abbrev-ref", "HEAD").get().trim()
          attributes(
              "Main-Class" to "org.bukkit.craftbukkit.Main",
--            "Implementation-Title" to "Purpur", // Purpur
-+            "Implementation-Title" to "DeepslateMC", // Purpur // Deepslate - Rebrand
+-            "Implementation-Title" to "Leaf", // Leaf - Rebrand
++            "Implementation-Title" to "DeepslateMC", // Leaf - Rebrand // Deepslate - Rebrand
              "Implementation-Version" to implementationVersion,
              "Implementation-Vendor" to date,
--            "Specification-Title" to "Purpur", // Purpur
-+            "Specification-Title" to "DeepslateMC", // Purpur // Deepslate - Rebrand
+-            "Specification-Title" to "Leaf", // Leaf - Rebrand
++            "Specification-Title" to "DeepslateMC", // Leaf - Rebrand // Deepslate - Rebrand
              "Specification-Version" to project.version,
--            "Specification-Vendor" to "Purpur Team", // Purpur
--            "Brand-Id" to "purpurmc:purpur", // Purpur
--            "Brand-Name" to "Purpur", // Purpur
-+            "Specification-Vendor" to "Pascalpex", // Purpur // Deepslate - Rebrand
-+            "Brand-Id" to "pascalpex:deepslate", // Purpur // Deepslate - Rebrand
-+            "Brand-Name" to "DeepslateMC", // Purpur // Deepslate - Rebrand
+-            "Specification-Vendor" to "Winds Studio", // Leaf - Rebrand
+-            "Brand-Id" to "winds-studio:leaf", // Leaf - Rebrand
+-            "Brand-Name" to "Leaf", // Leaf - Rebrand
++            "Specification-Vendor" to "Pascalpex", // Leaf - Rebrand // Deepslate - Rebrand
++            "Brand-Id" to "pascalpex:deepslate", // Leaf - Rebrand // Deepslate - Rebrand
++            "Brand-Name" to "DeepslateMC", // Leaf - Rebrand // Deepslate - Rebrand
              "Build-Number" to (build ?: ""),
              "Build-Time" to buildTime.toString(),
              "Git-Branch" to gitBranch,
