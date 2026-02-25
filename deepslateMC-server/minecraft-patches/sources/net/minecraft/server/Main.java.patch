@@ -15,6 +15,6 @@
 +                "                     | |                                             \n" +
 +                "                     |_|                                             \u001B[0m\u001B[1;31m\u001B[0m\u001B[1;31m\u001B[0m\u001B[0m\n");
 +        // Deepslate end - Startup branding
-         io.papermc.paper.util.LogManagerShutdownThread.hook(); // Paper - Improved watchdog support
+         io.papermc.paper.log.LogManagerShutdownThread.hook(); // Paper - Improved watchdog support
          SharedConstants.tryDetectVersion();
          /* CraftBukkit start - Replace everything

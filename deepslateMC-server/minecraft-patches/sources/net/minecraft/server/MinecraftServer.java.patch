@@ -1,6 +1,6 @@
 --- a/net/minecraft/server/MinecraftServer.java
 +++ b/net/minecraft/server/MinecraftServer.java
-@@ -1357,6 +_,7 @@
+@@ -1352,6 +_,7 @@
              // Paper end
              org.spigotmc.WatchdogThread.hasStarted = true; // Paper
              org.dreeam.leaf.config.LeafConfig.regSparkExtraConfig(); // Leaf - Leaf config
@@ -8,7 +8,7 @@
              // Paper start - Add onboarding message for initial server start
              if (io.papermc.paper.configuration.GlobalConfiguration.isFirstStart) {
                  LOGGER.info("*************************************************************************************");
-@@ -1840,6 +_,19 @@
+@@ -1835,6 +_,19 @@
      private ServerStatus.Players buildPlayerStatus() {
          List<ServerPlayer> players = this.playerList.getPlayers();
          int maxPlayers = this.getMaxPlayers();
@@ -28,7 +28,7 @@
          if (this.hidesOnlinePlayers()) {
              return new ServerStatus.Players(maxPlayers, players.size(), List.of());
          } else {
-@@ -2268,12 +_,29 @@
+@@ -2263,12 +_,29 @@
  
      @Override
      public String getMotd() {

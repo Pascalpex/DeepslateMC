@@ -8,4 +8,4 @@
 +    private List<String> extraInfo = List.of("", "DO NOT REPORT THIS TO PAPER! REPORT TO DEEPSLATEMC INSTEAD!", ""); // Leaf - Rebrand // Deepslate
  
      public CrashReport(String title, Throwable exception) {
-         io.papermc.paper.util.StacktraceDeobfuscator.INSTANCE.deobfuscateThrowable(exception); // Paper
+         this.title = title;
