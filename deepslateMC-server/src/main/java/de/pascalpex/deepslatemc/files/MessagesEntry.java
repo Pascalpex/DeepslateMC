@@ -19,7 +19,9 @@ public enum MessagesEntry {
     HELP_MESSAGE("helpMessage", List.of("&6This is a custom help message.", "&6Configure it in the &bmessages.yml &6file inside the deepslate folder.")),
     SPAWN_SET("spawnSet", "&aThe spawn got set successfully"),
     SPAWN_NOT_SET("spawnNotSet", "&cThe spawn is not set"),
-    SPAWN_TELEPORTED("spawnTeleport", "&aYou got teleported to the spawn");
+    SPAWN_TELEPORTED("spawnTeleport", "&aYou got teleported to the spawn"),
+    NO_ITEM("noItem", "&cNo valid item was found"),
+    ITEM_UNBREAKABLE("itemUnbreakable", "&aThe item is now unbreakable"),;
 
     final String key;
     final Object defaultValue;

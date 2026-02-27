@@ -1,7 +1,12 @@
 package de.pascalpex.deepslatemc.commands;
 
+import com.mojang.brigadier.tree.LiteralCommandNode;
+import io.papermc.paper.command.brigadier.CommandSourceStack;
 import net.minecraft.server.MinecraftServer;
 import org.bukkit.command.SimpleCommandMap;
+
+import java.util.List;
+import java.util.Set;
 
 public class DeepslateCmdRegisterer {
 
@@ -20,6 +25,22 @@ public class DeepslateCmdRegisterer {
         commandMap.register("setspawn", "Deepslate", new SpawnCommand("setspawn"));
         commandMap.register("spawn", "Deepslate", new SpawnCommand("spawn"));
         commandMap.register("lobby", "Deepslate", new SpawnCommand("lobby"));
+    }
+
+    public static void registerBrigadierCommands() {
+        registerInternalCommand(UnbreakableCommand.create(), "Makes an item unbreakable", List.of("unbreakable"));
+    }
+
+    private static void registerInternalCommand(final LiteralCommandNode<CommandSourceStack> node, final String description, final List<String> aliases) {
+        io.papermc.paper.command.brigadier.PaperCommands.INSTANCE.registerWithFlagsInternal(
+            null,
+            "deepslate",
+            "Paper",
+            node,
+            description,
+            aliases,
+            Set.of()
+        );
     }
 
 }

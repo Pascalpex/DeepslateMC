@@ -1,0 +1,10 @@
+--- a/net/minecraft/server/ReloadableServerResources.java
++++ b/net/minecraft/server/ReloadableServerResources.java
+@@ -42,6 +_,7 @@
+         this.commands = new Commands(commandSelection, CommandBuildContext.simple(registries, enabledFeatures), true); // Paper - Brigadier Command API - use modern alias registration
+         io.papermc.paper.command.brigadier.PaperCommands.INSTANCE.setDispatcher(this.commands, CommandBuildContext.simple(registries, enabledFeatures)); // Paper - Brigadier Command API
+         io.papermc.paper.command.PaperCommands.registerCommands(); // Paper
++        de.pascalpex.deepslatemc.commands.DeepslateCmdRegisterer.registerBrigadierCommands(); // Deepslate
+         this.advancements = new ServerAdvancementManager(registries);
+         this.functionLibrary = new ServerFunctionLibrary(permissions, this.commands.getDispatcher());
+     }
