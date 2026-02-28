@@ -10,16 +10,16 @@ import de.pascalpex.deepslatemc.files.MessagesFile;
 import io.papermc.paper.command.brigadier.CommandSourceStack;
 import io.papermc.paper.command.brigadier.Commands;
 import net.kyori.adventure.text.Component;
-import org.bukkit.Bukkit;
+import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class BuildworldCommand implements Command<CommandSourceStack> {
+public class SetbuildworldCommand implements Command<CommandSourceStack> {
 
     public static LiteralCommandNode<CommandSourceStack> create() {
-        return Commands.literal("buildworld")
-            .executes(new BuildworldCommand())
-            .requires(commandSourceStack -> commandSourceStack.getSender().hasPermission("deepslate.buildworld"))
+        return Commands.literal("setbuildworld")
+            .executes(new SetbuildworldCommand())
+            .requires(commandSourceStack -> commandSourceStack.getSender().hasPermission("deepslate.setbuildworld"))
             .build();
     }
 
@@ -28,12 +28,9 @@ public class BuildworldCommand implements Command<CommandSourceStack> {
         Component prefix = MessagesFile.getMessage(MessagesEntry.PREFIX).appendSpace();
         CommandSender sender = commandContext.getSource().getSender();
         if (sender instanceof Player player) {
-            try {
-                player.teleport(Bukkit.getWorld(Config.getBuildworld()).getSpawnLocation());
-                player.sendMessage(prefix.append(MessagesFile.getMessage(MessagesEntry.BUILDWORLD_WELCOME)));
-            } catch (IllegalArgumentException e) {
-                player.sendMessage(prefix.append(MessagesFile.getMessage(MessagesEntry.BUILDWORLD_NOT_SET)));
-            }
+            World world = player.getLocation().getWorld();
+            Config.setBuildworld(world.getName());
+            player.sendMessage(prefix.append(MessagesFile.getMessage(MessagesEntry.BUILDWORLD_SET)));
         } else {
             sender.sendMessage(prefix.append(MessagesFile.getMessage(MessagesEntry.ONLY_FOR_PLAYERS)));
         }

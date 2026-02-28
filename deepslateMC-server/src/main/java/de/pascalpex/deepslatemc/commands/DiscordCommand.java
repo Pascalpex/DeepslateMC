@@ -1,26 +1,27 @@
 package de.pascalpex.deepslatemc.commands;
     
+import com.mojang.brigadier.Command;
+import com.mojang.brigadier.context.CommandContext;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import com.mojang.brigadier.tree.LiteralCommandNode;
 import de.pascalpex.deepslatemc.files.MessagesEntry;
 import de.pascalpex.deepslatemc.files.MessagesFile;
+import io.papermc.paper.command.brigadier.CommandSourceStack;
+import io.papermc.paper.command.brigadier.Commands;
 import net.kyori.adventure.text.Component;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
-import org.jetbrains.annotations.NotNull;
 
-public class DiscordCommand extends Command {
+public class DiscordCommand implements Command<CommandSourceStack> {
 
-    public DiscordCommand(String name) {
-        super(name);
-        this.description = "Discord link command";
-        this.usageMessage = "/discord";
+    public static LiteralCommandNode<CommandSourceStack> create() {
+        return Commands.literal("discord")
+            .executes(new DiscordCommand())
+            .build();
     }
 
     @Override
-    public boolean execute(@NotNull CommandSender sender, String commandLabel, String @NotNull [] args) {
+    public int run(CommandContext<CommandSourceStack> commandContext) throws CommandSyntaxException {
         Component prefix = MessagesFile.getMessage(MessagesEntry.PREFIX).appendSpace();
-        if (commandLabel.equalsIgnoreCase("dc") || commandLabel.equalsIgnoreCase("discord")) {
-            sender.sendMessage(prefix.append(MessagesFile.getMessage(MessagesEntry.DISCORD_MESSAGE)));
-        }
-        return true;
+        commandContext.getSource().getSender().sendMessage(prefix.append(MessagesFile.getMessage(MessagesEntry.DISCORD_MESSAGE)));
+        return SINGLE_SUCCESS;
     }
 }

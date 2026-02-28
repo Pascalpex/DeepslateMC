@@ -1,34 +1,37 @@
 package de.pascalpex.deepslatemc.commands;
 
+import com.mojang.brigadier.Command;
+import com.mojang.brigadier.context.CommandContext;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import com.mojang.brigadier.tree.LiteralCommandNode;
 import de.pascalpex.deepslatemc.files.Config;
 import de.pascalpex.deepslatemc.files.MessagesEntry;
 import de.pascalpex.deepslatemc.files.MessagesFile;
+import io.papermc.paper.command.brigadier.CommandSourceStack;
+import io.papermc.paper.command.brigadier.Commands;
 import net.kyori.adventure.text.Component;
-import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.jetbrains.annotations.NotNull;
 
-public class MaintenanceMode extends Command {
-    public MaintenanceMode(String name) {
-        super(name);
-        this.description = "Toggles the maintenance mode";
-        this.usageMessage = "/maintenance";
-        setPermission("deepslate.maintenance");
+public class MaintenanceMode implements Command<CommandSourceStack> {
+
+    public static LiteralCommandNode<CommandSourceStack> create() {
+        return Commands.literal("maintenance")
+            .requires(commandSourceStack -> commandSourceStack.getSender().hasPermission("deepslate.maintenance"))
+            .executes(new MaintenanceMode())
+            .build();
     }
 
-    public boolean execute(@NotNull CommandSender sender, @NotNull String label, String @NotNull [] args) {
+    @Override
+    public int run(CommandContext<CommandSourceStack> commandContext) throws CommandSyntaxException {
         Component prefix = MessagesFile.getMessage(MessagesEntry.PREFIX).appendSpace();
-            if (label.equalsIgnoreCase("maintenance") && sender.hasPermission("deepslate.maintenance")) {
-                if (Config.getMaintenanceMode()) {
-                    sender.sendMessage(prefix.append(MessagesFile.getMessage(MessagesEntry.MAINTENANCE_OFF)));
-                } else {
-                    sender.sendMessage(prefix.append(MessagesFile.getMessage(MessagesEntry.MAINTENANCE_ON)));
-                }
-                Config.toggleMaintenanceMode();
-            } else {
-                sender.sendMessage(prefix.append(MessagesFile.getMessage(MessagesEntry.NO_PERMISSIONS)));
-            }
+        CommandSender sender = commandContext.getSource().getSender();
 
-        return true;
+        Config.toggleMaintenanceMode();
+        if (Config.getMaintenanceMode()) {
+            sender.sendMessage(prefix.append(MessagesFile.getMessage(MessagesEntry.MAINTENANCE_ON)));
+        } else {
+            sender.sendMessage(prefix.append(MessagesFile.getMessage(MessagesEntry.MAINTENANCE_OFF)));
+        }
+        return SINGLE_SUCCESS;
     }
 }

@@ -1,0 +1,17 @@
+--- a/src/main/java/org/bukkit/command/defaults/HelpCommand.java
++++ b/src/main/java/org/bukkit/command/defaults/HelpCommand.java
+@@ -27,10 +_,11 @@
+ 
+ public class HelpCommand extends BukkitCommand {
+     public HelpCommand() {
+-        super("help");
++        // Deepslate start - Custom help command
++        super("?");
+         this.description = "Shows the help menu";
+-        this.usageMessage = "/help <pageNumber>\n/help <topic>\n/help <topic> <pageNumber>";
+-        this.setAliases(Arrays.asList(new String[]{"?"}));
++        this.usageMessage = "/? <pageNumber>\n/? <topic>\n/? <topic> <pageNumber>";
++        // Deepslate end - Custom help command
+         this.setPermission("bukkit.command.help");
+     }
+ 

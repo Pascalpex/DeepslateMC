@@ -1,34 +1,37 @@
 package de.pascalpex.deepslatemc.commands;
-    
+
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.tree.LiteralCommandNode;
+import de.pascalpex.deepslatemc.files.Config;
 import de.pascalpex.deepslatemc.files.MessagesEntry;
 import de.pascalpex.deepslatemc.files.MessagesFile;
 import io.papermc.paper.command.brigadier.CommandSourceStack;
 import io.papermc.paper.command.brigadier.Commands;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.TextReplacementConfig;
-import org.bukkit.Bukkit;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
-public class ClearchatCommand implements Command<CommandSourceStack> {
+public class SetspawnCommand implements Command<CommandSourceStack> {
 
     public static LiteralCommandNode<CommandSourceStack> create() {
-        return Commands.literal("clearchat")
-            .executes(new ClearchatCommand())
-            .requires(commandSourceStack -> commandSourceStack.getSender().hasPermission("deepslate.clearchat"))
+        return Commands.literal("setspawn")
+            .executes(new SetspawnCommand())
+            .requires(commandSourceStack -> commandSourceStack.getSender().hasPermission("deepslate.setspawn"))
             .build();
     }
 
     @Override
     public int run(CommandContext<CommandSourceStack> commandContext) throws CommandSyntaxException {
         Component prefix = MessagesFile.getMessage(MessagesEntry.PREFIX).appendSpace();
-        for (int x = 0; x < 150; x++){
-            Bukkit.broadcast(Component.empty());
+        CommandSender sender = commandContext.getSource().getSender();
+        if (sender instanceof Player player) {
+            Config.setSpawn(player.getLocation());
+            player.sendMessage(prefix.append(MessagesFile.getMessage(MessagesEntry.SPAWN_SET)));
+        } else {
+            sender.sendMessage(prefix.append(MessagesFile.getMessage(MessagesEntry.ONLY_FOR_PLAYERS)));
         }
-        Component clearMessage = MessagesFile.getMessage(MessagesEntry.CLEARED_CHAT).replaceText(TextReplacementConfig.builder().match("%clearer%").replacement(commandContext.getSource().getSender().getName()).build());
-        Bukkit.broadcast(prefix.append(clearMessage));
         return SINGLE_SUCCESS;
     }
 }
