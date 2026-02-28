@@ -1,0 +1,11 @@
+--- a/net/minecraft/network/protocol/game/ClientboundPlayerInfoUpdatePacket.java
++++ b/net/minecraft/network/protocol/game/ClientboundPlayerInfoUpdatePacket.java
+@@ -228,7 +_,7 @@
+         // Paper end - Add Listing API for Player
+                 player.getUUID(),
+                 player.getGameProfile(),
+-                listed, // Paper - Add Listing API for Player
++                de.pascalpex.deepslatemc.files.Config.getEnableTablist() && listed, // Paper - Add Listing API for Player // Deepslate - Option to disable tablist
+                 player.connection.latency(),
+                 player.gameMode(),
+                 player.getTabListDisplayName(),

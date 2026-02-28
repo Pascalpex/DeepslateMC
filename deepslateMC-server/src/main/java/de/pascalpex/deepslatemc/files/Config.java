@@ -183,5 +183,8 @@ public class Config {
         config.getConfigurationSection(SERVER_LINKS.key).getKeys(false).forEach(key -> serverLinks.put(key, config.getString(SERVER_LINKS.key + "." + key)));
         return serverLinks;
     }
+    public static boolean getEnableTablist() {
+        return config.getBoolean(ENABLE_TABLIST.key);
+    }
 
 }
