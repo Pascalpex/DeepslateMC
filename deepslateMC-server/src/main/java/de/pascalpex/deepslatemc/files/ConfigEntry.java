@@ -33,7 +33,7 @@ enum ConfigEntry {
     ACTIONBAR_ENABLED("actionbar" + ".enabled", false),
     MINIMESSAGE_MOTD("miniMessageMotdSupport", false),
     ACTIONBAR_TEXT("actionbar" + ".text", "&6Custom Actionbar"),
-    MINIMESSAGE_MESSAGES("miniMessageMessages", false),
+    MINIMESSAGE_MESSAGES("miniMessageMessages", true),
     SPECTATOR_MODE_PACKETS("sendSpectatorModePackets", true),
     SERVER_LINKS("serverLinks", ""),
     ENABLE_TABLIST("enableTablist", true);
