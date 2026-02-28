@@ -27,13 +27,8 @@ public class SetbuildworldCommand implements Command<CommandSourceStack> {
     public int run(CommandContext<CommandSourceStack> commandContext) throws CommandSyntaxException {
         Component prefix = MessagesFile.getMessage(MessagesEntry.PREFIX).appendSpace();
         CommandSender sender = commandContext.getSource().getSender();
-        if (sender instanceof Player player) {
-            World world = player.getLocation().getWorld();
-            Config.setBuildworld(world.getName());
-            player.sendMessage(prefix.append(MessagesFile.getMessage(MessagesEntry.BUILDWORLD_SET)));
-        } else {
-            sender.sendMessage(prefix.append(MessagesFile.getMessage(MessagesEntry.ONLY_FOR_PLAYERS)));
-        }
+        Config.setBuildworld(commandContext.getSource().getLocation().getWorld().getName());
+        sender.sendMessage(prefix.append(MessagesFile.getMessage(MessagesEntry.BUILDWORLD_SET)));
         return SINGLE_SUCCESS;
     }
 }

@@ -8,7 +8,6 @@ public enum MessagesEntry {
     CONFIG_RELOADED("configReloaded", "<green>Config got reloaded successfully"),
     ONLY_FOR_PLAYERS("onlyForPlayers", "<red>This command can only be used by players"),
     DISCORD_MESSAGE("discordMessage", "<gold>The link to our Discord server: <aqua>%link%"),
-    NO_PERMISSIONS("noPermissions", "<red>You have no permission to do this"),
     CLEARED_CHAT("clearedChat", "<gold>The chat got cleared by <aqua>%clearer%"),
     BUILDWORLD_SET("buildworldSet", "<green>The buildworld got set successfully"),
     BUILDWORLD_WELCOME("buildworldWelcome", "<green>Welcome to the buildworld"),

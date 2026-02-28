@@ -27,15 +27,11 @@ public class BuildworldCommand implements Command<CommandSourceStack> {
     public int run(CommandContext<CommandSourceStack> commandContext) throws CommandSyntaxException {
         Component prefix = MessagesFile.getMessage(MessagesEntry.PREFIX).appendSpace();
         CommandSender sender = commandContext.getSource().getSender();
-        if (sender instanceof Player player) {
-            try {
-                player.teleport(Bukkit.getWorld(Config.getBuildworld()).getSpawnLocation());
-                player.sendMessage(prefix.append(MessagesFile.getMessage(MessagesEntry.BUILDWORLD_WELCOME)));
-            } catch (IllegalArgumentException e) {
-                player.sendMessage(prefix.append(MessagesFile.getMessage(MessagesEntry.BUILDWORLD_NOT_SET)));
-            }
-        } else {
-            sender.sendMessage(prefix.append(MessagesFile.getMessage(MessagesEntry.ONLY_FOR_PLAYERS)));
+        try {
+            commandContext.getSource().getExecutor().teleport(Bukkit.getWorld(Config.getBuildworld()).getSpawnLocation());
+            sender.sendMessage(prefix.append(MessagesFile.getMessage(MessagesEntry.BUILDWORLD_WELCOME)));
+        } catch (IllegalArgumentException e) {
+            sender.sendMessage(prefix.append(MessagesFile.getMessage(MessagesEntry.BUILDWORLD_NOT_SET)));
         }
         return SINGLE_SUCCESS;
     }

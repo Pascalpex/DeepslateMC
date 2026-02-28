@@ -26,12 +26,8 @@ public class SetspawnCommand implements Command<CommandSourceStack> {
     public int run(CommandContext<CommandSourceStack> commandContext) throws CommandSyntaxException {
         Component prefix = MessagesFile.getMessage(MessagesEntry.PREFIX).appendSpace();
         CommandSender sender = commandContext.getSource().getSender();
-        if (sender instanceof Player player) {
-            Config.setSpawn(player.getLocation());
-            player.sendMessage(prefix.append(MessagesFile.getMessage(MessagesEntry.SPAWN_SET)));
-        } else {
-            sender.sendMessage(prefix.append(MessagesFile.getMessage(MessagesEntry.ONLY_FOR_PLAYERS)));
-        }
+        Config.setSpawn(commandContext.getSource().getLocation());
+        sender.sendMessage(prefix.append(MessagesFile.getMessage(MessagesEntry.SPAWN_SET)));
         return SINGLE_SUCCESS;
     }
 }

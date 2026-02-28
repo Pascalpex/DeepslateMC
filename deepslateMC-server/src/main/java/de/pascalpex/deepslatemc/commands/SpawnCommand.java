@@ -37,15 +37,11 @@ public class SpawnCommand implements Command<CommandSourceStack> {
     public int run(CommandContext<CommandSourceStack> commandContext) throws CommandSyntaxException {
         Component prefix = MessagesFile.getMessage(MessagesEntry.PREFIX).appendSpace();
         CommandSender sender = commandContext.getSource().getSender();
-        if (sender instanceof Player player) {
-            try {
-                player.teleport(Config.getSpawn());
-                player.sendMessage(prefix.append(MessagesFile.getMessage(MessagesEntry.SPAWN_TELEPORTED)));
-            } catch (IllegalArgumentException e) {
-                player.sendMessage(prefix.append(MessagesFile.getMessage(MessagesEntry.SPAWN_NOT_SET)));
-            }
-        } else {
-            sender.sendMessage(prefix.append(MessagesFile.getMessage(MessagesEntry.ONLY_FOR_PLAYERS)));
+        try {
+            commandContext.getSource().getExecutor().teleport(Config.getSpawn());
+            sender.sendMessage(prefix.append(MessagesFile.getMessage(MessagesEntry.SPAWN_TELEPORTED)));
+        } catch (IllegalArgumentException e) {
+            sender.sendMessage(prefix.append(MessagesFile.getMessage(MessagesEntry.SPAWN_NOT_SET)));
         }
         return SINGLE_SUCCESS;
     }
