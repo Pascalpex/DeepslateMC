@@ -1,6 +1,6 @@
 --- a/leaf-api/build.gradle.kts
 +++ b/leaf-api/build.gradle.kts
-@@ -123,17 +_,21 @@
+@@ -122,17 +_,21 @@
              srcDir(generatedDir)
              // Leaf start - project setup
              srcDir(file("../paper-api/src/main/java"))
