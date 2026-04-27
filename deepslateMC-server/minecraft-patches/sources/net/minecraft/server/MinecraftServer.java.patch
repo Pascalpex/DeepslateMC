@@ -10,7 +10,7 @@
                  LOGGER.info("*************************************************************************************");
 @@ -1835,6 +_,19 @@
      private ServerStatus.Players buildPlayerStatus() {
-         List<ServerPlayer> players = this.playerList.getPlayers();
+         List<ServerPlayer> players = this.playerList.realPlayers; // Leaves - only real player
          int maxPlayers = this.getMaxPlayers();
 +
 +        // Deepslate start - Custom playerlist hover text
@@ -28,7 +28,7 @@
          if (this.hidesOnlinePlayers()) {
              return new ServerStatus.Players(maxPlayers, players.size(), List.of());
          } else {
-@@ -2263,12 +_,29 @@
+@@ -2264,12 +_,29 @@
  
      @Override
      public String getMotd() {
