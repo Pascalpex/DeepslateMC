@@ -5,6 +5,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v6.0.2
+      with:
+        fetch-depth: 0
     - name: Set up JDK 21
       uses: actions/setup-java@v5.2.0
       with:
@@ -17,10 +19,16 @@ jobs:
           git config --global user.name "Github Actions"
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
+    - name: Disable Git Auto GC
+      run: |
+          git config --global gc.auto 0
+          git config --global maintenance.auto false
+    - name: Clean Paperweight Caches
+      run: rm -rf ~/.gradle/caches/paperweight .gradle/caches/paperweight || true
     - name: Apply patches
-      run: ./gradlew applyAllPatches --no-daemon
+      run: ./gradlew applyAllPatches --no-daemon --no-parallel
     - name: Generate Paperclip Jar
-      run: ./gradlew createMojmapPaperclipJar --no-daemon
+      run: ./gradlew createMojmapPaperclipJar --no-daemon --no-parallel
     - name: Upload Paperclip
       uses: actions/upload-artifact@v7.0.1
       with:
