@@ -17,6 +17,8 @@ jobs:
       run: |
           git config --global user.email "actions@github.com"
           git config --global user.name "Github Actions"
+          git config --global gc.auto 0
+          git config --global maintenance.auto false
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
     - name: Apply patches
