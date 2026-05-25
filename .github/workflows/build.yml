@@ -10,6 +10,7 @@ jobs:
       with:
         java-version: 21.0.11
         distribution: 'temurin'
+        cache: gradle
     - name: Configure Git
       run: |
           git config --global user.email "actions@github.com"
@@ -17,9 +18,9 @@ jobs:
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
     - name: Apply patches
-      run: ./gradlew applyAllPatches
+      run: ./gradlew applyAllPatches --no-daemon
     - name: Generate Paperclip Jar
-      run: ./gradlew createMojmapPaperclipJar
+      run: ./gradlew createMojmapPaperclipJar --no-daemon
     - name: Upload Paperclip
       uses: actions/upload-artifact@v7.0.1
       with:
