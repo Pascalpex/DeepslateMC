@@ -53,15 +53,10 @@ subprojects {
         maven(leafMavenPublicUrl)
     }
 
-    tasks.withType<AbstractArchiveTask>().configureEach {
-        isPreserveFileTimestamps = false
-        isReproducibleFileOrder = true
-    }
     tasks.withType<JavaCompile>().configureEach {
         options.encoding = Charsets.UTF_8.name()
         options.release = 21
         options.isFork = true
-        options.forkOptions.memoryMaximumSize = "6g"
     }
     tasks.withType<Javadoc>().configureEach {
         options.encoding = Charsets.UTF_8.name()

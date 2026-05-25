@@ -5,21 +5,26 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v6.0.2
+      with:
+        fetch-depth: 0
     - name: Set up JDK 21
       uses: actions/setup-java@v5.2.0
       with:
         java-version: 21.0.11
         distribution: 'temurin'
+        cache: gradle
     - name: Configure Git
       run: |
           git config --global user.email "actions@github.com"
           git config --global user.name "Github Actions"
+          git config --global gc.auto 0
+          git config --global maintenance.auto false
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
     - name: Apply patches
-      run: ./gradlew applyAllPatches
+      run: ./gradlew applyAllPatches --no-daemon
     - name: Generate Paperclip Jar
-      run: ./gradlew createMojmapPaperclipJar
+      run: ./gradlew createMojmapPaperclipJar --no-daemon
     - name: Upload Paperclip
       uses: actions/upload-artifact@v7.0.1
       with:
