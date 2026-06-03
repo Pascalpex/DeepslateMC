@@ -5,7 +5,7 @@ import net.kyori.adventure.bossbar.BossBar;
 import java.util.List;
 
 enum ConfigEntry {
-    DISCORD_LINK("discordLink", "https://discord.gg/BGrhNnVczp"),
+    DISCORD_LINK("discordLink", "https://deepslatemc.de/dc/"),
     BUILDWORLD("buildworld", null),
     MAINTENANCE_MODE("maintenance", false),
     OP_COMMAND_ACTIVE("opCommandActive", true),

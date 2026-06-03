@@ -37,7 +37,7 @@ public class MessagesFile {
                 configFile.createNewFile();
                 List<String> header = new ArrayList<>();
                 header.add("This is the messages file of DeepslateMC");
-                header.add("You can find some pre-translated files here: https://pascalpex.de/files/deepslate/translations/");
+                header.add("You can find some pre-translated files here: https://deepslatemc.de/translations/");
                 config.options().setHeader(header);
                 save();
             }

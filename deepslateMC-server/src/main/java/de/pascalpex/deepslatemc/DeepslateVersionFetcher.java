@@ -5,7 +5,7 @@ import org.galemc.gale.version.AbstractPaperVersionFetcher;
 public class DeepslateVersionFetcher extends AbstractPaperVersionFetcher {
     public DeepslateVersionFetcher() {
         super(
-            "https://pascalpex.de/deepslate/",
+            "https://deepslatemc.de/download/",
             "Pascalpex",
             "DeepslateMC",
             "Pascalpex",
