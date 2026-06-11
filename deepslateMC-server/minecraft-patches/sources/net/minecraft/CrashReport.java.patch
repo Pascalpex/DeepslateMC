@@ -1,11 +1,11 @@
 --- a/net/minecraft/CrashReport.java
 +++ b/net/minecraft/CrashReport.java
-@@ -30,7 +_,7 @@
-     private boolean trackingStackTrace = true;
-     private StackTraceElement[] uncategorizedStackTrace = new StackTraceElement[0];
-     private final SystemReport systemReport = new SystemReport();
--    private List<String> extraInfo = List.of("", "DO NOT REPORT THIS TO PAPER! REPORT TO LEAF INSTEAD!", ""); // Leaf - Rebrand
-+    private List<String> extraInfo = List.of("", "DO NOT REPORT THIS TO PAPER! REPORT TO DEEPSLATEMC INSTEAD!", ""); // Leaf - Rebrand // Deepslate
- 
-     public CrashReport(String title, Throwable exception) {
-         this.title = title;
+@@ -23,7 +_,7 @@
+ public class CrashReport {
+     private static final Logger LOGGER = LogUtils.getLogger();
+     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss", Locale.ROOT);
+-    private static final List<String> EXTRA_INFO = List.of("", "DO NOT REPORT THIS TO PAPER! REPORT TO LEAF INSTEAD!", ""); // Leaf - Rebrand
++    private static final List<String> EXTRA_INFO = List.of("", "DO NOT REPORT THIS TO PAPER! REPORT TO DEEPSLATEMC INSTEAD!", ""); // Leaf - Rebrand // Deepslate
+     private final String title;
+     private final Throwable exception;
+     private final List<CrashReportCategory> details = Lists.newArrayList();

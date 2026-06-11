@@ -1,6 +1,6 @@
 --- a/net/minecraft/server/MinecraftServer.java
 +++ b/net/minecraft/server/MinecraftServer.java
-@@ -1353,6 +_,7 @@
+@@ -1391,6 +_,7 @@
              org.spigotmc.WatchdogThread.hasStarted = true; // Paper
              org.dreeam.leaf.config.LeafConfig.regSparkExtraConfig(); // Leaf - Leaf config
              net.minecraft.world.level.block.Blocks.initPathType(); // Leaf - Cache block state tags
@@ -8,7 +8,7 @@
              // Paper start - Add onboarding message for initial server start
              if (io.papermc.paper.configuration.GlobalConfiguration.isFirstStart) {
                  LOGGER.info("*************************************************************************************");
-@@ -1836,6 +_,19 @@
+@@ -1872,6 +_,19 @@
      private ServerStatus.Players buildPlayerStatus() {
          List<ServerPlayer> players = this.playerList.realPlayers; // Leaves - only real player
          int maxPlayers = this.getMaxPlayers();
@@ -27,8 +27,8 @@
 +
          if (this.hidesOnlinePlayers()) {
              return new ServerStatus.Players(maxPlayers, players.size(), List.of());
-         } else {
-@@ -2265,12 +_,29 @@
+         }
+@@ -2293,12 +_,29 @@
  
      @Override
      public String getMotd() {
@@ -42,7 +42,7 @@
 +        // Deepslate end - MiniMessage MOTD
      }
  
-     public void setMotd(String motd) {
+     public void setMotd(final String motd) {
          // Paper start - Adventure
 -        this.motd = net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer.legacySection().deserializeOr(motd, net.kyori.adventure.text.Component.empty());
 +        // Deepslate start - MiniMessage MOTD

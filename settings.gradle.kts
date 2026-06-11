@@ -12,3 +12,7 @@ plugins {
 rootProject.name = "deepslateMC"
 
 include("deepslateMC-api", "deepslateMC-server")
+
+gradle.lifecycle.beforeProject {
+    version = providers.gradleProperty("mcVersion").get().trim()
+}

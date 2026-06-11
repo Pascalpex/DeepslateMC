@@ -15,7 +15,7 @@ You can find a full list of features, commands, permissions, config options and 
 ## Building
 ```
 ./gradlew applyPatches
-./gradlew createMojmapPaperclipJar
+./gradlew createPaperclipJar
 ```
 ## Statistics
 [![bStats Graph](https://bstats.org/signatures/server-implementation/DeepslateMC.svg)](https://bstats.org/plugin/server-implementation/DeepslateMC)

@@ -1,9 +1,9 @@
 --- a/net/minecraft/server/Main.java
 +++ b/net/minecraft/server/Main.java
-@@ -65,6 +_,7 @@
+@@ -64,6 +_,7 @@
+ 
      @SuppressForbidden(reason = "System.out needed before bootstrap")
-     @DontObfuscate
-     public static void main(final OptionSet optionSet) { // CraftBukkit - replaces main(String[] args)
+     public static void main(final OptionSet options) { // CraftBukkit - replaces main(String[] args)
 +        de.pascalpex.deepslatemc.util.StartupLogo.printLogo(); // Deepslate - print logo
          io.papermc.paper.log.LogManagerShutdownThread.hook(); // Paper - Improved watchdog support
          SharedConstants.tryDetectVersion();

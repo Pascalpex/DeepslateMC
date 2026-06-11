@@ -31,8 +31,8 @@
 +    // Deepslate end - project setup
      // Leaf end - project setup
  
-     spigot {
-@@ -124,10 +_,14 @@
+     updatingMinecraft {
+@@ -106,10 +_,14 @@
      main {
          java { srcDir("../paper-server/src/main/java") }
          resources { srcDir("../paper-server/src/main/resources") }
@@ -47,7 +47,7 @@
      }
  }
  
-@@ -157,7 +_,7 @@
+@@ -139,7 +_,7 @@
  }
  
  dependencies {
@@ -56,7 +56,7 @@
  
      // Leaf start - Libraries
      implementation("com.github.thatsmusic99:ConfigurationMaster-API:v2.0.0-rc.3") { // Leaf config
-@@ -267,14 +_,14 @@
+@@ -241,14 +_,14 @@
          val gitBranch = git.exec(providers, "rev-parse", "--abbrev-ref", "HEAD").get().trim()
          attributes(
              "Main-Class" to "org.bukkit.craftbukkit.Main",
