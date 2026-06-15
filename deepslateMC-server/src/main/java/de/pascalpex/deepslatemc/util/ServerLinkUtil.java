@@ -13,6 +13,7 @@ import java.util.Map;
 public class ServerLinkUtil {
 
     private static Map<Component, URI> links = null;
+    private static final MiniMessage miniMessage = MiniMessage.miniMessage();
 
     public static void loadLinks() {
         if (links == null) {
@@ -25,7 +26,7 @@ public class ServerLinkUtil {
                 return;
             }
             try {
-                links.put(MiniMessage.miniMessage().deserialize(key), new URI(value));
+                links.put(miniMessage.deserialize(key), new URI(value));
             } catch (URISyntaxException e) {
                 LogManager.getLogger(ServerLinkUtil.class.getSimpleName()).warn("Invalid URL in DeepslateMC server links: {}", value);
             }

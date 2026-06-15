@@ -4,8 +4,6 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.JoinConfiguration;
 import net.kyori.adventure.text.event.ClickEvent;
 import net.kyori.adventure.text.minimessage.MiniMessage;
-import net.kyori.adventure.text.serializer.ComponentDecoder;
-import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.bukkit.configuration.InvalidConfigurationException;
@@ -26,7 +24,6 @@ public class MessagesFile {
 
     private static final Logger LOGGER = LogManager.getLogger(MessagesFile.class.getSimpleName());
     private static final MiniMessage miniMessage = MiniMessage.miniMessage();
-    private static final LegacyComponentSerializer legacySerializer = LegacyComponentSerializer.legacyAmpersand();
 
     private static final String COMMAND_USAGE = "/deepslate [reload | version]";
 
@@ -67,31 +64,26 @@ public class MessagesFile {
             case HELP_MESSAGE -> getHelpMessage();
             case DISCORD_MESSAGE -> getDiscordMessage();
             case WRONG_SYNTAX -> getWrongSyntaxMessage();
-            default -> processColors(config.getString(key.key));
+            default -> miniMessage.deserialize(config.getString(key.key));
         };
-    }
-
-    private static Component processColors(String message) {
-        ComponentDecoder<String, ?> decoder = Config.getMinimessageMessages() ? miniMessage : legacySerializer;
-        return decoder.deserialize(message);
     }
 
     private static Component getDiscordMessage() {
         String message = config.getString(DISCORD_MESSAGE.key);
         message = message.replace("%link%", Config.getDiscordLink());
-        return processColors(message).clickEvent(ClickEvent.openUrl(Config.getDiscordLink()));
+        return miniMessage.deserialize(message).clickEvent(ClickEvent.openUrl(Config.getDiscordLink()));
     }
 
     private static Component getWrongSyntaxMessage() {
         String message = config.getString(WRONG_SYNTAX.key);
         message = message.replace("%usage%", COMMAND_USAGE);
-        return processColors(message);
+        return miniMessage.deserialize(message);
     }
 
     private static Component getHelpMessage() {
-        List<String> messages = config.getList(HELP_MESSAGE.key).stream().map(Object::toString).toList();
+        List<String> messages = config.getStringList(HELP_MESSAGE.key);
         List<Component> components = messages.stream()
-            .map(MessagesFile::processColors)
+            .map(miniMessage::deserialize)
             .toList();
 
         return Component.join(JoinConfiguration.separator(Component.newline()), components);

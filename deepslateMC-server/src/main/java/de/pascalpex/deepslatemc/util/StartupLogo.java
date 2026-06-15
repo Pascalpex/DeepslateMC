@@ -25,7 +25,7 @@ public class StartupLogo {
         int startR = 0, startG = 255, startB = 200;
         int endR = 0, endG = 40, endB = 255;
 
-        StringBuilder logoBuilder = new StringBuilder("\n");
+        System.out.println();
 
         for (String line : lines) {
             if (line.trim().isEmpty()) {
@@ -57,10 +57,8 @@ public class StartupLogo {
             }
 
             gradientLine.append("\033[0m");
-            logoBuilder.append(gradientLine);
-            logoBuilder.append("\n");
+            System.out.println(gradientLine);
         }
-        System.out.println(logoBuilder);
     }
 
     private static int rgbToAnsi256(int r, int g, int b) {
@@ -85,6 +83,7 @@ public class StartupLogo {
 
     public static void printLogo() {
         printWithGradient(ASCII_LOGO);
+        System.out.print("\n");
     }
 
 }
