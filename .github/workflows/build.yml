@@ -29,5 +29,5 @@ jobs:
       uses: actions/upload-artifact@v7.0.1
       with:
         name: DeepslateMC
-        path: deepslateMC-server/build/libs/deepslateMC-paperclip-26.1.2.jar
+        path: deepslateMC-server/build/libs/deepslateMC-paperclip-26.2.jar
         archive: false

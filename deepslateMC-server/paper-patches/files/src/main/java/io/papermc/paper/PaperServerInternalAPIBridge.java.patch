@@ -1,0 +1,11 @@
+--- a/src/main/java/io/papermc/paper/PaperServerInternalAPIBridge.java
++++ b/src/main/java/io/papermc/paper/PaperServerInternalAPIBridge.java
+@@ -181,7 +_,7 @@
+ 
+     @Override
+     public VersionFetcher getVersionFetcher() {
+-        return new org.dreeam.leaf.version.LeafVersionFetcher(); // Leaf - Rebrand
++        return new de.pascalpex.deepslatemc.DeepslateVersionFetcher(); // Leaf - Rebrand // Deepslate
+     }
+ 
+     @Override
