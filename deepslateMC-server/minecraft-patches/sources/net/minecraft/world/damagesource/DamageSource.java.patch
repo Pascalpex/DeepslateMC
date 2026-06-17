@@ -5,7 +5,7 @@
  
          if (this.directEntity != null) {
 -            throw new IllegalStateException("Cannot set an event damager when another direct entity is already set (if you think this is a Leaf bug, please report it at https://github.com/Winds-Studio/Leaf/issues)"); // Leaf - Rebrand
-+            throw new IllegalStateException("Cannot set an event damager when another direct entity is already set (if you think this is a DeepslateMC bug, please report it at https://github.com/Pascalpex/DeepslateMC/issues)"); // Leaf - Rebrand // Deepslate
++            throw new IllegalStateException("Cannot set an event damager when another direct entity is already set (if you think this is a DeepslateMC bug, please report it at https://github.com/DeepslateMC/DeepslateMC/issues)"); // Leaf - Rebrand // Deepslate
          }
          final DamageSource damageSource = this.copy();
          damageSource.eventEntityDamager = entity;

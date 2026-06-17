@@ -70,8 +70,8 @@
 -            "Specification-Vendor" to "Winds Studio", // Leaf - Rebrand
 -            "Brand-Id" to "winds-studio:leaf", // Leaf - Rebrand
 -            "Brand-Name" to "Leaf", // Leaf - Rebrand
-+            "Specification-Vendor" to "Pascalpex", // Leaf - Rebrand // Deepslate - Rebrand
-+            "Brand-Id" to "pascalpex:deepslate", // Leaf - Rebrand // Deepslate - Rebrand
++            "Specification-Vendor" to "DeepslateMC", // Leaf - Rebrand // Deepslate - Rebrand
++            "Brand-Id" to "deepslatemc:deepslate", // Leaf - Rebrand // Deepslate - Rebrand
 +            "Brand-Name" to "DeepslateMC", // Leaf - Rebrand // Deepslate - Rebrand
              "Build-Number" to (build ?: ""),
              "Build-Time" to buildTime.toString(),

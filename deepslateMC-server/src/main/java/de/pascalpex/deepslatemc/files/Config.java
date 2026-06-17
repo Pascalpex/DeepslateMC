@@ -34,7 +34,7 @@ public class Config {
                 configFile.createNewFile();
                 List<String> header = new ArrayList<>();
                 header.add("This is the main configuration file of DeepslateMC");
-                header.add("You can find an explanation of all options here: https://github.com/Pascalpex/DeepslateMC/wiki");
+                header.add("You can find an explanation of all options here: https://deepslatemc.de/docs/files/config");
                 header.add("You can get support on our Discord server: https://discord.gg/BGrhNnVczp");
                 config.options().setHeader(header);
                 save();

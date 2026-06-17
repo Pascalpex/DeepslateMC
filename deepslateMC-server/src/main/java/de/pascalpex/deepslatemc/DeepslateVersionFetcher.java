@@ -6,9 +6,9 @@ public class DeepslateVersionFetcher extends AbstractPaperVersionFetcher {
     public DeepslateVersionFetcher() {
         super(
             "https://deepslatemc.de/download/",
-            "Pascalpex",
             "DeepslateMC",
-            "Pascalpex",
+            "DeepslateMC",
+            "DeepslateMC",
             "DeepslateMC",
             ApiType.GITHUB
         );
