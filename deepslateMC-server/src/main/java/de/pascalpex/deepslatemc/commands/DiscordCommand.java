@@ -15,6 +15,7 @@ public class DiscordCommand implements Command<CommandSourceStack> {
     public static LiteralCommandNode<CommandSourceStack> create() {
         return Commands.literal("discord")
             .executes(new DiscordCommand())
+            .requires(commandSourceStack -> commandSourceStack.getSender().hasPermission("deepslate.discord"))
             .build();
     }
 
