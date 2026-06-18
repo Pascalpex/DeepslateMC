@@ -24,9 +24,7 @@ public class ClearchatCommand implements Command<CommandSourceStack> {
     @Override
     public int run(CommandContext<CommandSourceStack> commandContext) throws CommandSyntaxException {
         Component prefix = MessagesFile.getMessage(MessagesEntry.PREFIX).appendSpace();
-        for (int x = 0; x < 150; x++){
-            Bukkit.broadcast(Component.empty());
-        }
+        Bukkit.broadcast(Component.text("\n".repeat(150)));
         Component clearMessage = MessagesFile.getMessage(MessagesEntry.CLEARED_CHAT).replaceText(TextReplacementConfig.builder().match("%clearer%").replacement(commandContext.getSource().getSender().getName()).build());
         Bukkit.broadcast(prefix.append(clearMessage));
         return SINGLE_SUCCESS;
