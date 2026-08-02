@@ -1,11 +1,11 @@
 --- a/src/main/java/com/destroystokyo/paper/console/PaperConsole.java
 +++ b/src/main/java/com/destroystokyo/paper/console/PaperConsole.java
-@@ -20,7 +_,7 @@
+@@ -21,7 +_,7 @@
      @Override
      protected LineReader buildReader(LineReaderBuilder builder) {
          builder
--                .appName("Leaf") // Gale - branding changes // Leaf - Rebrand
-+                .appName("DeepslateMC") // Gale - branding changes // Leaf - Rebrand // Deepslate
-                 .variable(LineReader.HISTORY_FILE, java.nio.file.Paths.get(".console_history"))
+-                .appName("Leaf") // Leaf - Rebrand
++                .appName("DeepslateMC") // Leaf - Rebrand // Deepslate
+                 .variable(LineReader.HISTORY_FILE, PaperCacheDir.moveFromServerRootAndGet(".console_history", "console_history"))
                  .completer(new ConsoleCommandCompleter(this.server))
                  .option(LineReader.Option.COMPLETE_IN_WORD, true);

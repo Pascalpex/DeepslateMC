@@ -1,17 +1,15 @@
 --- a/net/minecraft/server/network/ServerConfigurationPacketListenerImpl.java
 +++ b/net/minecraft/server/network/ServerConfigurationPacketListenerImpl.java
-@@ -103,9 +_,13 @@
-         new io.papermc.paper.event.connection.configuration.PlayerConnectionInitialConfigureEvent(this.paperConnection).callEvent(); // Paper
-         this.send(new ClientboundCustomPayloadPacket(new BrandPayload(this.server.getServerModName())));
-         ServerLinks serverLinks = this.server.serverLinks();
--        if (!serverLinks.isEmpty()) {
-+        if (!serverLinks.isEmpty() || !de.pascalpex.deepslatemc.util.ServerLinkUtil.getLinks().isEmpty()) { // Deepslate - server links
-             // Paper start
-             org.bukkit.craftbukkit.CraftServerLinks links = new org.bukkit.craftbukkit.CraftServerLinks(serverLinks);
+@@ -106,7 +_,11 @@
+         // Paper start
+         org.bukkit.craftbukkit.CraftServerLinks links = new org.bukkit.craftbukkit.CraftServerLinks(serverLinks);
+         new org.bukkit.event.player.PlayerLinksSendEvent(this.paperConnection, links).callEvent();
+-        if (!links.getServerLinks().isEmpty()) {
++        if (!links.getServerLinks().isEmpty() || !de.pascalpex.deepslatemc.util.ServerLinkUtil.getLinks().isEmpty()) { // Deepslate - server links
 +            // Deepslate start - server links
 +            java.util.Map<net.kyori.adventure.text.Component, java.net.URI> deepslateLinks = de.pascalpex.deepslatemc.util.ServerLinkUtil.getLinks();
 +            deepslateLinks.keySet().forEach(key -> links.addLink(key, deepslateLinks.get(key)));
 +            // Deepslate end - server links
-             new org.bukkit.event.player.PlayerLinksSendEvent(this.paperConnection, links).callEvent();
              this.send(new ClientboundServerLinksPacket(links.getServerLinks().untrust()));
-             // Paper end
+         // Paper end
+         }
