@@ -1,6 +1,6 @@
 --- a/net/minecraft/world/damagesource/DamageSource.java
 +++ b/net/minecraft/world/damagesource/DamageSource.java
-@@ -72,7 +_,7 @@
+@@ -73,7 +_,7 @@
          }
  
          if (this.directEntity != null) {
