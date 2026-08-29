@@ -14,6 +14,7 @@ public class HelpCommand implements Command<CommandSourceStack> {
     public static LiteralCommandNode<CommandSourceStack> create() {
         return Commands.literal("help")
             .executes(new HelpCommand())
+            .requires(commandSourceStack -> commandSourceStack.getSender().hasPermission("deepslate.help"))
             .build();
     }
 
