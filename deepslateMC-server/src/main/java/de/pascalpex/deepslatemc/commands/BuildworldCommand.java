@@ -30,7 +30,7 @@ public class BuildworldCommand implements Command<CommandSourceStack> {
         try {
             commandContext.getSource().getExecutor().teleport(Bukkit.getWorld(Config.getBuildworld()).getSpawnLocation());
             sender.sendMessage(prefix.append(MessagesFile.getMessage(MessagesEntry.BUILDWORLD_WELCOME)));
-        } catch (IllegalArgumentException e) {
+        } catch (Exception e) {
             sender.sendMessage(prefix.append(MessagesFile.getMessage(MessagesEntry.BUILDWORLD_NOT_SET)));
         }
         return SINGLE_SUCCESS;
