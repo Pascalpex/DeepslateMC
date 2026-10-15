@@ -1,6 +1,6 @@
 --- a/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
 +++ b/src/main/java/org/bukkit/craftbukkit/event/CraftEventFactory.java
-@@ -658,6 +_,17 @@
+@@ -661,6 +_,17 @@
          if (cancelledItem) {
              event.setUseItemInHand(Result.DENY);
          }
